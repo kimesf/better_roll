@@ -12,7 +12,7 @@ interface SelectedCharacterStore extends Readable<Character | null> {
 }
 
 const initStore = (): SelectedCharacterStore => {
-  const { subscribe, set, update } = writable(null)
+  const { subscribe, set } = writable(null)
 
   const select = (character) => set(character)
 

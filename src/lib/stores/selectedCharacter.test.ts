@@ -6,8 +6,8 @@ import devCharacter from "./devCharacter"
 const createCharacter = () => devCharacter
 const loadStoreValue = () => get(selectedCharacter)
 
-describe.concurrent("#select", () => {
-  it("changes selected characters", async () => {
+describe.concurrent("Selected Character Store", () => {
+  it("#select changes selected characters", async () => {
     const initialState = loadStoreValue()
 
     expect(initialState).toBe(null)
