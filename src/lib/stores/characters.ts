@@ -1,18 +1,12 @@
 import { writable, type Readable } from "svelte/store";
+import { type Character } from "./selectedCharacter";
 import devCharacter from "./devCharacter";
-
-type Character = {
-  name: string,
-  lineages: string,
-  level: number,
-  classes: string,
-}
 
 type Characters = Character[];
 
-interface CharacterStore extends Readable<Characters> { }
+interface CharactersStore extends Readable<Characters> {}
 
-const initStore = (): CharacterStore => {
+const initStore = (): CharactersStore => {
   const initialCharacters: Characters = [devCharacter];
 
   const { subscribe, set, update } = writable(initialCharacters);

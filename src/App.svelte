@@ -1,15 +1,16 @@
 <script lang="ts">
-  import { characters as characterStore } from "./lib/stores/characters";
-
-  let characters = $characterStore;
+  import CharacterSelection from "./lib/components/CharacterSelection.svelte";
+  import { selectedCharacter } from "./lib/stores/selectedCharacter";
 </script>
 
 <main>
   <h1>Better Roll</h1>
 
-  {#each characters as character}
-    {character.name}
-  {/each}
+  {#if $selectedCharacter}
+    CharacterSheet TODO
+  {:else}
+    <CharacterSelection />
+  {/if}
 </main>
 
 <style>
