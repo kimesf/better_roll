@@ -1,26 +1,26 @@
 <script lang="ts">
-  import { selectedCharacter } from "../../stores/selectedCharacter";
+    import { selectedCharacter } from '../../stores/selectedCharacter'
 
-  let opened: string | null = null
+    let opened: string | null = null
 
-  const open = (featureName: string) => {
-    if(featureName == opened) {
-      opened = null
-      return
+    const open = (featureName: string) => {
+        if (featureName == opened) {
+            opened = null
+            return
+        }
+
+        opened = featureName
     }
-
-    opened = featureName
-  }
 </script>
 
 {#each $selectedCharacter.features as feature}
-  <div>
-    <button class="text-orange-500" on:click={() => open(feature.name)}>
-      {feature.name}
-    </button>
+    <div>
+        <button class="text-orange-500" on:click={() => open(feature.name)}>
+            {feature.name}
+        </button>
 
-    {#if opened == feature.name}
-      <div>{feature.notes}</div>
-    {/if}
-  </div>
+        {#if opened == feature.name}
+            <div>{feature.notes}</div>
+        {/if}
+    </div>
 {/each}

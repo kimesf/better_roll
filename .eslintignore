@@ -1,0 +1,5 @@
+index.html
+*.config.js
+*.config.ts
+**/*/*.test.ts
+README.md

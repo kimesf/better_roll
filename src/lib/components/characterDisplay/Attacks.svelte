@@ -1,9 +1,9 @@
 <script lang="ts">
-  import { i18n } from "../../stores/i18n";
-  import { selectedCharacter, type Attribute } from "../../stores/selectedCharacter";
+    import { i18n } from '../../stores/i18n'
+    import { selectedCharacter, type Attribute } from '../../stores/selectedCharacter'
 
-  // TODO: repetition can be removed
-  const PROFICIENCY_BONUS = {
+    // TODO: repetition can be removed
+    const PROFICIENCY_BONUS = {
         1: +2,
         2: +2,
         3: +2,
@@ -27,50 +27,50 @@
     } as const
 
     // TODO: repetition can be removed
-    $: proficiencyBonus = PROFICIENCY_BONUS[$selectedCharacter.level]
+    $: proficiencyBonus = PROFICIENCY_BONUS[$selectedCharacter.level] as number
 
     // TODO: repetition can be removed
     const attributeMod = (attr: Attribute | null): number => {
-      if(!attr) {
-        return 0
-      }
+        if (!attr) {
+            return 0
+        }
 
-      const attrValue = $selectedCharacter.attributes[attr]
+        const attrValue = $selectedCharacter.attributes[attr]
 
-      return Math.floor((attrValue - 10) / 2)
+        return Math.floor((attrValue - 10) / 2)
     }
 
     // TODO: repetition can be removed
     // presentWithSign maybe ?
     const showSign = (number: number): string => {
-      const signal = number < 0 ? "-" : "+"
+        const signal = number < 0 ? '-' : '+'
 
-      return `${signal}${Math.abs(number)}`
+        return `${signal}${Math.abs(number)}`
     }
 </script>
 
-{#each $selectedCharacter.attacks as attack }
-  <div>
-    <h1 class="text-orange-500">
-      {attack.name}
-    </h1>
+{#each $selectedCharacter.attacks as attack}
+    <div>
+        <h1 class="text-orange-500">
+            {attack.name}
+        </h1>
 
-    <p>
-      {i18n.t("display.attacks.hitBonus")}:
-      {proficiencyBonus}
-      {attributeMod(attack.attribute)}
-      {attack.hitBonus}
-      =
-      {proficiencyBonus + attributeMod(attack.attribute) + attack.hitBonus}
-    </p>
+        <p>
+            {i18n.t('display.attacks.hitBonus')}:
+            {showSign(proficiencyBonus)}
+            {showSign(attributeMod(attack.attribute))}
+            {showSign(attack.hitBonus)}
+            =
+            {proficiencyBonus + attributeMod(attack.attribute) + attack.hitBonus}
+        </p>
 
-    <p>
-      {i18n.t("display.attacks.damage")}:
-      {attack.damage} ({attack.damageType})
-    </p>
+        <p>
+            {i18n.t('display.attacks.damage')}:
+            {attack.damage} ({attack.damageType})
+        </p>
 
-    <p>
-      {attack.notes}
-    </p>
-  </div>
+        <p>
+            {attack.notes}
+        </p>
+    </div>
 {/each}

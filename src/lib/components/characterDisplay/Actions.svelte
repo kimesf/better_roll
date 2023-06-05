@@ -1,5 +1,5 @@
 <script>
-  import Attacks from "./Attacks.svelte";
+    import Attacks from './Attacks.svelte'
 </script>
 
 <Attacks />

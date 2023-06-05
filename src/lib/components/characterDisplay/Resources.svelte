@@ -1,15 +1,15 @@
 <script lang="ts">
-    import { i18n } from "../../stores/i18n";
-    import { selectedCharacter, type Coin } from "../../stores/selectedCharacter";
+    import { i18n } from '../../stores/i18n'
+    import { selectedCharacter, type Coin } from '../../stores/selectedCharacter'
 
-    const coins: Coin[] = ["copper", "silver", "gold", "platinum"]
+    const coins: Coin[] = ['copper', 'silver', 'gold', 'platinum']
 </script>
 
 <div>
     <div>
-        <h1 class="text-orange-500">{i18n.t("display.resources.coins")}</h1>
+        <h1 class="text-orange-500">{i18n.t('display.resources.coins')}</h1>
 
-        {#each coins as coin }
+        {#each coins as coin}
             <span>
                 {i18n.t(`display.resources.coins.${coin}`)}:
                 {$selectedCharacter.resources.coins[coin]}
@@ -18,7 +18,7 @@
     </div>
 
     <div>
-        <h1 class="text-orange-500">{i18n.t("display.resources.renewable")}</h1>
+        <h1 class="text-orange-500">{i18n.t('display.resources.renewable')}</h1>
 
         <div>
             {#each $selectedCharacter.resources.recoverable as recoverable}
@@ -27,13 +27,12 @@
                     -
                     {recoverable.name}
                 </p>
-
             {/each}
         </div>
     </div>
 
     <div>
-        <h1 class="text-orange-500">{i18n.t("display.resources.finite")}</h1>
+        <h1 class="text-orange-500">{i18n.t('display.resources.finite')}</h1>
 
         <div>
             {#each $selectedCharacter.resources.finite as finite}
