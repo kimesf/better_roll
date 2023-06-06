@@ -3,33 +3,6 @@
     import { character, type Attribute } from '../../stores/character'
 
     // TODO: repetition can be removed
-    const PROFICIENCY_BONUS = {
-        1: +2,
-        2: +2,
-        3: +2,
-        4: +2,
-        5: +3,
-        6: +3,
-        7: +3,
-        8: +3,
-        9: +4,
-        10: +4,
-        11: +4,
-        12: +4,
-        13: +5,
-        14: +5,
-        15: +5,
-        16: +5,
-        17: +6,
-        18: +6,
-        19: +6,
-        20: +6,
-    } as const
-
-    // TODO: repetition can be removed
-    $: proficiencyBonus = PROFICIENCY_BONUS[$character.current.level] as number
-
-    // TODO: repetition can be removed
     const attributeMod = (attr: Attribute | null): number => {
         if (!attr) {
             return 0
@@ -49,13 +22,13 @@
 
         <p>
             {i18n.t('display.attacks.hitBonus')}:
-            {proficiencyBonus}
+            {character.proficiencyBonus()}
             +
             {attributeMod(attack.attribute)}
             +
             {attack.hitBonus}
             =
-            {proficiencyBonus + attributeMod(attack.attribute) + attack.hitBonus}
+            {character.proficiencyBonus() + attributeMod(attack.attribute) + attack.hitBonus}
         </p>
 
         <p>

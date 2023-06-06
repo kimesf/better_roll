@@ -3,33 +3,6 @@
     import { character, type Attribute, type Skill } from '../../stores/character'
     import SignedNumber from '../shared/SignedNumber.svelte';
 
-    // TODO: repetition can be removed
-    const PROFICIENCY_BONUS = {
-        1: 2,
-        2: 2,
-        3: 2,
-        4: 2,
-        5: 3,
-        6: 3,
-        7: 3,
-        8: 3,
-        9: 4,
-        10: 4,
-        11: 4,
-        12: 4,
-        13: 5,
-        14: 5,
-        15: 5,
-        16: 5,
-        17: 6,
-        18: 6,
-        19: 6,
-        20: 6,
-    } as const
-
-    // TODO: repetition can be removed
-    $: proficiencyBonus = PROFICIENCY_BONUS[$character.current.level] as number
-
     type SkillsGroupedByAttr = {
         [key in Attribute]: Skill[]
     }
@@ -64,8 +37,8 @@
     const skillModifier = (skill: Skill): number => {
         return (
             attrModifier(skill.attribute) +
-            (skill.proficiency ? proficiencyBonus : 0) +
-            (skill.expertise ? proficiencyBonus : 0) +
+            (skill.proficiency ? character.proficiencyBonus() : 0) +
+            (skill.expertise ? character.proficiencyBonus() : 0) +
             skill.otherBonus
         )
     }
@@ -109,7 +82,7 @@
                 <div>
                     <p>
                         <span class:text-blue-500={!tool.expertise} class:text-yellow-500={tool.expertise}>
-                            <SignedNumber number={proficiencyBonus * (tool.expertise ? 2 : 1) + tool.otherBonus} />
+                            <SignedNumber number={character.proficiencyBonus() * (tool.expertise ? 2 : 1) + tool.otherBonus} />
                         </span>
                         {tool.name}
                     </p>

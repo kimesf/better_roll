@@ -1,4 +1,4 @@
-import { writable, type Readable } from 'svelte/store'
+import { writable, type Readable, get } from 'svelte/store'
 import devCharacter from './devCharacter'
 
 type Coin = 'copper' | 'silver' | 'gold' | 'platinum'
@@ -14,6 +14,29 @@ type School =
     | 'illusion'
     | 'necromancy'
     | 'transmutation'
+
+const PROFICIENCY_BONUS: { [key: number]: number } = {
+    1: 2,
+    2: 2,
+    3: 2,
+    4: 2,
+    5: 3,
+    6: 3,
+    7: 3,
+    8: 3,
+    9: 4,
+    10: 4,
+    11: 4,
+    12: 4,
+    13: 5,
+    14: 5,
+    15: 5,
+    16: 5,
+    17: 6,
+    18: 6,
+    19: 6,
+    20: 6,
+} as const
 
 type Character = {
     name: string
@@ -129,11 +152,12 @@ type Spell = {
 
 type CharacterStoreState = {
     current: Character | null,
-    all: Character[]
+    all: Character[],
 }
 
-interface CharacterStore extends Readable<CharacterStoreState | null> {
-    select: (character: Character) => void
+interface CharacterStore extends Readable<CharacterStoreState> {
+    select: (character: Character) => void,
+    proficiencyBonus: () => number,
 }
 
 const initStore = (): CharacterStore => {
@@ -142,7 +166,8 @@ const initStore = (): CharacterStore => {
         all: [devCharacter]
     } as CharacterStoreState
 
-    const { subscribe, update } = writable(initialState)
+    const store = writable(initialState)
+    const { subscribe, update } = store
 
     const select: CharacterStore['select'] = (character) => {
         update((previousState) => ({
@@ -151,9 +176,16 @@ const initStore = (): CharacterStore => {
         }))
     }
 
+    const proficiencyBonus: CharacterStore['proficiencyBonus'] = () => {
+        const level = get(store).current.level
+
+        return PROFICIENCY_BONUS[level]
+    }
+
     return {
         subscribe,
         select,
+        proficiencyBonus,
     }
 }
 
