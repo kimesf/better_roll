@@ -1,6 +1,6 @@
 <script lang="ts">
     import { i18n } from '../../stores/i18n'
-    import { selectedCharacter, type Spell } from '../../stores/selectedCharacter'
+    import { character, type Spell } from '../../stores/character'
 
     const SPACE = '\u0020'
 
@@ -33,7 +33,7 @@
             </tr>
         </thead>
         <tbody>
-            {#each $selectedCharacter.spells as spell}
+            {#each $character.current.spells as spell}
                 <tr>
                     <td>{spell.alwaysAvailable || spell.available ? 'x' : ''}</td>
                     <td>{spell.name}</td>

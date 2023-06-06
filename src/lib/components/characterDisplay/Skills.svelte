@@ -1,6 +1,6 @@
 <script lang="ts">
     import { i18n } from '../../stores/i18n'
-    import { selectedCharacter, type Attribute, type Skill } from '../../stores/selectedCharacter'
+    import { character, type Attribute, type Skill } from '../../stores/character'
     import SignedNumber from '../shared/SignedNumber.svelte';
 
     // TODO: repetition can be removed
@@ -28,7 +28,7 @@
     } as const
 
     // TODO: repetition can be removed
-    $: proficiencyBonus = PROFICIENCY_BONUS[$selectedCharacter.level] as number
+    $: proficiencyBonus = PROFICIENCY_BONUS[$character.current.level] as number
 
     type SkillsGroupedByAttr = {
         [key in Attribute]: Skill[]
@@ -45,7 +45,7 @@
         selectedAttr = attr
     }
 
-    $: skillsByAttr = $selectedCharacter.skills.reduce((acc, skill) => {
+    $: skillsByAttr = $character.current.skills.reduce((acc, skill) => {
         const key = skill.attribute
         const group = (acc[key] || []).concat(skill)
 
@@ -56,7 +56,7 @@
 
     // TODO: repetition can be removed
     const attrModifier = (key: Attribute): number => {
-        const attrValue = $selectedCharacter.attributes[key]
+        const attrValue = $character.current.attributes[key]
 
         return Math.floor((attrValue - 10) / 2)
     }
@@ -83,7 +83,7 @@
                 <span>
                     <SignedNumber number={attrModifier(attr)} />
                 </span>
-                <span>{presentAttribute($selectedCharacter.attributes[attr])}</span>
+                <span>{presentAttribute($character.current.attributes[attr])}</span>
             </button>
             {#each skillsByAttr[attr] as skill}
                 {#if selectedAttr == skill.attribute}
@@ -104,7 +104,7 @@
     {/each}
     <div>
         <button class="text-4xl" on:click={() => showSkills('tool')}> tools </button>
-        {#each $selectedCharacter.tools as tool}
+        {#each $character.current.tools as tool}
             {#if selectedAttr == 'tool'}
                 <div>
                     <p>

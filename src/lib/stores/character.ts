@@ -1,4 +1,5 @@
 import { writable, type Readable } from 'svelte/store'
+import devCharacter from './devCharacter'
 
 type Coin = 'copper' | 'silver' | 'gold' | 'platinum'
 
@@ -126,16 +127,29 @@ type Spell = {
     source: string
 }
 
-// TODO: change to character store and encasulate characters in here ???
-// this would probably add methods like "current" and "all"
-interface SelectedCharacterStore extends Readable<Character | null> {
+type CharacterStoreState = {
+    current: Character | null,
+    all: Character[]
+}
+
+interface CharacterStore extends Readable<CharacterStoreState | null> {
     select: (character: Character) => void
 }
 
-const initStore = (): SelectedCharacterStore => {
-    const { subscribe, set } = writable<Character>(null)
+const initStore = (): CharacterStore => {
+    const initialState = {
+        current: null,
+        all: [devCharacter]
+    } as CharacterStoreState
 
-    const select: SelectedCharacterStore['select'] = (character) => set(character)
+    const { subscribe, update } = writable(initialState)
+
+    const select: CharacterStore['select'] = (character) => {
+        update((previousState) => ({
+            ...previousState,
+            current: character,
+        }))
+    }
 
     return {
         subscribe,
@@ -144,4 +158,4 @@ const initStore = (): SelectedCharacterStore => {
 }
 
 export type { Character, Attribute, Skill, Coin, Spell }
-export const selectedCharacter = initStore()
+export const character = initStore()

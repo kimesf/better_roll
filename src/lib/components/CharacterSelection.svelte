@@ -1,9 +1,8 @@
-<script>
-    import { characters } from '../stores/characters'
-    import { selectedCharacter } from '../stores/selectedCharacter'
+<script lang="ts">
+    import { character } from '../stores/character';
     import { i18n } from '../stores/i18n'
 
-    const { select } = selectedCharacter
+    const { select } = character
 </script>
 
 <div>
@@ -13,7 +12,7 @@
     </h1>
 
     <div>
-        {#each $characters as character}
+        {#each $character.all as character}
             <button on:click={() => select(character)}>
                 {character.name}
             </button>

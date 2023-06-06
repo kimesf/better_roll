@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { selectedCharacter } from '../stores/selectedCharacter'
+    import { character } from '../stores/character'
     import { i18n } from '../stores/i18n'
     import Actions from './characterDisplay/Actions.svelte'
     import Magic from './characterDisplay/Magic.svelte'
@@ -81,9 +81,9 @@
         <div class="grow bg-black">
             <div class="text-center p-1">
                 <p>
-                    {$selectedCharacter.name} | {$selectedCharacter.lineages} | {$selectedCharacter.level}
+                    {$character.current.name} | {$character.current.lineages} | {$character.current.level}
                 </p>
-                <p>{$selectedCharacter.classes}</p>
+                <p>{$character.current.classes}</p>
             </div>
 
             <Skills />

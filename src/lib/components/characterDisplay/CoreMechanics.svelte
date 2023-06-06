@@ -1,8 +1,8 @@
 <script lang="ts">
-    import { selectedCharacter } from '../../stores/selectedCharacter'
+    import { character } from '../../stores/character'
     import { i18n } from '../../stores/i18n'
 
-    $: mechanics = $selectedCharacter.mechanics
+    $: mechanics = $character.current.mechanics
 </script>
 
 <div>

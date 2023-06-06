@@ -1,12 +1,12 @@
 <script lang="ts">
-    import { selectedCharacter } from '../../stores/selectedCharacter'
+    import { character } from '../../stores/character'
     import CoreMechanics from './CoreMechanics.svelte'
 </script>
 
 <CoreMechanics />
 
 <div>
-    {#each $selectedCharacter.mechanics.other as mechanic}
+    {#each $character.current.mechanics.other as mechanic}
         <p>
             {mechanic.name}:
             {mechanic.value}

@@ -1,6 +1,6 @@
 <script lang="ts">
     import { i18n } from '../../stores/i18n'
-    import { selectedCharacter, type Attribute } from '../../stores/selectedCharacter'
+    import { character, type Attribute } from '../../stores/character'
 
     // TODO: repetition can be removed
     const PROFICIENCY_BONUS = {
@@ -27,7 +27,7 @@
     } as const
 
     // TODO: repetition can be removed
-    $: proficiencyBonus = PROFICIENCY_BONUS[$selectedCharacter.level] as number
+    $: proficiencyBonus = PROFICIENCY_BONUS[$character.current.level] as number
 
     // TODO: repetition can be removed
     const attributeMod = (attr: Attribute | null): number => {
@@ -35,13 +35,13 @@
             return 0
         }
 
-        const attrValue = $selectedCharacter.attributes[attr]
+        const attrValue = $character.current.attributes[attr]
 
         return Math.floor((attrValue - 10) / 2)
     }
 </script>
 
-{#each $selectedCharacter.attacks as attack}
+{#each $character.current.attacks as attack}
     <div>
         <h1 class="text-orange-500">
             {attack.name}
