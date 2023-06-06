@@ -1,11 +1,14 @@
-import { writable, type Readable, get } from 'svelte/store'
-import devCharacter from './devCharacter'
+export type Coin = 'copper' | 'silver' | 'gold' | 'platinum'
 
-type Coin = 'copper' | 'silver' | 'gold' | 'platinum'
+export type Attribute = 'str' | 'dex' | 'con' | 'int' | 'wis' | 'cha'
 
-type Attribute = 'str' | 'dex' | 'con' | 'int' | 'wis' | 'cha'
+// TODO: ranges?
+export type Level = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17 | 18 | 19 | 20
 
-type School =
+// TODO: ranges?
+export type ProficiencyBonus = 2 | 3 | 4 | 5 | 6
+
+export type School =
     | 'abjuration'
     | 'conjuration'
     | 'divination'
@@ -15,33 +18,10 @@ type School =
     | 'necromancy'
     | 'transmutation'
 
-const PROFICIENCY_BONUS: { [key: number]: number } = {
-    1: 2,
-    2: 2,
-    3: 2,
-    4: 2,
-    5: 3,
-    6: 3,
-    7: 3,
-    8: 3,
-    9: 4,
-    10: 4,
-    11: 4,
-    12: 4,
-    13: 5,
-    14: 5,
-    15: 5,
-    16: 5,
-    17: 6,
-    18: 6,
-    19: 6,
-    20: 6,
-} as const
-
-type Character = {
+export type Character = {
     name: string
     lineages: string
-    level: number
+    level: Level
     classes: string
     attributes: {
         [key in Attribute]: number
@@ -75,12 +55,12 @@ type Character = {
     spells: Spell[]
 }
 
-type Mechanic = {
+export type Mechanic = {
     name: string
     value: string
 }
 
-type Skill = {
+export type Skill = {
     name: string
     attribute: Attribute
     proficiency: boolean
@@ -88,13 +68,13 @@ type Skill = {
     otherBonus: number
 }
 
-type Tool = {
+export type Tool = {
     name: string
     expertise: boolean
     otherBonus: number
 }
 
-type Recoverable = {
+export type Recoverable = {
     name: string
     current: number
     total: number
@@ -103,7 +83,7 @@ type Recoverable = {
     source: string
 }
 
-type Finite = {
+export type Finite = {
     name: string
     amount: number
     unity: string
@@ -111,13 +91,13 @@ type Finite = {
     source: string
 }
 
-type Feature = {
+export type Feature = {
     name: string
     notes: string
     source: string
 }
 
-type Attack = {
+export type Attack = {
     name: string
     addProficiency: boolean
     attribute: Attribute | null
@@ -128,7 +108,7 @@ type Attack = {
     source: string
 }
 
-type Spell = {
+export type Spell = {
     circle: number
     alwaysAvailable: boolean
     available: boolean
@@ -149,45 +129,3 @@ type Spell = {
     notes: string
     source: string
 }
-
-type CharacterStoreState = {
-    current: Character | null,
-    all: Character[],
-}
-
-interface CharacterStore extends Readable<CharacterStoreState> {
-    select: (character: Character) => void,
-    proficiencyBonus: () => number,
-}
-
-const initStore = (): CharacterStore => {
-    const initialState = {
-        current: null,
-        all: [devCharacter]
-    } as CharacterStoreState
-
-    const store = writable(initialState)
-    const { subscribe, update } = store
-
-    const select: CharacterStore['select'] = (character) => {
-        update((previousState) => ({
-            ...previousState,
-            current: character,
-        }))
-    }
-
-    const proficiencyBonus: CharacterStore['proficiencyBonus'] = () => {
-        const level = get(store).current.level
-
-        return PROFICIENCY_BONUS[level]
-    }
-
-    return {
-        subscribe,
-        select,
-        proficiencyBonus,
-    }
-}
-
-export type { Character, Attribute, Skill, Coin, Spell }
-export const character = initStore()

@@ -1,4 +1,3 @@
-import { describe, it, expect, afterEach } from 'vitest'
 import { i18n } from './i18n'
 import { get } from 'svelte/store'
 

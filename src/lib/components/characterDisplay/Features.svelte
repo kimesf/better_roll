@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { character } from '../../stores/character'
+    import { character } from '../../stores/currentCharacter'
 
     let opened: string | null = null
 
@@ -13,7 +13,7 @@
     }
 </script>
 
-{#each $character.current.features as feature}
+{#each $character.features as feature}
     <div>
         <button class="text-orange-500" on:click={() => open(feature.name)}>
             {feature.name}

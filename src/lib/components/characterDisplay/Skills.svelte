@@ -1,7 +1,8 @@
 <script lang="ts">
     import { i18n } from '../../stores/i18n'
-    import { character, type Attribute, type Skill } from '../../stores/character'
-    import SignedNumber from '../shared/SignedNumber.svelte';
+    import { character, proficiencyBonus } from '../../stores/currentCharacter'
+    import { type Attribute, type Skill } from '../../types'
+    import SignedNumber from '../shared/SignedNumber.svelte'
 
     type SkillsGroupedByAttr = {
         [key in Attribute]: Skill[]
@@ -18,7 +19,7 @@
         selectedAttr = attr
     }
 
-    $: skillsByAttr = $character.current.skills.reduce((acc, skill) => {
+    $: skillsByAttr = $character.skills.reduce((acc, skill) => {
         const key = skill.attribute
         const group = (acc[key] || []).concat(skill)
 
@@ -29,7 +30,7 @@
 
     // TODO: repetition can be removed
     const attrModifier = (key: Attribute): number => {
-        const attrValue = $character.current.attributes[key]
+        const attrValue = $character.attributes[key]
 
         return Math.floor((attrValue - 10) / 2)
     }
@@ -37,8 +38,8 @@
     const skillModifier = (skill: Skill): number => {
         return (
             attrModifier(skill.attribute) +
-            (skill.proficiency ? character.proficiencyBonus() : 0) +
-            (skill.expertise ? character.proficiencyBonus() : 0) +
+            (skill.proficiency ? $proficiencyBonus : 0) +
+            (skill.expertise ? $proficiencyBonus : 0) +
             skill.otherBonus
         )
     }
@@ -56,7 +57,7 @@
                 <span>
                     <SignedNumber number={attrModifier(attr)} />
                 </span>
-                <span>{presentAttribute($character.current.attributes[attr])}</span>
+                <span>{presentAttribute($character.attributes[attr])}</span>
             </button>
             {#each skillsByAttr[attr] as skill}
                 {#if selectedAttr == skill.attribute}
@@ -77,12 +78,12 @@
     {/each}
     <div>
         <button class="text-4xl" on:click={() => showSkills('tool')}> tools </button>
-        {#each $character.current.tools as tool}
+        {#each $character.tools as tool}
             {#if selectedAttr == 'tool'}
                 <div>
                     <p>
                         <span class:text-blue-500={!tool.expertise} class:text-yellow-500={tool.expertise}>
-                            <SignedNumber number={character.proficiencyBonus() * (tool.expertise ? 2 : 1) + tool.otherBonus} />
+                            <SignedNumber number={$proficiencyBonus * (tool.expertise ? 2 : 1) + tool.otherBonus} />
                         </span>
                         {tool.name}
                     </p>
