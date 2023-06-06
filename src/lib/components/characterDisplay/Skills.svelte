@@ -1,6 +1,7 @@
 <script lang="ts">
     import { i18n } from '../../stores/i18n'
     import { selectedCharacter, type Attribute, type Skill } from '../../stores/selectedCharacter'
+    import SignedNumber from '../shared/SignedNumber.svelte';
 
     // TODO: repetition can be removed
     const PROFICIENCY_BONUS = {
@@ -72,13 +73,6 @@
     const presentAttribute = (value: number) => {
         return String(value).padStart(2, '0')
     }
-
-    // TODO: repetition can be removed
-    const showSign = (mod: number) => {
-        const signal = mod < 0 ? '-' : '+'
-
-        return `${signal}${Math.abs(mod)}`
-    }
 </script>
 
 <div>
@@ -86,7 +80,9 @@
         <div class="py-1">
             <button class="text-4xl" on:click={() => showSkills(attr)}>
                 <span>{i18n.t(`attributes.${attr}`)}</span>
-                <span>{showSign(attrModifier(attr))}</span>
+                <span>
+                    <SignedNumber number={attrModifier(attr)} />
+                </span>
                 <span>{presentAttribute($selectedCharacter.attributes[attr])}</span>
             </button>
             {#each skillsByAttr[attr] as skill}
@@ -97,7 +93,7 @@
                                 class:text-blue-500={skill.proficiency && !skill.expertise}
                                 class:text-yellow-500={skill.proficiency && skill.expertise}
                             >
-                                {showSign(skillModifier(skill))}
+                                <SignedNumber number={skillModifier(skill)} />
                             </span>
                             {skill.name}
                         </p>
@@ -113,7 +109,7 @@
                 <div>
                     <p>
                         <span class:text-blue-500={!tool.expertise} class:text-yellow-500={tool.expertise}>
-                            {showSign(proficiencyBonus * (tool.expertise ? 2 : 1) + tool.otherBonus)}
+                            <SignedNumber number={proficiencyBonus * (tool.expertise ? 2 : 1) + tool.otherBonus} />
                         </span>
                         {tool.name}
                     </p>

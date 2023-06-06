@@ -39,14 +39,6 @@
 
         return Math.floor((attrValue - 10) / 2)
     }
-
-    // TODO: repetition can be removed
-    // presentWithSign maybe ?
-    const showSign = (number: number): string => {
-        const signal = number < 0 ? '-' : '+'
-
-        return `${signal}${Math.abs(number)}`
-    }
 </script>
 
 {#each $selectedCharacter.attacks as attack}
@@ -57,9 +49,11 @@
 
         <p>
             {i18n.t('display.attacks.hitBonus')}:
-            {showSign(proficiencyBonus)}
-            {showSign(attributeMod(attack.attribute))}
-            {showSign(attack.hitBonus)}
+            {proficiencyBonus}
+            +
+            {attributeMod(attack.attribute)}
+            +
+            {attack.hitBonus}
             =
             {proficiencyBonus + attributeMod(attack.attribute) + attack.hitBonus}
         </p>
