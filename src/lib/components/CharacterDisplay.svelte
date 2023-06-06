@@ -1,4 +1,4 @@
-<script lang="ts">
+<script lang='ts'>
     import { character } from '../stores/currentCharacter'
     import { i18n } from '../stores/i18n'
     import Actions from './characterDisplay/Actions.svelte'
@@ -36,22 +36,22 @@
     {#each menuKeys as key}
         <!-- TODO: alternative is to use DIALOG tag -->
         {#if menuOpened == key}
-            <div class="bg-neutral-900 absolute min-h-screen w-screen flex flex-col justify-between">
-                <div class="flex justify-between">
-                    <span class="uppercase">
+            <div class='bg-neutral-900 absolute min-h-screen w-screen flex flex-col justify-between'>
+                <div class='flex justify-between'>
+                    <span class='uppercase'>
                         >
                         {i18n.t(`display.${key}`)}
                     </span>
-                    <button class="text-2xl" on:click={() => closeMenu()}>CLOSE</button>
+                    <button class='text-2xl' on:click={() => closeMenu()}>CLOSE</button>
                 </div>
 
-                <div class="grow mb-20">
+                <div class='grow mb-20'>
                     <svelte:component this={menu[key]} />
                 </div>
 
                 <button
                     on:click={() => closeMenu()}
-                    class="fixed bottom-0 w-screen bg-neutral-800 p-4 text-2xl text-center"
+                    class='fixed bottom-0 w-screen bg-neutral-800 p-4 text-2xl text-center'
                 >
                     GO BACK
                 </button>
@@ -59,16 +59,16 @@
         {/if}
     {/each}
 
-    <div class="flex">
-        <div class="flex flex-col justify-between grow-0 h-screen">
+    <div class='flex'>
+        <div class='flex flex-col justify-between grow-0 h-screen'>
             <CoreMechanics />
 
             <div>
                 <nav>
                     <ul>
                         {#each menuKeys as key}
-                            <li class="flex">
-                                <button on:click={() => openMenu(key)} class="p-1 text-2xl w-full">
+                            <li class='flex'>
+                                <button on:click={() => openMenu(key)} class='p-1 text-2xl w-full'>
                                     {i18n.t(`display.${key}`)}
                                 </button>
                             </li>
@@ -78,8 +78,8 @@
             </div>
         </div>
 
-        <div class="grow bg-black">
-            <div class="text-center p-1">
+        <div class='grow bg-black'>
+            <div class='text-center p-1'>
                 <p>
                     {$character.name} | {$character.lineages} | {$character.level}
                 </p>

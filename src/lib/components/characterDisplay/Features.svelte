@@ -1,4 +1,4 @@
-<script lang="ts">
+<script lang='ts'>
     import { character } from '../../stores/currentCharacter'
 
     let opened: string | null = null
@@ -15,7 +15,7 @@
 
 {#each $character.features as feature}
     <div>
-        <button class="text-orange-500" on:click={() => open(feature.name)}>
+        <button class='text-orange-500' on:click={() => open(feature.name)}>
             {feature.name}
         </button>
 

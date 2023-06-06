@@ -1,4 +1,4 @@
-<script lang="ts">
+<script lang='ts'>
     import { i18n } from '../../stores/i18n'
     import { character } from '../../stores/currentCharacter'
     import { type Spell } from '../../types'
@@ -16,8 +16,8 @@
     }
 </script>
 
-<div class="overflow-x-scroll">
-    <table class="table-auto">
+<div class='overflow-x-scroll'>
+    <table class='table-auto'>
         <thead>
             <tr>
                 <th>{i18n.t('spells.available')}</th>

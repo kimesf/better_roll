@@ -4,7 +4,7 @@ import { proficiencyBonus, skillsGroupedByAttribute } from './currentCharacter'
 const mockStore = await vi.hoisted(async () => {
     const { writable } = await vi.importActual<typeof import('svelte/store')>('svelte/store')
 
-    return writable({ current: {}})
+    return writable({ current: {} })
 })
 
 vi.mock('./characterRepository', () => ({ default: mockStore }))
@@ -14,7 +14,7 @@ const setCharacter = (hash) => {
 }
 
 describe('$proficiencyBonus', () => {
-    [
+    ;[
         { levels: [1, 2, 3, 4], expectation: 2 },
         { levels: [5, 6, 7, 8], expectation: 3 },
         { levels: [9, 10, 11, 12], expectation: 4 },
@@ -41,12 +41,8 @@ describe('$skillsGroupedByAttribute', () => {
         setCharacter({ skills })
 
         expect(get(skillsGroupedByAttribute)).toEqual({
-            dreaming: [
-                { name: 'magic', attribute: 'dreaming' },
-            ],
-            training: [
-                { name: 'paiting', attribute: 'training' },
-            ]
+            dreaming: [{ name: 'magic', attribute: 'dreaming' }],
+            training: [{ name: 'paiting', attribute: 'training' }],
         })
     })
 })

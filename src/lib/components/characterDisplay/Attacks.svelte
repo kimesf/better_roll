@@ -1,4 +1,4 @@
-<script lang="ts">
+<script lang='ts'>
     import { i18n } from '../../stores/i18n'
     import { character, proficiencyBonus } from '../../stores/currentCharacter'
     import { type Attribute } from '../../types'
@@ -17,7 +17,7 @@
 
 {#each $character.attacks as attack}
     <div>
-        <h1 class="text-orange-500">
+        <h1 class='text-orange-500'>
             {attack.name}
         </h1>
 
