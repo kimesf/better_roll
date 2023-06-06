@@ -1,13 +1,19 @@
 import { get } from 'svelte/store'
-import { proficiencyBonus } from './currentCharacter'
-import characterRepository from './characterRepository'
-import devCharacter from './devCharacter'
-import { type Character, type Level } from '../types'
+import { proficiencyBonus, skillsGroupedByAttribute } from './currentCharacter'
 
-// TODO: dup
-const createCharacter = () => devCharacter as Character
+const mockStore = await vi.hoisted(async () => {
+    const { writable } = await vi.importActual<typeof import('svelte/store')>('svelte/store')
 
-describe('#proficiencyBonus', () => {
+    return writable({ current: {}})
+})
+
+vi.mock('./characterRepository', () => ({ default: mockStore }))
+
+const setCharacter = (hash) => {
+    mockStore.set({ current: hash })
+}
+
+describe('$proficiencyBonus', () => {
     [
         { levels: [1, 2, 3, 4], expectation: 2 },
         { levels: [5, 6, 7, 8], expectation: 3 },
@@ -17,12 +23,30 @@ describe('#proficiencyBonus', () => {
     ].forEach(({ levels, expectation }) => {
         levels.forEach((level) => {
             it(`equals ${expectation} for level ${level}`, () => {
-                let char = createCharacter()
-                char.level = level as Level
-                characterRepository.select(char)
+                setCharacter({ level })
 
                 expect(get(proficiencyBonus)).toEqual(expectation)
             })
+        })
+    })
+})
+
+describe('$skillsGroupedByAttribute', () => {
+    it('groups skills by attribute', () => {
+        const skills = [
+            { name: 'magic', attribute: 'dreaming' },
+            { name: 'paiting', attribute: 'training' },
+        ]
+
+        setCharacter({ skills })
+
+        expect(get(skillsGroupedByAttribute)).toEqual({
+            dreaming: [
+                { name: 'magic', attribute: 'dreaming' },
+            ],
+            training: [
+                { name: 'paiting', attribute: 'training' },
+            ]
         })
     })
 })

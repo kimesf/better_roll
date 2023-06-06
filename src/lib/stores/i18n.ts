@@ -48,4 +48,5 @@ const initStore = (): I18nStore => {
     }
 }
 
+// TODO: export default
 export const i18n = initStore()

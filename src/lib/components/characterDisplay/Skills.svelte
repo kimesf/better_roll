@@ -1,12 +1,9 @@
 <script lang="ts">
     import { i18n } from '../../stores/i18n'
-    import { character, proficiencyBonus } from '../../stores/currentCharacter'
+    import { character, proficiencyBonus, skillsGroupedByAttribute } from '../../stores/currentCharacter'
     import { type Attribute, type Skill } from '../../types'
+    import { ATTRIBUTES } from '../../constants'
     import SignedNumber from '../shared/SignedNumber.svelte'
-
-    type SkillsGroupedByAttr = {
-        [key in Attribute]: Skill[]
-    }
 
     let selectedAttr: Attribute | 'tool' | null = null
 
@@ -18,15 +15,6 @@
 
         selectedAttr = attr
     }
-
-    $: skillsByAttr = $character.skills.reduce((acc, skill) => {
-        const key = skill.attribute
-        const group = (acc[key] || []).concat(skill)
-
-        return Object.assign(acc, { [key]: group })
-    }, {} as SkillsGroupedByAttr)
-
-    const attributes: Attribute[] = ['str', 'dex', 'con', 'int', 'wis', 'cha']
 
     // TODO: repetition can be removed
     const attrModifier = (key: Attribute): number => {
@@ -50,7 +38,7 @@
 </script>
 
 <div>
-    {#each attributes as attr}
+    {#each ATTRIBUTES as attr}
         <div class="py-1">
             <button class="text-4xl" on:click={() => showSkills(attr)}>
                 <span>{i18n.t(`attributes.${attr}`)}</span>
@@ -59,7 +47,7 @@
                 </span>
                 <span>{presentAttribute($character.attributes[attr])}</span>
             </button>
-            {#each skillsByAttr[attr] as skill}
+            {#each $skillsGroupedByAttribute[attr] as skill}
                 {#if selectedAttr == skill.attribute}
                     <div>
                         <p>

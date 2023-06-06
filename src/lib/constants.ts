@@ -1,4 +1,6 @@
-import type { Level, ProficiencyBonus } from './types'
+import type { Attribute, Level, ProficiencyBonus } from './types'
+
+export const ATTRIBUTES: Attribute[] = ['str', 'dex', 'con', 'int', 'wis', 'cha']
 
 export const PROFICIENCY_BONUS: { [key in Level]: ProficiencyBonus } = {
     1: 2,
