@@ -4,6 +4,7 @@ export default {
     lineages: 'Leonin',
     classes: 'Rogue 1 / Paladin 3',
 
+    // TODO:
     // Armas simples e marciais.
     // Armadura leve, média e escudos.
     // Linguagem comum, leonina, dialeto militar e dialeto ladino.

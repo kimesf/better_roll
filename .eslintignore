@@ -2,4 +2,5 @@ index.html
 *.config.js
 *.config.ts
 **/*/*.test.ts
+tests/utils/**
 README.md

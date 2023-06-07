@@ -1,17 +1,8 @@
+import { charactersMock, setCharacter } from '../../../tests/utils/mockCharacters'
 import { get } from 'svelte/store'
 import { attributesModifiers, proficiencyBonus, skillsGroupedByAttribute } from './currentCharacter'
 
-const mockStore = await vi.hoisted(async () => {
-    const { writable } = await vi.importActual<typeof import('svelte/store')>('svelte/store')
-
-    return writable({ current: {} })
-})
-
-vi.mock('./characterRepository', () => ({ default: mockStore }))
-
-const setCharacter = (hash) => {
-    mockStore.set({ current: hash })
-}
+vi.mock('./characterRepository', () => charactersMock)
 
 describe('$proficiencyBonus', () => {
     ;[
