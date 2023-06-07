@@ -1,24 +1,33 @@
 import { writable, get, type Readable, type Writable } from 'svelte/store'
-import translations from './translations'
+import locales from '../../../config/locales'
 
 const DEFAULT_LOCALE = 'ptbr'
-const missingTranslationFor = (key: string): string => `Translation missing for '${key}'`
 
-type Translations = keyof typeof translations.ptbr
-type Available = keyof typeof translations
+type locales = keyof typeof locales.ptbr
+type Available = keyof typeof locales
+
+const missingTranslationFor = (key: string): string => {
+    return `Translation missing for '${key}'`
+}
 
 interface I18nStore extends Readable<string> {
     current: () => Available
     available: () => string[]
     change: (availableLocale: Available) => void
-    t: (key: Translations, options?: { [key: string]: string }) => string
+    t: (key: locales, options?: { [key: string]: string }) => string
 }
 
 const initStore = (): I18nStore => {
     const locale: Writable<Available> = writable(DEFAULT_LOCALE)
     const { subscribe, set } = locale
-    const current: I18nStore['current'] = () => get(locale)
-    const available: I18nStore['available'] = () => Object.keys(translations)
+
+    const current: I18nStore['current'] = () => {
+        return get(locale)
+    }
+
+    const available: I18nStore['available'] = () => {
+        return Object.keys(locales)
+    }
 
     const change: I18nStore['change'] = (availableLocale) => {
         if (!available().includes(availableLocale)) return
@@ -26,8 +35,8 @@ const initStore = (): I18nStore => {
         set(availableLocale)
     }
 
-    const getTranslation: I18nStore['t'] = (key, options): string => {
-        let translation = translations[current()][key] || missingTranslationFor(key)
+    const getTranslation: I18nStore['t'] = (key, options) => {
+        let translation = locales[current()][key] || missingTranslationFor(key)
 
         options &&
             Object.keys(options).map((k) => {
@@ -48,5 +57,4 @@ const initStore = (): I18nStore => {
     }
 }
 
-// TODO: export default
-export const i18n = initStore()
+export default initStore()

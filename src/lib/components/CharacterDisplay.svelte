@@ -1,6 +1,6 @@
 <script lang='ts'>
     import { character } from '../stores/currentCharacter'
-    import { i18n } from '../stores/i18n'
+    import i18n from '../stores/i18n'
     import Actions from './characterDisplay/Actions.svelte'
     import Magic from './characterDisplay/Magic.svelte'
     import OtherMechanics from './characterDisplay/OtherMechanics.svelte'

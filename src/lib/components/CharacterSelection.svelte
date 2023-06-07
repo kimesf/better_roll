@@ -1,6 +1,6 @@
 <script lang="ts">
     import characterRepository from '../stores/characterRepository'
-    import { i18n } from '../stores/i18n'
+    import i18n from '../stores/i18n'
 
     const { select } = characterRepository
 </script>

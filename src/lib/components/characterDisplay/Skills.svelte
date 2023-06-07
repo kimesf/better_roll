@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { i18n } from '../../stores/i18n'
+    import i18n from '../../stores/i18n'
     import { attributesModifiers, character, proficiencyBonus, skillsGroupedByAttribute } from '../../stores/currentCharacter'
     import { type Attribute, type Skill, type Tool } from '../../types'
     import { ATTRIBUTES } from '../../constants'

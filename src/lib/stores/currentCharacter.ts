@@ -2,7 +2,6 @@ import { derived } from 'svelte/store'
 import characters from './characterRepository'
 import { ATTRIBUTES, PROFICIENCY_BONUS } from '../constants'
 import { type Attribute, type Skill } from '../types'
-import { attr } from 'svelte/internal'
 
 type SkillsGroupedByAttr = {
     [key in Attribute]: Skill[]
