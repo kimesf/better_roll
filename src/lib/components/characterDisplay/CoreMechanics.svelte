@@ -1,6 +1,7 @@
 <script lang="ts">
-    import { character } from '../../stores/currentCharacter'
+    import { character, proficiencyBonus } from '../../stores/currentCharacter'
     import { i18n } from '../../stores/i18n'
+    import SignedNumber from '../shared/SignedNumber.svelte';
 
     $: mechanics = $character.mechanics
 </script>
@@ -30,8 +31,13 @@
 </div>
 
 <div>
+    {i18n.t('display.coreMechanics.proficiencyBonus')}
+    <SignedNumber number={$proficiencyBonus} />
+</div>
+
+<div>
     {i18n.t('display.coreMechanics.initiative')}
-    {mechanics.initiative}
+    <SignedNumber number={mechanics.initiative} />
 </div>
 
 <div>
