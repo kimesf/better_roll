@@ -3,7 +3,7 @@
 
     let opened: string | null = null
 
-    const open = (featureName: string) => {
+    const toggle = (featureName: string) => {
         if (featureName == opened) {
             opened = null
             return
@@ -15,7 +15,7 @@
 
 {#each $character.features as feature}
     <div>
-        <button class='text-orange-500' on:click={() => open(feature.name)}>
+        <button class='text-orange-500' on:click={() => toggle(feature.name)}>
             {feature.name}
         </button>
 
