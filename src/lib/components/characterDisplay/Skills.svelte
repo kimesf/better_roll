@@ -1,55 +1,44 @@
 <script lang="ts">
     import { i18n } from '../../stores/i18n'
-    import { character, proficiencyBonus, skillsGroupedByAttribute } from '../../stores/currentCharacter'
+    import { attributesModifiers, character, proficiencyBonus, skillsGroupedByAttribute } from '../../stores/currentCharacter'
     import { type Attribute, type Skill, type Tool } from '../../types'
     import { ATTRIBUTES } from '../../constants'
     import SignedNumber from '../shared/SignedNumber.svelte'
 
-    let selectedAttr: Attribute | 'tool' | null = null
+    let opened: Attribute | 'tool' | null = null
 
-    const showSkills = (attr: Attribute | 'tool') => {
-        if (attr == selectedAttr) {
-            selectedAttr = null
+    const toggle = (attr: Attribute | 'tool') => {
+        if (attr == opened) {
+            opened = null
             return
         }
 
-        selectedAttr = attr
+        opened = attr
     }
 
-    // TODO: repetition can be removed
-    const attrModifier = (key: Attribute): number => {
-        const attrValue = $character.attributes[key]
-
-        return Math.floor((attrValue - 10) / 2)
-    }
-
-    const skillModifier = (skill: Skill): number => {
+    const skillModifier = ({ attribute, proficiency, expertise, otherBonus }: Skill): number => {
         return (
-            attrModifier(skill.attribute) +
-            (skill.proficiency ? $proficiencyBonus : 0) +
-            (skill.expertise ? $proficiencyBonus : 0) +
-            skill.otherBonus
+            $attributesModifiers[attribute] +
+            (proficiency ? $proficiencyBonus : 0) +
+            (expertise ? $proficiencyBonus : 0) +
+            otherBonus
         )
     }
 
     const toolModifier = (tool: Tool) => {
         return $proficiencyBonus * (tool.expertise ? 2 : 1) + tool.otherBonus
     }
-
-    const presentAttribute = (value: number) => {
-        return String(value).padStart(2, '0')
-    }
 </script>
 
 {#each ATTRIBUTES as attr}
     <div>
-        <button class='text-4xl' on:click={() => showSkills(attr)}>
+        <button class='text-4xl' on:click={() => toggle(attr)}>
             {i18n.t(`attributes.${attr}`)}
-            <SignedNumber number={attrModifier(attr)} />
-            {presentAttribute($character.attributes[attr])}
+            <SignedNumber number={$attributesModifiers[attr]} />
+            {$character.attributes[attr]}
         </button>
         {#each $skillsGroupedByAttribute[attr] as skill}
-            {#if selectedAttr == skill.attribute}
+            {#if opened == skill.attribute}
                 <div>
                     <span
                         class:text-blue-500={skill.proficiency && !skill.expertise}
@@ -66,9 +55,9 @@
 
 {#if !!$character.tools.length}
     <div>
-        <button class='text-4xl' on:click={() => showSkills('tool')}>{i18n.t("display.skills.tools")}</button>
+        <button class='text-4xl' on:click={() => toggle('tool')}>{i18n.t("display.skills.tools")}</button>
         {#each $character.tools as tool}
-            {#if selectedAttr == 'tool'}
+            {#if opened == 'tool'}
                 <div>
                     <span class:text-blue-500={!tool.expertise} class:text-yellow-500={tool.expertise}>
                         <SignedNumber number={toolModifier(tool)} />

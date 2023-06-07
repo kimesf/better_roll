@@ -1,17 +1,10 @@
 <script lang='ts'>
     import { i18n } from '../../stores/i18n'
-    import { character, proficiencyBonus } from '../../stores/currentCharacter'
+    import { attributesModifiers, character, proficiencyBonus } from '../../stores/currentCharacter'
     import { type Attribute } from '../../types'
 
-    // TODO: repetition can be removed
-    const attributeMod = (attr: Attribute | null): number => {
-        if (!attr) {
-            return 0
-        }
-
-        const attrValue = $character.attributes[attr]
-
-        return Math.floor((attrValue - 10) / 2)
+    const modifier = (attr: Attribute | null): number => {
+        return $attributesModifiers?.[attr] || 0
     }
 </script>
 
@@ -25,11 +18,11 @@
             {i18n.t('display.attacks.hitBonus')}:
             {$proficiencyBonus}
             +
-            {attributeMod(attack.attribute)}
+            {modifier(attack.attribute)}
             +
             {attack.hitBonus}
             =
-            {$proficiencyBonus + attributeMod(attack.attribute) + attack.hitBonus}
+            {$proficiencyBonus + modifier(attack.attribute) + attack.hitBonus}
         </p>
 
         <p>

@@ -1,7 +1,8 @@
 import { derived } from 'svelte/store'
 import characters from './characterRepository'
-import { PROFICIENCY_BONUS } from '../constants'
+import { ATTRIBUTES, PROFICIENCY_BONUS } from '../constants'
 import { type Attribute, type Skill } from '../types'
+import { attr } from 'svelte/internal'
 
 type SkillsGroupedByAttr = {
     [key in Attribute]: Skill[]
@@ -18,4 +19,14 @@ export const skillsGroupedByAttribute = derived(character, ($character) => {
 
         return Object.assign(acc, { [key]: group })
     }, {} as SkillsGroupedByAttr)
+})
+
+export const attributesModifiers = derived(character, ($character) => {
+    return ATTRIBUTES.reduce((acc, attrName) => {
+        const value = $character.attributes[attrName]
+        const mod = Math.floor((value - 10) / 2)
+        acc[attrName] = mod
+
+        return acc
+    }, {} as {[key in Attribute]: number})
 })
