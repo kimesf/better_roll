@@ -4,20 +4,6 @@ export default {
     lineages: 'Leonin',
     classes: 'Rogue 2 / Paladin 3',
 
-    // TODO:
-    // Armas simples e marciais.
-    // Armadura leve, média e escudos.
-    // Linguagem comum, leonina, dialeto militar e dialeto ladino.
-    // Veiculos aquáticos.
-
-    // Salto
-    // Distância	3.9m
-    // Altura	1.2m+0.55m
-
-    // Atletismo
-    // Empurrar e puxar	195kg
-    // Carga máxima	97.5kg
-
     attributes: {
         str: 13,
         dex: 16,
@@ -26,6 +12,7 @@ export default {
         wis: 11,
         cha: 14,
     },
+
 
     mechanics: {
         hitPoints: {
@@ -48,6 +35,12 @@ export default {
             { name: 'Vantagem SG', value: 'Morte' },
         ],
     },
+
+    weapons: 'Armas simples e marciais',
+
+    armors: 'Armadura leve, média e escudos',
+
+    languages: 'Língua comum, leonina, dialeto militar e dialeto ladino',
 
     skills: [
         { name: 'Salvaguarda', attribute: 'str', proficiency: false, expertise: false, otherBonus: 0 },
@@ -77,8 +70,9 @@ export default {
     ],
 
     tools: [
-        { name: 'Kit Ladinos', expertise: true, otherBonus: 0 },
-        { name: 'Kit Venenos', expertise: false, otherBonus: 0 },
+        { name: 'Kit Ladinos', attribute: 'dex', expertise: true, otherBonus: 0 },
+        { name: 'Kit Venenos', attribute: 'dex', expertise: false, otherBonus: 0 },
+        { name: 'Veículos aquáticos', attribute: 'dex', expertise: false, otherBonus: 0 },
     ],
 
     resources: {
@@ -161,6 +155,7 @@ export default {
         ],
     },
 
+    // TODO:
     // equipped_items: [
     //   { name: "Botas Élficas",              notes: "", source: "" },
     //   { name: "Manto Preto Comum",          notes: "", source: "" },

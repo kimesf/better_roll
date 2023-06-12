@@ -41,6 +41,9 @@ export type Character = {
         darkVision: number
         other: Mechanic[]
     }
+    weapons: string,
+    armors: string,
+    languages: string,
     skills: Skill[]
     tools: Tool[]
     resources: {
@@ -71,6 +74,7 @@ export type Skill = {
 
 export type Tool = {
     name: string
+    attribute: Attribute
     expertise: boolean
     otherBonus: number
 }
