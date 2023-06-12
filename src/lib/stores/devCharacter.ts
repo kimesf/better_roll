@@ -1,8 +1,8 @@
 export default {
     name: 'Alû',
-    level: 4,
+    level: 5,
     lineages: 'Leonin',
-    classes: 'Rogue 1 / Paladin 3',
+    classes: 'Rogue 2 / Paladin 3',
 
     // TODO:
     // Armas simples e marciais.
@@ -29,8 +29,8 @@ export default {
 
     mechanics: {
         hitPoints: {
-            total: 37,
-            current: 37,
+            total: 45,
+            current: 45,
             temporary: 0,
             debuff: 0,
         },
@@ -225,7 +225,7 @@ export default {
 
     features: [
         {
-            name: 'Natureza Morte',
+            name: 'Natureza M.',
             notes: 'Você não precisa comer, beber ou respirar.\n\nVocê não precisa dormir e a magia não pode fazer você dormir. Você pode terminar um descanso longo em 4 horas se passar essas horas em um estado inativo e imóvel, durante o qual retém a consciência.',
             source: '',
         },
@@ -269,18 +269,26 @@ export default {
             notes: 'componentes. pequena lima, conjunto de gazuas, pequeno espelho montado num baco de metal, conjunto de tesouras de lâminas estreita e um par de alicates.\nhistória. concede informação sobre locais famosos por suas armadilhas.\ninvestigação e percepção. facilidade em encontrar armadilhas.\nmontar uma armadilha. assim como você pode armar armadilhas, também pode desarmá-las. como parte de um descanso curto, você pode criar armadilhas usando itens que estiverem à mão. o resultado do seu teste torna-se a CD para a tentativa de outra criatura de descobrir ou desarmar a armadilha. o tipo de dano causado por uma armadilha é aquele adequado aos materiais usados na sua criação (venenoso, para o material venenoso, ou perfurante, para o material lança) ou uma quantidade de dano igual a metade do resultado do seu teste, à escolha do DM.\natividades. arrombar fechadura e desarmar armadilhas.',
             source: '',
         },
+        // {
+        //     name: 'Marinheiro',
+        //     notes: 'Estilo de luta nível 2. Contanto que você não esteja vestindo armadura pesada ou usando um escudo, você tem um deslocamento de natação e um deslocamento de escalada igual ao seu deslocamento normal e ganha um bônus de +1 na classe de armadura.',
+        //     source: '',
+        // },
         {
-            name: 'Marinheiro',
-            notes: 'Estilo de luta nível 2. Contanto que você não esteja vestindo armadura pesada ou usando um escudo, você tem um deslocamento de natação e um deslocamento de escalada igual ao seu deslocamento normal e ganha um bônus de +1 na classe de armadura.',
+            name: 'Ação Astuta',
+            notes: 'Seu pensamento rápido e agilidade permitem que você se mova e aja rapidamente. Você pode realizar uma ação bônus em cada um de seus turnos de combate. Esta ação pode ser usada apenas para executar a ação Correr, Desengajar ou Esconder.',
             source: '',
         },
     ],
 
+    // TODO
     // magic_mechanics: [
     //   { name: "bonusAttack",  value: 37 },
     //   { name: "memoMagic",    value: 16 },
     //   { name: "defenseMagic", value: 16 },
     // ],
+
+    // PASSIVE PERCEPTION
 
     spells: [
         {
