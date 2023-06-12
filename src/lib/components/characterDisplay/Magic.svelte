@@ -1,4 +1,4 @@
-<script lang='ts'>
+<script lang="ts">
     import i18n from '../../stores/i18n'
     import { attributesModifiers, character, proficiencyBonus } from '../../stores/currentCharacter'
     import { type Spell } from '../../types'
@@ -9,7 +9,8 @@
 
     $: spellAttack = $proficiencyBonus + $attributesModifiers[spellAttribute] + $character.spellMechanics.hitBonus
 
-    $: spellSaveDifficulty = 8 + $proficiencyBonus + $attributesModifiers[spellAttribute] + $character.spellMechanics.saveDifficultyBonus
+    $: spellSaveDifficulty =
+        8 + $proficiencyBonus + $attributesModifiers[spellAttribute] + $character.spellMechanics.saveDifficultyBonus
 
     const presentComponents = (components: Spell['components']) => {
         const maybeAspect = (aspect: 'verbal' | 'somatic' | 'material') =>
@@ -20,7 +21,6 @@
 
         return abbr + notes
     }
-
 </script>
 
 <div>
@@ -52,8 +52,8 @@
     {/each}
 </div>
 
-<div class='overflow-x-scroll'>
-    <table class='table-auto whitespace-nowrap'>
+<div class="overflow-x-scroll">
+    <table class="table-auto whitespace-nowrap">
         <thead>
             <tr>
                 <th>{i18n.t('spells.available')}</th>

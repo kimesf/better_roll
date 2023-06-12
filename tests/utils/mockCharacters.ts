@@ -11,22 +11,19 @@ export const charactersMock = {
     default: {
         subscribe: store.subscribe,
         select: vi.fn(),
-    }
+    },
 }
 
 export const setCurrent = (hash) => {
     store.update((previous) => ({
         ...previous,
-        current: hash
+        current: hash,
     }))
 }
 
 export const addCharacter = (hash) => {
     store.update((previous) => ({
         ...previous,
-        all: [
-            ...previous.all,
-            hash
-        ]
+        all: [...previous.all, hash],
     }))
 }

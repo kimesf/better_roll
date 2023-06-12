@@ -1,4 +1,4 @@
-<script lang='ts'>
+<script lang="ts">
     // import i18n from '../../stores/i18n'
     import { attributesModifiers, character, proficiencyBonus } from '../../stores/currentCharacter'
     import { type Attribute } from '../../types'
@@ -11,7 +11,7 @@
     let open: string | null = null
 
     const toggle = (item: string): void => {
-        if(open == item) {
+        if (open == item) {
             open = null
             return
         }
@@ -22,7 +22,7 @@
 
 {#each $character.attacks as attack}
     <div>
-        <button class='text-orange-500' on:click={() => toggle(attack.name)}>
+        <button class="text-orange-500" on:click={() => toggle(attack.name)}>
             {attack.name}
         </button>
 

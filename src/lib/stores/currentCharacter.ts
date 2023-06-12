@@ -27,5 +27,5 @@ export const attributesModifiers = derived(character, ($character) => {
         acc[attrName] = mod
 
         return acc
-    }, {} as {[key in Attribute]: number})
+    }, {} as { [key in Attribute]: number })
 })

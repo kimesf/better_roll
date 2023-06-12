@@ -8,7 +8,7 @@ vi.mock('../../../config/locales', () => {
             hi: 'hey',
             welcome: 'welcome {{name}}',
         },
-        other: {}
+        other: {},
     }
 
     return { default: locales }

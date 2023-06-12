@@ -1,7 +1,7 @@
 <script lang="ts">
     import { character, proficiencyBonus } from '../../stores/currentCharacter'
     import i18n from '../../stores/i18n'
-    import SignedNumber from '../shared/SignedNumber.svelte';
+    import SignedNumber from '../shared/SignedNumber.svelte'
 
     $: mechanics = $character.mechanics
 </script>

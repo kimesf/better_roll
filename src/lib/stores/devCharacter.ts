@@ -13,7 +13,6 @@ export default {
         cha: 14,
     },
 
-
     mechanics: {
         hitPoints: {
             total: 45,
@@ -327,7 +326,7 @@ export default {
             //     total: 0,
             //     current: 0,
             // },
-        ]
+        ],
     },
 
     spells: [

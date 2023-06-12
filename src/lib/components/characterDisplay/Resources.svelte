@@ -1,4 +1,4 @@
-<script lang='ts'>
+<script lang="ts">
     import i18n from '../../stores/i18n'
     import { character } from '../../stores/currentCharacter'
     import { type Coin } from '../../types'
@@ -7,7 +7,7 @@
 </script>
 
 <div>
-    <h1 class='text-orange-500'>{i18n.t('display.resources.coins')}</h1>
+    <h1 class="text-orange-500">{i18n.t('display.resources.coins')}</h1>
 
     {#each coins as coin}
         <span>
@@ -18,7 +18,7 @@
 </div>
 
 <div>
-    <h1 class='text-orange-500'>{i18n.t('display.resources.renewable')}</h1>
+    <h1 class="text-orange-500">{i18n.t('display.resources.renewable')}</h1>
 
     <div>
         {#each $character.resources.recoverable as recoverable}
@@ -32,7 +32,7 @@
 </div>
 
 <div>
-    <h1 class='text-orange-500'>{i18n.t('display.resources.finite')}</h1>
+    <h1 class="text-orange-500">{i18n.t('display.resources.finite')}</h1>
 
     <div>
         {#each $character.resources.finite as finite}

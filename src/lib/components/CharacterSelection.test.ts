@@ -24,6 +24,6 @@ describe('character selection', () => {
 
         fireEvent.click(joeBtn)
 
-        expect(spy).toBeCalledWith({ name: 'Joe'} )
+        expect(spy).toBeCalledWith({ name: 'Joe' })
     })
 })

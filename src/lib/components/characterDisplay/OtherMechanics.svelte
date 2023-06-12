@@ -5,9 +5,11 @@
 
 <CoreMechanics />
 
-{#each $character.mechanics.other as mechanic}
-    <div>
-        {mechanic.name}:
-        {mechanic.value}
-    </div>
-{/each}
+<div class="bg-neutral-700">
+    {#each $character.mechanics.other as mechanic}
+        <div>
+            {mechanic.name}:
+            {mechanic.value}
+        </div>
+    {/each}
+</div>

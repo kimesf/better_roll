@@ -1,6 +1,11 @@
 <script lang="ts">
     import i18n from '../../stores/i18n'
-    import { attributesModifiers, character, proficiencyBonus, skillsGroupedByAttribute } from '../../stores/currentCharacter'
+    import {
+        attributesModifiers,
+        character,
+        proficiencyBonus,
+        skillsGroupedByAttribute,
+    } from '../../stores/currentCharacter'
     import { type Attribute, type Skill, type Tool } from '../../types'
     import { ATTRIBUTES } from '../../constants'
     import SignedNumber from '../shared/SignedNumber.svelte'
@@ -32,39 +37,36 @@
         )
     }
 
-    const toolModifier = ({ attribute, expertise, otherBonus}: Tool): number => {
-        return $proficiencyBonus *
-            (expertise ? 2 : 1) +
-            $attributesModifiers[attribute] +
-            otherBonus
+    const toolModifier = ({ attribute, expertise, otherBonus }: Tool): number => {
+        return $proficiencyBonus * (expertise ? 2 : 1) + $attributesModifiers[attribute] + otherBonus
     }
 </script>
 
 {#each ATTRIBUTES as attr}
-<div>
-    <button class='text-4xl' on:click={() => toggle(attr)}>
-        {i18n.t(`attributes.${attr}`)}
-        <SignedNumber number={$attributesModifiers[attr]} />
-        {$character.attributes[attr]}
-    </button>
-    {#each $skillsGroupedByAttribute[attr] as skill}
-        {#if visible == skill.attribute}
-        <div>
-            <span
-                class:text-blue-500={skill.proficiency && !skill.expertise}
-                class:text-yellow-500={skill.proficiency && skill.expertise}
-            >
-                <SignedNumber number={skillModifier(skill)} />
-            </span>
-            {skill.name}
-        </div>
-        {/if}
-    {/each}
-</div>
+    <div>
+        <button class="text-4xl" on:click={() => toggle(attr)}>
+            {i18n.t(`attributes.${attr}`)}
+            <SignedNumber number={$attributesModifiers[attr]} />
+            {$character.attributes[attr]}
+        </button>
+        {#each $skillsGroupedByAttribute[attr] as skill}
+            {#if visible == skill.attribute}
+                <div>
+                    <span
+                        class:text-blue-500={skill.proficiency && !skill.expertise}
+                        class:text-yellow-500={skill.proficiency && skill.expertise}
+                    >
+                        <SignedNumber number={skillModifier(skill)} />
+                    </span>
+                    {skill.name}
+                </div>
+            {/if}
+        {/each}
+    </div>
 {/each}
 
 <div>
-    <button class='text-4xl' on:click={() => toggle('other')}>{i18n.t("display.skills.other")}</button>
+    <button class="text-4xl" on:click={() => toggle('other')}>{i18n.t('display.skills.other')}</button>
     {#if visible == 'other'}
         {#each $character.tools as tool}
             <div>
@@ -75,7 +77,7 @@
             </div>
         {/each}
 
-        <br>
+        <br />
 
         <div>
             <p>{$character.weapons}</p>
@@ -83,22 +85,22 @@
             <p>{$character.languages}</p>
         </div>
 
-        <br>
+        <br />
 
         <div>
             <h1>{i18n.t('display.skills.jump')}</h1>
 
             <p>
                 {i18n.t('display.skills.distance')}:
-                <DistanceNumber distanceInFeet={jumpDistanceInFeet}/>
+                <DistanceNumber distanceInFeet={jumpDistanceInFeet} />
             </p>
             <p>
                 {i18n.t('display.skills.height')}:
-                <DistanceNumber distanceInFeet={jumpHeightInFeet}/>
+                <DistanceNumber distanceInFeet={jumpHeightInFeet} />
             </p>
         </div>
 
-        <br>
+        <br />
 
         <div>
             <h1>{i18n.t('display.skills.atletics')}</h1>

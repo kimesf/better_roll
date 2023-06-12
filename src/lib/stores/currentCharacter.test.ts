@@ -38,7 +38,7 @@ describe('$skillsGroupedByAttribute', () => {
     })
 })
 
-describe ('$attributesModifiers', () => {
+describe('$attributesModifiers', () => {
     it('calculates attributes modifiers', () => {
         const attributes = {
             str: 4,
