@@ -1,4 +1,4 @@
-import { charactersMock, setCharacter } from '../../../tests/utils/mockCharacters'
+import { charactersMock, setCurrent } from '../../../tests/utils/mockCharacters'
 import { get } from 'svelte/store'
 import { attributesModifiers, proficiencyBonus, skillsGroupedByAttribute } from './currentCharacter'
 
@@ -14,7 +14,7 @@ describe('$proficiencyBonus', () => {
     ].forEach(({ levels, expectation }) => {
         levels.forEach((level) => {
             it(`equals ${expectation} for level ${level}`, () => {
-                setCharacter({ level })
+                setCurrent({ level })
 
                 expect(get(proficiencyBonus)).toEqual(expectation)
             })
@@ -29,7 +29,7 @@ describe('$skillsGroupedByAttribute', () => {
             { name: 'paiting', attribute: 'training' },
         ]
 
-        setCharacter({ skills })
+        setCurrent({ skills })
 
         expect(get(skillsGroupedByAttribute)).toEqual({
             dreaming: [{ name: 'magic', attribute: 'dreaming' }],
@@ -49,7 +49,7 @@ describe ('$attributesModifiers', () => {
             cha: 23,
         }
 
-        setCharacter({ attributes })
+        setCurrent({ attributes })
 
         expect(get(attributesModifiers)).toEqual({
             str: -3,
