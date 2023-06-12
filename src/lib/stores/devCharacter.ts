@@ -204,7 +204,7 @@ export default {
         {
             name: 'Golpe divino',
             addProficiency: true,
-            attribute: 'dex',
+            attribute: null,
             hitBonus: 0,
             damage: '1d8 (+1d8 ++)',
             damageType: 'radiante',
@@ -214,7 +214,7 @@ export default {
         {
             name: 'Veneno Potente',
             addProficiency: true,
-            attribute: 'dex',
+            attribute: null,
             hitBonus: 0,
             damage: '2d8 (SG CON 14) venenoso',
             damageType: 'veneno',
