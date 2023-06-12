@@ -281,14 +281,59 @@ export default {
         },
     ],
 
-    // TODO
-    // magic_mechanics: [
-    //   { name: "bonusAttack",  value: 37 },
-    //   { name: "memoMagic",    value: 16 },
-    //   { name: "defenseMagic", value: 16 },
-    // ],
-
-    // PASSIVE PERCEPTION
+    spellMechanics: {
+        attribute: 'cha',
+        hitBonus: 0,
+        availablePerDay: 3,
+        saveDifficultyBonus: 0,
+        slots: [
+            {
+                circle: 1,
+                total: 3,
+                current: 3,
+            },
+            // {
+            //     level: 2,
+            //     total: 0,
+            //     current: 0,
+            // },
+            // {
+            //     level: 3,
+            //     total: 0,
+            //     current: 0,
+            // },
+            // {
+            //     level: 4,
+            //     total: 0,
+            //     current: 0,
+            // },
+            // {
+            //     level: 5,
+            //     total: 0,
+            //     current: 0,
+            // },
+            // {
+            //     level: 6,
+            //     total: 0,
+            //     current: 0,
+            // },
+            // {
+            //     level: 7,
+            //     total: 0,
+            //     current: 0,
+            // },
+            // {
+            //     level: 8,
+            //     total: 0,
+            //     current: 0,
+            // },
+            // {
+            //     level: 9,
+            //     total: 0,
+            //     current: 0,
+            // },
+        ]
+    },
 
     spells: [
         {

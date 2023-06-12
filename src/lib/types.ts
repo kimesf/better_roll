@@ -6,6 +6,8 @@ export type Level = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 |
 
 export type ProficiencyBonus = 2 | 3 | 4 | 5 | 6
 
+export type SpellCircle = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9
+
 export type School =
     | 'abjuration'
     | 'conjuration'
@@ -50,6 +52,7 @@ export type Character = {
     }
     features: Feature[]
     attacks: Attack[]
+    spellMechanics: SpellMechanics
     spells: Spell[]
 }
 
@@ -106,8 +109,22 @@ export type Attack = {
     source: string
 }
 
+export type SpellMechanics = {
+    attribute: Attribute
+    hitBonus: number
+    availablePerDay: number
+    saveDifficultyBonus: number
+    slots: SpellSlot[]
+}
+
+export type SpellSlot = {
+    circle: SpellCircle
+    total: number
+    current: number
+}
+
 export type Spell = {
-    circle: number
+    circle: SpellCircle
     alwaysAvailable: boolean
     available: boolean
     name: string

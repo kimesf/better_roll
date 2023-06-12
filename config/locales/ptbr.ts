@@ -40,7 +40,7 @@ export default {
     'display.actions': 'ações',
     'display.magic': 'magias',
     'display.features': 'talentos',
-    'display.skills.tools': 'ferramentas',
+    'display.skills.other': 'outros',
     'display.coreMechanics.hitPoints': 'vida',
     'display.coreMechanics.hitPoints.total': 'total',
     'display.coreMechanics.hitPoints.current': 'atual',
@@ -62,4 +62,8 @@ export default {
     'display.resources.finite': 'finitos',
     'display.attacks.hitBonus': 'bônus de ataque',
     'display.attacks.damage': 'dano',
+    'display.spell.attribute': 'attributo de conjuração',
+    'display.spell.availablePerDay': 'disponíveis por dia',
+    'display.spell.hitBonus': 'bônus de acerto',
+    'display.spell.saveDifficulty': 'dificuldade de salvaguarda',
 }

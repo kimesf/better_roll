@@ -40,7 +40,7 @@ export default {
     'display.actions': 'actions',
     'display.magic': 'magic',
     'display.features': 'features',
-    'display.skills.tools': 'tools',
+    'display.skills.other': 'other',
     'display.coreMechanics.hitPoints': 'hp',
     'display.coreMechanics.hitPoints.total': 'total',
     'display.coreMechanics.hitPoints.current': 'current',
@@ -62,4 +62,8 @@ export default {
     'display.resources.finite': 'finite',
     'display.attacks.hitBonus': 'hit bonus',
     'display.attacks.damage': 'damage',
+    'display.spell.attribute': 'conjuration attribute',
+    'display.spell.availablePerDay': 'available per day',
+    'display.spell.hitBonus': 'hit bonus',
+    'display.spell.saveDifficulty': 'save DC',
 }
