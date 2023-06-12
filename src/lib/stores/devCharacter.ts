@@ -1,8 +1,8 @@
 export default {
     name: 'Alû',
     level: 5,
-    lineages: 'Leonin',
-    classes: 'Rogue 2 / Paladin 3',
+    lineages: 'Leonino',
+    classes: 'Ladino 2 | Paladino 3',
 
     attributes: {
         str: 13,
