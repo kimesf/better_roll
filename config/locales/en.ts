@@ -35,6 +35,7 @@ export default {
     'spells.ritual': 'ritual',
     'spells.notes': 'notes',
     'selection.title': 'select you character',
+    'display.goBack': 'go back',
     'display.mechanics': 'mechanics',
     'display.resources': 'resources',
     'display.actions': 'actions',

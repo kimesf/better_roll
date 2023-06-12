@@ -35,6 +35,7 @@ export default {
     'spells.ritual': 'ritual',
     'spells.notes': 'descrição',
     'selection.title': 'selecione seu personagem',
+    'display.goBack': 'voltar',
     'display.mechanics': 'mecânicas',
     'display.resources': 'recursos',
     'display.actions': 'ações',

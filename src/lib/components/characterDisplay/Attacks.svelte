@@ -1,5 +1,4 @@
 <script lang="ts">
-    // import i18n from '../../stores/i18n'
     import { attributesModifiers, character, proficiencyBonus } from '../../stores/currentCharacter'
     import { type Attribute } from '../../types'
     import SignedNumber from '../shared/SignedNumber.svelte'

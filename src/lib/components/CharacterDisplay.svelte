@@ -9,7 +9,7 @@
     import Features from './characterDisplay/Features.svelte'
     import CoreMechanics from './characterDisplay/CoreMechanics.svelte'
 
-    const menu = {
+    const sections = {
         mechanics: OtherMechanics,
         features: Features,
         resources: Resources,
@@ -17,46 +17,34 @@
         actions: Actions,
     } as const
 
-    type Menu = keyof typeof menu
+    type Section = keyof typeof sections
 
-    const menuKeys = Object.keys(menu) as Menu[]
+    const sectionKeys = Object.keys(sections) as Section[]
 
-    let menuOpened: Menu | null = null
+    let visible: Section | null = null
 
-    const openMenu = (key: Menu | null): void => {
-        menuOpened = key
+    const openSection = (key: Section | null): void => {
+        visible = key
     }
 
-    // TODO: menu is not a good name
-    const closeMenu = (): void => {
-        menuOpened = null
+    const closeSection = (): void => {
+        visible = null
     }
 </script>
 
 <div>
-    {#each menuKeys as key}
-        <!-- TODO: alternative is to use DIALOG tag -->
-        {#if menuOpened == key}
-            <div class="bg-neutral-900 absolute min-h-screen w-screen flex flex-col justify-between">
-                <div class="flex justify-between">
-                    <span class="uppercase">
-                        >
-                        {i18n.t(`display.${key}`)}
-                    </span>
-                    <button class="text-2xl" on:click={() => closeMenu()}>CLOSE</button>
-                </div>
-
-                <div class="grow mb-20">
-                    <svelte:component this={menu[key]} />
-                </div>
-
-                <button
-                    on:click={() => closeMenu()}
-                    class="fixed bottom-0 w-screen bg-neutral-800 p-4 text-2xl text-center"
-                >
-                    GO BACK
-                </button>
+    {#each sectionKeys as key}
+        {#if visible == key}
+            <div class="bg-neutral-900 absolute min-h-screen w-screen justify-between p-2 mb-20">
+                <svelte:component this={sections[key]} />
             </div>
+
+            <button
+                on:click={() => closeSection()}
+                class="fixed bottom-0 w-screen p-4 text-2xl text-center uppercase bg-neutral-800 shadow-[0_-10px_50px_0_rgba(23,23,23,1)]"
+            >
+                {i18n.t('display.goBack')}
+            </button>
         {/if}
     {/each}
 
@@ -66,9 +54,9 @@
 
             <nav>
                 <ul>
-                    {#each menuKeys as key}
+                    {#each sectionKeys as key}
                         <li class="flex">
-                            <button on:click={() => openMenu(key)} class="p-1 text-2xl w-full">
+                            <button on:click={() => openSection(key)} class="p-1 text-2xl w-full">
                                 {i18n.t(`display.${key}`)}
                             </button>
                         </li>
