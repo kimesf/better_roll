@@ -1,3 +1,18 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* TODO: move to component */
+.arrow {
+    border-width: 0 3px 3px 0;
+    padding: 3px;
+    transition: transform .1s linear;
+
+    &.right {
+        transform: rotate(-45deg);
+    }
+
+    &.down {
+        transform: rotate(45deg);
+    }
+}

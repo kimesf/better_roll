@@ -34,6 +34,8 @@ export default {
     'spells.concentration': 'concentração',
     'spells.ritual': 'ritual',
     'spells.notes': 'descrição',
+    'recoverable.short': 'curto',
+    'recoverable.long': 'longo',
     'selection.title': 'selecione seu personagem',
     'display.goBack': 'voltar',
     'display.mechanics': 'mecânicas',

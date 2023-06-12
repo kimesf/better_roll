@@ -89,7 +89,7 @@ export default {
             { name: 'Magias 1o círculo', current: 3, total: 3, recoveredBy: 'long', notes: '', source: '' },
             { name: 'Absorver Canalizar Divino', current: 0, total: 1, recoveredBy: 'long', notes: '', source: '' },
             { name: 'Senso Divino', current: 3, total: 3, recoveredBy: 'long', notes: '', source: '' },
-            { name: 'Curar pelas Mãos', current: 15, total: 15, recoveredBy: 'long', notes: '', source: '' },
+            { name: 'Curar pelas Mãos', current: 15, total: 15, recoveredBy: 'long', notes: 'Seu toque abençoado pode curar feridas. Você tem uma reserva de poder de cura que é reabastecida quando você faz um descanso longo. Com essa reserva, você pode restaurar um número total de pontos de vida igual ao seu nível de paladino x 5.\n\nComo uma ação, você pode tocar uma criatura e extrair poder da reserva para restaurar um número de pontos de vida daquela criatura, até o máximo restante em sua reserva.\n\nAlternativamente, você pode gastar 5 pontos de vida de sua reserva de cura para curar o alvo de uma doença ou neutralizar um veneno que o esteja afetando. Você pode curar várias doenças e neutralizar vários venenos com um único uso de Imposição de mãos, gastando pontos de vida separadamente para cada um.\n\nEste recurso não tem efeito em mortos-vivos e construtos.', source: 'http://dnd5e.wikidot.com/paladin' },
             { name: 'Lágrima da Dríade', current: 1, total: 1, recoveredBy: 'long', notes: '', source: '' },
         ],
 
