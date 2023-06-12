@@ -53,8 +53,8 @@
             {#if visible == skill.attribute}
                 <div>
                     <span
-                        class:text-blue-500={skill.proficiency && !skill.expertise}
-                        class:text-yellow-500={skill.proficiency && skill.expertise}
+                        class:text-indigo-500={skill.proficiency && !skill.expertise}
+                        class:text-teal-500={skill.proficiency && skill.expertise}
                     >
                         <SignedNumber number={skillModifier(skill)} />
                     </span>
@@ -70,7 +70,7 @@
     {#if visible == 'other'}
         {#each $character.tools as tool}
             <div>
-                <span class:text-blue-500={!tool.expertise} class:text-yellow-500={tool.expertise}>
+                <span class:text-indigo-500={!tool.expertise} class:text-teal-500={tool.expertise}>
                     <SignedNumber number={toolModifier(tool)} />
                 </span>
                 {tool.name}
