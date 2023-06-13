@@ -25,6 +25,7 @@
                 class:down={visible == feature.name}
                 class:right={visible != feature.name}
             />
+
             {feature.name}
         </button>
 

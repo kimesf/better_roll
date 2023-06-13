@@ -41,6 +41,7 @@ export default {
     'display.mechanics': 'mecânicas',
     'display.resources': 'recursos',
     'display.actions': 'ações',
+    'display.actions.attacks': 'ataques',
     'display.magic': 'magias',
     'display.features': 'talentos',
     'display.skills.other': 'outros',
