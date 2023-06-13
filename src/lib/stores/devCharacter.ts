@@ -86,7 +86,6 @@ export default {
             { name: 'd8', current: 1, total: 1, recoveredBy: 'long', notes: '', source: '' },
             { name: 'd10', current: 1, total: 3, recoveredBy: 'long', notes: '', source: '' },
             { name: 'Canalizar Divino', current: 1, total: 1, recoveredBy: 'short', notes: '', source: '' },
-            { name: 'Magias 1o círculo', current: 3, total: 3, recoveredBy: 'long', notes: '', source: '' },
             { name: 'Absorver Canalizar Divino', current: 0, total: 1, recoveredBy: 'long', notes: '', source: '' },
             { name: 'Senso Divino', current: 3, total: 3, recoveredBy: 'long', notes: '', source: '' },
             { name: 'Curar pelas Mãos', current: 15, total: 15, recoveredBy: 'long', notes: 'Seu toque abençoado pode curar feridas. Você tem uma reserva de poder de cura que é reabastecida quando você faz um descanso longo. Com essa reserva, você pode restaurar um número total de pontos de vida igual ao seu nível de paladino x 5.\n\nComo uma ação, você pode tocar uma criatura e extrair poder da reserva para restaurar um número de pontos de vida daquela criatura, até o máximo restante em sua reserva.\n\nAlternativamente, você pode gastar 5 pontos de vida de sua reserva de cura para curar o alvo de uma doença ou neutralizar um veneno que o esteja afetando. Você pode curar várias doenças e neutralizar vários venenos com um único uso de Imposição de mãos, gastando pontos de vida separadamente para cada um.\n\nEste recurso não tem efeito em mortos-vivos e construtos.', source: 'http://dnd5e.wikidot.com/paladin' },
@@ -218,11 +217,11 @@ export default {
     ],
 
     features: [
-        {
-            name: 'Natureza M.',
-            notes: 'Você não precisa comer, beber ou respirar.\n\nVocê não precisa dormir e a magia não pode fazer você dormir. Você pode terminar um descanso longo em 4 horas se passar essas horas em um estado inativo e imóvel, durante o qual retém a consciência.',
-            source: '',
-        },
+        // {
+        //     name: 'Natureza M.',
+        //     notes: 'Você não precisa comer, beber ou respirar.\n\nVocê não precisa dormir e a magia não pode fazer você dormir. Você pode terminar um descanso longo em 4 horas se passar essas horas em um estado inativo e imóvel, durante o qual retém a consciência.',
+        //     source: '',
+        // },
         {
             name: 'Canalizar divino',
             notes: 'Seu juramento permite que você canalize energia divina para alimentar efeitos mágicos. Cada opção de Canalizar Divindade fornecida por seu juramento explica como usá-la. Quando você usa seu Canalizar Divindade, você escolhe qual opção usar. Você deve então terminar um descanso curto ou longo para usar seu Canalizar Divindade novamente. Alguns efeitos de Canalizar Divindade requerem testes de resistência. Quando você usa tal efeito desta classe, a CD é igual a sua CD de resistência de magia de paladino.\n\n- Abjurar Inimigo: como uma ação, você apresenta seu símbolo sagrado e faz uma oração de denúncia, usando seu Canalizar Divindade. Escolha uma criatura a até 18 metros de você que você possa ver. Essa criatura deve fazer um teste de resistência de Sabedoria, a menos que seja imune a ser amedrontado. Demônios e mortos-vivos têm desvantagem neste teste de resistência. Se falhar na resistência, a criatura fica amedrontada por 1 minuto ou até sofrer qualquer dano. Enquanto estiver amedrontada, a velocidade da criatura é 0 e ela não pode se beneficiar de nenhum bônus em sua velocidade. Em um teste de resistência bem-sucedido, a velocidade da criatura é reduzida pela metade por 1 minuto ou até que a criatura sofra algum dano.\n\n- Voto de Inimizade: como uma ação bônus, você pode proferir um voto de inimizade contra uma criatura que você possa ver a até 3 metros de você, usando seu Canalizar Divindade. Você ganha vantagem nas jogadas de ataque contra a criatura por 1 minuto ou até que ela caia para 0 pontos de vida ou fique inconsciente.\n\n- Absorver canalização divina: como uma ação bônus, você toca seu símbolo sagrado, profere uma oração e recupera um espaço de magia gasto, cujo nível não pode ser maior que metade de seu bônus de proficiência (arredondado para cima). O número de vezes que você pode usar esse recurso é baseado no nível que você alcançou nesta classe: 3º nível, uma vez; 7º nível, duas vezes; e 15º nível, três vezes. Você recupera todos os usos gastos quando termina um descanso longo.',

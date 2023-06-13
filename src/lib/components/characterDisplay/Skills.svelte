@@ -1,4 +1,5 @@
 <script lang="ts">
+    // TODO: use absolute imports?
     import i18n from '../../stores/i18n'
     import {
         attributesModifiers,
