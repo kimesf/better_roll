@@ -20,36 +20,24 @@
 <hr>
 
 {#each $character.attacks as attack}
-    <Collapsible let:visible>
-        <div slot='title' class='flex items-center my-4'>
-            <i
-                class='arrow mr-2 border-amber-500'
-                class:down={visible}
-                class:right={!visible}
-            />
+    <Collapsible>
+        <div slot=title class='flex flex-col text-left my-2'>
+            {attack.name}
 
-            <div class='flex flex-col text-left'>
-                {attack.name}
+            <span class='text-xl'>
+                {#if attack.attribute}
+                    <SignedNumber number={attackHitBonus(attack)} />
+                    {attack.damage}<SignedNumber number={$attributesModifiers[attack.attribute]} />
+                {:else}
+                    {attack.damage}
+                {/if}
 
-                <span class='text-xl'>
-                    {#if attack.attribute}
-                        <SignedNumber number={attackHitBonus(attack)} />
-                        {attack.damage}<SignedNumber number={$attributesModifiers[attack.attribute]} />
-                    {:else}
-                        {attack.damage}
-                    {/if}
-
-                    <span class='text-sm text-neutral-500'>{attack.damageType}</span>
-                </span>
-            </div>
+                <span class='text-sm text-neutral-500'>{attack.damageType}</span>
+            </span>
         </div>
 
         <div slot='body'>
-            <hr>
-
-            <div class='py-4'>
-                {attack.notes}
-            </div>
+            {attack.notes}
         </div>
     </Collapsible>
 {/each}

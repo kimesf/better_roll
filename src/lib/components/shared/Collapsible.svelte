@@ -7,11 +7,21 @@
 <slot {visible} />
 
 <div>
-    <button on:click={() => toggle()}>
-        <slot  name='title' />
+    <button class='w-full flex items-center' on:click={() => toggle()}>
+        <i
+            class='arrow mr-2 border-amber-500'
+            class:down={visible}
+            class:right={!visible}
+        />
+
+        <slot name=title />
     </button>
 
     {#if visible}
-        <slot name='body' />
+        <div class='pb-4'>
+            <slot name=body />
+        </div>
+
+        <hr class='border-neutral-500'>
     {/if}
 </div>
