@@ -1,6 +1,7 @@
 <script lang='ts'>
-    let visible = false
+    import Separator from "./Separator.svelte";
 
+    let visible = false
     const toggle = () => visible = !visible
 </script>
 
@@ -18,10 +19,10 @@
     </button>
 
     {#if visible}
-        <div class='pb-2'>
+        <Separator />
+
+        <div class='pt-2'>
             <slot name=body />
         </div>
-
-        <hr class='border-neutral-500'>
     {/if}
 </div>
