@@ -35,11 +35,11 @@ export default {
         ],
     },
 
-    weapons: 'Armas simples e marciais',
+    weapons: 'Simples e marciais',
 
-    armors: 'Armadura leve, média e escudos',
+    armors: 'Leve, média e escudos',
 
-    languages: 'Língua comum, leonina, dialeto militar e dialeto ladino',
+    languages: 'Comum, leonina, dialeto militar e dialeto ladino',
 
     skills: [
         { name: 'Salvaguarda', attribute: 'str', proficiency: false, expertise: false, otherBonus: 0 },
@@ -199,7 +199,7 @@ export default {
             addProficiency: true,
             attribute: null,
             hitBonus: 0,
-            damage: '1d8 (+1d8 ++)',
+            damage: '2d8 (+1d8 ++)',
             damageType: 'radiante',
             notes: 'num acerto com ataque de arma corpo a corpo, dano extra gastando spell slot até um máximo de 5d8. +1d8 se o alvo for um morto-vivo ou um demônio, até +6d8.',
             source: '',

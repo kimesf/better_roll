@@ -18,7 +18,7 @@
     </button>
 
     {#if visible}
-        <div class='pb-4'>
+        <div class='pb-2'>
             <slot name=body />
         </div>
 

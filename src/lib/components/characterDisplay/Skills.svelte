@@ -7,27 +7,18 @@
         proficiencyBonus,
         skillsGroupedByAttribute,
     } from '../../stores/currentCharacter'
-    import { type Attribute, type Skill, type Tool } from '../../types'
+    import { type Skill, type Tool } from '../../types'
     import { ATTRIBUTES } from '../../constants'
     import SignedNumber from '../shared/SignedNumber.svelte'
     import DistanceNumber from '../shared/DistanceNumber.svelte'
     import WeightNumber from '../shared/WeightNumber.svelte'
+    import Collapsible from '../shared/Collapsible.svelte'
+    import Title from '../shared/Title.svelte'
 
     $: jumpDistanceInFeet = $character.attributes.str
     $: jumpHeightInFeet = 3 + $attributesModifiers.str
     $: pushAndPullInPounds = 30 * $character.attributes.str
     $: maxLoadInPounds = 15 * $character.attributes.str
-
-    let visible: Attribute | 'other' | null = null
-
-    const toggle = (attr: Attribute | 'other') => {
-        if (attr == visible) {
-            visible = null
-            return
-        }
-
-        visible = attr
-    }
 
     const skillModifier = ({ attribute, proficiency, expertise, otherBonus }: Skill): number => {
         return (
@@ -43,77 +34,101 @@
     }
 </script>
 
-{#each ATTRIBUTES as attr}
-    <div>
-        <button class="text-4xl" on:click={() => toggle(attr)}>
-            {i18n.t(`attributes.${attr}`)}
-            <SignedNumber number={$attributesModifiers[attr]} />
-            {$character.attributes[attr]}
-        </button>
-        {#each $skillsGroupedByAttribute[attr] as skill}
-            {#if visible == skill.attribute}
-                <div>
-                    <span
-                        class:text-indigo-500={skill.proficiency && !skill.expertise}
-                        class:text-teal-500={skill.proficiency && skill.expertise}
-                    >
-                        <SignedNumber number={skillModifier(skill)} />
-                    </span>
-                    {skill.name}
-                </div>
-            {/if}
-        {/each}
-    </div>
-{/each}
-
-<div>
-    <button class="text-4xl" on:click={() => toggle('other')}>{i18n.t('display.skills.other')}</button>
-    {#if visible == 'other'}
-        {#each $character.tools as tool}
-            <div>
-                <span class:text-indigo-500={!tool.expertise} class:text-teal-500={tool.expertise}>
-                    <SignedNumber number={toolModifier(tool)} />
+<!-- TODO: dup items -->
+<div class='flex flex-col'>
+    {#each ATTRIBUTES as attr}
+        <Collapsible>
+            <div slot=title class='grow flex items-center justify-between'>
+                <span class='grow basis-0 text-2xl uppercase'>
+                    {i18n.t(`attributes.${attr}`)}
                 </span>
-                {tool.name}
+
+                <span class='grow basis-0 text-4xl'>
+                    <SignedNumber number={$attributesModifiers[attr]} />
+                </span>
+
+                <span class='grow basis-0 text-2xl text-neutral-500'>
+                    ({$character.attributes[attr]})
+                </span>
             </div>
-        {/each}
 
-        <br />
 
-        <div>
-            <p>{$character.weapons}</p>
-            <p>{$character.armors}</p>
-            <p>{$character.languages}</p>
+            <svelte:fragment slot='body'>
+                {#each $skillsGroupedByAttribute[attr] as skill}
+                    <div>
+                        <span
+                            class:text-indigo-500={skill.proficiency && !skill.expertise}
+                            class:text-teal-500={skill.proficiency && skill.expertise}
+                        >
+                            <SignedNumber number={skillModifier(skill)} />
+                        </span>
+                        {skill.name}
+                    </div>
+                {/each}
+            </svelte:fragment>
+        </Collapsible>
+    {/each}
+
+    <Collapsible>
+        <div slot='title' class="text-2xl px-3">
+            {i18n.t('display.skills.other')}
         </div>
 
-        <br />
+        <svelte:fragment slot=body>
+            {#each $character.tools as tool}
+                <div>
+                    <span class:text-indigo-500={!tool.expertise} class:text-teal-500={tool.expertise}>
+                        <SignedNumber number={toolModifier(tool)} />
+                    </span>
 
-        <div>
-            <h1>{i18n.t('display.skills.jump')}</h1>
+                    {tool.name}
+                </div>
+            {/each}
 
-            <p>
-                {i18n.t('display.skills.distance')}:
-                <DistanceNumber distanceInFeet={jumpDistanceInFeet} />
-            </p>
-            <p>
-                {i18n.t('display.skills.height')}:
-                <DistanceNumber distanceInFeet={jumpHeightInFeet} />
-            </p>
-        </div>
+            <!-- TODO: dup -->
+            <div class='mt-4 text-sm'>
+                <p class='text-sm text-neutral-500'>{i18n.t('display.skills.weapons')}</p>
+                <p>{$character.weapons}</p>
+            </div>
 
-        <br />
+            <div class='mt-4 text-sm'>
+                <p class='text-sm text-neutral-500'>{i18n.t('display.skills.armors')}</p>
+                <p>{$character.armors}</p>
+            </div>
 
-        <div>
-            <h1>{i18n.t('display.skills.atletics')}</h1>
+            <div class='mt-4 text-sm'>
+                <p class='text-sm text-neutral-500'>{i18n.t('display.skills.languages')}</p>
+                <p>{$character.languages}</p>
+            </div>
 
-            <p>
-                {i18n.t('display.skills.pushAndPull')}:
-                <WeightNumber weightInPounds={pushAndPullInPounds} />
-            </p>
-            <p>
-                {i18n.t('display.skills.maxLoad')}:
-                <WeightNumber weightInPounds={maxLoadInPounds} />
-            </p>
-        </div>
-    {/if}
+            <!-- TODO: dup -->
+            <div class='mt-4'>
+                <Title title={i18n.t('display.skills.jump')}/>
+
+                <div>
+                    <p class='text-sm text-neutral-500'>{i18n.t('display.skills.distance')}</p>
+                    <p><DistanceNumber distanceInFeet={jumpDistanceInFeet} /></p>
+                </div>
+
+                <div>
+                    <p class='text-sm text-neutral-500'>{i18n.t('display.skills.height')}</p>
+                    <p><DistanceNumber distanceInFeet={jumpHeightInFeet} /></p>
+                </div>
+            </div>
+
+            <div class='mt-4'>
+                <Title title={i18n.t('display.skills.atletics')} />
+
+                <div>
+                    <p class='text-sm text-neutral-500'>{i18n.t('display.skills.pushAndPull')}</p>
+                    <p><WeightNumber weightInPounds={pushAndPullInPounds} /></p>
+                </div>
+
+                <div>
+                    <p class='text-sm text-neutral-500'>{i18n.t('display.skills.maxLoad')}</p>
+                    <p><WeightNumber weightInPounds={maxLoadInPounds} /></p>
+                </div>
+            </div>
+        </svelte:fragment>
+    </Collapsible>
 </div>
