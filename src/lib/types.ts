@@ -33,7 +33,7 @@ export type Character = {
             temporary: number
             debuff: number
         }
-        initiative: number
+        bonusInitiative: number
         defense: number
         walkSpeed: number
         flySpeed: number

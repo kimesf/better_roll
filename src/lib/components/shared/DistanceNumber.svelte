@@ -9,7 +9,7 @@
 </script>
 
 <span>
-    {`${distanceInFeet}f`}
     {`${distanceInMeters}m`}
+    {`${distanceInFeet}f`}
     {`${distanceInSquares}q`}
 </span>

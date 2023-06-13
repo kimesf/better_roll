@@ -20,7 +20,7 @@ export default {
             temporary: 0,
             debuff: 0,
         },
-        initiative: 3,
+        bonusInitiative: 0,
         defense: 16,
         walkSpeed: 30,
         flySpeed: 30,

@@ -5,6 +5,6 @@ describe('DistanceNumber', () => {
     it('renders distance in feet, meters and squares', () => {
         const { getByText } = render(DistanceNumber, { props: { distanceInFeet: 30 } })
 
-        expect(() => getByText('30f 9m 6q')).not.toThrow()
+        expect(() => getByText('9m 30f 6q')).not.toThrow()
     })
 })
