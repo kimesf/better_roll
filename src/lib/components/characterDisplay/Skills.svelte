@@ -35,25 +35,24 @@
 </script>
 
 <!-- TODO: dup items -->
-<div class='flex flex-col'>
+<div class="flex flex-col">
     {#each ATTRIBUTES as attr}
         <Collapsible>
-            <div slot=title class='grow flex items-center justify-between'>
-                <span class='grow basis-0 text-2xl uppercase'>
+            <div slot="title" class="grow flex items-center justify-between">
+                <span class="grow basis-0 text-2xl uppercase">
                     {i18n.t(`attributes.${attr}`)}
                 </span>
 
-                <span class='grow basis-0 text-4xl'>
+                <span class="grow basis-0 text-4xl">
                     <SignedNumber number={$attributesModifiers[attr]} />
                 </span>
 
-                <span class='grow basis-0 text-2xl text-neutral-500'>
+                <span class="grow basis-0 text-2xl text-neutral-500">
                     ({$character.attributes[attr]})
                 </span>
             </div>
 
-
-            <svelte:fragment slot='body'>
+            <svelte:fragment slot="body">
                 {#each $skillsGroupedByAttribute[attr] as skill}
                     <div>
                         <span
@@ -70,11 +69,11 @@
     {/each}
 
     <Collapsible>
-        <div slot='title' class="text-2xl px-3">
+        <div slot="title" class="text-2xl px-3">
             {i18n.t('display.skills.other')}
         </div>
 
-        <svelte:fragment slot=body>
+        <svelte:fragment slot="body">
             {#each $character.tools as tool}
                 <div>
                     <span class:text-indigo-500={!tool.expertise} class:text-teal-500={tool.expertise}>
@@ -86,46 +85,46 @@
             {/each}
 
             <!-- TODO: dup -->
-            <div class='mt-4 text-sm'>
-                <p class='text-sm text-neutral-500'>{i18n.t('display.skills.weapons')}</p>
+            <div class="mt-4 text-sm">
+                <p class="text-sm text-neutral-500">{i18n.t('display.skills.weapons')}</p>
                 <p>{$character.weapons}</p>
             </div>
 
-            <div class='mt-4 text-sm'>
-                <p class='text-sm text-neutral-500'>{i18n.t('display.skills.armors')}</p>
+            <div class="mt-4 text-sm">
+                <p class="text-sm text-neutral-500">{i18n.t('display.skills.armors')}</p>
                 <p>{$character.armors}</p>
             </div>
 
-            <div class='mt-4 text-sm'>
-                <p class='text-sm text-neutral-500'>{i18n.t('display.skills.languages')}</p>
+            <div class="mt-4 text-sm">
+                <p class="text-sm text-neutral-500">{i18n.t('display.skills.languages')}</p>
                 <p>{$character.languages}</p>
             </div>
 
             <!-- TODO: dup -->
-            <div class='mt-4'>
-                <Title title={i18n.t('display.skills.jump')}/>
+            <div class="mt-4">
+                <Title title={i18n.t('display.skills.jump')} />
 
                 <div>
-                    <p class='text-sm text-neutral-500'>{i18n.t('display.skills.distance')}</p>
+                    <p class="text-sm text-neutral-500">{i18n.t('display.skills.distance')}</p>
                     <p><DistanceNumber distanceInFeet={jumpDistanceInFeet} /></p>
                 </div>
 
                 <div>
-                    <p class='text-sm text-neutral-500'>{i18n.t('display.skills.height')}</p>
+                    <p class="text-sm text-neutral-500">{i18n.t('display.skills.height')}</p>
                     <p><DistanceNumber distanceInFeet={jumpHeightInFeet} /></p>
                 </div>
             </div>
 
-            <div class='mt-4'>
+            <div class="mt-4">
                 <Title title={i18n.t('display.skills.atletics')} />
 
                 <div>
-                    <p class='text-sm text-neutral-500'>{i18n.t('display.skills.pushAndPull')}</p>
+                    <p class="text-sm text-neutral-500">{i18n.t('display.skills.pushAndPull')}</p>
                     <p><WeightNumber weightInPounds={pushAndPullInPounds} /></p>
                 </div>
 
                 <div>
-                    <p class='text-sm text-neutral-500'>{i18n.t('display.skills.maxLoad')}</p>
+                    <p class="text-sm text-neutral-500">{i18n.t('display.skills.maxLoad')}</p>
                     <p><WeightNumber weightInPounds={maxLoadInPounds} /></p>
                 </div>
             </div>

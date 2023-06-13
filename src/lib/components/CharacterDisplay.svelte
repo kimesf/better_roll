@@ -37,14 +37,14 @@
 
 <div>
     {#if menuVisible}
-        <div class='z-10 absolute h-screen w-screen flex flex-col justify-between'>
-            <button class='grow bg-neutral-950 bg-opacity-50' on:click={() => menuVisible = false} />
+        <div class="z-10 absolute h-screen w-screen flex flex-col justify-between">
+            <button class="grow bg-neutral-950 bg-opacity-50" on:click={() => (menuVisible = false)} />
 
-            <div class='bg-neutral-950'>
+            <div class="bg-neutral-950">
                 {#each sectionKeys as key}
-                        <button on:click={() => openSection(key)} class="p-4 text-2xl w-full">
-                            {i18n.t(`display.${key}`)}
-                        </button>
+                    <button on:click={() => openSection(key)} class="p-4 text-2xl w-full">
+                        {i18n.t(`display.${key}`)}
+                    </button>
                 {/each}
             </div>
         </div>
@@ -67,7 +67,7 @@
 
     <div class="flex">
         <div class="basis-2/5 h-screen overflow-y-scroll">
-            <div class='mb-20 '>
+            <div class="mb-20">
                 <CoreMechanics />
             </div>
         </div>
@@ -80,13 +80,16 @@
                 <p>{$character.classes}</p>
             </div>
 
-            <div class='p-2 mb-20'>
+            <div class="p-2 mb-20">
                 <Skills />
             </div>
         </div>
     </div>
 
-    <button class="fixed bottom-0 w-screen p-4 text-2xl text-center uppercase bg-black" on:click={() => menuVisible = true}>
+    <button
+        class="fixed bottom-0 w-screen p-4 text-2xl text-center uppercase bg-black"
+        on:click={() => (menuVisible = true)}
+    >
         menu
     </button>
 </div>

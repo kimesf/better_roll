@@ -17,14 +17,14 @@
 
 <Title title={i18n.t('display.actions.attacks')} />
 
-<hr>
+<hr />
 
 {#each $character.attacks as attack}
     <Collapsible>
-        <div slot=title class='flex flex-col text-left my-2'>
+        <div slot="title" class="flex flex-col text-left my-2">
             {attack.name}
 
-            <span class='text-xl'>
+            <span class="text-xl">
                 {#if attack.attribute}
                     <SignedNumber number={attackHitBonus(attack)} />
                     {attack.damage}<SignedNumber number={$attributesModifiers[attack.attribute]} />
@@ -32,11 +32,11 @@
                     {attack.damage}
                 {/if}
 
-                <span class='text-sm text-neutral-500'>{attack.damageType}</span>
+                <span class="text-sm text-neutral-500">{attack.damageType}</span>
             </span>
         </div>
 
-        <div slot='body'>
+        <div slot="body">
             {attack.notes}
         </div>
     </Collapsible>
