@@ -28,26 +28,23 @@
                 class:right={!visible}
             />
 
-            <span class='text-xl'>
+            <div class='flex flex-col text-left'>
                 {attack.name}
-            </span>
+
+                <span class='text-xl'>
+                    {#if attack.attribute}
+                        <SignedNumber number={attackHitBonus(attack)} />
+                        {attack.damage}<SignedNumber number={$attributesModifiers[attack.attribute]} />
+                    {:else}
+                        {attack.damage}
+                    {/if}
+
+                    <span class='text-sm text-neutral-500'>{attack.damageType}</span>
+                </span>
+            </div>
         </div>
 
         <div slot='body'>
-            <hr>
-
-            <div class='py-4'>
-                <SignedNumber number={attackHitBonus(attack)} />
-
-                {#if attack.attribute}
-                    {attack.damage}<SignedNumber number={$attributesModifiers[attack.attribute]} />
-                {:else}
-                    {attack.damage}
-                {/if}
-
-                <span class='text-sm text-neutral-500'>{attack.damageType}</span>
-            </div>
-
             <hr>
 
             <div class='py-4'>
