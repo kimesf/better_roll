@@ -1,25 +1,34 @@
 <script lang="ts">
     import { character } from '../../stores/currentCharacter'
+    import Title from '../shared/Title.svelte'
+    import i18n from '../../stores/i18n';
 
-    let opened: string | null = null
+    let visible: string | null = null
 
     const toggle = (featureName: string) => {
-        if (featureName == opened) {
-            opened = null
-            return
-        }
-
-        opened = featureName
+        visible = featureName == visible
+            ? null
+            : featureName
     }
 </script>
 
+<Title title={i18n.t('display.features')}/>
+
+<hr>
+
 {#each $character.features as feature}
     <div>
-        <button class="text-orange-500" on:click={() => toggle(feature.name)}>
+        <button class='flex items-center text-xl my-4' on:click={() => toggle(feature.name)}>
+            <!-- TODO: maybe remove this > dup here and in features -->
+            <i
+                class='arrow mr-2 border-amber-500'
+                class:down={visible == feature.name}
+                class:right={visible != feature.name}
+            />
             {feature.name}
         </button>
 
-        {#if opened == feature.name}
+        {#if visible == feature.name}
             <div>{feature.notes}</div>
         {/if}
     </div>

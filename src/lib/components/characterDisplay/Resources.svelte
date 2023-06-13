@@ -57,6 +57,7 @@
         <div class='flex justify-between'>
             <button class='grow basis-0 flex items-center text-left' on:click={() => toggle(recoverable.name)}>
                 {#if recoverable.notes != '' || recoverable.source != '' }
+                    <!-- TODO: maybe remove this > dup here and in features -->
                     <i
                         class='arrow mr-2 border-amber-500'
                         class:down={visible == recoverable.name}

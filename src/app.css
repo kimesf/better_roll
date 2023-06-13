@@ -7,6 +7,7 @@
     border-width: 0 3px 3px 0;
     padding: 3px;
     transition: transform .1s linear;
+    display: inline-block;
 
     &.right {
         transform: rotate(-45deg);
