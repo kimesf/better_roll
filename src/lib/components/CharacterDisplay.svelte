@@ -1,4 +1,5 @@
 <script lang="ts">
+    import { fly } from 'svelte/transition'
     import { character } from '../stores/currentCharacter'
     import i18n from '../stores/i18n'
     import Actions from './characterDisplay/Actions.svelte'
@@ -52,7 +53,7 @@
 
     {#each sectionKeys as key}
         {#if visible == key}
-            <div class="z-20 bg-neutral-900 absolute min-h-screen w-screen justify-between p-2 mb-20">
+            <div transition:fly={{ x: -400, opacity: 1, duration: 500 }} class="z-20 bg-neutral-900 absolute min-h-screen w-screen justify-between p-2 mb-20">
                 <svelte:component this={sections[key]} />
             </div>
 
