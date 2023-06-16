@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { slide } from 'svelte/transition';
+    import { slide } from 'svelte/transition'
     import Separator from './Separator.svelte'
 
     let visible = false
@@ -28,9 +28,8 @@
     .arrow {
         border-width: 0 3px 3px 0;
         padding: 3px;
-        transition: transform .1s linear;
+        transition: transform 0.1s linear;
         display: inline-block;
-
     }
 
     .arrow-right {

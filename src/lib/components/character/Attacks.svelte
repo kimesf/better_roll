@@ -1,10 +1,8 @@
 <script lang="ts">
     import { attributesModifiers, character, proficiencyBonus } from '../../stores/currentCharacter'
-    import i18n from '../../stores/i18n'
     import { type Attack, type Attribute } from '../../types'
     import Collapsible from '../shared/Collapsible.svelte'
     import SignedNumber from '../shared/SignedNumber.svelte'
-    import Title from '../shared/Title.svelte'
 
     const attackHitBonus = ({ attribute, hitBonus }: Attack): number => {
         return $proficiencyBonus + modifier(attribute) + hitBonus
@@ -14,10 +12,6 @@
         return $attributesModifiers?.[attr] || 0
     }
 </script>
-
-<Title title={i18n.t('display.actions.attacks')} />
-
-<hr />
 
 {#each $character.attacks as attack}
     <Collapsible>

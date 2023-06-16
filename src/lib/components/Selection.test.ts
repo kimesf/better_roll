@@ -1,6 +1,6 @@
 import { fireEvent, render } from '@testing-library/svelte'
 import { charactersMock, addCharacter } from '../../../tests/utils/mockCharacters'
-import CharacterSelection from './CharacterSelection.svelte'
+import Selection from './Selection.svelte'
 
 vi.mock('../stores/characterRepository', () => charactersMock)
 
@@ -11,7 +11,7 @@ describe('character selection', () => {
     })
 
     it('lists all characters', () => {
-        const { getByText } = render(CharacterSelection)
+        const { getByText } = render(Selection)
 
         expect(() => getByText('Joe')).not.toThrowError()
         expect(() => getByText('Joana')).not.toThrowError()
@@ -19,7 +19,7 @@ describe('character selection', () => {
 
     it('clicking a characters updates current character', () => {
         const spy = vi.spyOn(charactersMock.default, 'select')
-        const { getByText } = render(CharacterSelection)
+        const { getByText } = render(Selection)
         const joeBtn = getByText('Joe')
 
         fireEvent.click(joeBtn)

@@ -1,13 +1,13 @@
 <script lang="ts">
-    import CharacterDisplay from './lib/components/CharacterDisplay.svelte'
-    import CharacterSelection from './lib/components/CharacterSelection.svelte'
+    import Display from './lib/components/Display.svelte'
+    import Selection from './lib/components/Selection.svelte'
     import { character } from './lib/stores/currentCharacter'
 </script>
 
 <main class="min-h-screen bg-neutral-900 text-neutral-200 font-mono">
     {#if $character}
-        <CharacterDisplay />
+        <Display />
     {:else}
-        <CharacterSelection />
+        <Selection />
     {/if}
 </main>

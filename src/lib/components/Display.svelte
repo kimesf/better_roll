@@ -1,21 +1,19 @@
 <script lang="ts">
     import { fly } from 'svelte/transition'
-    import { character } from '../stores/currentCharacter'
     import i18n from '../stores/i18n'
-    import Actions from './characterDisplay/Actions.svelte'
-    import Magic from './characterDisplay/Magic.svelte'
-    import OtherMechanics from './characterDisplay/OtherMechanics.svelte'
-    import Resources from './characterDisplay/Resources.svelte'
-    import Skills from './characterDisplay/Skills.svelte'
-    import Features from './characterDisplay/Features.svelte'
-    import CoreMechanics from './characterDisplay/CoreMechanics.svelte'
+    import OtherMechanics from './character/OtherMechanics.svelte'
+    import Magic from './displaySections/Magic.svelte'
+    import Resources from './displaySections/Resources.svelte'
+    import Features from './character/Features.svelte'
+    import Main from './displaySections/Main.svelte'
+    import Combat from './displaySections/Combat.svelte'
 
     const sections = {
         mechanics: OtherMechanics,
         features: Features,
         resources: Resources,
         magic: Magic,
-        actions: Actions,
+        combat: Combat,
     } as const
 
     type Section = keyof typeof sections
@@ -53,7 +51,10 @@
 
     {#each sectionKeys as key}
         {#if visible == key}
-            <div transition:fly={{ x: -400, opacity: 1, duration: 500 }} class="z-20 bg-neutral-900 absolute min-h-screen w-screen justify-between p-2 mb-20">
+            <div
+                transition:fly={{ x: -400, opacity: 1, duration: 500 }}
+                class="z-20 bg-neutral-900 absolute min-h-screen w-screen justify-between p-2 mb-20"
+            >
                 <svelte:component this={sections[key]} />
             </div>
 
@@ -66,26 +67,7 @@
         {/if}
     {/each}
 
-    <div class="flex">
-        <div class="basis-2/5 h-screen overflow-y-scroll">
-            <div class="mb-20">
-                <CoreMechanics />
-            </div>
-        </div>
-
-        <div class="basis-3/5 h-screen overflow-y-scroll bg-neutral-950">
-            <div class="text-center p-1">
-                <p>
-                    {$character.name} | {$character.lineages} | {$character.level}
-                </p>
-                <p>{$character.classes}</p>
-            </div>
-
-            <div class="p-2 mb-20">
-                <Skills />
-            </div>
-        </div>
-    </div>
+    <Main />
 
     <button
         class="fixed bottom-0 w-screen p-4 text-2xl text-center uppercase bg-black"
