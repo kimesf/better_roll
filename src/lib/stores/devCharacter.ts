@@ -23,6 +23,8 @@ export default {
         bonusInitiative: 0,
         defense: 16,
         walkSpeed: 30,
+        // TODO:
+        // climbSpeed: 30,
         flySpeed: 30,
         swimSpeed: 30,
         darkVision: 60,
