@@ -7,6 +7,7 @@
     import Features from './character/Features.svelte'
     import Main from './displaySections/Main.svelte'
     import Combat from './displaySections/Combat.svelte'
+    import canEdit from '../stores/canEdit'
 
     const sections = {
         mechanics: OtherMechanics,
@@ -36,7 +37,7 @@
 
 <div>
     {#if menuVisible}
-        <div class="z-10 absolute h-screen w-screen flex flex-col justify-between">
+        <div class="z-40 absolute h-screen w-screen flex flex-col justify-between">
             <button class="grow bg-neutral-950 bg-opacity-50" on:click={() => (menuVisible = false)} />
 
             <div class="bg-neutral-950">
@@ -53,14 +54,14 @@
         {#if visible == key}
             <div
                 transition:fly={{ x: -400, opacity: 1, duration: 500 }}
-                class="z-20 bg-neutral-900 absolute min-h-screen w-screen justify-between p-2 mb-20"
+                class="z-10 bg-neutral-900 absolute min-h-screen w-screen justify-between p-2 mb-20"
             >
                 <svelte:component this={sections[key]} />
             </div>
 
             <button
                 on:click={() => closeSection()}
-                class="z-30 fixed bottom-0 w-screen p-4 text-2xl text-center uppercase bg-black shadow-[0_-10px_50px_0_rgba(23,23,23,1)]"
+                class="z-20 fixed bottom-0 w-screen p-4 text-2xl text-center uppercase bg-black shadow-[0_-10px_50px_0_rgba(23,23,23,1)]"
             >
                 {i18n.t('display.goBack')}
             </button>
@@ -75,4 +76,11 @@
     >
         menu
     </button>
+
+    <button
+        class="z-30 absolute top-5 left-1/2 p-6 rounded-full"
+        class:bg-blue-500={!$canEdit}
+        class:bg-green-500={$canEdit}
+        on:click={() => canEdit.toggle()}
+    />
 </div>
