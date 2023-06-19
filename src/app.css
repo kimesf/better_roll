@@ -1,3 +1,22 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+    .bg-primary {
+        @apply bg-neutral-900
+    }
+
+    .bg-secondary {
+        @apply bg-neutral-950
+    }
+
+    .bg-contrast {
+        @apply bg-neutral-500
+    }
+
+    .input {
+        @apply bg-contrast rounded-md p-1
+    }
+}
+

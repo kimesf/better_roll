@@ -1,9 +1,6 @@
 <script lang="ts">
     import i18n from '../../stores/i18n'
     import Collapsible from '../shared/Collapsible.svelte'
-    import Title from '../shared/Title.svelte'
-    import DistanceNumber from '../shared/DistanceNumber.svelte'
-    import WeightNumber from '../shared/WeightNumber.svelte'
     import CoreMechanics from '../character/CoreMechanics.svelte'
     import Skills from '../character/Skills.svelte'
     import Tools from '../character/Tools.svelte'
@@ -19,7 +16,7 @@
         </div>
     </div>
 
-    <div class="basis-3/5 h-screen overflow-y-scroll bg-neutral-950">
+    <div class="basis-3/5 h-screen overflow-y-scroll bg-secondary">
         <div class="text-center p-1">
             <p>
                 {$character.name} | {$character.lineages} | {$character.level}

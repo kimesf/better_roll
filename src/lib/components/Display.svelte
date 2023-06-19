@@ -38,9 +38,9 @@
 <div>
     {#if menuVisible}
         <div class="z-40 absolute h-screen w-screen flex flex-col justify-between">
-            <button class="grow bg-neutral-950 bg-opacity-50" on:click={() => (menuVisible = false)} />
+            <button class="grow bg-secondary bg-opacity-50" on:click={() => (menuVisible = false)} />
 
-            <div class="bg-neutral-950">
+            <div class="bg-secondary">
                 {#each sectionKeys as key}
                     <button on:click={() => openSection(key)} class="p-4 text-2xl w-full">
                         {i18n.t(`display.${key}`)}
@@ -54,7 +54,7 @@
         {#if visible == key}
             <div
                 transition:fly={{ x: -400, opacity: 1, duration: 500 }}
-                class="z-10 bg-neutral-900 absolute min-h-screen w-screen justify-between p-2 mb-20"
+                class="z-10 bg-primary absolute min-h-screen w-screen justify-between p-2 mb-20"
             >
                 <svelte:component this={sections[key]} />
             </div>
