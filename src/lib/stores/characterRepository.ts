@@ -1,4 +1,4 @@
-import { writable, type Readable } from 'svelte/store'
+import { writable, type Writable } from 'svelte/store'
 import { type Character } from '../types'
 import devCharacter from './devCharacter'
 
@@ -7,14 +7,14 @@ type CharacterStoreState = {
     all: Character[]
 }
 
-interface CharacterStore extends Readable<CharacterStoreState> {
+interface CharacterStore extends Writable<CharacterStoreState> {
     select: (character: Character) => void
 }
 
 const initStore = (): CharacterStore => {
     const initialState = { current: null, all: [devCharacter] } as CharacterStoreState
     const store = writable(initialState)
-    const { subscribe, update } = store
+    const { subscribe, update, set } = store
 
     const select: CharacterStore['select'] = (character) => {
         update((previousState) => ({
@@ -26,6 +26,8 @@ const initStore = (): CharacterStore => {
     return {
         subscribe,
         select,
+        set,
+        update,
     }
 }
 

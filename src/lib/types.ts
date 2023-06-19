@@ -47,9 +47,7 @@ export type Character = {
     skills: Skill[]
     tools: Tool[]
     resources: {
-        coins: {
-            [key in Coin]: number
-        }
+        coins: Coins
         recoverable: Recoverable[]
         finite: Finite[]
     }
@@ -57,6 +55,10 @@ export type Character = {
     attacks: Attack[]
     spellMechanics: SpellMechanics
     spells: Spell[]
+}
+
+export type Coins = {
+    [key in Coin]: number
 }
 
 export type Mechanic = {
