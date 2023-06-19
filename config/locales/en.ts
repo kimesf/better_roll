@@ -73,6 +73,8 @@ export default {
     'display.resources.coins.platinum': 'platinum',
     'display.resources.renewable': 'renewable',
     'display.resources.finite': 'finite',
+    'display.resources.missingNotes': 'zero notes',
+    'display.resources.missingSource': 'no source',
     'display.attacks.hitBonus': 'hit bonus',
     'display.attacks.damage': 'damage',
     'display.spell.attribute': 'conjuration attribute',

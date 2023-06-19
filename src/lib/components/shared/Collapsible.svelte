@@ -9,11 +9,13 @@
 <slot {visible} />
 
 <div>
-    <button class="w-full flex items-center" on:click={() => toggle()}>
-        <i class="arrow mr-2 border-amber-500" class:arrow-down={visible} class:arrow-right={!visible} />
+    <div class="w-full flex items-center">
+        <button class="mr-4" on:click={() => toggle()}>
+            <i class="arrow p-1 border-amber-500" class:arrow-down={visible} class:arrow-right={!visible} />
+        </button>
 
         <slot name="title" />
-    </button>
+    </div>
 
     {#if visible}
         <Separator />
@@ -27,7 +29,6 @@
 <style>
     .arrow {
         border-width: 0 3px 3px 0;
-        padding: 3px;
         transition: transform 0.1s linear;
         display: inline-block;
     }

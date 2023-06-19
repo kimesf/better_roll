@@ -73,6 +73,8 @@ export default {
     'display.resources.coins.platinum': 'platina',
     'display.resources.renewable': 'renováveis',
     'display.resources.finite': 'finitos',
+    'display.resources.missingNotes': 'Nenhuma anotação',
+    'display.resources.missingSource': 'Nenhuma fonte externa',
     'display.attacks.hitBonus': 'bônus de ataque',
     'display.attacks.damage': 'dano',
     'display.spell.attribute': 'attributo de conjuração',
