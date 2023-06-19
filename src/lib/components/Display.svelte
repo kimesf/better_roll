@@ -79,7 +79,7 @@
     </button>
 
     <button
-        class="z-30 absolute top-5 left-1/2 p-6 rounded-full"
+        class="z-30 fixed top-5 left-1/2 p-6 rounded-full"
         class:bg-blue-500={!$canEdit}
         class:bg-green-500={$canEdit}
         on:click={() => canEdit.toggle()}
