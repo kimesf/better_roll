@@ -1,17 +1,21 @@
-import { derived } from 'svelte/store'
+import { derived, type Readable } from 'svelte/store'
 import characters from './characterRepository'
 import { ATTRIBUTES, PROFICIENCY_BONUS } from '../constants'
-import { type Attribute, type Skill } from '../types'
+import { type Attribute, type Character, type ProficiencyBonus, type Skill } from '../types'
 
 type SkillsGroupedByAttr = {
     [key in Attribute]: Skill[]
 }
 
-export const character = derived(characters, ($characters) => $characters.current)
+type AttributesMofifiers = {
+    [key in Attribute]: number
+}
 
-export const proficiencyBonus = derived(character, ($character) => PROFICIENCY_BONUS[$character.level])
+export const character: Readable<Character> = derived(characters, ($characters) => $characters.current)
 
-export const skillsGroupedByAttribute = derived(character, ($character) => {
+export const proficiencyBonus: Readable<ProficiencyBonus> = derived(character, ($character) => PROFICIENCY_BONUS[$character.level])
+
+export const skillsGroupedByAttribute: Readable<SkillsGroupedByAttr> = derived(character, ($character) => {
     return $character.skills.reduce((acc, skill) => {
         const key = skill.attribute
         const group = (acc[key] || []).concat(skill)
@@ -20,12 +24,12 @@ export const skillsGroupedByAttribute = derived(character, ($character) => {
     }, {} as SkillsGroupedByAttr)
 })
 
-export const attributesModifiers = derived(character, ($character) => {
+export const attributesModifiers: Readable<AttributesMofifiers> = derived(character, ($character) => {
     return ATTRIBUTES.reduce((acc, attrName) => {
         const value = $character.attributes[attrName]
         const mod = Math.floor((value - 10) / 2)
         acc[attrName] = mod
 
         return acc
-    }, {} as { [key in Attribute]: number })
+    }, {} as AttributesMofifiers)
 })
