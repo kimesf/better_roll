@@ -16,15 +16,19 @@
     }
 
     .text-primary {
-        @apply text-neutral-50
+        @apply text-neutral-200
     }
 
     .text-secondary {
         @apply text-neutral-500
     }
 
-    .text-title {
-        @apply text-amber-500
+    .text-proficient {
+        @apply text-indigo-500
+    }
+
+    .text-expert {
+        @apply text-teal-500
     }
 
     .input {

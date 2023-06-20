@@ -15,12 +15,12 @@
     <Title title={i18n.t('display.skills.jump')} />
 
     <div>
-        <p class="text-sm text-neutral-500">{i18n.t('display.skills.distance')}</p>
+        <p class="text-sm text-secondary">{i18n.t('display.skills.distance')}</p>
         <p><DistanceNumber distanceInFeet={jumpDistanceInFeet} /></p>
     </div>
 
     <div>
-        <p class="text-sm text-neutral-500">{i18n.t('display.skills.height')}</p>
+        <p class="text-sm text-secondary">{i18n.t('display.skills.height')}</p>
         <p><DistanceNumber distanceInFeet={jumpHeightInFeet} /></p>
     </div>
 </div>
@@ -29,12 +29,12 @@
     <Title title={i18n.t('display.skills.atletics')} />
 
     <div>
-        <p class="text-sm text-neutral-500">{i18n.t('display.skills.pushAndPull')}</p>
+        <p class="text-sm text-secondary">{i18n.t('display.skills.pushAndPull')}</p>
         <p><WeightNumber weightInPounds={pushAndPullInPounds} /></p>
     </div>
 
     <div>
-        <p class="text-sm text-neutral-500">{i18n.t('display.skills.maxLoad')}</p>
+        <p class="text-sm text-secondary">{i18n.t('display.skills.maxLoad')}</p>
         <p><WeightNumber weightInPounds={maxLoadInPounds} /></p>
     </div>
 </div>

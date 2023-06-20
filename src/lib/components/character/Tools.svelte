@@ -10,7 +10,7 @@
 
 {#each $character.tools as tool}
     <div>
-        <span class:text-indigo-500={!tool.expertise} class:text-teal-500={tool.expertise}>
+        <span class:text-proficient={!tool.expertise} class:text-expert={tool.expertise}>
             <SignedNumber number={toolModifier(tool)} />
         </span>
 

@@ -34,7 +34,7 @@
                 <SignedNumber number={$attributesModifiers[attr]} />
             </span>
 
-            <span class="grow basis-0 text-2xl text-neutral-500">
+            <span class="grow basis-0 text-2xl text-secondary">
                 ({$character.attributes[attr]})
             </span>
         </div>
@@ -43,8 +43,8 @@
             {#each $skillsGroupedByAttribute[attr] as skill}
                 <div>
                     <span
-                        class:text-indigo-500={skill.proficiency && !skill.expertise}
-                        class:text-teal-500={skill.proficiency && skill.expertise}
+                        class:text-proficient={skill.proficiency && !skill.expertise}
+                        class:text-expert={skill.proficiency && skill.expertise}
                     >
                         <SignedNumber number={skillModifier(skill)} />
                     </span>

@@ -4,7 +4,7 @@
     import { character } from './lib/stores/currentCharacter'
 </script>
 
-<main class="min-h-screen bg-primary text-neutral-200 font-mono">
+<main class="min-h-screen bg-primary text-primary font-mono">
     {#if $character}
         <Display />
     {:else}

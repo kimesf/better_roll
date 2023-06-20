@@ -26,7 +26,7 @@
                     {attack.damage}
                 {/if}
 
-                <span class="text-sm text-neutral-500">{attack.damageType}</span>
+                <span class="text-sm text-secondary">{attack.damageType}</span>
             </span>
         </div>
 

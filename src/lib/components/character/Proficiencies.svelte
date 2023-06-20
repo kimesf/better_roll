@@ -5,16 +5,16 @@
 
 <!-- TODO: dup -->
 <div class="mt-4 text-sm">
-    <p class="text-sm text-neutral-500">{i18n.t('display.skills.weapons')}</p>
+    <p class="text-sm text-secondary">{i18n.t('display.skills.weapons')}</p>
     <p>{$character.weapons}</p>
 </div>
 
 <div class="mt-4 text-sm">
-    <p class="text-sm text-neutral-500">{i18n.t('display.skills.armors')}</p>
+    <p class="text-sm text-secondary">{i18n.t('display.skills.armors')}</p>
     <p>{$character.armors}</p>
 </div>
 
 <div class="mt-4 text-sm">
-    <p class="text-sm text-neutral-500">{i18n.t('display.skills.languages')}</p>
+    <p class="text-sm text-secondary">{i18n.t('display.skills.languages')}</p>
     <p>{$character.languages}</p>
 </div>
