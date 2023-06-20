@@ -4,6 +4,7 @@
     import Collapsible from '../shared/Collapsible.svelte'
     import Separator from '../shared/Separator.svelte'
     import canEdit from '../../stores/canEdit';
+    import Editable from '../shared/Editable.svelte'
 
     const inc = (index: number): void => {
         $characterRepository.current.resources.recoverable[index].current++
@@ -18,11 +19,10 @@
     <Collapsible>
         <div slot="title" class="flex w-full items-center">
             <div class="grow basis-0 flex flex-col">
-                {#if $canEdit }
-                    <input id={`recoverable-${index}-name`} type="text" class="input w-36" bind:value={recoverable.name}>
-                {:else}
-                    {recoverable.name}
-                {/if}
+                <Editable>
+                    <input slot=editing id={`recoverable-${index}-name`} type="text" class="input w-36" bind:value={recoverable.name}>
+                    <span slot=showing>{recoverable.name}</span>
+                </Editable>
 
                 <span class="text-xs text-secondary">
                     {i18n.t(`recoverable.${recoverable.recoveredBy}`)}
@@ -41,8 +41,8 @@
         </div>
 
         <div slot="body">
-            {#if $canEdit}
-                <div class=' py-4 text-secondary'>
+            <Editable>
+                <div class='py-4 text-secondary'>
                     <label for="short">{i18n.t('recoverable.short')}</label>
                     <input class=input type="radio" id='short' bind:group={recoverable.recoveredBy} value=short>
                     <label for="long">{i18n.t('recoverable.long')}</label>
@@ -50,33 +50,34 @@
                 </div>
 
                 <Separator />
-            {/if}
+            </Editable>
 
 
             <div class="py-4">
-                {#if $canEdit }
-                    <input id={`recoverable-${index}-source`} type="text" class="input w-full" bind:value={recoverable.source} placeholder={i18n.t('display.missingSource')} >
-                {:else}
-                    {#if recoverable.source}
-                        <a class="underline text-sky-500" href={recoverable.source} target="_blank" rel="noopener noreferrer">
-                            {recoverable.source}
-                        </a>
-                    {:else}
-                        <span>
-                            {i18n.t('display.missingSource')}
-                        </span>
-                    {/if}
-                {/if}
+                <Editable>
+                    <input slot=editing id={`recoverable-${index}-source`} type="text" class="input w-full" bind:value={recoverable.source} placeholder={i18n.t('display.missingSource')} >
+
+                    <div slot=showing>
+                        {#if recoverable.source}
+                            <a class="underline text-sky-500" href={recoverable.source} target="_blank" rel="noopener noreferrer">
+                                {recoverable.source}
+                            </a>
+                        {:else}
+                            <span>
+                                {i18n.t('display.missingSource')}
+                            </span>
+                        {/if}
+                    </div>
+                </Editable>
             </div>
 
             <Separator />
 
             <div class="py-4">
-                {#if $canEdit }
-                    <textarea id={`recoverable-${index}-notes`} class="input w-full" bind:value={recoverable.notes} placeholder={i18n.t('display.missingNotes')}/>
-                {:else}
-                    {recoverable.notes || i18n.t('display.missingNotes')}
-                {/if}
+                <Editable>
+                    <span slot=showing>{recoverable.notes || i18n.t('display.missingNotes')}</span>
+                    <textarea slot=editing id={`recoverable-${index}-notes`} class="input w-full" bind:value={recoverable.notes} placeholder={i18n.t('display.missingNotes')}/>
+                </Editable>
             </div>
         </div>
     </Collapsible>

@@ -4,6 +4,7 @@
     import Separator from '../shared/Separator.svelte'
     import canEdit from '../../stores/canEdit';
     import characterRepository from '../../stores/characterRepository';
+    import Editable from '../shared/Editable.svelte'
 
     const inc = (index: number): void => {
         $characterRepository.current.resources.finite[index].amount++
@@ -18,11 +19,11 @@
     <Collapsible>
         <div slot='title' class='flex w-full justify-between'>
             <div class="grow basis-0 flex items-center text-left">
-                {#if $canEdit }
-                    <input id={`finite-${index}-name`} type="text" class="input w-36" bind:value={finite.name}>
-                {:else}
-                    {finite.name}
-                {/if}
+                <Editable>
+                    <input slot=editing id={`finite-${index}-name`} type="text" class="input w-36" bind:value={finite.name}>
+
+                    <span slot=showing>{finite.name}</span>
+                </Editable>
             </div>
 
             <div class="grow basis-0 flex text-6xl justify-between">
@@ -43,29 +44,31 @@
 
         <div slot='body'>
             <div class="py-4">
-                {#if $canEdit }
-                    <input id={`finite-${index}-source`} type="text" class="input w-full" bind:value={finite.source} placeholder={i18n.t('display.missingSource')}>
-                {:else}
-                    {#if finite.source}
-                        <a class="underline text-sky-500" href={finite.source} target="_blank" rel="noopener noreferrer">
-                            {finite.source}
-                        </a>
-                    {:else}
-                        <span>
-                            {i18n.t('display.missingSource')}
-                        </span>
-                    {/if}
-                {/if}
+                <Editable>
+                    <input slot=editing id={`finite-${index}-source`} type="text" class="input w-full" bind:value={finite.source} placeholder={i18n.t('display.missingSource')}>
+
+                    <div slot=showing>
+                        {#if finite.source}
+                            <a class="underline text-sky-500" href={finite.source} target="_blank" rel="noopener noreferrer">
+                                {finite.source}
+                            </a>
+                        {:else}
+                            <span>
+                                {i18n.t('display.missingSource')}
+                            </span>
+                        {/if}
+                    </div>
+                </Editable>
             </div>
 
             <Separator />
 
             <div class="py-4">
-                {#if $canEdit }
-                    <textarea id={`finite-${index}-notes`} class="input w-full" bind:value={finite.notes} placeholder={i18n.t('display.missingNotes')}/>
-                {:else}
-                    {finite.notes || i18n.t('display.missingNotes')}
-                {/if}
+                <Editable>
+                    <textarea slot=editing id={`finite-${index}-notes`} class="input w-full" bind:value={finite.notes} placeholder={i18n.t('display.missingNotes')}/>
+
+                    <span slot=showing>{finite.notes || i18n.t('display.missingNotes')}</span>
+                </Editable>
             </div>
         </div>
     </Collapsible>

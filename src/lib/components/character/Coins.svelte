@@ -5,6 +5,7 @@
     import canEdit from '../../stores/canEdit';
     import characterRepository from '../../stores/characterRepository';
     import type { Coin } from '../../types'
+    import Editable from '../shared/Editable.svelte'
 
     const inc = (coin: Coin) => {
         $characterRepository.current.resources.coins[coin]++
@@ -26,11 +27,10 @@
             <button class:invisible={!$canEdit} class="text-red-500" on:click={() => dec(coin)}> - </button>
 
             <div class="text-4xl flex items-center">
-                {#if $canEdit}
-                    <input id={coin} type="number" class="input w-24 text-center" bind:value={$characterRepository.current.resources.coins[coin]}>
-                {:else}
-                    {$character.resources.coins[coin]}
-                {/if}
+                <Editable>
+                    <input slot=editing id={coin} type="number" class="input w-24 text-center" bind:value={$characterRepository.current.resources.coins[coin]}>
+                    <span slot=showing>{$character.resources.coins[coin]}</span>
+                </Editable>
             </div>
 
             <button class:invisible={!$canEdit} class="text-green-500" on:click={() => inc(coin)}> + </button>
