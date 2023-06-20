@@ -15,6 +15,18 @@
         @apply bg-neutral-500
     }
 
+    .text-primary {
+        @apply text-neutral-50
+    }
+
+    .text-secondary {
+        @apply text-neutral-500
+    }
+
+    .text-title {
+        @apply text-amber-500
+    }
+
     .input {
         @apply bg-contrast rounded-md p-1
     }

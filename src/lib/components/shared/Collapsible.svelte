@@ -20,7 +20,7 @@
     {#if visible}
         <Separator />
 
-        <div transition:slide class="pt-2">
+        <div transition:slide>
             <slot name="body" />
         </div>
     {/if}

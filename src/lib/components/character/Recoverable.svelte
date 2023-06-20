@@ -1,62 +1,83 @@
 <script lang="ts">
     import i18n from '../../stores/i18n'
-    import { character } from '../../stores/currentCharacter'
+    import characterRepository from '../../stores/characterRepository';
+    import Collapsible from '../shared/Collapsible.svelte'
+    import Separator from '../shared/Separator.svelte'
+    import canEdit from '../../stores/canEdit';
 
-    // TODO: use Collapsible
-    let visible: string | null = null
-    const toggle = (resource: string): void => {
-        visible = resource == visible ? null : resource
+    const inc = (index: number): void => {
+        $characterRepository.current.resources.recoverable[index].current++
     }
 
-    // TEMP
-    const canEdit = false
+    const dec = (index: number): void => {
+        $characterRepository.current.resources.recoverable[index].current--
+    }
 </script>
 
-<!-- TODO: create component for resources depending on edit -->
-{#each $character.resources.recoverable as recoverable}
-    <div class="flex justify-between">
-        <button class="grow basis-0 flex items-center text-left" on:click={() => toggle(recoverable.name)}>
-            {#if recoverable.notes != '' || recoverable.source != ''}
-                <!-- TODO: maybe remove this > dup here and in features -->
-                <i
-                    class="arrow mr-2 border-amber-500"
-                    class:down={visible == recoverable.name}
-                    class:right={visible != recoverable.name}
-                />
-            {/if}
+{#each $characterRepository.current.resources.recoverable as recoverable, index}
+    <Collapsible>
+        <div slot="title" class="flex w-full items-center">
+            <div class="grow basis-0 flex flex-col">
+                {#if $canEdit }
+                    <input id={`recoverable-${index}-name`} type="text" class="input w-36" bind:value={recoverable.name}>
+                {:else}
+                    {recoverable.name}
+                {/if}
 
-            <span class="flex flex-col">
-                {recoverable.name}
-                <span class="text-xs text-neutral-500">
+                <span class="text-xs text-secondary">
                     {i18n.t(`recoverable.${recoverable.recoveredBy}`)}
                 </span>
-            </span>
-        </button>
-
-        <div class="grow basis-0 flex text-6xl justify-between">
-            <button class:invisible={!canEdit} class="text-red-500"> - </button>
-
-            <div class="text-4xl flex items-center">
-                {recoverable.current}/{recoverable.total}
             </div>
 
-            <button class:invisible={!canEdit} class="text-green-500"> + </button>
+            <div class="grow basis-0 flex text-6xl justify-between">
+                <button class:invisible={!$canEdit} class="text-red-500" on:click={() => dec(index)}> - </button>
+
+                <div class="text-4xl flex items-center">
+                    {recoverable.current}/{recoverable.total}
+                </div>
+
+                <button class:invisible={!$canEdit} class="text-green-500" on:click={() => inc(index)}> + </button>
+            </div>
         </div>
-    </div>
 
-    {#if recoverable.source != '' && visible == recoverable.name}
-        <hr />
+        <div slot="body">
+            {#if $canEdit}
+                <div class=' py-4 text-secondary'>
+                    <label for="short">{i18n.t('recoverable.short')}</label>
+                    <input class=input type="radio" id='short' bind:group={recoverable.recoveredBy} value=short>
+                    <label for="long">{i18n.t('recoverable.long')}</label>
+                    <input class=input type="radio" id='long' bind:group={recoverable.recoveredBy} value=long>
+                </div>
 
-        <div class="py-4 underline text-sky-500">
-            <a href={recoverable.source} target="_blank" rel="noopener noreferrer">{recoverable.source}</a>
+                <Separator />
+            {/if}
+
+
+            <div class="py-4">
+                {#if $canEdit }
+                    <input id={`recoverable-${index}-source`} type="text" class="input w-full" bind:value={recoverable.source}>
+                {:else}
+                    {#if recoverable.source}
+                        <a class="underline text-sky-500" href={recoverable.source} target="_blank" rel="noopener noreferrer">
+                            {recoverable.source}
+                        </a>
+                    {:else}
+                        <span>
+                            {i18n.t('display.resources.missingSource')}
+                        </span>
+                    {/if}
+                {/if}
+            </div>
+
+            <Separator />
+
+            <div class="py-4">
+                {#if $canEdit }
+                    <textarea id={`recoverable-${index}-notes`} class="input w-full" bind:value={recoverable.notes} />
+                {:else}
+                    {recoverable.notes || i18n.t('display.resources.missingNotes')}
+                {/if}
+            </div>
         </div>
-    {/if}
-
-    {#if recoverable.notes != '' && visible == recoverable.name}
-        <hr />
-
-        <div class="py-4">
-            {recoverable.notes}
-        </div>
-    {/if}
+    </Collapsible>
 {/each}
