@@ -29,14 +29,14 @@
             <div class="grow basis-0 flex text-6xl justify-between">
                 <button class:invisible={!$canEdit} class="text-red-500" on:click={() => dec(index)}> - </button>
 
-                <div class="text-4xl flex items-center">
-                    {#if $canEdit }
+                <Editable>
+                    <div slot=editing class="flex items-center">
                         <input id={`finite-${index}-amount`} type="number" class="input w-16 mr-1 text-center" bind:value={finite.amount}>
                         <input id={`finite-${index}-unity`} type="text" class="input w-8 text-center" bind:value={finite.unity}>
-                    {:else}
-                        {finite.amount}{finite.unity}
-                    {/if}
-                </div>
+                    </div>
+
+                    <span class="text-4xl" slot=showing>{finite.amount}{finite.unity}</span>
+                </Editable>
 
                 <button class:invisible={!$canEdit} class="text-green-500" on:click={() => inc(index)}> + </button>
             </div>

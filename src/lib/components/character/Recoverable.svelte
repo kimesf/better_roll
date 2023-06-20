@@ -32,9 +32,14 @@
             <div class="grow basis-0 flex text-6xl justify-between">
                 <button class:invisible={!$canEdit} class="text-red-500" on:click={() => dec(index)}> - </button>
 
-                <div class="text-4xl flex items-center">
-                    {recoverable.current}/{recoverable.total}
-                </div>
+                <Editable>
+                    <div slot=editing class="flex items-center">
+                        <input id={`recoverable-${index}-current`} type="number" class="input w-12 mr-1 text-center" bind:value={recoverable.current}>
+                        <input id={`recoverable-${index}-total`} type="text" class="input w-12 text-center" bind:value={recoverable.total}>
+                    </div>
+
+                    <span slot=showing class="text-4xl">{recoverable.current}/{recoverable.total}</span>
+                </Editable>
 
                 <button class:invisible={!$canEdit} class="text-green-500" on:click={() => inc(index)}> + </button>
             </div>
