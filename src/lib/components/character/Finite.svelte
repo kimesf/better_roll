@@ -4,6 +4,14 @@
     import Separator from '../shared/Separator.svelte'
     import canEdit from '../../stores/canEdit';
     import characterRepository from '../../stores/characterRepository';
+
+    const inc = (index: number): void => {
+        $characterRepository.current.resources.finite[index].amount++
+    }
+
+    const dec = (index: number): void => {
+        $characterRepository.current.resources.finite[index].amount--
+    }
 </script>
 
 {#each $characterRepository.current.resources.finite as finite, index}
@@ -18,7 +26,7 @@
             </div>
 
             <div class="grow basis-0 flex text-6xl justify-between">
-                <button class:invisible={!$canEdit} class="text-red-500" on:click={() => finite.amount--}> - </button>
+                <button class:invisible={!$canEdit} class="text-red-500" on:click={() => dec(index)}> - </button>
 
                 <div class="text-4xl flex items-center">
                     {#if $canEdit }
@@ -29,7 +37,7 @@
                     {/if}
                 </div>
 
-                <button class:invisible={!$canEdit} class="text-green-500" on:click={() => finite.amount++}> + </button>
+                <button class:invisible={!$canEdit} class="text-green-500" on:click={() => inc(index)}> + </button>
             </div>
         </div>
 
