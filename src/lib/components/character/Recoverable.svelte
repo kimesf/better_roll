@@ -55,7 +55,7 @@
 
             <div class="py-4">
                 {#if $canEdit }
-                    <input id={`recoverable-${index}-source`} type="text" class="input w-full" bind:value={recoverable.source} placeholder={i18n.t('display.resources.missingSource')} >
+                    <input id={`recoverable-${index}-source`} type="text" class="input w-full" bind:value={recoverable.source} placeholder={i18n.t('display.missingSource')} >
                 {:else}
                     {#if recoverable.source}
                         <a class="underline text-sky-500" href={recoverable.source} target="_blank" rel="noopener noreferrer">
@@ -63,7 +63,7 @@
                         </a>
                     {:else}
                         <span>
-                            {i18n.t('display.resources.missingSource')}
+                            {i18n.t('display.missingSource')}
                         </span>
                     {/if}
                 {/if}
@@ -73,9 +73,9 @@
 
             <div class="py-4">
                 {#if $canEdit }
-                    <textarea id={`recoverable-${index}-notes`} class="input w-full" bind:value={recoverable.notes} placeholder={i18n.t('display.resources.missingNotes')}/>
+                    <textarea id={`recoverable-${index}-notes`} class="input w-full" bind:value={recoverable.notes} placeholder={i18n.t('display.missingNotes')}/>
                 {:else}
-                    {recoverable.notes || i18n.t('display.resources.missingNotes')}
+                    {recoverable.notes || i18n.t('display.missingNotes')}
                 {/if}
             </div>
         </div>

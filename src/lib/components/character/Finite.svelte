@@ -44,7 +44,7 @@
         <div slot='body'>
             <div class="py-4">
                 {#if $canEdit }
-                    <input id={`finite-${index}-source`} type="text" class="input w-full" bind:value={finite.source} placeholder={i18n.t('display.resources.missingSource')}>
+                    <input id={`finite-${index}-source`} type="text" class="input w-full" bind:value={finite.source} placeholder={i18n.t('display.missingSource')}>
                 {:else}
                     {#if finite.source}
                         <a class="underline text-sky-500" href={finite.source} target="_blank" rel="noopener noreferrer">
@@ -52,7 +52,7 @@
                         </a>
                     {:else}
                         <span>
-                            {i18n.t('display.resources.missingSource')}
+                            {i18n.t('display.missingSource')}
                         </span>
                     {/if}
                 {/if}
@@ -62,9 +62,9 @@
 
             <div class="py-4">
                 {#if $canEdit }
-                    <textarea id={`finite-${index}-notes`} class="input w-full" bind:value={finite.notes} placeholder={i18n.t('display.resources.missingNotes')}/>
+                    <textarea id={`finite-${index}-notes`} class="input w-full" bind:value={finite.notes} placeholder={i18n.t('display.missingNotes')}/>
                 {:else}
-                    {finite.notes || i18n.t('display.resources.missingNotes')}
+                    {finite.notes || i18n.t('display.missingNotes')}
                 {/if}
             </div>
         </div>
