@@ -77,7 +77,7 @@
             <div class="pt-4">
                 <div class="text-secondary">{t(`display.coreMechanics.${mechanic}`)}</div>
                 <Incrementor
-                    id={`mechanics-initiative`}
+                    id={`mechanics-${mechanic}`}
                     signClasses="text-4xl"
                     bind:value={$characterRepository.current.mechanics[mechanic]}
                 >

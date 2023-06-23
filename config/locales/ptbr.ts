@@ -48,6 +48,8 @@ export default {
     'display.magic': 'magias',
     'display.features': 'talentos',
     'display.other': 'outros',
+    'display.skills.proficiency': 'proficiência',
+    'display.skills.expertise': 'expertise',
     'display.skills.weapons': 'armas',
     'display.skills.armors': 'armaduras',
     'display.skills.languages': 'idiomas',

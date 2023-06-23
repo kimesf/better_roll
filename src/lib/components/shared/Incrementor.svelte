@@ -22,7 +22,7 @@
             slot="editing"
             {id}
             type="number"
-            class='input text-center w-12'
+            class='text-primary input text-center w-12'
             bind:value
         />
 
