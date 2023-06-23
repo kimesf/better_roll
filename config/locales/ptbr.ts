@@ -1,4 +1,7 @@
 export default {
+    'bonus': 'bônus',
+    'attribute': 'atributo',
+    'none': 'nenhum',
     'attributes.str.full': 'força',
     'attributes.dex.full': 'destreza',
     'attributes.con.full': 'constituição',
@@ -75,6 +78,9 @@ export default {
     'display.resources.finite': 'finitos',
     'display.attacks.hitBonus': 'bônus de ataque',
     'display.attacks.damage': 'dano',
+    'display.attacks.damageType': 'tipo de dano',
+    'display.attacks.bonus': 'dano',
+    'display.attacks.addProficiency': 'adicionar proficiência',
     'display.spell.attribute': 'attributo de conjuração',
     'display.spell.availablePerDay': 'disponíveis por dia',
     'display.spell.hitBonus': 'bônus de acerto',

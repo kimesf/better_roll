@@ -196,7 +196,7 @@ export default {
         {
             name: 'Ataque Furtivo',
             addProficiency: false,
-            attribute: 'dex',
+            attribute: null,
             hitBonus: 0,
             damage: '1d6',
             damageType: 'mesmo do armamento',
@@ -205,7 +205,7 @@ export default {
         },
         {
             name: 'Golpe divino',
-            addProficiency: true,
+            addProficiency: false,
             attribute: null,
             hitBonus: 0,
             damage: '2d8 (+1d8 ++)',
@@ -215,7 +215,7 @@ export default {
         },
         {
             name: 'Veneno Potente',
-            addProficiency: true,
+            addProficiency: false,
             attribute: null,
             hitBonus: 0,
             damage: '2d8 (SG CON 14)',

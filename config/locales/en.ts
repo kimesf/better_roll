@@ -1,4 +1,7 @@
 export default {
+    'bonus': 'bonusk',
+    'attribute': 'attribute',
+    'none': 'none',
     'attributes.str.full': 'strenght',
     'attributes.dex.full': 'dexterity',
     'attributes.con.full': 'constitution',
@@ -75,6 +78,8 @@ export default {
     'display.resources.finite': 'finite',
     'display.attacks.hitBonus': 'hit bonus',
     'display.attacks.damage': 'damage',
+    'display.attacks.damageType': 'damage type',
+    'display.attacks.addProficiency': 'add proficiency',
     'display.spell.attribute': 'conjuration attribute',
     'display.spell.availablePerDay': 'available per day',
     'display.spell.hitBonus': 'hit bonus',

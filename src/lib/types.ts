@@ -1,3 +1,5 @@
+// TODO: implement source and notes
+
 export type Coin = 'copper' | 'silver' | 'gold' | 'platinum'
 
 export type Attribute = 'str' | 'dex' | 'con' | 'int' | 'wis' | 'cha'

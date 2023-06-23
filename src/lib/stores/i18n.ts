@@ -57,4 +57,8 @@ const initStore = (): I18nStore => {
     }
 }
 
-export default initStore()
+const store = initStore()
+const { t } = store
+
+export default store
+export { t }
