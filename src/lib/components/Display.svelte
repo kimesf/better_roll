@@ -53,14 +53,18 @@
 
     {#each sectionKeys as key}
         {#if visible == key}
+            <!-- TODO: dup transition -->
             <div
-                transition:fly={{ x: -400, opacity: 1, duration: 500 }}
+                in:fly={{ x: -400, opacity: 1, duration: 500 }}
+                out:fly={{ x: -400, opacity: 1, duration: 300 }}
                 class="z-10 bg-primary absolute min-h-screen w-screen justify-between p-2 mb-20"
             >
                 <svelte:component this={sections[key]} />
             </div>
 
             <button
+                in:fly={{ x: -400, opacity: 1, duration: 500 }}
+                out:fly={{ x: -400, opacity: 1, duration: 300 }}
                 on:click={() => closeSection()}
                 class="z-20 fixed bottom-0 w-screen p-4 text-2xl text-center uppercase bg-black shadow-[0_-10px_50px_0_rgba(23,23,23,1)]"
             >
