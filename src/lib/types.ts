@@ -38,6 +38,7 @@ export type Character = {
         bonusInitiative: number
         defense: number
         walkSpeed: number
+        climbSpeed: number
         flySpeed: number
         swimSpeed: number
         darkVision: number

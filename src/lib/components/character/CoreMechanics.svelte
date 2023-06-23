@@ -1,80 +1,93 @@
 <script lang="ts">
-    import { attributesModifiers, character, proficiencyBonus } from '../../stores/currentCharacter'
-    import i18n from '../../stores/i18n'
+    import { attributesModifiers, proficiencyBonus } from '../../stores/currentCharacter'
+    import { t } from '../../stores/i18n'
     import SignedNumber from '../shared/SignedNumber.svelte'
     import DistanceNumber from '../shared/DistanceNumber.svelte'
     import Title from '../shared/Title.svelte'
     import Separator from '../shared/Separator.svelte'
+    import characterRepository from '../../stores/characterRepository'
+    import Incrementor from '../shared/Incrementor.svelte'
+    import Editable from '../shared/Editable.svelte'
+    import { type ComponentType } from 'svelte/internal'
 
-    $: mechanics = $character.mechanics
+    $: mechanics = $characterRepository.current.mechanics
     $: initiativeBonus = $attributesModifiers.dex + mechanics.bonusInitiative
+
+    const hitPoints: ('total' | 'current' | 'temporary' | 'debuff')[] = ['total', 'current', 'temporary', 'debuff']
+
+    $: other = [
+        ['defense'],
+        ['darkVision', DistanceNumber, { distanceInFeet: mechanics.darkVision }],
+        ['walkSpeed', DistanceNumber, { distanceInFeet: mechanics.walkSpeed }],
+        ['climbSpeed', DistanceNumber, { distanceInFeet: mechanics.climbSpeed }],
+        ['swimSpeed', DistanceNumber, { distanceInFeet: mechanics.swimSpeed }],
+        ['flySpeed', DistanceNumber, { distanceInFeet: mechanics.flySpeed }],
+    ] as [
+        'defense' | 'darkVision' | 'walkSpeed' | 'climbSpeed' | 'swimSpeed' | 'flySpeed',
+        ComponentType | null,
+        { distanceInFeet: number } | null,
+    ][]
 </script>
 
-<!-- TODO: remove overflow -->
 <div class="p-2 text-center overflow-y-scroll">
-    <!-- TODO: a lot dup -->
     <div>
-        <Title title={i18n.t('display.coreMechanics.hitPoints')} />
+        <Title title={t('display.coreMechanics.hitPoints')} />
 
-        <div class="pt-4">
-            <p class="text-sm text-secondary">{i18n.t('display.coreMechanics.hitPoints.total')}</p>
-            <p class="text-4xl">{mechanics.hitPoints.total}</p>
-        </div>
+        {#each hitPoints as hitPoint}
+            <div class="pt-4">
+                <div class="text-sm text-secondary">{t(`display.coreMechanics.hitPoints.${hitPoint}`)}</div>
 
-        <div class="pt-4">
-            <p class="text-sm text-secondary">{i18n.t('display.coreMechanics.hitPoints.current')}</p>
-            <p class="text-4xl">{mechanics.hitPoints.current}</p>
-        </div>
-
-        <div class="pt-4">
-            <p class="text-sm text-secondary">{i18n.t('display.coreMechanics.hitPoints.temporary')}</p>
-            <p>{mechanics.hitPoints.temporary}</p>
-        </div>
-
-        <div class="pt-4">
-            <p class="text-sm text-secondary">{i18n.t('display.coreMechanics.hitPoints.debuff')}</p>
-            <p>{mechanics.hitPoints.debuff}</p>
-        </div>
+                <Incrementor
+                    id={`attributes-hitPoints-${hitPoint}`}
+                    signClasses="text-4xl"
+                    contentClasses={['total', 'current'].includes(hitPoint) ? 'text-4xl' : ''}
+                    bind:value={$characterRepository.current.mechanics.hitPoints[hitPoint]}
+                />
+            </div>
+        {/each}
     </div>
 
     <div class="pt-2">
         <Separator />
     </div>
 
-    <div>
+    <div class="text-sm">
         <div class="pt-4">
-            <p class="text-sm text-secondary">{i18n.t('display.coreMechanics.proficiencyBonus')}</p>
-            <p><SignedNumber number={$proficiencyBonus} /></p>
+            <div class="text-secondary">{t('display.coreMechanics.proficiencyBonus')}</div>
+            <div><SignedNumber number={$proficiencyBonus} /></div>
         </div>
 
         <div class="pt-4">
-            <p class="text-sm text-secondary">{i18n.t('display.coreMechanics.initiative')}</p>
-            <p><SignedNumber number={initiativeBonus} /></p>
+            <div class="text-secondary">{t('display.coreMechanics.initiative')}</div>
+
+            <Editable>
+                <SignedNumber number={initiativeBonus} />
+            </Editable>
+
+            <Incrementor
+                id={`mechanics-initiative`}
+                signClasses="text-4xl"
+                bind:value={$characterRepository.current.mechanics.bonusInitiative}
+            >
+                <SignedNumber number={initiativeBonus} />
+            </Incrementor>
         </div>
 
-        <div class="pt-4">
-            <p class="text-sm text-secondary">{i18n.t('display.coreMechanics.defense')}</p>
-            <p>{mechanics.defense}</p>
-        </div>
-
-        <div class="pt-4">
-            <p class="text-sm text-secondary">{i18n.t('display.coreMechanics.walkSpeed')}</p>
-            <DistanceNumber distanceInFeet={mechanics.walkSpeed} />
-        </div>
-
-        <div class="pt-4">
-            <p class="text-sm text-secondary">{i18n.t('display.coreMechanics.flySpeed')}</p>
-            <DistanceNumber distanceInFeet={mechanics.flySpeed} />
-        </div>
-
-        <div class="pt-4">
-            <p class="text-sm text-secondary">{i18n.t('display.coreMechanics.swimSpeed')}</p>
-            <DistanceNumber distanceInFeet={mechanics.swimSpeed} />
-        </div>
-
-        <div class="pt-4">
-            <p class="text-sm text-secondary">{i18n.t('display.coreMechanics.darkVision')}</p>
-            <DistanceNumber distanceInFeet={mechanics.darkVision} />
-        </div>
+        {#each other as [mechanic, component, props]}
+            <div class="pt-4">
+                <div class="text-secondary">{t(`display.coreMechanics.${mechanic}`)}</div>
+                <Incrementor
+                    id={`mechanics-initiative`}
+                    signClasses="text-4xl"
+                    bind:value={$characterRepository.current.mechanics[mechanic]}
+                >
+                    {#if component}
+                        <svelte:component this={component} {...props} />
+                    {:else}
+                        {mechanics[mechanic]}
+                    {/if}
+                </Incrementor>
+            </div>
+        {/each}
     </div>
 </div>

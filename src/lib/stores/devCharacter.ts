@@ -23,10 +23,9 @@ export default {
         bonusInitiative: 0,
         defense: 16,
         walkSpeed: 30,
-        // TODO:
-        // climbSpeed: 30,
-        flySpeed: 30,
+        climbSpeed: 30,
         swimSpeed: 30,
+        flySpeed: 0,
         darkVision: 60,
         other: [
             { name: 'Resistência', value: 'Veneno' },

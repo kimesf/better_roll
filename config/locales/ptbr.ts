@@ -66,6 +66,7 @@ export default {
     'display.coreMechanics.initiative': 'iniciativa',
     'display.coreMechanics.defense': 'defesa',
     'display.coreMechanics.walkSpeed': 'andar',
+    'display.coreMechanics.climbSpeed': 'escalar',
     'display.coreMechanics.flySpeed': 'voar',
     'display.coreMechanics.swimSpeed': 'nadar',
     'display.coreMechanics.darkVision': 'visão no escuro',
