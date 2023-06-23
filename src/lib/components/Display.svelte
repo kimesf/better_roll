@@ -12,9 +12,9 @@
     const sections = {
         mechanics: OtherMechanics,
         features: Features,
-        resources: Resources,
         magic: Magic,
         combat: Combat,
+        resources: Resources,
     } as const
 
     type Section = keyof typeof sections
