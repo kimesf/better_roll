@@ -1,20 +1,24 @@
 <script lang="ts">
     import i18n from '../../stores/i18n'
-    import { character } from '../../stores/currentCharacter'
+    import characterRepository from '../../stores/characterRepository';
+    import Editable from '../shared/Editable.svelte'
+
+    const proficiencies: ('weapons' | 'armors' | 'languages')[] = ['weapons', 'armors', 'languages']
 </script>
 
-<!-- TODO: dup -->
-<div class="mt-4 text-sm">
-    <p class="text-sm text-secondary">{i18n.t('display.skills.weapons')}</p>
-    <p>{$character.weapons}</p>
-</div>
+{#each proficiencies as proficiency}
+    <div class="mt-4 text-sm">
+        <div class="text-sm text-secondary">{i18n.t(`display.skills.${proficiency}`)}</div>
 
-<div class="mt-4 text-sm">
-    <p class="text-sm text-secondary">{i18n.t('display.skills.armors')}</p>
-    <p>{$character.armors}</p>
-</div>
+        <Editable>
+            <textarea
+                slot=editing
+                id={`proficiency-${proficiency}`}
+                class='input w-full'
+                bind:value={$characterRepository.current[proficiency]}
+            />
 
-<div class="mt-4 text-sm">
-    <p class="text-sm text-secondary">{i18n.t('display.skills.languages')}</p>
-    <p>{$character.languages}</p>
-</div>
+            <div slot=showing>{$characterRepository.current[proficiency]}</div>
+        </Editable>
+    </div>
+{/each}
