@@ -1,16 +1,13 @@
 <script lang="ts">
     // TODO: use absolute imports?
-    import i18n from '../../stores/i18n'
-    import {
-        attributesModifiers,
-        character,
-        proficiencyBonus,
-        skillsGroupedByAttribute,
-    } from '../../stores/currentCharacter'
+    import { attributesModifiers, proficiencyBonus, skillsGroupedByAttribute } from '../../stores/currentCharacter'
     import { type Skill } from '../../types'
     import { ATTRIBUTES } from '../../constants'
     import SignedNumber from '../shared/SignedNumber.svelte'
     import Collapsible from '../shared/Collapsible.svelte'
+    import Editable from '../shared/Editable.svelte'
+    import characterRepository from '../../stores/characterRepository'
+    import Attribute from './Attribute.svelte'
 
     const skillModifier = ({ attribute, proficiency, expertise, otherBonus }: Skill): number => {
         return (
@@ -22,22 +19,9 @@
     }
 </script>
 
-<!-- TODO: dup items -->
 {#each ATTRIBUTES as attr}
     <Collapsible>
-        <div slot="title" class="grow flex items-center justify-between">
-            <span class="grow basis-0 text-2xl uppercase">
-                {i18n.t(`attributes.${attr}`)}
-            </span>
-
-            <span class="grow basis-0 text-4xl">
-                <SignedNumber number={$attributesModifiers[attr]} />
-            </span>
-
-            <span class="grow basis-0 text-2xl text-secondary">
-                ({$character.attributes[attr]})
-            </span>
-        </div>
+        <Attribute slot=title {attr} />
 
         <svelte:fragment slot="body">
             {#each $skillsGroupedByAttribute[attr] as skill}
