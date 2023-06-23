@@ -1,17 +1,16 @@
-<script lang=ts>
-    import { slide } from "svelte/transition"
-    import canEdit from "../../stores/canEdit";
+<script lang="ts">
+    import { slide } from 'svelte/transition'
+    import canEdit from '../../stores/canEdit'
 </script>
 
 {#if $$slots.default && $canEdit}
-    <div transition:slide >
+    <div transition:slide>
         <slot />
     </div>
 {/if}
 
 {#if $canEdit}
-    <slot name='editing' />
+    <slot name="editing" />
 {:else}
-    <slot name='showing' />
+    <slot name="showing" />
 {/if}
-

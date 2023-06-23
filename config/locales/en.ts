@@ -1,7 +1,7 @@
 export default {
-    'bonus': 'bonusk',
-    'attribute': 'attribute',
-    'none': 'none',
+    bonus: 'bonusk',
+    attribute: 'attribute',
+    none: 'none',
     'attributes.str.full': 'strenght',
     'attributes.dex.full': 'dexterity',
     'attributes.con.full': 'constitution',

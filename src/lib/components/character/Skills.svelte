@@ -58,8 +58,7 @@
                             <input
                                 id={`skill-${index}-proficiency`}
                                 type="checkbox"
-                                bind:checked={$characterRepository.current.skills[skillIndex(skill)]
-                                    .proficiency}
+                                bind:checked={$characterRepository.current.skills[skillIndex(skill)].proficiency}
                             />
                             <label for={`skill-${index}-proficiency`}>{t('display.skills.proficiency')}</label>
                         </div>
@@ -67,8 +66,7 @@
                             <input
                                 id={`skill-${index}-expertise`}
                                 type="checkbox"
-                                bind:checked={$characterRepository.current.skills[skillIndex(skill)]
-                                    .expertise}
+                                bind:checked={$characterRepository.current.skills[skillIndex(skill)].expertise}
                             />
                             <label for={`skill-${index}-expertise`}>{t('display.skills.expertise')}</label>
                         </div>

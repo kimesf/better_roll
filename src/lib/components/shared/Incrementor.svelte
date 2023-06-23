@@ -1,6 +1,6 @@
 <script lang="ts">
-    import Editable from "./Editable.svelte";
-    import canEdit from "../../stores/canEdit"
+    import Editable from './Editable.svelte'
+    import canEdit from '../../stores/canEdit'
 
     export let id
     export let contentClasses = ''
@@ -9,22 +9,10 @@
 </script>
 
 <div class="w-full flex justify-around items-center">
-    <button
-        class:invisible={!$canEdit}
-        class={`text-red-500 ${signClasses}`}
-        on:click={() => value--}
-    >
-        -
-    </button>
+    <button class:invisible={!$canEdit} class={`text-red-500 ${signClasses}`} on:click={() => value--}> - </button>
 
     <Editable>
-        <input
-            slot="editing"
-            {id}
-            type="number"
-            class='text-primary input text-center w-12'
-            bind:value
-        />
+        <input slot="editing" {id} type="number" class="text-primary input text-center w-12" bind:value />
 
         <span slot="showing" class={contentClasses}>
             {#if $$slots.default}
@@ -35,11 +23,5 @@
         </span>
     </Editable>
 
-    <button
-        class:invisible={!$canEdit}
-        class={`text-green-500 ${signClasses}`}
-        on:click={() => value++}
-    >
-        +
-    </button>
+    <button class:invisible={!$canEdit} class={`text-green-500 ${signClasses}`} on:click={() => value++}> + </button>
 </div>

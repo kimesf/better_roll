@@ -1,10 +1,10 @@
 <script lang="ts">
     import { t } from '../../stores/i18n'
-    import SignedNumber from "../shared/SignedNumber.svelte"
-    import Editable from '../shared/Editable.svelte';
-    import characterRepository from "../../stores/characterRepository";
-    import type { Attribute } from "../../types"
-    import { attributesModifiers } from "../../stores/currentCharacter";
+    import SignedNumber from '../shared/SignedNumber.svelte'
+    import Editable from '../shared/Editable.svelte'
+    import characterRepository from '../../stores/characterRepository'
+    import type { Attribute } from '../../types'
+    import { attributesModifiers } from '../../stores/currentCharacter'
 
     export let attr: Attribute
 </script>

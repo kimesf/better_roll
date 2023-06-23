@@ -1,4 +1,4 @@
-import { writable, type Readable } from "svelte/store"
+import { writable, type Readable } from 'svelte/store'
 
 interface canEditStore extends Readable<boolean> {
     toggle: () => void

@@ -13,7 +13,10 @@ type AttributesMofifiers = {
 
 export const character: Readable<Character> = derived(characters, ($characters) => $characters.current)
 
-export const proficiencyBonus: Readable<ProficiencyBonus> = derived(character, ($character) => PROFICIENCY_BONUS[$character.level])
+export const proficiencyBonus: Readable<ProficiencyBonus> = derived(
+    character,
+    ($character) => PROFICIENCY_BONUS[$character.level],
+)
 
 export const skillsGroupedByAttribute: Readable<SkillsGroupedByAttr> = derived(character, ($character) => {
     return $character.skills.reduce((acc, skill) => {

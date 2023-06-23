@@ -1,7 +1,7 @@
 export default {
-    'bonus': 'bônus',
-    'attribute': 'atributo',
-    'none': 'nenhum',
+    bonus: 'bônus',
+    attribute: 'atributo',
+    none: 'nenhum',
     'attributes.str.full': 'força',
     'attributes.dex.full': 'destreza',
     'attributes.con.full': 'constituição',
