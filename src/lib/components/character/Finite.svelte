@@ -15,6 +15,7 @@
     }
 </script>
 
+<!-- TODO: use incrementor? -->
 {#each $characterRepository.current.resources.finite as finite, index}
     <Collapsible>
         <div slot='title' class='flex w-full justify-between'>

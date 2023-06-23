@@ -8,7 +8,7 @@
     export let value
 </script>
 
-<div class="flex justify-around items-center">
+<div class="w-full flex justify-around items-center">
     <button
         class:invisible={!$canEdit}
         class={`text-red-500 ${signClasses}`}
@@ -22,9 +22,10 @@
             slot="editing"
             {id}
             type="number"
-            class="input w-12 text-center"
+            class='input text-center w-12'
             bind:value
         />
+
         <span slot="showing" class={contentClasses}>
             {#if $$slots.default}
                 <slot />

@@ -15,6 +15,7 @@
     }
 </script>
 
+<!-- TODO: use incrementor? -->
 {#each $characterRepository.current.resources.recoverable as recoverable, index}
     <Collapsible>
         <div slot="title" class="flex w-full items-center">
