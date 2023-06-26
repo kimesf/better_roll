@@ -31,6 +31,7 @@
         @apply text-teal-500
     }
 
+    /* TODO: input to shared component */
     .input {
         @apply bg-contrast rounded-md p-1 text-sm
     }

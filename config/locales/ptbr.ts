@@ -2,6 +2,7 @@ export default {
     bonus: 'bônus',
     attribute: 'atributo',
     none: 'nenhum',
+    'actions.create': 'novo',
     'attributes.str.full': 'força',
     'attributes.dex.full': 'destreza',
     'attributes.con.full': 'constituição',
@@ -90,4 +91,5 @@ export default {
     'display.spell.saveDifficulty': 'dificuldade de salvaguarda',
     'display.missingNotes': 'Nenhuma anotação',
     'display.missingSource': 'Nenhuma fonte externa',
+    'display.missingName': 'Nenhum nome fornecido',
 }

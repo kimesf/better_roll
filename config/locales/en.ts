@@ -2,6 +2,7 @@ export default {
     bonus: 'bonusk',
     attribute: 'attribute',
     none: 'none',
+    'actions.create': 'new',
     'attributes.str.full': 'strenght',
     'attributes.dex.full': 'dexterity',
     'attributes.con.full': 'constitution',
@@ -89,4 +90,5 @@ export default {
     'display.spell.saveDifficulty': 'save DC',
     'display.missingNotes': 'zero notes',
     'display.missingSource': 'no source',
+    'display.missingName': 'no name given',
 }
