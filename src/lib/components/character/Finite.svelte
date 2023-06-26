@@ -1,10 +1,13 @@
 <script lang="ts">
-    import i18n from '../../stores/i18n'
+    import { tick } from 'svelte'
+    import { t } from '../../stores/i18n'
     import Collapsible from '../shared/Collapsible.svelte'
     import Separator from '../shared/Separator.svelte'
     import canEdit from '../../stores/canEdit'
     import characterRepository from '../../stores/characterRepository'
     import Editable from '../shared/Editable.svelte'
+    import type { Finite } from '../../types'
+    import BtnAction from '../shared/BtnAction.svelte'
 
     const inc = (index: number): void => {
         $characterRepository.current.resources.finite[index].amount++
@@ -13,10 +16,53 @@
     const dec = (index: number): void => {
         $characterRepository.current.resources.finite[index].amount--
     }
+
+    const DEFAULT: Finite = {
+        name: '',
+        amount: 1,
+        unity: '',
+        notes: '',
+        source: '',
+    }
+
+    const newFinite = (): Finite => {
+        return structuredClone(DEFAULT)
+    }
+
+    const trigger = (): void => {
+        $characterRepository = $characterRepository
+    }
+
+    const create =  async (): Promise<void> => {
+        $characterRepository.current.resources.finite.push(newFinite())
+        trigger()
+
+        // TODO: do that for all, maybe find other solution
+        await tick()
+        focusLast()
+    }
+
+    const destroy = (index: number): void => {
+        $characterRepository.current.resources.finite.splice(index, 1)
+        trigger()
+    }
+
+    const focusLast = (): void => {
+        const lastId = `finite-${$characterRepository.current.resources.finite.length - 1}-name`
+        const last = document.getElementById(lastId)
+
+        last.focus()
+    }
 </script>
+
+<Editable>
+    <BtnAction kind=create class="w-full mt-2" handler={(_e) => create()}>{t('actions.create')}</BtnAction>
+</Editable>
 
 <!-- TODO: use incrementor? -->
 {#each $characterRepository.current.resources.finite as finite, index}
+    <div>
+    </div>
     <Collapsible>
         <div slot="title" class="flex w-full justify-between">
             <div class="grow basis-0 flex items-center text-left">
@@ -49,6 +95,7 @@
                             type="text"
                             class="input w-8 text-center"
                             bind:value={finite.unity}
+                            placeholder={t('display.resources.finite.unity.placeholder')}
                         />
                     </div>
 
@@ -60,6 +107,14 @@
         </div>
 
         <div slot="body">
+            <Editable>
+                <div class="py-4 flex">
+                    <BtnAction kind=destroy class="w-16" handler={(_e) => destroy(index)}>r</BtnAction>
+                </div>
+
+                <Separator />
+            </Editable>
+
             <div class="py-4">
                 <Editable>
                     <input
@@ -68,7 +123,7 @@
                         type="text"
                         class="input w-full"
                         bind:value={finite.source}
-                        placeholder={i18n.t('display.missingSource')}
+                        placeholder={t('display.missingSource')}
                     />
 
                     <div slot="showing">
@@ -83,7 +138,7 @@
                             </a>
                         {:else}
                             <span>
-                                {i18n.t('display.missingSource')}
+                                {t('display.missingSource')}
                             </span>
                         {/if}
                     </div>
@@ -99,10 +154,10 @@
                         id="finite-{index}-notes"
                         class="input w-full"
                         bind:value={finite.notes}
-                        placeholder={i18n.t('display.missingNotes')}
+                        placeholder={t('display.missingNotes')}
                     />
 
-                    <span slot="showing">{finite.notes || i18n.t('display.missingNotes')}</span>
+                    <span slot="showing">{finite.notes || t('display.missingNotes')}</span>
                 </Editable>
             </div>
         </div>

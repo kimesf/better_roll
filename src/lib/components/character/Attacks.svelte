@@ -57,7 +57,6 @@
 </script>
 
 <Editable>
-
     <BtnAction kind=create class="w-full mt-2" handler={(_e) => create()}>{t('actions.create')}</BtnAction>
 </Editable>
 

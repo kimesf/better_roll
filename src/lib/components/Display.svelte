@@ -57,7 +57,7 @@
             <div
                 in:fly={{ x: -400, opacity: 1, duration: 500 }}
                 out:fly={{ x: -400, opacity: 1, duration: 300 }}
-                class="z-10 bg-primary absolute min-h-screen w-screen justify-between p-2 mb-20"
+                class="z-10 bg-primary absolute min-h-screen w-screen justify-between p-2 pb-20"
             >
                 <svelte:component this={sections[key]} />
             </div>

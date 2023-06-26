@@ -80,6 +80,7 @@ export default {
     'display.resources.coins.platinum': 'platinum',
     'display.resources.renewable': 'renewable',
     'display.resources.finite': 'finite',
+    'display.resources.finite.unity.placeholder': 'u',
     'display.attacks.hitBonus': 'hit bonus',
     'display.attacks.damage': 'damage',
     'display.attacks.damage.placeholder': '1d4/1d6/1d8...',
