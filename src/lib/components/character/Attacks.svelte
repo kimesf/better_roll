@@ -7,6 +7,7 @@
     import BtnAction from '../shared/BtnAction.svelte'
     import Collapsible from '../shared/Collapsible.svelte'
     import Editable from '../shared/Editable.svelte'
+    import Incrementor from '../shared/Incrementor.svelte'
     import Separator from '../shared/Separator.svelte'
     import SignedNumber from '../shared/SignedNumber.svelte'
     import Title from '../shared/Title.svelte'
@@ -16,6 +17,7 @@
         addProficiency: false,
         attribute: null,
         hitBonus: 0,
+        damageBonus: 0,
         damage: '',
         damageType: '',
         notes: '',
@@ -46,6 +48,12 @@
 
         return proficiency + attributeBonus + hitBonus
     }
+
+    const attackDamageBonus = ({ attribute, damageBonus }: Attack): number => {
+        const attributeBonus = attribute ? $attributesModifiers[attribute] : 0
+
+        return attributeBonus + damageBonus
+    }
 </script>
 
 <Editable>
@@ -74,8 +82,8 @@
             <span class="text-xl">
                 {#if attackHitBonus(attack) > 0}
                     <SignedNumber number={attackHitBonus(attack)} />
-                    {attack.damage}{#if attack.attribute}<SignedNumber
-                            number={$attributesModifiers[attack.attribute]}
+                    {attack.damage}{#if attackDamageBonus(attack) > 0}<SignedNumber
+                            number={attackDamageBonus(attack)}
                         />{/if}
                 {:else}
                     {attack.damage}
@@ -89,6 +97,7 @@
             <Editable>
                 <div class="py-4">
                     <Title title={t('display.attacks.damage')} />
+
                     <input
                         type="text"
                         id={`attack-${index}-damage`}
@@ -96,6 +105,11 @@
                         bind:value={attack.damage}
                         placeholder={t('display.attacks.damage.placeholder')}
                     />
+
+                    <div class="flex items-center">
+                        <label for="attack-{index}-damageBonus">{t('bonus')}:</label>
+                        <Incrementor id="attack-{index}-damageBonus" signClasses="text-4xl" bind:value={attack.damageBonus} />
+                    </div>
                 </div>
 
                 <Separator />

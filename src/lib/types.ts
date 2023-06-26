@@ -112,6 +112,7 @@ export type Attack = {
     addProficiency: boolean
     attribute: Attribute | null
     hitBonus: number
+    damageBonus: number
     damage: string
     damageType: string
     notes: string

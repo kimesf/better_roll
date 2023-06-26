@@ -80,7 +80,7 @@ export default {
     'display.resources.coins.platinum': 'platina',
     'display.resources.renewable': 'renováveis',
     'display.resources.finite': 'finitos',
-    'display.attacks.hitBonus': 'bônus de ataque',
+    'display.attacks.hitBonus': 'bônus de acerto',
     'display.attacks.damage': 'dano',
     'display.attacks.damage.placeholder': '1d4/1d6/1d8...',
     'display.attacks.damageType': 'tipo de dano',
