@@ -1,10 +1,12 @@
 <script lang="ts">
-    import i18n from '../../stores/i18n'
+    import { t } from '../../stores/i18n'
     import characterRepository from '../../stores/characterRepository'
     import Collapsible from '../shared/Collapsible.svelte'
     import Separator from '../shared/Separator.svelte'
     import canEdit from '../../stores/canEdit'
     import Editable from '../shared/Editable.svelte'
+    import BtnAction from '../shared/BtnAction.svelte'
+    import type { Recoverable } from '../../types'
 
     const inc = (index: number): void => {
         $characterRepository.current.resources.recoverable[index].current++
@@ -13,7 +15,41 @@
     const dec = (index: number): void => {
         $characterRepository.current.resources.recoverable[index].current--
     }
+
+    const DEFAULT: Recoverable = {
+        name: '',
+        current: 0,
+        total: 1,
+        recoveredBy: 'long',
+        notes: '',
+        source: '',
+    }
+
+    const newRecoverable = (): Recoverable => {
+        return structuredClone(DEFAULT)
+    }
+
+    // TODO: dup
+    const trigger = (): void => {
+        $characterRepository = $characterRepository
+    }
+
+    // TODO: dup
+    const create = (): void => {
+        $characterRepository.current.resources.recoverable.push(newRecoverable())
+        trigger()
+    }
+
+    // TODO: dup
+    const destroy = (index: number): void => {
+        $characterRepository.current.resources.recoverable.splice(index, 1)
+        trigger()
+    }
 </script>
+
+<Editable>
+    <BtnAction kind=create class='w-full mt-2' handler={(_e) => create()}>{t('actions.create')}</BtnAction>
+</Editable>
 
 <!-- TODO: use incrementor? -->
 {#each $characterRepository.current.resources.recoverable as recoverable, index}
@@ -32,7 +68,7 @@
                 </Editable>
 
                 <span class="text-xs text-secondary">
-                    {i18n.t(`recoverable.${recoverable.recoveredBy}`)}
+                    {t(`recoverable.${recoverable.recoveredBy}`)}
                 </span>
             </div>
 
@@ -64,11 +100,15 @@
 
         <div slot="body">
             <Editable>
-                <div class="py-4 text-secondary">
-                    <label for="short">{i18n.t('recoverable.short')}</label>
-                    <input class="input" type="radio" id="short" bind:group={recoverable.recoveredBy} value="short" />
-                    <label for="long">{i18n.t('recoverable.long')}</label>
-                    <input class="input" type="radio" id="long" bind:group={recoverable.recoveredBy} value="long" />
+                <div class="flex justify-between items-center">
+                    <div class="py-4 text-secondary">
+                        <label for="short">{t('recoverable.short')}</label>
+                        <input class="input" type="radio" id="short" bind:group={recoverable.recoveredBy} value="short" />
+                        <label for="long">{t('recoverable.long')}</label>
+                        <input class="input" type="radio" id="long" bind:group={recoverable.recoveredBy} value="long" />
+                    </div>
+
+                    <BtnAction kind=destroy class="w-16" handler={(_e) => destroy(index)}>r</BtnAction>
                 </div>
 
                 <Separator />
@@ -82,7 +122,7 @@
                         type="text"
                         class="input w-full"
                         bind:value={recoverable.source}
-                        placeholder={i18n.t('display.missingSource')}
+                        placeholder={t('display.missingSource')}
                     />
 
                     <div slot="showing">
@@ -97,7 +137,7 @@
                             </a>
                         {:else}
                             <span>
-                                {i18n.t('display.missingSource')}
+                                {t('display.missingSource')}
                             </span>
                         {/if}
                     </div>
@@ -108,13 +148,13 @@
 
             <div class="py-4">
                 <Editable>
-                    <span slot="showing">{recoverable.notes || i18n.t('display.missingNotes')}</span>
+                    <span slot="showing">{recoverable.notes || t('display.missingNotes')}</span>
                     <textarea
                         slot="editing"
                         id="recoverable-{index}-notes"
                         class="input w-full"
                         bind:value={recoverable.notes}
-                        placeholder={i18n.t('display.missingNotes')}
+                        placeholder={t('display.missingNotes')}
                     />
                 </Editable>
             </div>

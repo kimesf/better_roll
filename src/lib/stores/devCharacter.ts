@@ -177,7 +177,7 @@ export default {
             addProficiency: true,
             attribute: 'dex',
             hitBonus: 0,
-            damageBonus: 10,
+            damageBonus: 0,
             damage: '1d6',
             damageType: 'perfurante',
             notes: 'acuidade, leve, luva, furtiva',
