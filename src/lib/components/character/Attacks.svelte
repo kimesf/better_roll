@@ -4,11 +4,41 @@
     import { attributesModifiers, proficiencyBonus } from '../../stores/currentCharacter'
     import { t } from '../../stores/i18n'
     import { type Attack } from '../../types'
+    import BtnAction from '../shared/BtnAction.svelte'
     import Collapsible from '../shared/Collapsible.svelte'
     import Editable from '../shared/Editable.svelte'
     import Separator from '../shared/Separator.svelte'
     import SignedNumber from '../shared/SignedNumber.svelte'
     import Title from '../shared/Title.svelte'
+
+    const DEFAULT: Attack = {
+        name: '',
+        addProficiency: false,
+        attribute: null,
+        hitBonus: 0,
+        damage: '',
+        damageType: '',
+        notes: '',
+        source: '',
+    }
+
+    const newAttack = (): Attack => {
+        return structuredClone(DEFAULT)
+    }
+
+    const trigger = (): void => {
+        $characterRepository.current.attacks = $characterRepository.current.attacks
+    }
+
+    const create = (): void => {
+        $characterRepository.current.attacks.push(newAttack())
+        trigger()
+    }
+
+    const destroy = (index: number): void => {
+        $characterRepository.current.attacks.splice(index, 1)
+        trigger()
+    }
 
     const attackHitBonus = ({ attribute, hitBonus, addProficiency }: Attack): number => {
         const proficiency = addProficiency ? $proficiencyBonus : 0
@@ -18,17 +48,26 @@
     }
 </script>
 
+<Editable>
+
+    <BtnAction kind=create class="w-full mt-2" handler={(_e) => create()}>{t('actions.create')}</BtnAction>
+</Editable>
+
 {#each $characterRepository.current.attacks as attack, index}
     <Collapsible>
         <div slot="title" class="flex flex-col text-left my-2 w-full">
             <Editable>
-                <input
-                    slot="editing"
-                    id={`attack-${index}-name`}
-                    type="text"
-                    class="input w-full"
-                    bind:value={attack.name}
-                />
+                <div slot="editing" class="flex">
+                    <input
+                        id={`attack-${index}-name`}
+                        type="text"
+                        class="input w-full"
+                        bind:value={attack.name}
+                    />
+
+                    <BtnAction kind=destroy class="w-16 ml-2" handler={(_e) => destroy(index)}>r</BtnAction>
+                </div>
+
                 <span slot="showing">{attack.name}</span>
             </Editable>
 
@@ -50,7 +89,13 @@
             <Editable>
                 <div class="py-4">
                     <Title title={t('display.attacks.damage')} />
-                    <input type="text" id={`attack-${index}-damage`} class="input w-full" bind:value={attack.damage} />
+                    <input
+                        type="text"
+                        id={`attack-${index}-damage`}
+                        class="input w-full"
+                        bind:value={attack.damage}
+                        placeholder={t('display.attacks.damage.placeholder')}
+                    />
                 </div>
 
                 <Separator />
@@ -62,6 +107,7 @@
                         id={`attack-${index}-damageType`}
                         class="input w-full"
                         bind:value={attack.damageType}
+                        placeholder={t('display.attacks.damageType.placeholder')}
                     />
                 </div>
 
