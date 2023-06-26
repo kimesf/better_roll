@@ -5,6 +5,7 @@
     export let handler: (e: MouseEvent & { currentTarget: EventTarget & HTMLButtonElement }) => void
 </script>
 
+<!-- TODO: get garbage icon for destroy -->
 <button
     class="{$$props.class || ''} text-xl rounded-md"
     class:bg-green-500={kind == 'create'}
