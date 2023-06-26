@@ -13,7 +13,7 @@
         <Editable>
             <textarea
                 slot="editing"
-                id={`proficiency-${proficiency}`}
+                id="proficiency-{proficiency}"
                 class="input w-full"
                 bind:value={$characterRepository.current[proficiency]}
             />

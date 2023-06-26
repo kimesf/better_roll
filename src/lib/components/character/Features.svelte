@@ -47,7 +47,7 @@
             <Editable>
                 <div slot="editing" class="flex justify-between">
                     <input
-                        id={`feature-${index}-name`}
+                        id="feature-{index}-name"
                         type="text"
                         class="input w-full"
                         bind:value={feature.name}
@@ -66,7 +66,7 @@
                 <Editable>
                     <input
                         slot="editing"
-                        id={`feature-${index}-source`}
+                        id="feature-{index}-source"
                         type="text"
                         class="input w-full"
                         bind:value={feature.source}
@@ -98,7 +98,7 @@
                 <Editable>
                     <textarea
                         slot="editing"
-                        id={`feature-${index}-notes`}
+                        id="feature-{index}-notes"
                         class="input w-full"
                         bind:value={feature.notes}
                         placeholder={t('display.missingNotes')}

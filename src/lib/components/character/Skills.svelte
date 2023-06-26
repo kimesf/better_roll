@@ -56,7 +56,7 @@
                     <div class="py-4 text-secondary text-sm">
                         <div>
                             <input
-                                id={`skill-${index}-proficiency`}
+                                id="skill-{index}-proficiency"
                                 type="checkbox"
                                 bind:checked={$characterRepository.current.skills[skillIndex(skill)].proficiency}
                             />
@@ -64,7 +64,7 @@
                         </div>
                         <div>
                             <input
-                                id={`skill-${index}-expertise`}
+                                id="skill-{index}-expertise"
                                 type="checkbox"
                                 bind:checked={$characterRepository.current.skills[skillIndex(skill)].expertise}
                             />
@@ -73,7 +73,7 @@
                         <div class="flex items-center justify-start">
                             <label for={`skill-${index}-otherBonus`}>{t('bonus')}:</label>
                             <Incrementor
-                                id={`skill-${index}-otherBonus`}
+                                id="skill-{index}-otherBonus"
                                 signClasses={'text-4xl'}
                                 bind:value={$characterRepository.current.skills[skillIndex(skill)].otherBonus}
                             />

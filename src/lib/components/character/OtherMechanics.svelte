@@ -44,7 +44,7 @@
         <Editable>
             <input
                 slot="editing"
-                id={`mechanic-${index}-name`}
+                id="mechanic-{index}-name"
                 type="text"
                 class="input w-5/12"
                 bind:value={mechanic.name}
@@ -55,7 +55,7 @@
         <Editable>
             <input
                 slot="editing"
-                id={`mechanic-${index}-value`}
+                id="mechanic-{index}-value"
                 type="text"
                 class="input w-5/12 ml-2"
                 bind:value={mechanic.value}

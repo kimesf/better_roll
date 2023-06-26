@@ -38,7 +38,7 @@
                 <div class="text-sm text-secondary">{t(`display.coreMechanics.hitPoints.${hitPoint}`)}</div>
 
                 <Incrementor
-                    id={`attributes-hitPoints-${hitPoint}`}
+                    id="attributes-hitPoints-{hitPoint}"
                     signClasses="text-4xl"
                     contentClasses={['total', 'current'].includes(hitPoint) ? 'text-4xl' : ''}
                     bind:value={$characterRepository.current.mechanics.hitPoints[hitPoint]}
@@ -77,7 +77,7 @@
             <div class="pt-4">
                 <div class="text-secondary">{t(`display.coreMechanics.${mechanic}`)}</div>
                 <Incrementor
-                    id={`mechanics-${mechanic}`}
+                    id="mechanics-{mechanic}"
                     signClasses="text-4xl"
                     bind:value={$characterRepository.current.mechanics[mechanic]}
                 >

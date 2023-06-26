@@ -22,7 +22,7 @@
         <Editable>
             <input
                 slot="editing"
-                id={`attributes-${attr}`}
+                id="attributes-{attr}"
                 type="number"
                 class="input w-12 text-primary text-center"
                 bind:value={$characterRepository.current.attributes[attr]}

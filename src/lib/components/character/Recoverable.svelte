@@ -23,7 +23,7 @@
                 <Editable>
                     <input
                         slot="editing"
-                        id={`recoverable-${index}-name`}
+                        id="recoverable-{index}-name"
                         type="text"
                         class="input w-36"
                         bind:value={recoverable.name}
@@ -42,13 +42,13 @@
                 <Editable>
                     <div slot="editing" class="flex items-center">
                         <input
-                            id={`recoverable-${index}-current`}
+                            id="recoverable-{index}-current"
                             type="number"
                             class="input w-12 mr-1 text-center"
                             bind:value={recoverable.current}
                         />
                         <input
-                            id={`recoverable-${index}-total`}
+                            id="recoverable-{index}-total"
                             type="text"
                             class="input w-12 text-center"
                             bind:value={recoverable.total}
@@ -78,7 +78,7 @@
                 <Editable>
                     <input
                         slot="editing"
-                        id={`recoverable-${index}-source`}
+                        id="recoverable-{index}-source"
                         type="text"
                         class="input w-full"
                         bind:value={recoverable.source}
@@ -111,7 +111,7 @@
                     <span slot="showing">{recoverable.notes || i18n.t('display.missingNotes')}</span>
                     <textarea
                         slot="editing"
-                        id={`recoverable-${index}-notes`}
+                        id="recoverable-{index}-notes"
                         class="input w-full"
                         bind:value={recoverable.notes}
                         placeholder={i18n.t('display.missingNotes')}

@@ -23,7 +23,7 @@
                 <Editable>
                     <input
                         slot="editing"
-                        id={`finite-${index}-name`}
+                        id="finite-{index}-name"
                         type="text"
                         class="input w-36"
                         bind:value={finite.name}
@@ -39,13 +39,13 @@
                 <Editable>
                     <div slot="editing" class="flex items-center">
                         <input
-                            id={`finite-${index}-amount`}
+                            id="finite-{index}-amount"
                             type="number"
                             class="input w-16 mr-1 text-center"
                             bind:value={finite.amount}
                         />
                         <input
-                            id={`finite-${index}-unity`}
+                            id="finite-{index}-unity"
                             type="text"
                             class="input w-8 text-center"
                             bind:value={finite.unity}
@@ -64,7 +64,7 @@
                 <Editable>
                     <input
                         slot="editing"
-                        id={`finite-${index}-source`}
+                        id="finite-{index}-source"
                         type="text"
                         class="input w-full"
                         bind:value={finite.source}
@@ -96,7 +96,7 @@
                 <Editable>
                     <textarea
                         slot="editing"
-                        id={`finite-${index}-notes`}
+                        id="finite-{index}-notes"
                         class="input w-full"
                         bind:value={finite.notes}
                         placeholder={i18n.t('display.missingNotes')}
