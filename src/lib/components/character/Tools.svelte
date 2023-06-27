@@ -70,7 +70,7 @@
             <div class="flex justify-between">
                 <select id="tool-{index}-attribute" class="input" bind:value={tool.attribute}>
                     {#each ATTRIBUTES as attribute}
-                        <option value={attribute}>{attribute}</option>
+                        <option value={attribute}>{t(`attributes.${attribute}`)}</option>
                     {/each}
                     <option value={null}>{t('none')}</option>
                 </select>

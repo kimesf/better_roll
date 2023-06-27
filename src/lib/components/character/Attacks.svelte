@@ -142,7 +142,7 @@
                             <div>
                                 <select id="attack-{index}-attribute" class="input" bind:value={attack.attribute}>
                                     {#each ATTRIBUTES as attribute}
-                                        <option value={attribute}>{attribute}</option>
+                                        <option value={attribute}>{t(`attributes.${attribute}`)}</option>
                                     {/each}
                                     <option value={null}>{t('none')}</option>
                                 </select>
