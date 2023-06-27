@@ -8,6 +8,7 @@
     import Main from './displaySections/Main.svelte'
     import Combat from './displaySections/Combat.svelte'
     import canEdit from '../stores/canEdit'
+    import Draggable from './shared/Draggable.svelte'
 
     const sections = {
         mechanics: OtherMechanics,
@@ -82,10 +83,12 @@
         menu
     </button>
 
-    <button
-        class="z-30 fixed top-5 left-1/2 p-6 rounded-full"
-        class:bg-blue-500={!$canEdit}
-        class:bg-green-500={$canEdit}
-        on:click={() => canEdit.toggle()}
-    />
+    <Draggable>
+        <button
+            class="z-30 p-6 rounded-full"
+            class:bg-blue-500={!$canEdit}
+            class:bg-green-500={$canEdit}
+            on:click={() => canEdit.toggle()}
+        />
+    </Draggable>
 </div>
