@@ -39,7 +39,7 @@
 
 <div>
     {#if menuVisible}
-        <div class="z-40 absolute h-screen w-screen flex flex-col justify-between">
+        <div class="z-40 bottom-0 fixed h-screen w-screen flex flex-col justify-between">
             <button class="grow bg-secondary bg-opacity-50" on:click={() => (menuVisible = false)} />
 
             <div class="bg-secondary">
