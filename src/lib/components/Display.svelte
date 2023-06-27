@@ -58,7 +58,7 @@
             <div
                 in:fly={{ x: -400, opacity: 1, duration: 500 }}
                 out:fly={{ x: -400, opacity: 1, duration: 300 }}
-                class="z-10 bg-primary absolute min-h-screen w-screen justify-between p-2 pb-20"
+                class="z-10 bg-primary absolute h-screen w-screen overflow-y-scroll justify-between p-2 pb-20"
             >
                 <svelte:component this={sections[key]} />
             </div>
@@ -83,9 +83,9 @@
         menu
     </button>
 
-    <Draggable>
+    <Draggable class="z-30">
         <button
-            class="z-30 p-6 rounded-full"
+            class="p-6 rounded-full"
             class:bg-blue-500={!$canEdit}
             class:bg-green-500={$canEdit}
             on:click={() => canEdit.toggle()}
