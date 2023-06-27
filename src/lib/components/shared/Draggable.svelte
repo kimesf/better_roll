@@ -1,5 +1,4 @@
 <script lang="ts">
-    import postcss from 'postcss'
     import { onMount } from 'svelte'
 
     export let left = 100

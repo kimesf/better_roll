@@ -83,7 +83,7 @@
         menu
     </button>
 
-    <Draggable class="z-30">
+    <Draggable class="z-30" top={12}>
         <button
             class="p-6 rounded-full"
             class:bg-blue-500={!$canEdit}
