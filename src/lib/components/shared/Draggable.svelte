@@ -1,4 +1,5 @@
 <script lang="ts">
+    import postcss from 'postcss'
     import { onMount } from 'svelte'
 
     export let left = 100
@@ -81,24 +82,22 @@
     on:mousedown={unlock}
     class="{$$props.class || ''} cursor-move select-none fixed"
     class:z-100={isMoving}
+    class:highlight={isMoving}
     style="left: {left}px; top: {top}px;"
 >
-    {#if isMoving}
-        <div
-            class="rounded-full border-4 border-blue-500 absolute"
-            style="width: {4 * offsetLeft}px; height: {4 * offsetTop}px; left: {-offsetLeft}px; top: {-offsetTop}px;"
-        />
-    {/if}
-
     <slot />
 </div>
 
-<style>
+<style lang="postcss">
     .z-100 {
         z-index: 100;
     }
 
     .z-99 {
         z-index: 99;
+    }
+
+    .highlight {
+        @apply outline outline-4 outline-blue-500 outline-offset-[20px] rounded-full;
     }
 </style>
