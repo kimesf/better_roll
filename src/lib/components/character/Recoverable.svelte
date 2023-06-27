@@ -7,6 +7,7 @@
     import Editable from '../shared/Editable.svelte'
     import BtnAction from '../shared/BtnAction.svelte'
     import type { Recoverable } from '../../types'
+    import Incrementor from '../shared/Incrementor.svelte'
 
     const inc = (index: number): void => {
         $characterRepository.current.resources.recoverable[index].current++
@@ -73,28 +74,17 @@
             </div>
 
             <div class="grow basis-0 flex text-6xl justify-between">
-                <button class:invisible={!$canEdit} class="text-red-500" on:click={() => dec(index)}> - </button>
+                <Incrementor id="recoverable-{index}-current" bind:value={recoverable.current}>
+                    <input
+                        slot=extra
+                        id="recoverable-{index}-total"
+                        type="text"
+                        class="input w-12 text-center"
+                        bind:value={recoverable.total}
+                    />
 
-                <Editable>
-                    <div slot="editing" class="flex items-center">
-                        <input
-                            id="recoverable-{index}-current"
-                            type="number"
-                            class="input w-12 mr-1 text-center"
-                            bind:value={recoverable.current}
-                        />
-                        <input
-                            id="recoverable-{index}-total"
-                            type="text"
-                            class="input w-12 text-center"
-                            bind:value={recoverable.total}
-                        />
-                    </div>
-
-                    <span slot="showing" class="text-4xl">{recoverable.current}/{recoverable.total}</span>
-                </Editable>
-
-                <button class:invisible={!$canEdit} class="text-green-500" on:click={() => inc(index)}> + </button>
+                    <span class="text-4xl">{recoverable.current}/{recoverable.total}</span>
+                </Incrementor>
             </div>
         </div>
 

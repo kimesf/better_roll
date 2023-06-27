@@ -8,6 +8,7 @@
     import Editable from '../shared/Editable.svelte'
     import type { Finite } from '../../types'
     import BtnAction from '../shared/BtnAction.svelte'
+    import Incrementor from '../shared/Incrementor.svelte'
 
     const inc = (index: number): void => {
         $characterRepository.current.resources.finite[index].amount++
@@ -59,7 +60,6 @@
     <BtnAction kind=create class="w-full mt-2" handler={(_e) => create()}>{t('actions.create')}</BtnAction>
 </Editable>
 
-<!-- TODO: use incrementor? -->
 {#each $characterRepository.current.resources.finite as finite, index}
     <div>
     </div>
@@ -79,30 +79,20 @@
                 </Editable>
             </div>
 
+
             <div class="grow basis-0 flex text-6xl justify-between">
-                <button class:invisible={!$canEdit} class="text-red-500" on:click={() => dec(index)}> - </button>
+                <Incrementor id="finite-{index}-amount" bind:value={finite.amount}>
+                    <input
+                        slot=extra
+                        id="finite-{index}-unity"
+                        type="text"
+                        class="input w-8 text-center"
+                        bind:value={finite.unity}
+                        placeholder={t('display.resources.finite.unity.placeholder')}
+                    />
 
-                <Editable>
-                    <div slot="editing" class="flex items-center">
-                        <input
-                            id="finite-{index}-amount"
-                            type="number"
-                            class="input w-16 mr-1 text-center"
-                            bind:value={finite.amount}
-                        />
-                        <input
-                            id="finite-{index}-unity"
-                            type="text"
-                            class="input w-8 text-center"
-                            bind:value={finite.unity}
-                            placeholder={t('display.resources.finite.unity.placeholder')}
-                        />
-                    </div>
-
-                    <span class="text-4xl" slot="showing">{finite.amount}{finite.unity}</span>
-                </Editable>
-
-                <button class:invisible={!$canEdit} class="text-green-500" on:click={() => inc(index)}> + </button>
+                    <span class="text-4xl">{finite.amount}{finite.unity}</span>
+                </Incrementor>
             </div>
         </div>
 
