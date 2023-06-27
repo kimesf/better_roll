@@ -1,40 +1,149 @@
 <script lang="ts">
-    import i18n from '../../stores/i18n'
+    import { t } from '../../stores/i18n'
+    import Title from '../shared/Title.svelte'
+    import Separator from '../shared/Separator.svelte'
+    import SignedNumber from '../shared/SignedNumber.svelte'
+    import Editable from '../shared/Editable.svelte'
+    import Incrementor from '../shared/Incrementor.svelte'
+    import BtnAction from '../shared/BtnAction.svelte'
     import { attributesModifiers, character, proficiencyBonus } from '../../stores/currentCharacter'
+    import characterRepository from '../../stores/characterRepository'
+    import { ATTRIBUTES } from '../../constants'
+    import type { SpellCircle, SpellSlot } from '../../types'
 
     $: spellAttribute = $character.spellMechanics.attribute
 
-    $: spellAttack = $proficiencyBonus + $attributesModifiers[spellAttribute] + $character.spellMechanics.hitBonus
+    $: spellAttack =
+        $proficiencyBonus + $attributesModifiers[spellAttribute] + $characterRepository.current.spellMechanics.hitBonus
 
     $: spellSaveDifficulty =
         8 + $proficiencyBonus + $attributesModifiers[spellAttribute] + $character.spellMechanics.saveDifficultyBonus
+
+    const DEFAULT_SLOT: SpellSlot = {
+        circle: 1,
+        current: 1,
+        total: 1,
+    }
+
+    const newSlot = (): SpellSlot => {
+        const nextCircle = $characterRepository.current.spellMechanics.slots.length + 1 as SpellCircle
+        let slot = structuredClone(DEFAULT_SLOT)
+        slot.circle = nextCircle
+
+        return slot
+    }
+
+    const trigger = (): void => {
+        $characterRepository = $characterRepository
+    }
+
+    const createSlot = (): void => {
+        if($characterRepository.current.spellMechanics.slots.length == 9) {
+            return
+        }
+
+        $characterRepository.current.spellMechanics.slots.push(newSlot())
+        trigger()
+    }
+
+    const destroyLastSlot = (): void => {
+        $characterRepository.current.spellMechanics.slots.pop()
+        trigger()
+    }
 </script>
 
-<div>
-    <p>
-        {i18n.t('display.spell.attribute')}:
-        {i18n.t(`attributes.${spellAttribute}.full`)}
-    </p>
+<Title title={t('character.spellMechanics.title')} />
 
-    <p>
-        {i18n.t('display.spell.availablePerDay')}:
-        {$character.spellMechanics.availablePerDay}
-    </p>
+<Separator />
 
-    <p>
-        {i18n.t('display.spell.hitBonus')}:
-        {spellAttack}
-    </p>
+<div class="grid gap-4 grid-cols-2">
+    <div class="flex flex-col items-center">
+        <Editable>
+            <span class="text-4xl"><SignedNumber number={spellAttack} /></span>
+        </Editable>
 
-    <p>
-        {i18n.t('display.spell.saveDifficulty')}:
-        {spellSaveDifficulty}
-    </p>
+        <Incrementor
+            id="spellMechanics-hitBonus"
+            signClasses="text-4xl"
+            bind:value={$characterRepository.current.spellMechanics.hitBonus}
+        >
+            <span class="text-4xl"><SignedNumber number={spellAttack} /></span>
+        </Incrementor>
 
-    {#each $character.spellMechanics.slots as slot}
-        <div>
-            <!-- TODO: i18n -->
-            slots circle {slot.circle}: {slot.current}/{slot.total}
+        <span class="text-secondary">{t('character.spellMechanics.hitBonus')}</span>
+    </div>
+
+    <div class="flex flex-col items-center">
+        <Editable>
+            <span class="text-4xl">{spellSaveDifficulty}</span>
+        </Editable>
+
+        <Incrementor
+            id="spellMechanics-saveDifficultyBonus"
+            contentClasses="text-4xl"
+            signClasses="text-4xl"
+            bind:value={$characterRepository.current.spellMechanics.saveDifficultyBonus}
+        >
+            <span class="text-4xl">{spellSaveDifficulty}</span>
+        </Incrementor>
+
+        <span class="text-secondary">{t('character.spellMechanics.saveDifficulty')}</span>
+    </div>
+
+    <div class="flex flex-col items-center">
+        <Editable>
+            <select
+                slot="editing"
+                id="spellMechanics-attribute"
+                class="input text-lg"
+                bind:value={$characterRepository.current.spellMechanics.attribute}
+            >
+                {#each ATTRIBUTES as attribute}
+                    <option value={attribute}>{t(`attributes.${attribute}.full`)}</option>
+                {/each}
+            </select>
+
+            <span slot="showing" class="text-4xl">{t(`attributes.${spellAttribute}.full`)}</span>
+        </Editable>
+        <span class="text-secondary">{t('character.spellMechanics.attribute')}</span>
+    </div>
+
+    <div class="flex flex-col items-center">
+        <Incrementor
+            id="spellMechanics-availablePerDay"
+            contentClasses="text-4xl"
+            signClasses="text-4xl"
+            bind:value={$characterRepository.current.spellMechanics.availablePerDay}
+        />
+
+        <span class="text-secondary">{t('character.spellMechanics.availablePerDay')}</span>
+    </div>
+</div>
+
+<Title title={t('character.spellMechanics.slots')} />
+
+<Separator />
+
+<Editable>
+    <BtnAction kind=create class="w-full mt-2" handler={(_e) => createSlot()}>{t('actions.create')}</BtnAction>
+    <BtnAction kind=destroy class="w-full mt-2" handler={(_e) => destroyLastSlot()}>{t('spellMechanics.slots.destroyLast')}</BtnAction>
+</Editable>
+
+<div class="pt-2 grid gap-4 grid-cols-2">
+    {#each $characterRepository.current.spellMechanics.slots as slot, index}
+        <div class="flex flex-col items-center">
+            <Incrementor
+                id="spellMechanics-slots-{index}-current"
+                contentClasses="text-4xl"
+                signClasses="text-4xl"
+                bind:value={slot.current}
+            >
+                <span class="text-4xl">{slot.current}/{slot.total}</span>
+
+                <input id="spellMechanics-slots-{index}-total" slot=extra class="input w-12 text-center" bind:value={slot.total} />
+            </Incrementor>
+
+            <span class="text-secondary">{t('character.spellMechanics.circle')} {slot.circle}</span>
         </div>
     {/each}
 </div>

@@ -298,46 +298,6 @@ export default {
                 total: 3,
                 current: 3,
             },
-            // {
-            //     level: 2,
-            //     total: 0,
-            //     current: 0,
-            // },
-            // {
-            //     level: 3,
-            //     total: 0,
-            //     current: 0,
-            // },
-            // {
-            //     level: 4,
-            //     total: 0,
-            //     current: 0,
-            // },
-            // {
-            //     level: 5,
-            //     total: 0,
-            //     current: 0,
-            // },
-            // {
-            //     level: 6,
-            //     total: 0,
-            //     current: 0,
-            // },
-            // {
-            //     level: 7,
-            //     total: 0,
-            //     current: 0,
-            // },
-            // {
-            //     level: 8,
-            //     total: 0,
-            //     current: 0,
-            // },
-            // {
-            //     level: 9,
-            //     total: 0,
-            //     current: 0,
-            // },
         ],
     },
 

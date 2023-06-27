@@ -12,7 +12,17 @@
     <button class:invisible={!$canEdit} class={`text-red-500 ${signClasses}`} on:click={() => value--}> - </button>
 
     <Editable>
-        <input slot="editing" {id} type="number" class="text-primary input text-center w-12" bind:value />
+        <div slot="editing" class="flex items-center">
+            <input {id} type="number" class="text-primary input text-center w-12" bind:value />
+
+            {#if $$slots.extra}
+                <span>
+                    |
+                </span>
+            {/if}
+
+            <slot name="extra" />
+        </div>
 
         <span slot="showing" class={contentClasses}>
             {#if $$slots.default}
