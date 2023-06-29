@@ -3,20 +3,11 @@
     import { t } from '../../stores/i18n'
     import Collapsible from '../shared/Collapsible.svelte'
     import Separator from '../shared/Separator.svelte'
-    import canEdit from '../../stores/canEdit'
     import characterRepository from '../../stores/characterRepository'
     import Editable from '../shared/Editable.svelte'
     import type { Finite } from '../../types'
     import BtnAction from '../shared/BtnAction.svelte'
     import Incrementor from '../shared/Incrementor.svelte'
-
-    const inc = (index: number): void => {
-        $characterRepository.current.resources.finite[index].amount++
-    }
-
-    const dec = (index: number): void => {
-        $characterRepository.current.resources.finite[index].amount--
-    }
 
     const DEFAULT: Finite = {
         name: '',
@@ -147,7 +138,7 @@
                         placeholder={t('display.missingNotes')}
                     />
 
-                    <span slot="showing">{finite.notes || t('display.missingNotes')}</span>
+                    <span slot="showing" class="whitespace-pre-wrap">{finite.notes || t('display.missingNotes')}</span>
                 </Editable>
             </div>
         </div>

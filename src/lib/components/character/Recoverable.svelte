@@ -3,19 +3,10 @@
     import characterRepository from '../../stores/characterRepository'
     import Collapsible from '../shared/Collapsible.svelte'
     import Separator from '../shared/Separator.svelte'
-    import canEdit from '../../stores/canEdit'
     import Editable from '../shared/Editable.svelte'
     import BtnAction from '../shared/BtnAction.svelte'
     import type { Recoverable } from '../../types'
     import Incrementor from '../shared/Incrementor.svelte'
-
-    const inc = (index: number): void => {
-        $characterRepository.current.resources.recoverable[index].current++
-    }
-
-    const dec = (index: number): void => {
-        $characterRepository.current.resources.recoverable[index].current--
-    }
 
     const DEFAULT: Recoverable = {
         name: '',
@@ -138,7 +129,7 @@
 
             <div class="py-4">
                 <Editable>
-                    <span slot="showing">{recoverable.notes || t('display.missingNotes')}</span>
+                    <span slot="showing" class="whitespace-pre-wrap">{recoverable.notes || t('display.missingNotes')}</span>
                     <textarea
                         slot="editing"
                         id="recoverable-{index}-notes"

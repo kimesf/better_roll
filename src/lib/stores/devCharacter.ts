@@ -302,6 +302,7 @@ export default {
     },
 
     spells: [
+
         {
             name: 'Amaldiçoar',
             circle: 1,

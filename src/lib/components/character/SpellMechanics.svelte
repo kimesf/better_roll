@@ -126,7 +126,7 @@
 
 <Editable>
     <BtnAction kind=create class="w-full mt-2" handler={(_e) => createSlot()}>{t('actions.create')}</BtnAction>
-    <BtnAction kind=destroy class="w-full mt-2" handler={(_e) => destroyLastSlot()}>{t('spellMechanics.slots.destroyLast')}</BtnAction>
+    <BtnAction kind=destroy class="w-full mt-2" handler={(_e) => destroyLastSlot()}>{t('character.spellMechanics.slots.destroyLast')}</BtnAction>
 </Editable>
 
 <div class="pt-2 grid gap-4 grid-cols-2">

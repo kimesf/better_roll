@@ -1,6 +1,19 @@
-import type { Attribute, Level, ProficiencyBonus, Coin } from './types'
+import type { Attribute, Level, ProficiencyBonus, Coin, SpellCircle, School } from './types'
 
 export const ATTRIBUTES: Attribute[] = ['str', 'dex', 'con', 'int', 'wis', 'cha']
+
+export const SPELL_CIRCLES: SpellCircle[] = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+
+export const SCHOOLS: School[] = [
+    'abjuration',
+    'conjuration',
+    'divination',
+    'enchantment',
+    'evocation',
+    'illusion',
+    'necromancy',
+    'transmutation',
+]
 
 export const PROFICIENCY_BONUS: { [key in Level]: ProficiencyBonus } = {
     1: 2,
