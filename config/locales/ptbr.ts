@@ -41,7 +41,7 @@ export default {
     'spells.notes': 'descrição',
     'recoverable.short': 'curto',
     'recoverable.long': 'longo',
-    'selection.title': 'selecione seu personagem',
+    'selection.title': 'selecione um personagem',
     'display.goBack': 'voltar',
     'display.mechanics': 'mecânicas',
     'display.resources': 'recursos',

@@ -1,3 +1,4 @@
+import { debug } from 'svelte/internal'
 import locales from './locales'
 
 describe('locales', () => {
@@ -5,12 +6,10 @@ describe('locales', () => {
         const available = Object.keys(locales)
         const expectedKeys = Object.keys(locales[available[0]]).toString()
 
-        const allLocationsHaveSameKeys = available.every((key) => {
-            const thisLocaleKeys = Object.keys(locales[key]).toString()
+        available.forEach((locale) => {
+            const thisLocaleKeys = Object.keys(locales[locale]).toString()
 
-            return thisLocaleKeys === expectedKeys
+            expect(thisLocaleKeys).toEqual(expectedKeys)
         })
-
-        expect(allLocationsHaveSameKeys).toBeTruthy()
     })
 })
