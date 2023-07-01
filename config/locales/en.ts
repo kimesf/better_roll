@@ -42,6 +42,7 @@ export default {
     'recoverable.short': 'short',
     'recoverable.long': 'long',
     'selection.title': 'select you character',
+    'display.character': 'select you character',
     'display.goBack': 'go back',
     'display.mechanics': 'mechanics',
     'display.resources': 'resources',

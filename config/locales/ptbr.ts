@@ -42,6 +42,7 @@ export default {
     'recoverable.short': 'curto',
     'recoverable.long': 'longo',
     'selection.title': 'selecione um personagem',
+    'display.characters': 'personagens',
     'display.goBack': 'voltar',
     'display.mechanics': 'mecânicas',
     'display.resources': 'recursos',

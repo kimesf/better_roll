@@ -20,6 +20,12 @@ describe('$proficiencyBonus', () => {
             })
         })
     })
+
+    it('returns 0 when current is null', () => {
+        setCurrent(null)
+
+        expect(get(proficiencyBonus)).toEqual(0)
+    })
 })
 
 describe('$skillsGroupedByAttribute', () => {
@@ -35,6 +41,12 @@ describe('$skillsGroupedByAttribute', () => {
             dreaming: [{ name: 'magic', attribute: 'dreaming' }],
             training: [{ name: 'paiting', attribute: 'training' }],
         })
+    })
+
+    it('returns {} when current is null', () => {
+        setCurrent(null)
+
+        expect(get(skillsGroupedByAttribute)).toEqual({})
     })
 })
 
@@ -59,5 +71,11 @@ describe('$attributesModifiers', () => {
             wis: 2,
             cha: 6,
         })
+    })
+
+    it('returns {} when current is null', () => {
+        setCurrent(null)
+
+        expect(get(attributesModifiers)).toEqual({})
     })
 })

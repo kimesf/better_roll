@@ -1,6 +1,6 @@
 <script lang="ts">
     import { fly } from 'svelte/transition'
-    import i18n from '../stores/i18n'
+    import { t } from '../stores/i18n'
     import OtherMechanics from './character/OtherMechanics.svelte'
     import Magic from './displaySections/Magic.svelte'
     import Resources from './displaySections/Resources.svelte'
@@ -9,6 +9,7 @@
     import Combat from './displaySections/Combat.svelte'
     import canEdit from '../stores/canEdit'
     import Draggable from './shared/Draggable.svelte'
+    import characterRepository from '../stores/characterRepository'
 
     const sections = {
         mechanics: OtherMechanics,
@@ -40,12 +41,16 @@
 <div>
     {#if menuVisible}
         <div class="z-40 bottom-0 fixed h-screen w-screen flex flex-col justify-between">
+            <button on:click={() => characterRepository.select(null) } class="p-4 text-2xl w-full bg-secondary">
+                {t('display.characters')}
+            </button>
+
             <button class="grow bg-secondary bg-opacity-50" on:click={() => (menuVisible = false)} />
 
             <div class="bg-secondary">
                 {#each sectionKeys as key}
                     <button on:click={() => openSection(key)} class="p-4 text-2xl w-full">
-                        {i18n.t(`display.${key}`)}
+                        {t(`display.${key}`)}
                     </button>
                 {/each}
             </div>
@@ -69,7 +74,7 @@
                 on:click={() => closeSection()}
                 class="z-20 fixed bottom-0 w-screen p-4 text-2xl text-center uppercase bg-black shadow-[0_-10px_50px_0_rgba(23,23,23,1)]"
             >
-                {i18n.t('display.goBack')}
+                {t('display.goBack')}
             </button>
         {/if}
     {/each}
