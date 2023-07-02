@@ -5,6 +5,7 @@ export default {
     other: 'other',
     'actions.create': 'new',
     'actions.confirm': 'are you sure?',
+    'selection.select': 'select',
     'selection.save': 'save',
     'selection.restore': 'restore',
     'selection.restore.confirm': 'can\'t be undone and current data exclusion is permanent, are you sure?',

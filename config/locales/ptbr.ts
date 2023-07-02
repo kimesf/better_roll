@@ -5,6 +5,7 @@ export default {
     other: 'outro',
     'actions.create': 'novo',
     'actions.confirm': 'você tem certeza?',
+    'selection.select': 'selecionar',
     'selection.save': 'salvar',
     'selection.restore': 'restaurar',
     'selection.restore.confirm': 'essa ação é definitiva e excluí permanentemente os dados antigos, você tem certeza?',

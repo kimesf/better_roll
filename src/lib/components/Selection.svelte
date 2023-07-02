@@ -90,12 +90,13 @@
     <BtnAction kind=create class="w-full mt-2" handler={() => { create() }}>{t('actions.create')}</BtnAction>
 
     {#each $characterRepository.all as availableCharacter, index}
-        <div class="flex flex-col mt-4 border border-neutral-500 rounded-md p-2">
-            <button on:click={() => select(availableCharacter)}>
-                <Basics character={availableCharacter} />
-            </button>
+        <div class="flex flex-col justify-center mt-4 border border-neutral-500 rounded-md p-2">
+            <Basics character={availableCharacter} />
 
-            <BtnAction kind=destroy handler={() => { destroy(index)} }>r</BtnAction>
+            <div class="flex items-center gap-1">
+                <BtnAction kind=destroy class="w-16" handler={() => { destroy(index)} }>r</BtnAction>
+                <BtnAction kind=update class="w-full" handler={() => { select(availableCharacter) }}>{t('selection.select')}</BtnAction>
+            </div>
         </div>
     {/each}
 </div>
