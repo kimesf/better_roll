@@ -7,6 +7,24 @@
     import Basics from './character/Basics.svelte'
 
     const { select, create, destroy } = characterRepository
+
+    const save = (): void => {
+        const blob = new Blob([JSON.stringify($characterRepository.all)], { type: 'text/json' })
+        const link = document.createElement('a')
+
+        link.download = `better_roll${Date.now()}.json`
+        link.href = window.URL.createObjectURL(blob)
+        link.dataset.downloadurl = ['text/json', link.download, link.href].join(':');
+
+        const event = new MouseEvent('click', {
+            view: window,
+            bubbles: true,
+            cancelable: true,
+        })
+
+        link.dispatchEvent(event)
+        link.remove()
+    }
 </script>
 
 <div class='p-2'>
@@ -14,7 +32,9 @@
 
     <Separator />
 
-    <BtnAction kind=create class="w-full" handler={() => { create() }}>{t('actions.create')}</BtnAction>
+    <BtnAction kind=create class="w-full" handler={() => { save() }}>{t('actions.save')}</BtnAction>
+
+    <BtnAction kind=create class="w-full mt-2" handler={() => { create() }}>{t('actions.create')}</BtnAction>
 
     {#each $characterRepository.all as availableCharacter, index}
         <div class="flex flex-col mt-4 border border-neutral-500 rounded-md p-2">
@@ -26,3 +46,4 @@
         </div>
     {/each}
 </div>
+

@@ -5,6 +5,7 @@ export default {
     other: 'outro',
     'actions.create': 'novo',
     'actions.confirm': 'você tem certeza?',
+    'actions.save': 'salvar',
     'attributes.str.full': 'força',
     'attributes.dex.full': 'destreza',
     'attributes.con.full': 'constituição',
