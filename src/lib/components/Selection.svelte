@@ -47,7 +47,7 @@
         reader.onload = (event) => {
             const content = JSON.parse(event.target.result as string) as Character[]
 
-            characterRepository.set({ current: null, all: content})
+            characterRepository.set({ current: null, all: content || []})
         }
 
         reader.readAsText(file)
