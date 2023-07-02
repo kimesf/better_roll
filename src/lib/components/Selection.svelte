@@ -31,6 +31,15 @@
         link.remove()
     }
 
+    const readFile = (file: File): Promise<FileReader> => {
+        return new Promise((resolve, reject) => {
+            const fr = new FileReader()
+            fr.onloadend = () => resolve(fr)
+            fr.onerror  = (err) => reject(err)
+            fr.readAsText(file)
+        })
+    }
+
     const restore = (): void => {
         if(!files) {
             alert(t('selection.alert'))
@@ -41,18 +50,22 @@
             return
         }
 
-        const file = files.item(0)
-        const reader = new FileReader()
+        readFile(files.item(0))
+            .then(({ result }) => {
+                const content = JSON.parse(result as string) as Character[]
 
-        reader.onload = (event) => {
-            const content = JSON.parse(event.target.result as string) as Character[]
+                characterRepository.set({ current: null, all: content || []})
+            })
+            .catch((error: ProgressEvent<FileReader>) => {
+                const { target: { error: { name, message } } } = error
 
-            characterRepository.set({ current: null, all: content || []})
-        }
-
-        reader.readAsText(file)
-        files = null
+                alert(`${name}: ${message}`)
+            })
+            .finally(() => {
+                files = null
+            })
     }
+
 </script>
 
 <div class='p-2'>
