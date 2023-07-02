@@ -10,6 +10,7 @@
     import canEdit from '../stores/canEdit'
     import Draggable from './shared/Draggable.svelte'
     import characterRepository from '../stores/characterRepository'
+    import Icon from './shared/Icon.svelte'
 
     const sections = {
         mechanics: OtherMechanics,
@@ -90,10 +91,16 @@
 
     <Draggable class="z-30" top={12}>
         <button
-            class="p-6 rounded-full"
+            class="rounded-full"
             class:bg-blue-500={!$canEdit}
             class:bg-green-500={$canEdit}
             on:click={() => canEdit.toggle()}
-        />
+        >
+            {#if $canEdit}
+                <Icon name="check" class="p-4" />
+            {:else}
+                <Icon name="edit" class="p-4"/>
+            {/if}
+        </button>
     </Draggable>
 </div>

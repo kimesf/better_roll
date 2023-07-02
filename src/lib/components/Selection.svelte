@@ -93,8 +93,8 @@
         <div class="flex flex-col justify-center mt-4 border border-neutral-500 rounded-md p-2">
             <Basics character={availableCharacter} />
 
-            <div class="flex items-center gap-1">
-                <BtnAction kind=destroy class="w-16" handler={() => { destroy(index)} }>r</BtnAction>
+            <div class="flex gap-1">
+                <BtnAction kind=destroy class="w-16" handler={() => { destroy(index)} } />
                 <BtnAction kind=update class="w-full" handler={() => { select(availableCharacter) }}>{t('selection.select')}</BtnAction>
             </div>
         </div>

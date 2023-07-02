@@ -82,7 +82,7 @@
         <div slot="body">
             <Editable>
                 <div class="flex justify-between items-center">
-                    <BtnAction kind=destroy class="w-16" handler={(_e) => destroy(index)}>r</BtnAction>
+                    <BtnAction kind=destroy class="w-16" handler={(_e) => destroy(index)} />
 
                     <div class="py-4 text-secondary">
                         <label for="short">{t('recoverable.short')}</label>

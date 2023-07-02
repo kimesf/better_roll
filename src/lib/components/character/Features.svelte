@@ -54,7 +54,7 @@
                         placeholder={t('display.missingName')}
                     />
 
-                    <BtnAction kind=destroy class="w-16 ml-4" handler={(_e) => destroy(index)}>r</BtnAction>
+                    <BtnAction kind=destroy class="w-16 ml-4" handler={(_e) => destroy(index)} />
                 </div>
 
                 <span slot="showing">{feature.name}</span>

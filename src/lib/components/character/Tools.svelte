@@ -75,7 +75,7 @@
                     <option value={null}>{t('none')}</option>
                 </select>
 
-                <BtnAction kind=destroy class="w-16" handler={(_e) => destroy(index)}>r</BtnAction>
+                <BtnAction kind=destroy class="w-16" handler={(_e) => destroy(index)} />
             </div>
 
             <div class=pt-2>

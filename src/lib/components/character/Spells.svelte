@@ -253,7 +253,7 @@
                                 </select>
 
 
-                                <BtnAction kind=destroy class="grow" handler={(_e) => destroy(index)}>r</BtnAction>
+                                <BtnAction kind=destroy class="grow" handler={(_e) => destroy(index)} />
                             </div>
 
                             {#each booleanForms as key}

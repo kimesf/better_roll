@@ -72,7 +72,7 @@
                         bind:value={attack.name}
                     />
 
-                    <BtnAction kind=destroy class="w-16 ml-2" handler={(_e) => destroy(index)}>r</BtnAction>
+                    <BtnAction kind=destroy class="w-16 ml-2" handler={(_e) => destroy(index)} />
                 </div>
 
                 <span slot="showing">{attack.name}</span>

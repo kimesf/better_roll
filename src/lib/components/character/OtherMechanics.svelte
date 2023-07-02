@@ -64,7 +64,7 @@
         </Editable>
 
         <Editable>
-            <BtnAction kind=destroy class="w-16 ml-2" handler={(_e) => destroy(index)}>r</BtnAction>
+            <BtnAction kind=destroy class="w-16 ml-2" handler={(_e) => destroy(index)} />
         </Editable>
     </div>
 {/each}

@@ -89,8 +89,8 @@
 
         <div slot="body">
             <Editable>
-                <div class="py-4 flex">
-                    <BtnAction kind=destroy class="w-16" handler={(_e) => destroy(index)}>r</BtnAction>
+                <div class="py-2">
+                    <BtnAction kind=destroy class="w-20" handler={(_e) => destroy(index)} />
                 </div>
 
                 <Separator />
