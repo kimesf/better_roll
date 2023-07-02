@@ -13,14 +13,14 @@ describe('character selection', () => {
     it('lists all characters', () => {
         const { getByText } = render(Selection)
 
-        expect(() => getByText('Joe')).not.toThrowError()
-        expect(() => getByText('Joana')).not.toThrowError()
+        expect(() => getByText(/Joe/)).not.toThrowError()
+        expect(() => getByText(/Joana/)).not.toThrowError()
     })
 
     it('clicking a characters updates current character', () => {
         const spy = vi.spyOn(charactersMock.default, 'select')
         const { getByText } = render(Selection)
-        const joeBtn = getByText('Joe')
+        const joeBtn = getByText(/Joe/)
 
         fireEvent.click(joeBtn)
 

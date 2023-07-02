@@ -1,7 +1,7 @@
 <script lang=ts>
     import { t } from "../../stores/i18n";
 
-    type Action = 'create' | 'destroy'
+    type Action = 'create' | 'destroy' | 'update'
     type HandlerEvent = MouseEvent & { currentTarget: EventTarget & HTMLButtonElement }
 
     export let kind: Action
@@ -25,6 +25,7 @@
     class="{$$props.class || ''} text-xl rounded-md"
     class:bg-green-500={kind == 'create'}
     class:bg-red-500={kind == 'destroy'}
+    class:bg-blue-500={kind == 'update'}
     on:click={handle}
 >
     <slot />
