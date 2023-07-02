@@ -32,12 +32,12 @@
     }
 
     const restore = (): void => {
-        if(!confirm(t('selection.restore.confirm'))) {
+        if(!files) {
+            alert(t('selection.alert'))
             return
         }
 
-        if(!files) {
-            alert(t('selection.alert'))
+        if(!confirm(t('selection.restore.confirm'))) {
             return
         }
 

@@ -1,7 +1,8 @@
-import { writable, type Writable } from 'svelte/store'
+import { get, writable, type Writable } from 'svelte/store'
 import { type Character } from '../types'
 import defaultCharacter from '../defaultCharacter'
-import devCharacter from './devCharacter'
+
+const LS_KEY = 'characters'
 
 type CharacterStoreState = {
     current: Character | null
@@ -15,9 +16,25 @@ interface CharacterStore extends Writable<CharacterStoreState> {
 }
 
 const initStore = (): CharacterStore => {
-    const initialState = { current: null, all: [devCharacter] } as CharacterStoreState
+    const initialState = { current: null, all: loadFromLocalStore() } as CharacterStoreState
     const store = writable(initialState)
-    const { subscribe, update, set } = store
+    const { subscribe } = store
+
+    const saveOnLocalStorage = () => {
+        const characters = get(store).all
+
+        window.localStorage.setItem(LS_KEY, JSON.stringify(characters))
+    }
+
+    const set: typeof store.set = (value) => {
+        store.set(value)
+        saveOnLocalStorage()
+    }
+
+    const update: typeof store.update = (updater) => {
+        store.update(updater)
+        saveOnLocalStorage()
+    }
 
     const select: CharacterStore['select'] = (character) => {
         update((previousState) => ({
@@ -55,6 +72,12 @@ const initStore = (): CharacterStore => {
         set,
         update,
     }
+}
+
+const loadFromLocalStore = (): Character[] => {
+    const storedCharacters = JSON.parse(window.localStorage.getItem('characters')) as Character[]
+
+    return storedCharacters || []
 }
 
 export default initStore()

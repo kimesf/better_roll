@@ -233,11 +233,11 @@ export default {
     ],
 
     features: [
-        // {
-        //     name: 'Natureza M.',
-        //     notes: 'Você não precisa comer, beber ou respirar.\n\nVocê não precisa dormir e a magia não pode fazer você dormir. Você pode terminar um descanso longo em 4 horas se passar essas horas em um estado inativo e imóvel, durante o qual retém a consciência.',
-        //     source: '',
-        // },
+        {
+            name: 'Natureza M.',
+            notes: 'Você não precisa comer, beber ou respirar.\n\nVocê não precisa dormir e a magia não pode fazer você dormir. Você pode terminar um descanso longo em 4 horas se passar essas horas em um estado inativo e imóvel, durante o qual retém a consciência.',
+            source: '',
+        },
         {
             name: 'Canalizar divino',
             notes: 'Seu juramento permite que você canalize energia divina para alimentar efeitos mágicos. Cada opção de Canalizar Divindade fornecida por seu juramento explica como usá-la. Quando você usa seu Canalizar Divindade, você escolhe qual opção usar. Você deve então terminar um descanso curto ou longo para usar seu Canalizar Divindade novamente. Alguns efeitos de Canalizar Divindade requerem testes de resistência. Quando você usa tal efeito desta classe, a CD é igual a sua CD de resistência de magia de paladino.\n\n- Abjurar Inimigo: como uma ação, você apresenta seu símbolo sagrado e faz uma oração de denúncia, usando seu Canalizar Divindade. Escolha uma criatura a até 18 metros de você que você possa ver. Essa criatura deve fazer um teste de resistência de Sabedoria, a menos que seja imune a ser amedrontado. Demônios e mortos-vivos têm desvantagem neste teste de resistência. Se falhar na resistência, a criatura fica amedrontada por 1 minuto ou até sofrer qualquer dano. Enquanto estiver amedrontada, a velocidade da criatura é 0 e ela não pode se beneficiar de nenhum bônus em sua velocidade. Em um teste de resistência bem-sucedido, a velocidade da criatura é reduzida pela metade por 1 minuto ou até que a criatura sofra algum dano.\n\n- Voto de Inimizade: como uma ação bônus, você pode proferir um voto de inimizade contra uma criatura que você possa ver a até 3 metros de você, usando seu Canalizar Divindade. Você ganha vantagem nas jogadas de ataque contra a criatura por 1 minuto ou até que ela caia para 0 pontos de vida ou fique inconsciente.\n\n- Absorver canalização divina: como uma ação bônus, você toca seu símbolo sagrado, profere uma oração e recupera um espaço de magia gasto, cujo nível não pode ser maior que metade de seu bônus de proficiência (arredondado para cima). O número de vezes que você pode usar esse recurso é baseado no nível que você alcançou nesta classe: 3º nível, uma vez; 7º nível, duas vezes; e 15º nível, três vezes. Você recupera todos os usos gastos quando termina um descanso longo.',
@@ -278,11 +278,11 @@ export default {
             notes: 'componentes. pequena lima, conjunto de gazuas, pequeno espelho montado num baco de metal, conjunto de tesouras de lâminas estreita e um par de alicates.\nhistória. concede informação sobre locais famosos por suas armadilhas.\ninvestigação e percepção. facilidade em encontrar armadilhas.\nmontar uma armadilha. assim como você pode armar armadilhas, também pode desarmá-las. como parte de um descanso curto, você pode criar armadilhas usando itens que estiverem à mão. o resultado do seu teste torna-se a CD para a tentativa de outra criatura de descobrir ou desarmar a armadilha. o tipo de dano causado por uma armadilha é aquele adequado aos materiais usados na sua criação (venenoso, para o material venenoso, ou perfurante, para o material lança) ou uma quantidade de dano igual a metade do resultado do seu teste, à escolha do DM.\natividades. arrombar fechadura e desarmar armadilhas.',
             source: '',
         },
-        // {
-        //     name: 'Marinheiro',
-        //     notes: 'Estilo de luta nível 2. Contanto que você não esteja vestindo armadura pesada ou usando um escudo, você tem um deslocamento de natação e um deslocamento de escalada igual ao seu deslocamento normal e ganha um bônus de +1 na classe de armadura.',
-        //     source: '',
-        // },
+        {
+            name: 'Marinheiro',
+            notes: 'Estilo de luta nível 2. Contanto que você não esteja vestindo armadura pesada ou usando um escudo, você tem um deslocamento de natação e um deslocamento de escalada igual ao seu deslocamento normal e ganha um bônus de +1 na classe de armadura.',
+            source: '',
+        },
         {
             name: 'Ação Astuta',
             notes: 'Seu pensamento rápido e agilidade permitem que você se mova e aja rapidamente. Você pode realizar uma ação bônus em cada um de seus turnos de combate. Esta ação pode ser usada apenas para executar a ação Correr, Desengajar ou Esconder.',
