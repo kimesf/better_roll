@@ -4,6 +4,7 @@ export default {
     none: 'nenhum',
     other: 'outro',
     'actions.create': 'novo',
+    'actions.confirm': 'você tem certeza?',
     'attributes.str.full': 'força',
     'attributes.dex.full': 'destreza',
     'attributes.con.full': 'constituição',

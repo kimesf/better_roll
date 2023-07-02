@@ -1,7 +1,7 @@
 import { writable, type Writable } from 'svelte/store'
 import { type Character } from '../types'
 import defaultCharacter from '../defaultCharacter'
-// import devCharacter from './devCharacter'
+import devCharacter from './devCharacter'
 
 type CharacterStoreState = {
     current: Character | null
@@ -15,7 +15,7 @@ interface CharacterStore extends Writable<CharacterStoreState> {
 }
 
 const initStore = (): CharacterStore => {
-    const initialState = { current: null, all: [] } as CharacterStoreState
+    const initialState = { current: null, all: [devCharacter] } as CharacterStoreState
     const store = writable(initialState)
     const { subscribe, update, set } = store
 

@@ -4,6 +4,7 @@ export default {
     none: 'none',
     other: 'other',
     'actions.create': 'new',
+    'actions.confirm': 'are you sure?',
     'attributes.str.full': 'strenght',
     'attributes.dex.full': 'dexterity',
     'attributes.con.full': 'constitution',
