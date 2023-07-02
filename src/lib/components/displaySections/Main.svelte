@@ -9,6 +9,7 @@
     import Atletics from '../character/Atletics.svelte'
     import Editable from '../shared/Editable.svelte'
     import Incrementor from '../shared/Incrementor.svelte'
+    import Basics from '../character/Basics.svelte'
 
     $: character = $characterRepository.current
 </script>
@@ -24,11 +25,7 @@
         <div class="text-center p-2">
             <Editable>
                 <span slot=showing>
-                    <p>
-                        {character.name} | {character.lineages} | {character.level}
-                    </p>
-
-                    <p>{character.classes}</p>
+                    <Basics {character} />
                 </span>
 
                 <div class="flex gap-2 flex-col">
@@ -40,7 +37,7 @@
                         placeholder={t('display.missingName')}
                     />
 
-                    <Incrementor id="level" bind:value={$characterRepository.current.level}/>
+                    <Incrementor id="level" signClasses="text-4xl"  bind:value={$characterRepository.current.level}/>
 
                     <input
                         id="lineages"
