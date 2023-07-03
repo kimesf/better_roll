@@ -1,8 +1,8 @@
-import { charactersMock, setCurrent } from '../../../tests/utils/mockCharacters'
 import { get } from 'svelte/store'
 import { attributesModifiers, proficiencyBonus, skillsGroupedByAttribute } from './currentCharacter'
+import { clean, setCurrent } from '../../../tests/utils/characterRepositoryHelper'
 
-vi.mock('./characterRepository', () => charactersMock)
+afterEach(() => clean())
 
 describe('$proficiencyBonus', () => {
     ;[
