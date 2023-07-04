@@ -1,13 +1,13 @@
 <script lang="ts">
     import { fly } from 'svelte/transition'
     import { t } from '../stores/i18n'
-    import Magic from './displaySections/Magic.svelte'
-    import Resources from './displaySections/Resources.svelte'
-    import Features from './displaySections/Features.svelte'
-    import Main from './displaySections/Main.svelte'
-    import Combat from './displaySections/Combat.svelte'
+    import Magic from './pages/Magic.svelte'
+    import Resources from './pages/Resources.svelte'
+    import Features from './pages/Features.svelte'
+    import Main from './pages/Main.svelte'
+    import Combat from './pages/Combat.svelte'
     import characterRepository from '../stores/characterRepository'
-    import Mechanics from './displaySections/Mechanics.svelte'
+    import Mechanics from './pages/Mechanics.svelte'
     import EditToggler from './EditToggler.svelte'
 
     // TODO: maybe page handling can be a store and they this can be clean up
