@@ -57,8 +57,8 @@
 
     <div class="grid gap-4 grid-cols-2">
         <div class="flex flex-col items-center">
-            <Editable>
-                <span class="text-4xl"><SignedNumber number={spellAttack} /></span>
+            <Editable class="text-4xl">
+                <SignedNumber number={spellAttack} />
             </Editable>
 
             <Incrementor
@@ -73,8 +73,8 @@
         </div>
 
         <div class="flex flex-col items-center">
-            <Editable>
-                <span class="text-4xl">{spellSaveDifficulty}</span>
+            <Editable class="text-4xl">
+                {spellSaveDifficulty}
             </Editable>
 
             <Incrementor
@@ -104,6 +104,7 @@
 
                 <span slot="showing" class="text-4xl">{t(`attributes.${spellAttribute}.full`)}</span>
             </Editable>
+
             <span class="text-secondary">{t('character.spellMechanics.attribute')}</span>
         </div>
 
@@ -125,9 +126,7 @@
         <BtnAction kind=create class="w-full" handler={(_e) => createSlot()}>
             {t('actions.create')}
         </BtnAction>
-    </Editable>
 
-    <Editable>
         <BtnAction kind=destroy class="w-full" handler={(_e) => destroyLastSlot()}>
             {t('character.spellMechanics.slots.destroyLast')}
         </BtnAction>

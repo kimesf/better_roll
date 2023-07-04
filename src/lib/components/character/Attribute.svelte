@@ -18,16 +18,15 @@
         <SignedNumber number={$attributesModifiers[attr]} />
     </span>
 
-    <span class="grow basis-0 text-2xl text-secondary">
-        <Editable>
-            <input
-                slot="editing"
-                id="attributes-{attr}"
-                type="number"
-                class="input w-12 text-primary text-center"
-                bind:value={$characterRepository.current.attributes[attr]}
-            />
-            <span slot="showing">({$characterRepository.current.attributes[attr]})</span>
-        </Editable>
-    </span>
+    <Editable class="grow basis-0 text-2xl text-secondary">
+        <span slot="showing">({$characterRepository.current.attributes[attr]})</span>
+
+        <input
+            slot="editing"
+            id="attributes-{attr}"
+            type="number"
+            class="input w-12 text-primary text-center"
+            bind:value={$characterRepository.current.attributes[attr]}
+        />
+    </Editable>
 </div>

@@ -5,7 +5,6 @@
     import { attributesModifiers, proficiencyBonus } from '../../stores/currentCharacter'
     import characterRepository from '../../stores/characterRepository'
     import Incrementor from '../shared/Incrementor.svelte'
-    import Container from '../shared/Container.svelte'
     import Separator from '../shared/Separator.svelte'
     import Editable from '../shared/Editable.svelte'
     import { ATTRIBUTES } from '../../constants'
@@ -67,29 +66,27 @@
     </div>
 
     <Editable>
-        <Container>
-            <div class="flex justify-between">
-                <select id="tool-{index}-attribute" class="input" bind:value={tool.attribute}>
-                    {#each ATTRIBUTES as attribute}
-                        <option value={attribute}>{t(`attributes.${attribute}`)}</option>
-                    {/each}
-                    <option value={null}>{t('none')}</option>
-                </select>
+        <div class="flex justify-between">
+            <select id="tool-{index}-attribute" class="input" bind:value={tool.attribute}>
+                {#each ATTRIBUTES as attribute}
+                    <option value={attribute}>{t(`attributes.${attribute}`)}</option>
+                {/each}
+                <option value={null}>{t('none')}</option>
+            </select>
 
-                <BtnAction kind=destroy class="w-16" handler={(_e) => destroy(index)} />
-            </div>
+            <BtnAction kind=destroy class="w-16" handler={(_e) => destroy(index)} />
+        </div>
 
-            <div>
-                <input id="tool-{index}-expertise" type="checkbox" bind:checked={tool.expertise} />
-                <label for={`skill-${index}-expertise`}>{t('display.skills.expertise')}</label>
-            </div>
+        <div>
+            <input id="tool-{index}-expertise" type="checkbox" bind:checked={tool.expertise} />
+            <label for={`skill-${index}-expertise`}>{t('display.skills.expertise')}</label>
+        </div>
 
-            <div class="flex items-center justify-start">
-                <label for={`tool-${index}-otherBonus`}>{t('bonus')}:</label>
-                <Incrementor id="tool-{index}-otherBonus" signClasses={'text-4xl'} bind:value={tool.otherBonus} />
-            </div>
+        <div class="flex items-center justify-start">
+            <label for={`tool-${index}-otherBonus`}>{t('bonus')}:</label>
+            <Incrementor id="tool-{index}-otherBonus" signClasses={'text-4xl'} bind:value={tool.otherBonus} />
+        </div>
 
-            <Separator />
-        </Container>
+        <Separator />
     </Editable>
 {/each}

@@ -94,12 +94,14 @@
                 </span>
             </div>
 
-            <Container slot="body">
-                <Editable>
-                    <Container>
-                        <Container>
-                            <Title title={t('display.attacks.damage')} />
+            <Editable slot="body">
+                <span slot="showing">{attack.notes}</span>
 
+                <Container slot=editing>
+                    <Container>
+                        <Title title={t('display.attacks.damage')} />
+
+                        <Container row class="items-center">
                             <input
                                 type="text"
                                 id="attack-{index}-damage"
@@ -108,85 +110,75 @@
                                 placeholder={t('display.attacks.damage.placeholder')}
                             />
 
-                            <div class="flex items-center">
-                                <label for="attack-{index}-damageBonus">{t('bonus')}:</label>
-                                <Incrementor id="attack-{index}-damageBonus" signClasses="text-4xl" bind:value={attack.damageBonus} />
-                            </div>
+                            <Incrementor id="attack-{index}-damageBonus" signClasses="text-4xl" bind:value={attack.damageBonus} />
                         </Container>
-
-                        <Container>
-                            <Title title={t('display.attacks.damageType')} />
-
-                            <input
-                                type="text"
-                                id="attack-{index}-damageType"
-                                class="input w-full"
-                                bind:value={attack.damageType}
-                                placeholder={t('display.attacks.damageType.placeholder')}
-                            />
-                        </Container>
-
-                        <Container>
-                            <Title title={t('display.attacks.hitBonus')} />
-
-                            <div class="flex justify-between items-center">
-                                <div>
-                                    <div>
-                                        {$proficiencyBonus}
-                                        <input type="checkbox" bind:checked={attack.addProficiency} />
-                                        <span class="text-secondary text-sm">{t('display.attacks.addProficiency')}</span>
-                                    </div>
-
-                                    <div class="text-4xl">+</div>
-
-                                    <div>
-                                        <select id="attack-{index}-attribute" class="input" bind:value={attack.attribute}>
-                                            {#each ATTRIBUTES as attribute}
-                                                <option value={attribute}>{t(`attributes.${attribute}`)}</option>
-                                            {/each}
-                                            <option value={null}>{t('none')}</option>
-                                        </select>
-                                        <span class="text-secondary">{t('attribute')}</span>
-                                    </div>
-
-                                    <div class="text-4xl">+</div>
-
-                                    <div>
-                                        <input
-                                            id="attack-{index}-hitBonus"
-                                            type="number"
-                                            class="input w-12 text-center"
-                                            bind:value={attack.hitBonus}
-                                        />
-                                        <span class="text-secondary">{t('bonus')}</span>
-                                    </div>
-                                </div>
-
-                                <div class="mr-8">
-                                    <span class="text-4xl">=</span>
-                                    <span class="text-8xl">{attackHitBonus(attack)}</span>
-                                </div>
-                            </div>
-                        </Container>
-
-                        <Separator />
                     </Container>
-                </Editable>
 
-                <div>
-                    <Editable>
-                        <span slot="showing">{attack.notes}</span>
+                    <Container>
+                        <Title title={t('display.attacks.damageType')} />
 
-                        <textarea
-                            slot="editing"
-                            id="attack-{index}-notes"
+                        <input
+                            type="text"
+                            id="attack-{index}-damageType"
                             class="input w-full"
-                            bind:value={attack.notes}
-                            placeholder={t('display.missingNotes')}
+                            bind:value={attack.damageType}
+                            placeholder={t('display.attacks.damageType.placeholder')}
                         />
-                    </Editable>
-                </div>
-            </Container>
+                    </Container>
+
+                    <Container>
+                        <Title title={t('display.attacks.hitBonus')} />
+
+                        <div class="flex justify-between items-center">
+                            <div>
+                                <div>
+                                    {$proficiencyBonus}
+                                    <input type="checkbox" bind:checked={attack.addProficiency} />
+                                    <span class="text-secondary text-sm">{t('display.attacks.addProficiency')}</span>
+                                </div>
+
+                                <div class="text-4xl">+</div>
+
+                                <div>
+                                    <select id="attack-{index}-attribute" class="input" bind:value={attack.attribute}>
+                                        {#each ATTRIBUTES as attribute}
+                                            <option value={attribute}>{t(`attributes.${attribute}`)}</option>
+                                        {/each}
+                                        <option value={null}>{t('none')}</option>
+                                    </select>
+                                    <span class="text-secondary">{t('attribute')}</span>
+                                </div>
+
+                                <div class="text-4xl">+</div>
+
+                                <div>
+                                    <input
+                                        id="attack-{index}-hitBonus"
+                                        type="number"
+                                        class="input w-12 text-center"
+                                        bind:value={attack.hitBonus}
+                                    />
+                                    <span class="text-secondary">{t('bonus')}</span>
+                                </div>
+                            </div>
+
+                            <div class="mr-8">
+                                <span class="text-4xl">=</span>
+                                <span class="text-8xl">{attackHitBonus(attack)}</span>
+                            </div>
+                        </div>
+                    </Container>
+
+                    <Separator />
+
+                    <textarea
+                        id="attack-{index}-notes"
+                        class="input w-full"
+                        bind:value={attack.notes}
+                        placeholder={t('display.missingNotes')}
+                    />
+                </Container>
+            </Editable>
         </Collapsible>
     {/each}
 </Container>

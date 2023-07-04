@@ -11,7 +11,6 @@
     import { t } from '../../stores/i18n'
     import Incrementor from '../shared/Incrementor.svelte'
     import Separator from '../shared/Separator.svelte'
-    import Container from '../shared/Container.svelte'
 
     const skillModifier = ({ attribute, proficiency, expertise, otherBonus }: Skill): number => {
         return (
@@ -51,37 +50,35 @@
                     {skill.name}
                 </div>
 
-                <Editable>
-                    <Container class="text-secondary text-sm">
-                        <Separator />
+                <Editable class="text-secondary text-sm">
+                    <Separator />
 
-                        <div>
-                            <input
-                                id="skill-{index}-proficiency"
-                                type="checkbox"
-                                bind:checked={$characterRepository.current.skills[skillIndex(skill)].proficiency}
-                            />
-                            <label for={`skill-${index}-proficiency`}>{t('display.skills.proficiency')}</label>
-                        </div>
+                    <div>
+                        <input
+                            id="skill-{index}-proficiency"
+                            type="checkbox"
+                            bind:checked={$characterRepository.current.skills[skillIndex(skill)].proficiency}
+                        />
+                        <label for={`skill-${index}-proficiency`}>{t('display.skills.proficiency')}</label>
+                    </div>
 
-                        <div>
-                            <input
-                                id="skill-{index}-expertise"
-                                type="checkbox"
-                                bind:checked={$characterRepository.current.skills[skillIndex(skill)].expertise}
-                            />
-                            <label for={`skill-${index}-expertise`}>{t('display.skills.expertise')}</label>
-                        </div>
+                    <div>
+                        <input
+                            id="skill-{index}-expertise"
+                            type="checkbox"
+                            bind:checked={$characterRepository.current.skills[skillIndex(skill)].expertise}
+                        />
+                        <label for={`skill-${index}-expertise`}>{t('display.skills.expertise')}</label>
+                    </div>
 
-                        <div class="flex items-center justify-start">
-                            <label for={`skill-${index}-otherBonus`}>{t('bonus')}:</label>
-                            <Incrementor
-                                id="skill-{index}-otherBonus"
-                                signClasses={'text-4xl'}
-                                bind:value={$characterRepository.current.skills[skillIndex(skill)].otherBonus}
-                            />
-                        </div>
-                    </Container>
+                    <div class="flex items-center justify-start">
+                        <label for={`skill-${index}-otherBonus`}>{t('bonus')}:</label>
+                        <Incrementor
+                            id="skill-{index}-otherBonus"
+                            signClasses={'text-4xl'}
+                            bind:value={$characterRepository.current.skills[skillIndex(skill)].otherBonus}
+                        />
+                    </div>
                 </Editable>
             {/each}
         </svelte:fragment>

@@ -10,7 +10,7 @@
 <Container>
     {#each proficiencies as proficiency}
         <div class="text-sm">
-            <div class="text-sm text-secondary">{i18n.t(`display.skills.${proficiency}`)}</div>
+            <div class="text-secondary">{i18n.t(`display.skills.${proficiency}`)}</div>
 
             <Editable>
                 <textarea

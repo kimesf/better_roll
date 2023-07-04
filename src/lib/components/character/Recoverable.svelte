@@ -80,17 +80,14 @@
         </div>
 
         <Container slot="body">
-            <!-- TODO: transform in one Editable? -->
-            <Editable>
-                <div class="flex justify-between items-center">
-                    <BtnAction kind=destroy class="w-16" handler={(_e) => destroy(index)} />
+            <Editable row class="justify-between items-center">
+                <BtnAction kind=destroy class="w-16" handler={(_e) => destroy(index)} />
 
-                    <div class="text-secondary">
-                        <label for="short">{t('recoverable.short')}</label>
-                        <input class="input" type="radio" id="short" bind:group={recoverable.recoveredBy} value="short" />
-                        <label for="long">{t('recoverable.long')}</label>
-                        <input class="input" type="radio" id="long" bind:group={recoverable.recoveredBy} value="long" />
-                    </div>
+                <div class="text-secondary">
+                    <label for="short">{t('recoverable.short')}</label>
+                    <input class="input" type="radio" id="short" bind:group={recoverable.recoveredBy} value="short" />
+                    <label for="long">{t('recoverable.long')}</label>
+                    <input class="input" type="radio" id="long" bind:group={recoverable.recoveredBy} value="long" />
                 </div>
             </Editable>
 

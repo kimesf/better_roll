@@ -40,70 +40,66 @@
 
     {#each $characterRepository.current.features as feature, index}
         <Collapsible>
-            <div slot="title" class="text-xl w-full">
-                <Editable>
-                    <div slot="editing" class="flex justify-between">
-                        <input
-                            id="feature-{index}-name"
-                            type="text"
-                            class="input w-full"
-                            bind:value={feature.name}
-                            placeholder={t('display.missingName')}
-                        />
+            <Editable slot="title" class="text-xl">
+                <span slot="showing">
+                    {feature.name}
+                </span>
 
-                        <BtnAction kind=destroy class="w-16 ml-4" handler={(_e) => destroy(index)} />
-                    </div>
+                <div slot="editing" class="flex justify-between">
+                    <input
+                        id="feature-{index}-name"
+                        type="text"
+                        class="input w-full"
+                        bind:value={feature.name}
+                        placeholder={t('display.missingName')}
+                    />
 
-                    <span slot="showing">{feature.name}</span>
-                </Editable>
-            </div>
+                    <BtnAction kind=destroy class="w-16 ml-4" handler={(_e) => destroy(index)} />
+                </div>
+            </Editable>
 
             <Container slot="body">
-                <div>
-                    <Editable>
-                        <input
-                            slot="editing"
-                            id="feature-{index}-source"
-                            type="text"
-                            class="input w-full"
-                            bind:value={feature.source}
-                            placeholder={t('display.missingSource')}
-                        />
+                <Editable>
+                    <div slot="showing">
+                        {#if feature.source}
+                            <a
+                                class="underline text-sky-500"
+                                href={feature.source}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                            >
+                                {feature.source}
+                            </a>
+                        {:else}
+                            <span>
+                                {t('display.missingSource')}
+                            </span>
+                        {/if}
+                    </div>
 
-                        <div slot="showing">
-                            {#if feature.source}
-                                <a
-                                    class="underline text-sky-500"
-                                    href={feature.source}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                >
-                                    {feature.source}
-                                </a>
-                            {:else}
-                                <span>
-                                    {t('display.missingSource')}
-                                </span>
-                            {/if}
-                        </div>
-                    </Editable>
-                </div>
+                    <input
+                        slot="editing"
+                        id="feature-{index}-source"
+                        type="text"
+                        class="input w-full"
+                        bind:value={feature.source}
+                        placeholder={t('display.missingSource')}
+                    />
+                </Editable>
 
                 <Separator />
 
-                <div>
-                    <Editable>
-                        <textarea
-                            slot="editing"
-                            id="feature-{index}-notes"
-                            class="input w-full"
-                            bind:value={feature.notes}
-                            placeholder={t('display.missingNotes')}
-                        />
+                <Editable>
+                    <span slot="showing">{feature.notes || t('display.missingNotes')}</span>
 
-                        <span slot="showing">{feature.notes || t('display.missingNotes')}</span>
-                    </Editable>
-                </div>
+                    <textarea
+                        slot="editing"
+                        id="feature-{index}-notes"
+                        class="input w-full"
+                        bind:value={feature.notes}
+                        placeholder={t('display.missingNotes')}
+                    />
+                </Editable>
             </Container>
         </Collapsible>
     {/each}

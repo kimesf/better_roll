@@ -56,22 +56,21 @@
     {#each $characterRepository.current.resources.finite as finite, index}
         <Collapsible>
             <div slot="title" class="flex w-full justify-between">
-                <div class="grow basis-0 flex items-center text-left">
-                    <Editable>
-                        <input
-                            slot="editing"
-                            id="finite-{index}-name"
-                            type="text"
-                            class="input w-36"
-                            bind:value={finite.name}
-                        />
+                <Editable class="grow basis-0 flex items-center text-left">
+                    <input
+                        slot="editing"
+                        id="finite-{index}-name"
+                        type="text"
+                        class="input w-36"
+                        bind:value={finite.name}
+                    />
 
-                        <span slot="showing">{finite.name}</span>
-                    </Editable>
-                </div>
+                    <span slot="showing">{finite.name}</span>
+                </Editable>
 
 
                 <div class="grow basis-0 flex text-4xl justify-between">
+                    <!-- TODO: prop class to incrementor -->
                     <Incrementor id="finite-{index}-amount" bind:value={finite.amount}>
                         <input
                             slot=extra
@@ -90,9 +89,7 @@
             <Container slot="body">
                 <Editable>
                     <BtnAction kind=destroy class="w-20" handler={(_e) => destroy(index)} />
-                </Editable>
 
-                <Editable>
                     <Separator />
                 </Editable>
 

@@ -2,8 +2,6 @@
     import characterRepository from '../../stores/characterRepository'
     import { t } from '../../stores/i18n'
     import Editable from '../shared/Editable.svelte'
-    import Separator from '../shared/Separator.svelte'
-    import Title from '../shared/Title.svelte'
     import BtnAction from '../shared/BtnAction.svelte'
     import type { Mechanic } from '../../types'
     import Container from '../shared/Container.svelte'
@@ -38,32 +36,30 @@
     </Editable>
 
     {#each $characterRepository.current.mechanics.other as mechanic, index}
-        <div class="flex justify-between items-center">
-            <Editable>
+        <Editable>
+            <Container row slot=editing>
+                <BtnAction kind=destroy class="w-16" handler={(_e) => destroy(index)} />
+
                 <input
-                    slot="editing"
                     id="mechanic-{index}-name"
                     type="text"
-                    class="input w-5/12"
+                    class="input w-full"
                     bind:value={mechanic.name}
                 />
-                <span slot="showing">{mechanic.name}</span>
-            </Editable>
 
-            <Editable>
                 <input
-                    slot="editing"
                     id="mechanic-{index}-value"
                     type="text"
-                    class="input w-5/12 ml-2"
+                    class="input w-full"
                     bind:value={mechanic.value}
                 />
-                <span slot="showing" class="text-2xl">{mechanic.value}</span>
-            </Editable>
+            </Container>
 
-            <Editable>
-                <BtnAction kind=destroy class="w-16 ml-2" handler={(_e) => destroy(index)} />
-            </Editable>
-        </div>
+            <Container row slot=showing class="justify-between items-center">
+                <span>{mechanic.name}</span>
+
+                <span class="text-2xl">{mechanic.value}</span>
+            </Container>
+        </Editable>
     {/each}
 </Container>
