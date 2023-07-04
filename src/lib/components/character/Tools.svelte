@@ -13,14 +13,14 @@
     const toolModifier = ({ attribute, expertise, otherBonus }: Tool): number => {
         const attributeBonus = attribute ? $attributesModifiers[attribute] : 0
 
-        return $proficiencyBonus * (expertise ? 2 : 1) + attributeBonus  + otherBonus
+        return $proficiencyBonus * (expertise ? 2 : 1) + attributeBonus + otherBonus
     }
 
     const DEFAULT: Tool = {
         name: '',
         attribute: null,
         expertise: false,
-        otherBonus: 0
+        otherBonus: 0,
     }
 
     const newTool = (): Tool => {
@@ -31,7 +31,7 @@
         $characterRepository = $characterRepository
     }
 
-    const create =  (): void => {
+    const create = (): void => {
         $characterRepository.current.tools.push(newTool())
         trigger()
     }
@@ -43,7 +43,7 @@
 </script>
 
 <Editable>
-    <BtnAction kind=create class="w-full" handler={(_e) => create()}>{t('actions.create')}</BtnAction>
+    <BtnAction kind="create" class="w-full" handler={(_e) => create()}>{t('actions.create')}</BtnAction>
 </Editable>
 
 {#each $characterRepository.current.tools as tool, index}
@@ -53,15 +53,9 @@
         </div>
 
         <Editable>
-            <input
-                slot="editing"
-                id="tool-{index}-name"
-                type="text"
-                class="input w-full"
-                bind:value={tool.name}
-            />
+            <input slot="editing" id="tool-{index}-name" type="text" class="input w-full" bind:value={tool.name} />
 
-            <span slot=showing>{tool.name}</span>
+            <span slot="showing">{tool.name}</span>
         </Editable>
     </div>
 
@@ -74,7 +68,7 @@
                 <option value={null}>{t('none')}</option>
             </select>
 
-            <BtnAction kind=destroy class="w-16" handler={(_e) => destroy(index)} />
+            <BtnAction kind="destroy" class="w-16" handler={(_e) => destroy(index)} />
         </div>
 
         <div>

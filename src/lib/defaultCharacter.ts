@@ -1,5 +1,5 @@
-import { t } from "./stores/i18n";
-import type { Character } from "./types";
+import { t } from './stores/i18n'
+import type { Character } from './types'
 
 export default {
     name: t('default.name'),
@@ -39,25 +39,55 @@ export default {
         { name: t('default.skills.save'), attribute: 'dex', proficiency: false, expertise: false, otherBonus: 0 },
         { name: t('default.skills.acrobatics'), attribute: 'dex', proficiency: false, expertise: false, otherBonus: 0 },
         { name: t('default.skills.stealth'), attribute: 'dex', proficiency: false, expertise: false, otherBonus: 0 },
-        { name: t('default.skills.sleightOfHand'), attribute: 'dex', proficiency: false, expertise: false, otherBonus: 0 },
+        {
+            name: t('default.skills.sleightOfHand'),
+            attribute: 'dex',
+            proficiency: false,
+            expertise: false,
+            otherBonus: 0,
+        },
         { name: t('default.skills.save'), attribute: 'con', proficiency: false, expertise: false, otherBonus: 0 },
         { name: t('default.skills.save'), attribute: 'int', proficiency: false, expertise: false, otherBonus: 0 },
         { name: t('default.skills.arcana'), attribute: 'int', proficiency: false, expertise: false, otherBonus: 0 },
         { name: t('default.skills.history'), attribute: 'int', proficiency: false, expertise: false, otherBonus: 0 },
-        { name: t('default.skills.investigation'), attribute: 'int', proficiency: false, expertise: false, otherBonus: 0 },
+        {
+            name: t('default.skills.investigation'),
+            attribute: 'int',
+            proficiency: false,
+            expertise: false,
+            otherBonus: 0,
+        },
         { name: t('default.skills.nature'), attribute: 'int', proficiency: false, expertise: false, otherBonus: 0 },
         { name: t('default.skills.religion'), attribute: 'int', proficiency: false, expertise: false, otherBonus: 0 },
         { name: t('default.skills.save'), attribute: 'wis', proficiency: false, expertise: false, otherBonus: 0 },
         { name: t('default.skills.insight'), attribute: 'wis', proficiency: false, expertise: false, otherBonus: 0 },
-        { name: t('default.skills.animalHandling'), attribute: 'wis', proficiency: false, expertise: false, otherBonus: 0 },
+        {
+            name: t('default.skills.animalHandling'),
+            attribute: 'wis',
+            proficiency: false,
+            expertise: false,
+            otherBonus: 0,
+        },
         { name: t('default.skills.medicine'), attribute: 'wis', proficiency: false, expertise: false, otherBonus: 0 },
         { name: t('default.skills.perception'), attribute: 'wis', proficiency: false, expertise: false, otherBonus: 0 },
         { name: t('default.skills.survival'), attribute: 'wis', proficiency: false, expertise: false, otherBonus: 0 },
         { name: t('default.skills.save'), attribute: 'cha', proficiency: false, expertise: false, otherBonus: 0 },
-        { name: t('default.skills.performance'), attribute: 'cha', proficiency: false, expertise: false, otherBonus: 0 },
+        {
+            name: t('default.skills.performance'),
+            attribute: 'cha',
+            proficiency: false,
+            expertise: false,
+            otherBonus: 0,
+        },
         { name: t('default.skills.persuasion'), attribute: 'cha', proficiency: false, expertise: false, otherBonus: 0 },
         { name: t('default.skills.deception'), attribute: 'cha', proficiency: false, expertise: false, otherBonus: 0 },
-        { name: t('default.skills.intimidation'), attribute: 'cha', proficiency: false, expertise: false, otherBonus: 0 },
+        {
+            name: t('default.skills.intimidation'),
+            attribute: 'cha',
+            proficiency: false,
+            expertise: false,
+            otherBonus: 0,
+        },
     ],
     tools: [],
     resources: {
@@ -93,4 +123,3 @@ export default {
     },
     spells: [],
 } as Character
-

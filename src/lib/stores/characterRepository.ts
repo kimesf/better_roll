@@ -59,7 +59,7 @@ const initStore = (): CharacterStore => {
 
             return {
                 ...previousState,
-                all: newAllState
+                all: newAllState,
             }
         })
     }

@@ -1,7 +1,7 @@
 <script lang="ts">
     import { slide } from 'svelte/transition'
     import Separator from './Separator.svelte'
-    import Container from './Container.svelte';
+    import Container from './Container.svelte'
 
     let visible = false
     const toggle = () => (visible = !visible)

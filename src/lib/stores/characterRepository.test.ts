@@ -8,7 +8,7 @@ const createCharacter = () => defaultCharacter
 const loadStoreValue = () => get(store)
 
 describe('Character Store', () => {
-    afterEach(() => store.set({all: [], current: null}))
+    afterEach(() => store.set({ all: [], current: null }))
 
     describe('#select', () => {
         it('changes current character', () => {
@@ -41,7 +41,7 @@ describe('Character Store', () => {
             const char2 = { name: 'Ana' } as Character
             const char3 = { name: 'Maria' } as Character
 
-            store.set({ all: [char1, char2, char3], current: null})
+            store.set({ all: [char1, char2, char3], current: null })
             expect(loadStoreValue().all).toEqual([char1, char2, char3])
 
             store.destroy(1)

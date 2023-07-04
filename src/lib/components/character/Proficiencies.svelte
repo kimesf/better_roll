@@ -2,7 +2,7 @@
     import i18n from '../../stores/i18n'
     import characterRepository from '../../stores/characterRepository'
     import Editable from '../shared/Editable.svelte'
-    import Container from '../shared/Container.svelte';
+    import Container from '../shared/Container.svelte'
 
     const proficiencies: ('weapons' | 'armors' | 'languages')[] = ['weapons', 'armors', 'languages']
 </script>

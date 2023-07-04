@@ -103,7 +103,13 @@ export default {
         finite: [
             { name: 'Rede', amount: 1, unity: 'u', notes: '', source: 'https://www.dndbeyond.com/equipment/net' },
             { name: 'Veneno Potente', amount: 1, unity: 'u', notes: '', source: '' },
-            { name: 'Veneno Peixe Pedra', amount: 1, unity: 'u', notes: 'SG CON 14. Ingerido. Se ingerido por completo, desvantagem SG. Tem cheiro de peixe. 4d10 venenoso, envenenado por 8 horas. No sucesso na SG, metade do dano, envenenado por 1 hora.', source: '' },
+            {
+                name: 'Veneno Peixe Pedra',
+                amount: 1,
+                unity: 'u',
+                notes: 'SG CON 14. Ingerido. Se ingerido por completo, desvantagem SG. Tem cheiro de peixe. 4d10 venenoso, envenenado por 8 horas. No sucesso na SG, metade do dano, envenenado por 1 hora.',
+                source: '',
+            },
             { name: 'Antitoxina Universal', amount: 1, unity: 'u', notes: '', source: '' },
             { name: 'Adaga com Prata', amount: 1, unity: 'u', notes: '', source: '' },
             { name: 'Adagas', amount: 5, unity: 'u', notes: '', source: '' },
@@ -305,7 +311,6 @@ export default {
     },
 
     spells: [
-
         {
             name: 'Amaldiçoar',
             circle: 1,

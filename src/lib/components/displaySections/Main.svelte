@@ -25,7 +25,7 @@
     <div class="basis-3/5 h-screen overflow-y-scroll p-2 pb-20 bg-secondary">
         <div class="text-center">
             <Editable>
-                <span slot=showing>
+                <span slot="showing">
                     <Basics {character} />
                 </span>
 
@@ -38,7 +38,7 @@
                         placeholder={t('display.missingName')}
                     />
 
-                    <Incrementor id="level" bind:value={$characterRepository.current.level}/>
+                    <Incrementor id="level" bind:value={$characterRepository.current.level} />
 
                     <input
                         id="lineages"

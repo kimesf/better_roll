@@ -8,7 +8,7 @@ export default {
     'selection.select': 'select',
     'selection.save': 'save',
     'selection.restore': 'restore',
-    'selection.restore.confirm': 'can\'t be undone and current data exclusion is permanent, are you sure?',
+    'selection.restore.confirm': "can't be undone and current data exclusion is permanent, are you sure?",
     'selection.alert': 'please, select a file',
     'attributes.str.full': 'strenght',
     'attributes.dex.full': 'dexterity',

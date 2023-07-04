@@ -41,7 +41,7 @@
 </script>
 
 <Editable>
-    <BtnAction kind=create class='w-full' handler={(_e) => create()}>{t('actions.create')}</BtnAction>
+    <BtnAction kind="create" class="w-full" handler={(_e) => create()}>{t('actions.create')}</BtnAction>
 </Editable>
 
 {#each $characterRepository.current.resources.recoverable as recoverable, index}
@@ -68,9 +68,9 @@
                 id="recoverable-{index}-current"
                 class="grow basis-0 flex text-4xl justify-between"
                 bind:value={recoverable.current}
-                >
+            >
                 <input
-                    slot=extra
+                    slot="extra"
                     id="recoverable-{index}-total"
                     type="text"
                     class="input w-12 text-center"
@@ -83,7 +83,7 @@
 
         <Container slot="body">
             <Editable row class="justify-between items-center">
-                <BtnAction kind=destroy class="w-16" handler={(_e) => destroy(index)} />
+                <BtnAction kind="destroy" class="w-16" handler={(_e) => destroy(index)} />
 
                 <div class="text-secondary">
                     <label for="short">{t('recoverable.short')}</label>

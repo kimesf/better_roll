@@ -1,6 +1,6 @@
-<script lang=ts>
-    import { t } from "../../stores/i18n";
-    import Icon from "./Icon.svelte"
+<script lang="ts">
+    import { t } from '../../stores/i18n'
+    import Icon from './Icon.svelte'
 
     type Action = 'create' | 'destroy' | 'update'
     type HandlerEvent = MouseEvent & { currentTarget: EventTarget & HTMLButtonElement }
@@ -9,7 +9,7 @@
     export let handler: (e: HandlerEvent) => void
 
     const handle = (e: HandlerEvent) => {
-        if(kind == 'destroy' && doesUserRegret()) {
+        if (kind == 'destroy' && doesUserRegret()) {
             return
         }
 

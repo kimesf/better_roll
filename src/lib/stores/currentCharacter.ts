@@ -14,7 +14,7 @@ type AttributesMofifiers = {
 export const character: Readable<Character> = derived(characters, ($characters) => $characters.current)
 
 export const proficiencyBonus: Readable<ProficiencyBonus> = derived(character, ($character) => {
-    if(!$character) {
+    if (!$character) {
         return 0 as ProficiencyBonus
     }
 
@@ -22,7 +22,7 @@ export const proficiencyBonus: Readable<ProficiencyBonus> = derived(character, (
 })
 
 export const skillsGroupedByAttribute: Readable<SkillsGroupedByAttr> = derived(character, ($character) => {
-    if(!$character) {
+    if (!$character) {
         return {} as SkillsGroupedByAttr
     }
 
@@ -35,7 +35,7 @@ export const skillsGroupedByAttribute: Readable<SkillsGroupedByAttr> = derived(c
 })
 
 export const attributesModifiers: Readable<AttributesMofifiers> = derived(character, ($character) => {
-    if(!$character) {
+    if (!$character) {
         return {} as AttributesMofifiers
     }
 

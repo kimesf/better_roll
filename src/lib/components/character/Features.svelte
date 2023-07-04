@@ -35,7 +35,7 @@
 
 <Container>
     <Editable>
-        <BtnAction kind=create class="w-full" handler={(_e) => create()}>{t('actions.create')}</BtnAction>
+        <BtnAction kind="create" class="w-full" handler={(_e) => create()}>{t('actions.create')}</BtnAction>
     </Editable>
 
     {#each $characterRepository.current.features as feature, index}
@@ -54,7 +54,7 @@
                         placeholder={t('display.missingName')}
                     />
 
-                    <BtnAction kind=destroy class="w-16 ml-4" handler={(_e) => destroy(index)} />
+                    <BtnAction kind="destroy" class="w-16 ml-4" handler={(_e) => destroy(index)} />
                 </div>
             </Editable>
 

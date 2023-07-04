@@ -74,7 +74,7 @@
 
 {#if menuVisible}
     <div class="z-40 bottom-0 fixed h-screen w-screen flex flex-col justify-between">
-        <button class="fixed top-0 p-4 text-2xl w-full bg-secondary" on:click={() => characterRepository.select(null) }>
+        <button class="fixed top-0 p-4 text-2xl w-full bg-secondary" on:click={() => characterRepository.select(null)}>
             {t('display.characters')}
         </button>
 

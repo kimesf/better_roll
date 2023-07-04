@@ -26,7 +26,7 @@
         Touch = 'touch',
         TenFeet = '10feet',
         ThirtyFeet = '30feet',
-        SixtyFeet =  '60feet',
+        SixtyFeet = '60feet',
         NinetyFeet = '90feet',
         OneHundredAndTwentyFeet = '120feet',
         OneHundredAndFiftyFeet = '150feet',
@@ -79,11 +79,7 @@
         'ritual',
     ]
 
-    const formComponents: ('verbal' | 'somatic' | 'material')[] = [
-        'verbal',
-        'somatic',
-        'material'
-    ]
+    const formComponents: ('verbal' | 'somatic' | 'material')[] = ['verbal', 'somatic', 'material']
 
     const presentComponents = (components: Spell['components']) => {
         const maybeAspect = (aspect: 'verbal' | 'somatic' | 'material') =>
@@ -149,7 +145,7 @@
     <Title title={t('character.spells.title')} />
 
     <Editable>
-        <BtnAction kind=create class="w-full" handler={(_e) => create()}>{t('actions.create')}</BtnAction>
+        <BtnAction kind="create" class="w-full" handler={(_e) => create()}>{t('actions.create')}</BtnAction>
     </Editable>
 
     <div class="flex flex-col gap-2">
@@ -236,7 +232,12 @@
                         <Container slot="editing">
                             <Container>
                                 <div class="flex gap-1">
-                                    <input type="text" id="spell-{index}-name" class="input grow" bind:value={spell.name} />
+                                    <input
+                                        type="text"
+                                        id="spell-{index}-name"
+                                        class="input grow"
+                                        bind:value={spell.name}
+                                    />
 
                                     <select id="spell-{index}-circle" class="input" bind:value={spell.circle}>
                                         {#each SPELL_CIRCLES as option}
@@ -252,8 +253,7 @@
                                         {/each}
                                     </select>
 
-
-                                    <BtnAction kind=destroy class="grow" handler={(_e) => destroy(index)} />
+                                    <BtnAction kind="destroy" class="grow" handler={(_e) => destroy(index)} />
                                 </div>
 
                                 {#each booleanForms as key}
@@ -280,11 +280,18 @@
                                             type="checkbox"
                                             bind:checked={spell.components[key]}
                                         />
-                                        <label for="spell-{index}-{key}">{t(`character.spells.components.${key}`)}?</label>
+                                        <label for="spell-{index}-{key}"
+                                            >{t(`character.spells.components.${key}`)}?</label
+                                        >
                                     </div>
                                 {/each}
 
-                                <input type="text" id="spell-{index}-components-notes" class="input w-full" bind:value={spell.components.notes} />
+                                <input
+                                    type="text"
+                                    id="spell-{index}-components-notes"
+                                    class="input w-full"
+                                    bind:value={spell.components.notes}
+                                />
                             </Container>
 
                             {#each formsWithSuggestions as [key, suggestions]}
@@ -292,7 +299,7 @@
                                     <Title title={t(`character.spells.${key}`)} />
 
                                     <InputWithSuggestions
-                                        suggestions={suggestions}
+                                        {suggestions}
                                         id="spell-{index}-{key}"
                                         bind:value={spell[key]}
                                     />

@@ -8,7 +8,7 @@
 
     const DEFAULT: Mechanic = {
         name: '',
-        value: ''
+        value: '',
     }
 
     const newMechanic = (): Mechanic => {
@@ -32,30 +32,20 @@
 
 <Container>
     <Editable>
-        <BtnAction kind=create class="w-full" handler={(_e) => create()}>{t('actions.create')}</BtnAction>
+        <BtnAction kind="create" class="w-full" handler={(_e) => create()}>{t('actions.create')}</BtnAction>
     </Editable>
 
     {#each $characterRepository.current.mechanics.other as mechanic, index}
         <Editable>
-            <Container row slot=editing>
-                <BtnAction kind=destroy class="w-16" handler={(_e) => destroy(index)} />
+            <Container row slot="editing">
+                <BtnAction kind="destroy" class="w-16" handler={(_e) => destroy(index)} />
 
-                <input
-                    id="mechanic-{index}-name"
-                    type="text"
-                    class="input w-full"
-                    bind:value={mechanic.name}
-                />
+                <input id="mechanic-{index}-name" type="text" class="input w-full" bind:value={mechanic.name} />
 
-                <input
-                    id="mechanic-{index}-value"
-                    type="text"
-                    class="input w-full"
-                    bind:value={mechanic.value}
-                />
+                <input id="mechanic-{index}-value" type="text" class="input w-full" bind:value={mechanic.value} />
             </Container>
 
-            <Container row slot=showing class="justify-between items-center">
+            <Container row slot="showing" class="justify-between items-center">
                 <span>{mechanic.name}</span>
 
                 <span class="text-2xl">{mechanic.value}</span>

@@ -59,7 +59,7 @@
 
 <Container>
     <Editable>
-        <BtnAction kind=create class="w-full" handler={(_e) => create()}>{t('actions.create')}</BtnAction>
+        <BtnAction kind="create" class="w-full" handler={(_e) => create()}>{t('actions.create')}</BtnAction>
     </Editable>
 
     {#each $characterRepository.current.attacks as attack, index}
@@ -67,14 +67,9 @@
             <div slot="title" class="flex flex-col text-left w-full">
                 <Editable>
                     <div slot="editing" class="flex">
-                        <input
-                            id="attack-{index}-name"
-                            type="text"
-                            class="input w-full"
-                            bind:value={attack.name}
-                        />
+                        <input id="attack-{index}-name" type="text" class="input w-full" bind:value={attack.name} />
 
-                        <BtnAction kind=destroy class="w-16 ml-2" handler={(_e) => destroy(index)} />
+                        <BtnAction kind="destroy" class="w-16 ml-2" handler={(_e) => destroy(index)} />
                     </div>
 
                     <span slot="showing">{attack.name}</span>
@@ -97,7 +92,7 @@
             <Editable slot="body">
                 <span slot="showing">{attack.notes}</span>
 
-                <Container slot=editing>
+                <Container slot="editing">
                     <Container>
                         <Title title={t('display.attacks.damage')} />
 

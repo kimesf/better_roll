@@ -15,9 +15,7 @@
             <input {id} type="number" class="text-primary input text-center w-12" bind:value />
 
             {#if $$slots.extra}
-                <span class="text-base">
-                    |
-                </span>
+                <span class="text-base"> | </span>
             {/if}
 
             <slot name="extra" />

@@ -8,14 +8,14 @@
 
 {#if $$slots.default && $canEdit}
     <div transition:slide>
-        <Container class="{$$props.class || ''}" {row}>
+        <Container class={$$props.class || ''} {row}>
             <slot />
         </Container>
     </div>
 {/if}
 
 {#if $$slots.editing || $$slots.showing}
-    <div class="{$$props.class || ''}">
+    <div class={$$props.class || ''}>
         {#if $canEdit}
             <slot name="editing" />
         {:else}

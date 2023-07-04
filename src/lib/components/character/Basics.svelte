@@ -6,7 +6,7 @@
     const { name, lineages, level, classes } = character
 </script>
 
-<div class='flex flex-col'>
+<div class="flex flex-col">
     <span>
         {name} | {lineages}
     </span>

@@ -76,10 +76,7 @@
                     {t(`display.coreMechanics.${mechanic}`)}
                 </div>
 
-                <Incrementor
-                    id="mechanics-{mechanic}"
-                    bind:value={$characterRepository.current.mechanics[mechanic]}
-                >
+                <Incrementor id="mechanics-{mechanic}" bind:value={$characterRepository.current.mechanics[mechanic]}>
                     {#if component}
                         <svelte:component this={component} {...props} />
                     {:else}

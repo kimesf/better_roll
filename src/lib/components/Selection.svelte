@@ -20,7 +20,7 @@
         const now = new Date()
         link.download = `better_roll_${now.toLocaleDateString()}_${now.getTime()}.json`
         link.href = window.URL.createObjectURL(blob)
-        link.dataset.downloadurl = ['text/json', link.download, link.href].join(':');
+        link.dataset.downloadurl = ['text/json', link.download, link.href].join(':')
 
         const event = new MouseEvent('click', {
             view: window,
@@ -36,18 +36,18 @@
         return new Promise((resolve, reject) => {
             const fr = new FileReader()
             fr.onloadend = () => resolve(fr)
-            fr.onerror  = (err) => reject(err)
+            fr.onerror = (err) => reject(err)
             fr.readAsText(file)
         })
     }
 
     const restore = (): void => {
-        if(!files) {
+        if (!files) {
             alert(t('selection.alert'))
             return
         }
 
-        if(!confirm(t('selection.restore.confirm'))) {
+        if (!confirm(t('selection.restore.confirm'))) {
             return
         }
 
@@ -55,10 +55,14 @@
             .then(({ result }) => {
                 const content = JSON.parse(result as string) as Character[]
 
-                characterRepository.set({ current: null, all: content || []})
+                characterRepository.set({ current: null, all: content || [] })
             })
             .catch((error: ProgressEvent<FileReader>) => {
-                const { target: { error: { name, message } } } = error
+                const {
+                    target: {
+                        error: { name, message },
+                    },
+                } = error
 
                 alert(`${name}: ${message}`)
             })
@@ -66,37 +70,65 @@
                 files = null
             })
     }
-
 </script>
 
 <Container class="p-2">
     <Title title={t('display.characters')} />
 
     <Collapsible>
-        <div slot=title class="capitalize text-lg">{t('selection.restore')}</div>
+        <div slot="title" class="capitalize text-lg">{t('selection.restore')}</div>
 
-        <div slot=body>
-            <input type="file" accept="application/json" class="input w-full mb-1 basis-2/3" bind:files>
+        <div slot="body">
+            <input type="file" accept="application/json" class="input w-full mb-1 basis-2/3" bind:files />
 
-            <BtnAction kind=update class="w-full basis-1/3" handler={() => { restore() }}>{t('selection.restore')}</BtnAction>
+            <BtnAction
+                kind="update"
+                class="w-full basis-1/3"
+                handler={() => {
+                    restore()
+                }}>{t('selection.restore')}</BtnAction
+            >
 
             <Separator />
         </div>
     </Collapsible>
 
-    <BtnAction kind=create class="w-full" handler={() => { save() }}>{t('selection.save')}</BtnAction>
+    <BtnAction
+        kind="create"
+        class="w-full"
+        handler={() => {
+            save()
+        }}>{t('selection.save')}</BtnAction
+    >
 
-    <BtnAction kind=create class="w-full" handler={() => { create() }}>{t('actions.create')}</BtnAction>
+    <BtnAction
+        kind="create"
+        class="w-full"
+        handler={() => {
+            create()
+        }}>{t('actions.create')}</BtnAction
+    >
 
     {#each $characterRepository.all as availableCharacter, index}
         <div class="flex flex-col justify-center border border-neutral-500 rounded-md p-2">
             <Basics character={availableCharacter} />
 
             <div class="flex gap-1">
-                <BtnAction kind=destroy class="w-16" handler={() => { destroy(index)} } />
-                <BtnAction kind=update class="w-full" handler={() => { select(availableCharacter) }}>{t('selection.select')}</BtnAction>
+                <BtnAction
+                    kind="destroy"
+                    class="w-16"
+                    handler={() => {
+                        destroy(index)
+                    }}
+                />
+                <BtnAction
+                    kind="update"
+                    class="w-full"
+                    handler={() => {
+                        select(availableCharacter)
+                    }}>{t('selection.select')}</BtnAction
+                >
             </div>
         </div>
     {/each}
 </Container>
-

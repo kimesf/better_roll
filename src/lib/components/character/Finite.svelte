@@ -26,7 +26,7 @@
         $characterRepository = $characterRepository
     }
 
-    const create =  async (): Promise<void> => {
+    const create = async (): Promise<void> => {
         $characterRepository.current.resources.finite.push(newFinite())
         trigger()
 
@@ -50,7 +50,7 @@
 
 <Container>
     <Editable>
-        <BtnAction kind=create class="w-full" handler={(_e) => create()}>{t('actions.create')}</BtnAction>
+        <BtnAction kind="create" class="w-full" handler={(_e) => create()}>{t('actions.create')}</BtnAction>
     </Editable>
 
     {#each $characterRepository.current.resources.finite as finite, index}
@@ -74,7 +74,7 @@
                     bind:value={finite.amount}
                 >
                     <input
-                        slot=extra
+                        slot="extra"
                         id="finite-{index}-unity"
                         type="text"
                         class="input w-8 text-center"
@@ -88,7 +88,7 @@
 
             <Container slot="body">
                 <Editable>
-                    <BtnAction kind=destroy class="w-20" handler={(_e) => destroy(index)} />
+                    <BtnAction kind="destroy" class="w-20" handler={(_e) => destroy(index)} />
 
                     <Separator />
                 </Editable>

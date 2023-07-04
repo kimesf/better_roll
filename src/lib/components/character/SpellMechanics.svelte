@@ -26,7 +26,7 @@
     }
 
     const newSlot = (): SpellSlot => {
-        const nextCircle = $characterRepository.current.spellMechanics.slots.length + 1 as SpellCircle
+        const nextCircle = ($characterRepository.current.spellMechanics.slots.length + 1) as SpellCircle
         let slot = structuredClone(DEFAULT_SLOT)
         slot.circle = nextCircle
 
@@ -38,7 +38,7 @@
     }
 
     const createSlot = (): void => {
-        if($characterRepository.current.spellMechanics.slots.length == 9) {
+        if ($characterRepository.current.spellMechanics.slots.length == 9) {
             return
         }
 
@@ -61,10 +61,7 @@
                 <SignedNumber number={spellAttack} />
             </Editable>
 
-            <Incrementor
-                id="spellMechanics-hitBonus"
-                bind:value={$characterRepository.current.spellMechanics.hitBonus}
-            >
+            <Incrementor id="spellMechanics-hitBonus" bind:value={$characterRepository.current.spellMechanics.hitBonus}>
                 <span class="text-4xl"><SignedNumber number={spellAttack} /></span>
             </Incrementor>
 
@@ -120,11 +117,11 @@
     <Title title={t('character.spellMechanics.slots')} />
 
     <Editable>
-        <BtnAction kind=create class="w-full" handler={(_e) => createSlot()}>
+        <BtnAction kind="create" class="w-full" handler={(_e) => createSlot()}>
             {t('actions.create')}
         </BtnAction>
 
-        <BtnAction kind=destroy class="w-full" handler={(_e) => destroyLastSlot()}>
+        <BtnAction kind="destroy" class="w-full" handler={(_e) => destroyLastSlot()}>
             {t('character.spellMechanics.slots.destroyLast')}
         </BtnAction>
     </Editable>
@@ -139,7 +136,12 @@
                 >
                     <span class="text-4xl">{slot.current}/{slot.total}</span>
 
-                    <input id="spellMechanics-slots-{index}-total" slot=extra class="input w-12 text-center" bind:value={slot.total} />
+                    <input
+                        id="spellMechanics-slots-{index}-total"
+                        slot="extra"
+                        class="input w-12 text-center"
+                        bind:value={slot.total}
+                    />
                 </Incrementor>
 
                 <span class="text-secondary">{t('character.spellMechanics.circle')} {slot.circle}</span>
