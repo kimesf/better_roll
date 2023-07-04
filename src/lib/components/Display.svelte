@@ -1,19 +1,19 @@
 <script lang="ts">
     import { fly } from 'svelte/transition'
     import { t } from '../stores/i18n'
-    import OtherMechanics from './character/OtherMechanics.svelte'
     import Magic from './displaySections/Magic.svelte'
     import Resources from './displaySections/Resources.svelte'
-    import Features from './character/Features.svelte'
+    import Features from './displaySections/Features.svelte'
     import Main from './displaySections/Main.svelte'
     import Combat from './displaySections/Combat.svelte'
     import canEdit from '../stores/canEdit'
     import Draggable from './shared/Draggable.svelte'
     import characterRepository from '../stores/characterRepository'
     import Icon from './shared/Icon.svelte'
+    import Mechanics from './displaySections/Mechanics.svelte'
 
     const sections = {
-        mechanics: OtherMechanics,
+        mechanics: Mechanics,
         features: Features,
         magic: Magic,
         combat: Combat,

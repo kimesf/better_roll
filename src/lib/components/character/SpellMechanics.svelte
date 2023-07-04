@@ -1,7 +1,6 @@
 <script lang="ts">
     import { t } from '../../stores/i18n'
     import Title from '../shared/Title.svelte'
-    import Separator from '../shared/Separator.svelte'
     import SignedNumber from '../shared/SignedNumber.svelte'
     import Editable from '../shared/Editable.svelte'
     import Incrementor from '../shared/Incrementor.svelte'
@@ -10,6 +9,7 @@
     import characterRepository from '../../stores/characterRepository'
     import { ATTRIBUTES } from '../../constants'
     import type { SpellCircle, SpellSlot } from '../../types'
+    import Container from '../shared/Container.svelte'
 
     $: spellAttribute = $character.spellMechanics.attribute
 
@@ -52,98 +52,103 @@
     }
 </script>
 
-<Title title={t('character.spellMechanics.title')} />
+<Container>
+    <Title title={t('character.spellMechanics.title')} />
 
-<Separator />
-
-<div class="grid gap-4 grid-cols-2">
-    <div class="flex flex-col items-center">
-        <Editable>
-            <span class="text-4xl"><SignedNumber number={spellAttack} /></span>
-        </Editable>
-
-        <Incrementor
-            id="spellMechanics-hitBonus"
-            signClasses="text-4xl"
-            bind:value={$characterRepository.current.spellMechanics.hitBonus}
-        >
-            <span class="text-4xl"><SignedNumber number={spellAttack} /></span>
-        </Incrementor>
-
-        <span class="text-secondary">{t('character.spellMechanics.hitBonus')}</span>
-    </div>
-
-    <div class="flex flex-col items-center">
-        <Editable>
-            <span class="text-4xl">{spellSaveDifficulty}</span>
-        </Editable>
-
-        <Incrementor
-            id="spellMechanics-saveDifficultyBonus"
-            contentClasses="text-4xl"
-            signClasses="text-4xl"
-            bind:value={$characterRepository.current.spellMechanics.saveDifficultyBonus}
-        >
-            <span class="text-4xl">{spellSaveDifficulty}</span>
-        </Incrementor>
-
-        <span class="text-secondary">{t('character.spellMechanics.saveDifficulty')}</span>
-    </div>
-
-    <div class="flex flex-col items-center">
-        <Editable>
-            <select
-                slot="editing"
-                id="spellMechanics-attribute"
-                class="input text-lg"
-                bind:value={$characterRepository.current.spellMechanics.attribute}
-            >
-                {#each ATTRIBUTES as attribute}
-                    <option value={attribute}>{t(`attributes.${attribute}.full`)}</option>
-                {/each}
-            </select>
-
-            <span slot="showing" class="text-4xl">{t(`attributes.${spellAttribute}.full`)}</span>
-        </Editable>
-        <span class="text-secondary">{t('character.spellMechanics.attribute')}</span>
-    </div>
-
-    <div class="flex flex-col items-center">
-        <Incrementor
-            id="spellMechanics-availablePerDay"
-            contentClasses="text-4xl"
-            signClasses="text-4xl"
-            bind:value={$characterRepository.current.spellMechanics.availablePerDay}
-        />
-
-        <span class="text-secondary">{t('character.spellMechanics.availablePerDay')}</span>
-    </div>
-</div>
-
-<Title title={t('character.spellMechanics.slots')} />
-
-<Separator />
-
-<Editable>
-    <BtnAction kind=create class="w-full mt-2" handler={(_e) => createSlot()}>{t('actions.create')}</BtnAction>
-    <BtnAction kind=destroy class="w-full mt-2" handler={(_e) => destroyLastSlot()}>{t('character.spellMechanics.slots.destroyLast')}</BtnAction>
-</Editable>
-
-<div class="pt-2 grid gap-4 grid-cols-2">
-    {#each $characterRepository.current.spellMechanics.slots as slot, index}
+    <div class="grid gap-4 grid-cols-2">
         <div class="flex flex-col items-center">
-            <Incrementor
-                id="spellMechanics-slots-{index}-current"
-                contentClasses="text-4xl"
-                signClasses="text-4xl"
-                bind:value={slot.current}
-            >
-                <span class="text-4xl">{slot.current}/{slot.total}</span>
+            <Editable>
+                <span class="text-4xl"><SignedNumber number={spellAttack} /></span>
+            </Editable>
 
-                <input id="spellMechanics-slots-{index}-total" slot=extra class="input w-12 text-center" bind:value={slot.total} />
+            <Incrementor
+                id="spellMechanics-hitBonus"
+                signClasses="text-4xl"
+                bind:value={$characterRepository.current.spellMechanics.hitBonus}
+            >
+                <span class="text-4xl"><SignedNumber number={spellAttack} /></span>
             </Incrementor>
 
-            <span class="text-secondary">{t('character.spellMechanics.circle')} {slot.circle}</span>
+            <span class="text-secondary">{t('character.spellMechanics.hitBonus')}</span>
         </div>
-    {/each}
-</div>
+
+        <div class="flex flex-col items-center">
+            <Editable>
+                <span class="text-4xl">{spellSaveDifficulty}</span>
+            </Editable>
+
+            <Incrementor
+                id="spellMechanics-saveDifficultyBonus"
+                contentClasses="text-4xl"
+                signClasses="text-4xl"
+                bind:value={$characterRepository.current.spellMechanics.saveDifficultyBonus}
+            >
+                <span class="text-4xl">{spellSaveDifficulty}</span>
+            </Incrementor>
+
+            <span class="text-secondary">{t('character.spellMechanics.saveDifficulty')}</span>
+        </div>
+
+        <div class="flex flex-col items-center">
+            <Editable>
+                <select
+                    slot="editing"
+                    id="spellMechanics-attribute"
+                    class="input text-lg"
+                    bind:value={$characterRepository.current.spellMechanics.attribute}
+                >
+                    {#each ATTRIBUTES as attribute}
+                        <option value={attribute}>{t(`attributes.${attribute}.full`)}</option>
+                    {/each}
+                </select>
+
+                <span slot="showing" class="text-4xl">{t(`attributes.${spellAttribute}.full`)}</span>
+            </Editable>
+            <span class="text-secondary">{t('character.spellMechanics.attribute')}</span>
+        </div>
+
+        <div class="flex flex-col items-center">
+            <Incrementor
+                id="spellMechanics-availablePerDay"
+                contentClasses="text-4xl"
+                signClasses="text-4xl"
+                bind:value={$characterRepository.current.spellMechanics.availablePerDay}
+            />
+
+            <span class="text-secondary">{t('character.spellMechanics.availablePerDay')}</span>
+        </div>
+    </div>
+
+    <Title title={t('character.spellMechanics.slots')} />
+
+    <Editable>
+        <BtnAction kind=create class="w-full" handler={(_e) => createSlot()}>
+            {t('actions.create')}
+        </BtnAction>
+    </Editable>
+
+    <Editable>
+        <BtnAction kind=destroy class="w-full" handler={(_e) => destroyLastSlot()}>
+            {t('character.spellMechanics.slots.destroyLast')}
+        </BtnAction>
+    </Editable>
+
+    <div class="grid gap-4 grid-cols-2">
+        {#each $characterRepository.current.spellMechanics.slots as slot, index}
+            <div class="flex flex-col items-center">
+                <Incrementor
+                    id="spellMechanics-slots-{index}-current"
+                    contentClasses="text-4xl"
+                    signClasses="text-4xl"
+                    bind:value={slot.current}
+                >
+                    <span class="text-4xl">{slot.current}/{slot.total}</span>
+
+                    <input id="spellMechanics-slots-{index}-total" slot=extra class="input w-12 text-center" bind:value={slot.total} />
+                </Incrementor>
+
+                <span class="text-secondary">{t('character.spellMechanics.circle')} {slot.circle}</span>
+            </div>
+        {/each}
+    </div>
+</Container>

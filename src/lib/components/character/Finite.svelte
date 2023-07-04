@@ -8,6 +8,7 @@
     import type { Finite } from '../../types'
     import BtnAction from '../shared/BtnAction.svelte'
     import Incrementor from '../shared/Incrementor.svelte'
+    import Container from '../shared/Container.svelte'
 
     const DEFAULT: Finite = {
         name: '',
@@ -47,56 +48,54 @@
     }
 </script>
 
-<Editable>
-    <BtnAction kind=create class="w-full mt-2" handler={(_e) => create()}>{t('actions.create')}</BtnAction>
-</Editable>
+<Container>
+    <Editable>
+        <BtnAction kind=create class="w-full" handler={(_e) => create()}>{t('actions.create')}</BtnAction>
+    </Editable>
 
-{#each $characterRepository.current.resources.finite as finite, index}
-    <div>
-    </div>
-    <Collapsible>
-        <div slot="title" class="flex w-full justify-between">
-            <div class="grow basis-0 flex items-center text-left">
-                <Editable>
-                    <input
-                        slot="editing"
-                        id="finite-{index}-name"
-                        type="text"
-                        class="input w-36"
-                        bind:value={finite.name}
-                    />
+    {#each $characterRepository.current.resources.finite as finite, index}
+        <Collapsible>
+            <div slot="title" class="flex w-full justify-between">
+                <div class="grow basis-0 flex items-center text-left">
+                    <Editable>
+                        <input
+                            slot="editing"
+                            id="finite-{index}-name"
+                            type="text"
+                            class="input w-36"
+                            bind:value={finite.name}
+                        />
 
-                    <span slot="showing">{finite.name}</span>
-                </Editable>
-            </div>
-
-
-            <div class="grow basis-0 flex text-6xl justify-between">
-                <Incrementor id="finite-{index}-amount" bind:value={finite.amount}>
-                    <input
-                        slot=extra
-                        id="finite-{index}-unity"
-                        type="text"
-                        class="input w-8 text-center"
-                        bind:value={finite.unity}
-                        placeholder={t('display.resources.finite.unity.placeholder')}
-                    />
-
-                    <span class="text-4xl">{finite.amount}{finite.unity}</span>
-                </Incrementor>
-            </div>
-        </div>
-
-        <div slot="body">
-            <Editable>
-                <div class="py-2">
-                    <BtnAction kind=destroy class="w-20" handler={(_e) => destroy(index)} />
+                        <span slot="showing">{finite.name}</span>
+                    </Editable>
                 </div>
 
-                <Separator />
-            </Editable>
 
-            <div class="py-4">
+                <div class="grow basis-0 flex text-4xl justify-between">
+                    <Incrementor id="finite-{index}-amount" bind:value={finite.amount}>
+                        <input
+                            slot=extra
+                            id="finite-{index}-unity"
+                            type="text"
+                            class="input w-8 text-center"
+                            bind:value={finite.unity}
+                            placeholder={t('display.resources.finite.unity.placeholder')}
+                        />
+
+                        <span>{finite.amount}{finite.unity}</span>
+                    </Incrementor>
+                </div>
+            </div>
+
+            <Container slot="body">
+                <Editable>
+                    <BtnAction kind=destroy class="w-20" handler={(_e) => destroy(index)} />
+                </Editable>
+
+                <Editable>
+                    <Separator />
+                </Editable>
+
                 <Editable>
                     <input
                         slot="editing"
@@ -124,11 +123,9 @@
                         {/if}
                     </div>
                 </Editable>
-            </div>
 
-            <Separator />
+                <Separator />
 
-            <div class="py-4">
                 <Editable>
                     <textarea
                         slot="editing"
@@ -140,7 +137,7 @@
 
                     <span slot="showing" class="whitespace-pre-wrap">{finite.notes || t('display.missingNotes')}</span>
                 </Editable>
-            </div>
-        </div>
-    </Collapsible>
-{/each}
+            </Container>
+        </Collapsible>
+    {/each}
+</Container>

@@ -7,6 +7,7 @@
     import BtnAction from '../shared/BtnAction.svelte'
     import type { Recoverable } from '../../types'
     import Incrementor from '../shared/Incrementor.svelte'
+    import Container from '../shared/Container.svelte'
 
     const DEFAULT: Recoverable = {
         name: '',
@@ -40,10 +41,9 @@
 </script>
 
 <Editable>
-    <BtnAction kind=create class='w-full mt-2' handler={(_e) => create()}>{t('actions.create')}</BtnAction>
+    <BtnAction kind=create class='w-full' handler={(_e) => create()}>{t('actions.create')}</BtnAction>
 </Editable>
 
-<!-- TODO: use incrementor? -->
 {#each $characterRepository.current.resources.recoverable as recoverable, index}
     <Collapsible>
         <div slot="title" class="flex w-full items-center">
@@ -64,7 +64,7 @@
                 </span>
             </div>
 
-            <div class="grow basis-0 flex text-6xl justify-between">
+            <div class="grow basis-0 flex text-4xl justify-between">
                 <Incrementor id="recoverable-{index}-current" bind:value={recoverable.current}>
                     <input
                         slot=extra
@@ -79,66 +79,66 @@
             </div>
         </div>
 
-        <div slot="body">
+        <Container slot="body">
+            <!-- TODO: transform in one Editable? -->
             <Editable>
                 <div class="flex justify-between items-center">
                     <BtnAction kind=destroy class="w-16" handler={(_e) => destroy(index)} />
 
-                    <div class="py-4 text-secondary">
+                    <div class="text-secondary">
                         <label for="short">{t('recoverable.short')}</label>
                         <input class="input" type="radio" id="short" bind:group={recoverable.recoveredBy} value="short" />
                         <label for="long">{t('recoverable.long')}</label>
                         <input class="input" type="radio" id="long" bind:group={recoverable.recoveredBy} value="long" />
                     </div>
                 </div>
+            </Editable>
 
+            <Editable>
                 <Separator />
             </Editable>
 
-            <div class="py-4">
-                <Editable>
-                    <input
-                        slot="editing"
-                        id="recoverable-{index}-source"
-                        type="text"
-                        class="input w-full"
-                        bind:value={recoverable.source}
-                        placeholder={t('display.missingSource')}
-                    />
+            <Editable>
+                <input
+                    slot="editing"
+                    id="recoverable-{index}-source"
+                    type="text"
+                    class="input w-full"
+                    bind:value={recoverable.source}
+                    placeholder={t('display.missingSource')}
+                />
 
-                    <div slot="showing">
-                        {#if recoverable.source}
-                            <a
-                                class="underline text-sky-500"
-                                href={recoverable.source}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                            >
-                                {recoverable.source}
-                            </a>
-                        {:else}
-                            <span>
-                                {t('display.missingSource')}
-                            </span>
-                        {/if}
-                    </div>
-                </Editable>
-            </div>
+                <div slot="showing">
+                    {#if recoverable.source}
+                        <a
+                            class="underline text-sky-500"
+                            href={recoverable.source}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                        >
+                            {recoverable.source}
+                        </a>
+                    {:else}
+                        <span>
+                            {t('display.missingSource')}
+                        </span>
+                    {/if}
+                </div>
+            </Editable>
 
             <Separator />
 
-            <div class="py-4">
-                <Editable>
-                    <span slot="showing" class="whitespace-pre-wrap">{recoverable.notes || t('display.missingNotes')}</span>
-                    <textarea
-                        slot="editing"
-                        id="recoverable-{index}-notes"
-                        class="input w-full"
-                        bind:value={recoverable.notes}
-                        placeholder={t('display.missingNotes')}
-                    />
-                </Editable>
-            </div>
-        </div>
+            <Editable>
+                <span slot="showing" class="whitespace-pre-wrap">{recoverable.notes || t('display.missingNotes')}</span>
+
+                <textarea
+                    slot="editing"
+                    id="recoverable-{index}-notes"
+                    class="input w-full"
+                    bind:value={recoverable.notes}
+                    placeholder={t('display.missingNotes')}
+                />
+            </Editable>
+        </Container>
     </Collapsible>
 {/each}

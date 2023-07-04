@@ -10,25 +10,26 @@
     import Editable from '../shared/Editable.svelte'
     import Incrementor from '../shared/Incrementor.svelte'
     import Basics from '../character/Basics.svelte'
+    import Container from '../shared/Container.svelte'
 
     $: character = $characterRepository.current
 </script>
 
 <div class="flex">
-    <div class="basis-2/5 h-screen overflow-y-scroll">
-        <div class="mb-20">
+    <div class="basis-2/5 h-screen overflow-y-scroll p-2 pb-20">
+        <div>
             <CoreMechanics />
         </div>
     </div>
 
-    <div class="basis-3/5 h-screen overflow-y-scroll bg-secondary">
-        <div class="text-center p-2">
+    <div class="basis-3/5 h-screen overflow-y-scroll p-2 pb-20 bg-secondary">
+        <div class="text-center">
             <Editable>
                 <span slot=showing>
                     <Basics {character} />
                 </span>
 
-                <div class="flex gap-2 flex-col">
+                <Container>
                     <input
                         id="name"
                         type="text"
@@ -52,25 +53,25 @@
                         class="input w-full"
                         bind:value={$characterRepository.current.classes}
                     />
-                </div>
+                </Container>
             </Editable>
         </div>
 
-        <div class="p-2 mb-20 flex flex-col">
+        <div class="flex flex-col">
             <Skills />
 
             <Collapsible>
-                <div slot="title" class="text-2xl px-3">
+                <div slot="title" class="text-2xl capitalize">
                     {i18n.t('display.other')}
                 </div>
 
-                <svelte:fragment slot="body">
+                <Container slot="body">
                     <Tools />
 
                     <Proficiencies />
 
                     <Atletics />
-                </svelte:fragment>
+                </Container>
             </Collapsible>
         </div>
     </div>

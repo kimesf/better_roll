@@ -1,6 +1,7 @@
 <script lang="ts">
     import { slide } from 'svelte/transition'
     import Separator from './Separator.svelte'
+    import Container from './Container.svelte';
 
     let visible = false
     const toggle = () => (visible = !visible)
@@ -8,7 +9,7 @@
 
 <slot {visible} />
 
-<div>
+<Container>
     <div class="w-full flex items-center">
         <button class="mr-4" on:click={() => toggle()}>
             <i class="arrow p-1 border-amber-500" class:arrow-down={visible} class:arrow-right={!visible} />
@@ -20,11 +21,11 @@
     {#if visible}
         <Separator />
 
-        <div transition:slide>
+        <div transition:slide class="p-2 pt-0">
             <slot name="body" />
         </div>
     {/if}
-</div>
+</Container>
 
 <style>
     .arrow {

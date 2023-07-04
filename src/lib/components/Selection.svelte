@@ -7,6 +7,7 @@
     import Basics from './character/Basics.svelte'
     import Collapsible from './shared/Collapsible.svelte'
     import type { Character } from '../types'
+    import Container from './shared/Container.svelte'
 
     const { select, create, destroy } = characterRepository
 
@@ -68,10 +69,8 @@
 
 </script>
 
-<div class='p-2'>
+<Container class="p-2">
     <Title title={t('display.characters')} />
-
-    <Separator />
 
     <Collapsible>
         <div slot=title class="capitalize text-lg">{t('selection.restore')}</div>
@@ -85,12 +84,12 @@
         </div>
     </Collapsible>
 
-    <BtnAction kind=create class="w-full mt-2" handler={() => { save() }}>{t('selection.save')}</BtnAction>
+    <BtnAction kind=create class="w-full" handler={() => { save() }}>{t('selection.save')}</BtnAction>
 
-    <BtnAction kind=create class="w-full mt-2" handler={() => { create() }}>{t('actions.create')}</BtnAction>
+    <BtnAction kind=create class="w-full" handler={() => { create() }}>{t('actions.create')}</BtnAction>
 
     {#each $characterRepository.all as availableCharacter, index}
-        <div class="flex flex-col justify-center mt-4 border border-neutral-500 rounded-md p-2">
+        <div class="flex flex-col justify-center border border-neutral-500 rounded-md p-2">
             <Basics character={availableCharacter} />
 
             <div class="flex gap-1">
@@ -99,5 +98,5 @@
             </div>
         </div>
     {/each}
-</div>
+</Container>
 

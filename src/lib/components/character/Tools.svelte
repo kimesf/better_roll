@@ -5,6 +5,7 @@
     import { attributesModifiers, proficiencyBonus } from '../../stores/currentCharacter'
     import characterRepository from '../../stores/characterRepository'
     import Incrementor from '../shared/Incrementor.svelte'
+    import Container from '../shared/Container.svelte'
     import Separator from '../shared/Separator.svelte'
     import Editable from '../shared/Editable.svelte'
     import { ATTRIBUTES } from '../../constants'
@@ -43,11 +44,11 @@
 </script>
 
 <Editable>
-    <BtnAction kind=create class="w-full my-2" handler={(_e) => create()}>{t('actions.create')}</BtnAction>
+    <BtnAction kind=create class="w-full" handler={(_e) => create()}>{t('actions.create')}</BtnAction>
 </Editable>
 
 {#each $characterRepository.current.tools as tool, index}
-    <div class="py-2 flex">
+    <div class="flex">
         <div class="mr-1" class:text-proficient={!tool.expertise} class:text-expert={tool.expertise}>
             <SignedNumber number={toolModifier(tool)} />
         </div>
@@ -66,7 +67,7 @@
     </div>
 
     <Editable>
-        <div>
+        <Container>
             <div class="flex justify-between">
                 <select id="tool-{index}-attribute" class="input" bind:value={tool.attribute}>
                     {#each ATTRIBUTES as attribute}
@@ -78,7 +79,7 @@
                 <BtnAction kind=destroy class="w-16" handler={(_e) => destroy(index)} />
             </div>
 
-            <div class=pt-2>
+            <div>
                 <input id="tool-{index}-expertise" type="checkbox" bind:checked={tool.expertise} />
                 <label for={`skill-${index}-expertise`}>{t('display.skills.expertise')}</label>
             </div>
@@ -87,8 +88,8 @@
                 <label for={`tool-${index}-otherBonus`}>{t('bonus')}:</label>
                 <Incrementor id="tool-{index}-otherBonus" signClasses={'text-4xl'} bind:value={tool.otherBonus} />
             </div>
-        </div>
 
-        <Separator />
+            <Separator />
+        </Container>
     </Editable>
 {/each}

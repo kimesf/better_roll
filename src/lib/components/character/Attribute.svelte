@@ -9,7 +9,7 @@
     export let attr: Attribute
 </script>
 
-<div class="grow flex items-center justify-between">
+<div class="w-full flex items-center justify-between">
     <span class="grow basis-0 text-2xl uppercase">
         {t(`attributes.${attr}`)}
     </span>

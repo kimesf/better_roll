@@ -11,6 +11,7 @@
     import { t } from '../../stores/i18n'
     import Incrementor from '../shared/Incrementor.svelte'
     import Separator from '../shared/Separator.svelte'
+    import Container from '../shared/Container.svelte'
 
     const skillModifier = ({ attribute, proficiency, expertise, otherBonus }: Skill): number => {
         return (
@@ -51,9 +52,9 @@
                 </div>
 
                 <Editable>
-                    <Separator />
+                    <Container class="text-secondary text-sm">
+                        <Separator />
 
-                    <div class="py-4 text-secondary text-sm">
                         <div>
                             <input
                                 id="skill-{index}-proficiency"
@@ -62,6 +63,7 @@
                             />
                             <label for={`skill-${index}-proficiency`}>{t('display.skills.proficiency')}</label>
                         </div>
+
                         <div>
                             <input
                                 id="skill-{index}-expertise"
@@ -70,6 +72,7 @@
                             />
                             <label for={`skill-${index}-expertise`}>{t('display.skills.expertise')}</label>
                         </div>
+
                         <div class="flex items-center justify-start">
                             <label for={`skill-${index}-otherBonus`}>{t('bonus')}:</label>
                             <Incrementor
@@ -78,7 +81,7 @@
                                 bind:value={$characterRepository.current.skills[skillIndex(skill)].otherBonus}
                             />
                         </div>
-                    </div>
+                    </Container>
                 </Editable>
             {/each}
         </svelte:fragment>

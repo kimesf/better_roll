@@ -2,12 +2,11 @@
     import i18n from '../../stores/i18n'
     import Title from '../shared/Title.svelte'
     import Attacks from '../character/Attacks.svelte'
+    import Container from '../shared/Container.svelte'
 </script>
 
-<div>
+<Container>
     <Title title={i18n.t('display.actions.attacks')} />
 
-    <hr />
-
     <Attacks />
-</div>
+</Container>

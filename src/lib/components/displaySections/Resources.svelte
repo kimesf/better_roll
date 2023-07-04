@@ -4,28 +4,23 @@
     import Coins from '../character/Coins.svelte'
     import Finite from '../character/Finite.svelte'
     import Recoverable from '../character/Recoverable.svelte'
+    import Container from '../shared/Container.svelte'
 </script>
 
-<div>
+<Container>
     <Title title={i18n.t('display.resources.coins')} />
 
-    <hr />
-
     <Coins />
-</div>
+</Container>
 
-<div>
+<Container>
     <Title title={i18n.t('display.resources.renewable')} />
 
-    <hr />
-
     <Recoverable />
-</div>
+</Container>
 
-<div>
+<Container>
     <Title title={i18n.t('display.resources.finite')} />
 
-    <hr />
-
     <Finite />
-</div>
+</Container>

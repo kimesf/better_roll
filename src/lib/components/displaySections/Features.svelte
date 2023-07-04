@@ -1,13 +1,12 @@
 <script>
-    import i18n from '../../stores/i18n'
+    import { t } from '../../stores/i18n'
     import Features from '../character/Features.svelte'
+    import Container from '../shared/Container.svelte'
     import Title from '../shared/Title.svelte'
 </script>
 
-<div>
-    <Title title={i18n.t('display.features')} />
-
-    <hr />
+<Container>
+    <Title title={t('display.features')} />
 
     <Features />
-</div>
+</Container>

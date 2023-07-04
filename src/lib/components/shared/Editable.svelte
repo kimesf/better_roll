@@ -4,6 +4,7 @@
 </script>
 
 {#if $$slots.default && $canEdit}
+    <!-- TODO: pass class as props -->
     <div transition:slide>
         <slot />
     </div>

@@ -8,6 +8,7 @@
     import characterRepository from '../../stores/characterRepository'
     import Incrementor from '../shared/Incrementor.svelte'
     import Editable from '../shared/Editable.svelte'
+    import Container from '../shared/Container.svelte'
     import { type ComponentType } from 'svelte/internal'
 
     $: mechanics = $characterRepository.current.mechanics
@@ -29,12 +30,12 @@
     ][]
 </script>
 
-<div class="p-2 text-center overflow-y-scroll">
-    <div>
+<Container class="text-center">
+    <Container>
         <Title title={t('display.coreMechanics.hitPoints')} />
 
         {#each hitPoints as hitPoint}
-            <div class="pt-4">
+            <div>
                 <div class="text-sm text-secondary">{t(`display.coreMechanics.hitPoints.${hitPoint}`)}</div>
 
                 <Incrementor
@@ -45,19 +46,17 @@
                 />
             </div>
         {/each}
-    </div>
+    </Container>
 
-    <div class="pt-2">
-        <Separator />
-    </div>
+    <Separator />
 
-    <div class="text-sm">
-        <div class="pt-4">
+    <Container class="text-sm">
+        <div>
             <div class="text-secondary">{t('display.coreMechanics.proficiencyBonus')}</div>
             <div><SignedNumber number={$proficiencyBonus} /></div>
         </div>
 
-        <div class="pt-4">
+        <div>
             <div class="text-secondary">{t('display.coreMechanics.initiative')}</div>
 
             <Editable>
@@ -74,8 +73,11 @@
         </div>
 
         {#each other as [mechanic, component, props]}
-            <div class="pt-4">
-                <div class="text-secondary">{t(`display.coreMechanics.${mechanic}`)}</div>
+            <div>
+                <div class="text-secondary">
+                    {t(`display.coreMechanics.${mechanic}`)}
+                </div>
+
                 <Incrementor
                     id="mechanics-{mechanic}"
                     signClasses="text-4xl"
@@ -89,5 +91,5 @@
                 </Incrementor>
             </div>
         {/each}
-    </div>
-</div>
+    </Container>
+</Container>

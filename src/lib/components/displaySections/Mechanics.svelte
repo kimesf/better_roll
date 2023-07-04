@@ -1,14 +1,12 @@
 <script>
     import i18n from '../../stores/i18n'
     import Title from '../shared/Title.svelte'
-    import Separator from '../shared/Separator.svelte'
     import OtherMechanics from '../character/OtherMechanics.svelte'
+    import Container from '../shared/Container.svelte'
 </script>
 
-<div>
+<Container>
     <Title title={i18n.t('display.mechanics')} />
 
-    <Separator />
-
     <OtherMechanics />
-</div>
+</Container>

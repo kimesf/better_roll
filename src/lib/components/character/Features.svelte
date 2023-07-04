@@ -3,10 +3,10 @@
     import characterRepository from '../../stores/characterRepository'
     import Collapsible from '../shared/Collapsible.svelte'
     import Editable from '../shared/Editable.svelte'
-    import Title from '../shared/Title.svelte'
     import Separator from '../shared/Separator.svelte'
     import type { Feature } from '../../types'
     import BtnAction from '../shared/BtnAction.svelte'
+    import Container from '../shared/Container.svelte'
 
     const DEFAULT: Feature = {
         name: '',
@@ -33,80 +33,78 @@
     }
 </script>
 
-<Title title={t('display.features')} />
+<Container>
+    <Editable>
+        <BtnAction kind=create class="w-full" handler={(_e) => create()}>{t('actions.create')}</BtnAction>
+    </Editable>
 
-<Separator />
+    {#each $characterRepository.current.features as feature, index}
+        <Collapsible>
+            <div slot="title" class="text-xl w-full">
+                <Editable>
+                    <div slot="editing" class="flex justify-between">
+                        <input
+                            id="feature-{index}-name"
+                            type="text"
+                            class="input w-full"
+                            bind:value={feature.name}
+                            placeholder={t('display.missingName')}
+                        />
 
-<Editable>
-    <BtnAction kind=create class="mt-2 w-full" handler={(_e) => create()}>{t('actions.create')}</BtnAction>
-</Editable>
+                        <BtnAction kind=destroy class="w-16 ml-4" handler={(_e) => destroy(index)} />
+                    </div>
 
-{#each $characterRepository.current.features as feature, index}
-    <Collapsible>
-        <div slot="title" class="text-xl my-2 w-full">
-            <Editable>
-                <div slot="editing" class="flex justify-between">
-                    <input
-                        id="feature-{index}-name"
-                        type="text"
-                        class="input w-full"
-                        bind:value={feature.name}
-                        placeholder={t('display.missingName')}
-                    />
+                    <span slot="showing">{feature.name}</span>
+                </Editable>
+            </div>
 
-                    <BtnAction kind=destroy class="w-16 ml-4" handler={(_e) => destroy(index)} />
+            <Container slot="body">
+                <div>
+                    <Editable>
+                        <input
+                            slot="editing"
+                            id="feature-{index}-source"
+                            type="text"
+                            class="input w-full"
+                            bind:value={feature.source}
+                            placeholder={t('display.missingSource')}
+                        />
+
+                        <div slot="showing">
+                            {#if feature.source}
+                                <a
+                                    class="underline text-sky-500"
+                                    href={feature.source}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                >
+                                    {feature.source}
+                                </a>
+                            {:else}
+                                <span>
+                                    {t('display.missingSource')}
+                                </span>
+                            {/if}
+                        </div>
+                    </Editable>
                 </div>
 
-                <span slot="showing">{feature.name}</span>
-            </Editable>
-        </div>
+                <Separator />
 
-        <div slot="body">
-            <div class="p-4">
-                <Editable>
-                    <input
-                        slot="editing"
-                        id="feature-{index}-source"
-                        type="text"
-                        class="input w-full"
-                        bind:value={feature.source}
-                        placeholder={t('display.missingSource')}
-                    />
+                <div>
+                    <Editable>
+                        <textarea
+                            slot="editing"
+                            id="feature-{index}-notes"
+                            class="input w-full"
+                            bind:value={feature.notes}
+                            placeholder={t('display.missingNotes')}
+                        />
 
-                    <div slot="showing">
-                        {#if feature.source}
-                            <a
-                                class="underline text-sky-500"
-                                href={feature.source}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                            >
-                                {feature.source}
-                            </a>
-                        {:else}
-                            <span>
-                                {t('display.missingSource')}
-                            </span>
-                        {/if}
-                    </div>
-                </Editable>
-            </div>
-
-            <Separator />
-
-            <div class="p-4">
-                <Editable>
-                    <textarea
-                        slot="editing"
-                        id="feature-{index}-notes"
-                        class="input w-full"
-                        bind:value={feature.notes}
-                        placeholder={t('display.missingNotes')}
-                    />
-
-                    <span slot="showing">{feature.notes || t('display.missingNotes')}</span>
-                </Editable>
-            </div>
-        </div>
-    </Collapsible>
-{/each}
+                        <span slot="showing">{feature.notes || t('display.missingNotes')}</span>
+                    </Editable>
+                </div>
+            </Container>
+        </Collapsible>
+    {/each}
+</Container>
