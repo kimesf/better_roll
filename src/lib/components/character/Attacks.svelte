@@ -110,7 +110,7 @@
                                 placeholder={t('display.attacks.damage.placeholder')}
                             />
 
-                            <Incrementor id="attack-{index}-damageBonus" signClasses="text-4xl" bind:value={attack.damageBonus} />
+                            <Incrementor id="attack-{index}-damageBonus" bind:value={attack.damageBonus} />
                         </Container>
                     </Container>
 

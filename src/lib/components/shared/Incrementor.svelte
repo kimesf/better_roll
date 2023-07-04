@@ -4,12 +4,11 @@
 
     export let id
     export let contentClasses = ''
-    export let signClasses = ''
     export let value
 </script>
 
-<div class="w-full flex justify-around items-center">
-    <button class:invisible={!$canEdit} class={`text-red-500 ${signClasses}`} on:click={() => value--}> - </button>
+<div class="{$$props.class || ''} w-full flex justify-around items-center">
+    <button class:invisible={!$canEdit} class="text-red-500 text-4xl" on:click={() => value--}> - </button>
 
     <Editable>
         <div slot="editing" class="flex items-center">
@@ -33,5 +32,5 @@
         </span>
     </Editable>
 
-    <button class:invisible={!$canEdit} class={`text-green-500 ${signClasses}`} on:click={() => value++}> + </button>
+    <button class:invisible={!$canEdit} class="text-green-500 text-4xl" on:click={() => value++}> + </button>
 </div>

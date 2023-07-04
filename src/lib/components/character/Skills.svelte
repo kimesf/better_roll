@@ -75,7 +75,6 @@
                         <label for={`skill-${index}-otherBonus`}>{t('bonus')}:</label>
                         <Incrementor
                             id="skill-{index}-otherBonus"
-                            signClasses={'text-4xl'}
                             bind:value={$characterRepository.current.skills[skillIndex(skill)].otherBonus}
                         />
                     </div>

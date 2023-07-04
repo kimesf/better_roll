@@ -63,7 +63,6 @@
 
             <Incrementor
                 id="spellMechanics-hitBonus"
-                signClasses="text-4xl"
                 bind:value={$characterRepository.current.spellMechanics.hitBonus}
             >
                 <span class="text-4xl"><SignedNumber number={spellAttack} /></span>
@@ -80,7 +79,6 @@
             <Incrementor
                 id="spellMechanics-saveDifficultyBonus"
                 contentClasses="text-4xl"
-                signClasses="text-4xl"
                 bind:value={$characterRepository.current.spellMechanics.saveDifficultyBonus}
             >
                 <span class="text-4xl">{spellSaveDifficulty}</span>
@@ -112,7 +110,6 @@
             <Incrementor
                 id="spellMechanics-availablePerDay"
                 contentClasses="text-4xl"
-                signClasses="text-4xl"
                 bind:value={$characterRepository.current.spellMechanics.availablePerDay}
             />
 
@@ -138,7 +135,6 @@
                 <Incrementor
                     id="spellMechanics-slots-{index}-current"
                     contentClasses="text-4xl"
-                    signClasses="text-4xl"
                     bind:value={slot.current}
                 >
                     <span class="text-4xl">{slot.current}/{slot.total}</span>

@@ -38,7 +38,7 @@
                         placeholder={t('display.missingName')}
                     />
 
-                    <Incrementor id="level" signClasses="text-4xl"  bind:value={$characterRepository.current.level}/>
+                    <Incrementor id="level" bind:value={$characterRepository.current.level}/>
 
                     <input
                         id="lineages"

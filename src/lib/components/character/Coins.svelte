@@ -11,12 +11,11 @@
             {i18n.t(`display.resources.coins.${coin}`)}
         </h1>
 
-        <div class="grow basis-0 text-6xl">
-            <Incrementor
-                id={coin}
-                contentClasses="text-4xl"
-                bind:value={$characterRepository.current.resources.coins[coin]}
-            />
-        </div>
+        <Incrementor
+            id={coin}
+            contentClasses="text-4xl"
+            class="grow basis-0 text-6xl"
+            bind:value={$characterRepository.current.resources.coins[coin]}
+        />
     </div>
 {/each}

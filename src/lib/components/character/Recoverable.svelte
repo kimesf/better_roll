@@ -64,19 +64,21 @@
                 </span>
             </div>
 
-            <div class="grow basis-0 flex text-4xl justify-between">
-                <Incrementor id="recoverable-{index}-current" bind:value={recoverable.current}>
-                    <input
-                        slot=extra
-                        id="recoverable-{index}-total"
-                        type="text"
-                        class="input w-12 text-center"
-                        bind:value={recoverable.total}
-                    />
+            <Incrementor
+                id="recoverable-{index}-current"
+                class="grow basis-0 flex text-4xl justify-between"
+                bind:value={recoverable.current}
+                >
+                <input
+                    slot=extra
+                    id="recoverable-{index}-total"
+                    type="text"
+                    class="input w-12 text-center"
+                    bind:value={recoverable.total}
+                />
 
-                    <span class="text-4xl">{recoverable.current}/{recoverable.total}</span>
-                </Incrementor>
-            </div>
+                <span class="text-4xl">{recoverable.current}/{recoverable.total}</span>
+            </Incrementor>
         </div>
 
         <Container slot="body">

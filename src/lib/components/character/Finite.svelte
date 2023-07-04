@@ -68,22 +68,22 @@
                     <span slot="showing">{finite.name}</span>
                 </Editable>
 
+                <Incrementor
+                    id="finite-{index}-amount"
+                    class="grow basis-0 flex text-4xl justify-between"
+                    bind:value={finite.amount}
+                >
+                    <input
+                        slot=extra
+                        id="finite-{index}-unity"
+                        type="text"
+                        class="input w-8 text-center"
+                        bind:value={finite.unity}
+                        placeholder={t('display.resources.finite.unity.placeholder')}
+                    />
 
-                <div class="grow basis-0 flex text-4xl justify-between">
-                    <!-- TODO: prop class to incrementor -->
-                    <Incrementor id="finite-{index}-amount" bind:value={finite.amount}>
-                        <input
-                            slot=extra
-                            id="finite-{index}-unity"
-                            type="text"
-                            class="input w-8 text-center"
-                            bind:value={finite.unity}
-                            placeholder={t('display.resources.finite.unity.placeholder')}
-                        />
-
-                        <span>{finite.amount}{finite.unity}</span>
-                    </Incrementor>
-                </div>
+                    <span>{finite.amount}{finite.unity}</span>
+                </Incrementor>
             </div>
 
             <Container slot="body">

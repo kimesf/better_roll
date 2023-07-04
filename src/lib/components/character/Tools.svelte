@@ -84,7 +84,7 @@
 
         <div class="flex items-center justify-start">
             <label for={`tool-${index}-otherBonus`}>{t('bonus')}:</label>
-            <Incrementor id="tool-{index}-otherBonus" signClasses={'text-4xl'} bind:value={tool.otherBonus} />
+            <Incrementor id="tool-{index}-otherBonus" bind:value={tool.otherBonus} />
         </div>
 
         <Separator />

@@ -40,7 +40,6 @@
 
                 <Incrementor
                     id="attributes-hitPoints-{hitPoint}"
-                    signClasses="text-4xl"
                     contentClasses={['total', 'current'].includes(hitPoint) ? 'text-4xl' : ''}
                     bind:value={$characterRepository.current.mechanics.hitPoints[hitPoint]}
                 />
@@ -65,7 +64,6 @@
 
             <Incrementor
                 id={`mechanics-initiative`}
-                signClasses="text-4xl"
                 bind:value={$characterRepository.current.mechanics.bonusInitiative}
             >
                 <SignedNumber number={initiativeBonus} />
@@ -80,7 +78,6 @@
 
                 <Incrementor
                     id="mechanics-{mechanic}"
-                    signClasses="text-4xl"
                     bind:value={$characterRepository.current.mechanics[mechanic]}
                 >
                     {#if component}
