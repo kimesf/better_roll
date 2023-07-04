@@ -1,47 +1,80 @@
-# Svelte + TS + Vite
+# Better Roll
 
-This template should help get you started developing with Svelte and TypeScript in Vite.
+> ### A simple D&D character sheet designed for mobile as a databaseless web application
 
-## Recommended IDE Setup
+Live on [better-roll.vercel.app](better-roll.vercel.app)
 
-[VS Code](https://code.visualstudio.com/) + [Svelte](https://marketplace.visualstudio.com/items?itemName=svelte.svelte-vscode).
+## Why?
 
-## Need an official Svelte framework?
+I wanted to create a simple, straight forward and free character sheet solution for my D&D games.
 
-Check out [SvelteKit](https://github.com/sveltejs/kit#readme), which is also powered by Vite. Deploy anywhere with its serverless-first approach and adapt to various platforms, with out of the box support for TypeScript, SCSS, and Less, and easily-added support for mdsvex, GraphQL, PostCSS, Tailwind CSS, and more.
+I didn't mind it to be low automation. There would be no backend, user authentication or anything else. It's like the goal was to have a paper character sheet on my phone. I would do my best for it to be intuitive and ergonomic in use.
 
-## Technical considerations
+I would learn Svelte along the way.
 
-**Why use this over SvelteKit?**
+## Remember to save your characters
 
-- It brings its own routing solution which might not be preferable for some users.
-- It is first and foremost a framework that just happens to use Vite under the hood, not a Vite app.
+***A `json` file with all your characters can be downloaded at `menu > characters > save`***
 
-This template contains as little as possible to get started with Vite + TypeScript + Svelte, while taking into account the developer experience with regards to HMR and intellisense. It demonstrates capabilities on par with the other `create-vite` templates and is a good starting point for beginners dipping their toes into a Vite + Svelte project.
+This application does not have a database. It relies on your browser [local storage](https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage) to persist data. That means you could lose your characters data forever if your browser cache gets cleaned. It also means your characters are reserved to the device they were created.
 
-Should you later need the extended capabilities and extensibility provided by SvelteKit, the template has been structured similarly to SvelteKit so that it is easy to migrate.
+Having the `json` save file allows you to:
 
-**Why `global.d.ts` instead of `compilerOptions.types` inside `jsconfig.json` or `tsconfig.json`?**
+- Restore your characters if your browser cache is cleaned up.
+- Restore your characters to a previous state.
+- Move your characters between different devices.
 
-Setting `compilerOptions.types` shuts out all other types not explicitly listed in the configuration. Using triple-slash references keeps the default TypeScript setting of accepting type information from the entire workspace, while also adding `svelte` and `vite/client` type information.
+## Local Server
 
-**Why include `.vscode/extensions.json`?**
+### Prerequisites
 
-Other templates indirectly recommend extensions via the README, but this file allows VS Code to prompt the user to install the recommended extension upon opening the project.
+- Node.js 20.2.0
 
-**Why enable `allowJs` in the TS template?**
+[:link: Install with asdf](https://github.com/asdf-vm/asdf-nodejs)
 
-While `allowJs: false` would indeed prevent the use of `.js` files in the project, it does not prevent the use of JavaScript syntax in `.svelte` files. In addition, it would force `checkJs: false`, bringing the worst of both worlds: not being able to guarantee the entire codebase is TypeScript, and also having worse typechecking for the existing JavaScript. In addition, there are valid use cases in which a mixed codebase may be relevant.
+Clone.
 
-**Why is HMR not preserving my local component state?**
-
-HMR state preservation comes with a number of gotchas! It has been disabled by default in both `svelte-hmr` and `@sveltejs/vite-plugin-svelte` due to its often surprising behavior. You can read the details [here](https://github.com/rixo/svelte-hmr#svelte-hmr).
-
-If you have state that's important to retain within a component, consider creating an external store which would not be replaced by HMR.
-
-```ts
-// store.ts
-// An extremely simple external store
-import { writable } from 'svelte/store'
-export default writable(0)
+```shell
+git clone git@github.com:kimesf/better_roll.git
 ```
+
+Open.
+
+```shell
+cd better_roll
+```
+
+Install dependencies.
+
+```shell
+npm install
+```
+
+Run development server.
+
+```shell
+npm run dev
+```
+
+Open [localhost:5173](localhost:5173) in your browser.
+
+## TODO: Improvements
+
+### TODO: UX and Features
+
+- TODO: Ordering lists
+- TODO: Adding spells
+- TODO: Possible actions list
+- TODO: Having current available spells in one place (different views for spells)
+
+### TODO: Tech
+
+- TODO: Tests.
+- Better handling of character update logic. I would prefer character components not to be responsable for the update logic of the current select character.
+- TODO: SSR needed? Cache whole app for when there is no internet. It's not needed anyway.
+
+---
+
+## Any questions or suggestions?
+
+Open an issue and I`ll happily respond :smiley:
