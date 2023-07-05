@@ -56,23 +56,23 @@
 
                     <Input
                         type="checkbox"
-                        id="skill-{index}-proficiency"
+                        id="skill-{attr}-{index}-proficiency"
                         label={t('display.skills.proficiency')}
                         bind:checked={$characterRepository.current.skills[skillIndex(skill)].proficiency}
                     />
 
                     <Input
                         type="checkbox"
-                        id="skill-{index}-expertise"
+                        id="skill-{attr}-{index}-expertise"
                         label={t('display.skills.expertise')}
                         bind:checked={$characterRepository.current.skills[skillIndex(skill)].expertise}
                     />
 
                     <!-- TODO: label to incrementor -->
                     <div class="flex items-center justify-start">
-                        <label for={`skill-${index}-otherBonus`}>{t('bonus')}:</label>
+                        <label for="skill-{attr}-{index}-otherBonus">{t('bonus')}:</label>
                         <Incrementor
-                            id="skill-{index}-otherBonus"
+                            id="skill-{attr}-{index}-otherBonus"
                             bind:value={$characterRepository.current.skills[skillIndex(skill)].otherBonus}
                         />
                     </div>
