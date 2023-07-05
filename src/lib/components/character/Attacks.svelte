@@ -76,9 +76,9 @@
                 </Editable>
 
                 <span class="text-xl">
-                    {#if attackHitBonus(attack) > 0}
+                    {#if attackHitBonus(attack) != 0}
                         <SignedNumber number={attackHitBonus(attack)} />
-                        {attack.damage}{#if attackDamageBonus(attack) > 0}<SignedNumber
+                        {attack.damage}{#if attackDamageBonus(attack) != 0}<SignedNumber
                                 number={attackDamageBonus(attack)}
                             />{/if}
                     {:else}
