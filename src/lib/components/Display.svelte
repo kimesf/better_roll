@@ -39,16 +39,7 @@
     let menuVisible = false
 </script>
 
-<Main />
-
 <EditToggler />
-
-<button
-    class="fixed bottom-0 w-screen p-4 text-2xl text-center uppercase bg-black"
-    on:click={() => (menuVisible = true)}
->
-    menu
-</button>
 
 {#each pageKeys as key}
     {#if visible == key}
@@ -89,3 +80,12 @@
         </div>
     </div>
 {/if}
+
+<Main />
+
+<button
+    class="fixed bottom-0 w-screen p-4 text-2xl text-center uppercase bg-black"
+    on:click={() => (menuVisible = true)}
+>
+    menu
+</button>

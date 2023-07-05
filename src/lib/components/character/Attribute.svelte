@@ -9,8 +9,8 @@
     export let attr: Attribute
 </script>
 
-<div class="w-full flex items-center justify-between">
-    <span class="grow basis-0 text-2xl uppercase">
+<div class="w-full flex items-center justify-between text-2xl">
+    <span class="grow basis-0 uppercase">
         {t(`attributes.${attr}`)}
     </span>
 
@@ -18,14 +18,14 @@
         <SignedNumber number={$attributesModifiers[attr]} />
     </span>
 
-    <Editable class="grow basis-0 text-2xl text-secondary">
-        <span slot="showing">({$characterRepository.current.attributes[attr]})</span>
+    <Editable class="grow basis-0">
+        <span slot="showing" class="text-secondary">({$characterRepository.current.attributes[attr]})</span>
 
         <input
             slot="editing"
             id="attributes-{attr}"
             type="number"
-            class="input w-12 text-primary text-center"
+            class="input w-12 text-center"
             bind:value={$characterRepository.current.attributes[attr]}
         />
     </Editable>

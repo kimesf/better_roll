@@ -64,13 +64,13 @@
 
     {#each $characterRepository.current.attacks as attack, index}
         <Collapsible>
-            <div slot="title" class="flex flex-col text-left w-full">
+            <Container slot="title">
                 <Editable>
-                    <div slot="editing" class="flex">
+                    <Container row slot="editing">
                         <input id="attack-{index}-name" type="text" class="input w-full" bind:value={attack.name} />
 
-                        <BtnAction kind="destroy" class="w-16 ml-2" handler={(_e) => destroy(index)} />
-                    </div>
+                        <BtnAction kind="destroy" class="w-16" handler={(_e) => destroy(index)} />
+                    </Container>
 
                     <span slot="showing">{attack.name}</span>
                 </Editable>
@@ -78,16 +78,15 @@
                 <span class="text-xl">
                     {#if attackHitBonus(attack) != 0}
                         <SignedNumber number={attackHitBonus(attack)} />
-                        {attack.damage}{#if attackDamageBonus(attack) != 0}<SignedNumber
-                                number={attackDamageBonus(attack)}
-                            />{/if}
-                    {:else}
-                        {attack.damage}
+                    {/if}
+
+                    {attack.damage}{#if attackDamageBonus(attack) != 0}
+                        <SignedNumber number={attackDamageBonus(attack)} />
                     {/if}
 
                     <span class="text-sm text-secondary">{attack.damageType}</span>
                 </span>
-            </div>
+            </Container>
 
             <Editable slot="body">
                 <span slot="showing">{attack.notes}</span>
@@ -139,8 +138,10 @@
                                         {#each ATTRIBUTES as attribute}
                                             <option value={attribute}>{t(`attributes.${attribute}`)}</option>
                                         {/each}
+
                                         <option value={null}>{t('none')}</option>
                                     </select>
+
                                     <span class="text-secondary">{t('attribute')}</span>
                                 </div>
 
@@ -153,12 +154,14 @@
                                         class="input w-12 text-center"
                                         bind:value={attack.hitBonus}
                                     />
+
                                     <span class="text-secondary">{t('bonus')}</span>
                                 </div>
                             </div>
 
                             <div class="mr-8">
                                 <span class="text-4xl">=</span>
+
                                 <span class="text-8xl">{attackHitBonus(attack)}</span>
                             </div>
                         </div>

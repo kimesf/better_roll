@@ -1,5 +1,5 @@
 <script lang="ts">
-    import i18n from '../../stores/i18n'
+    import { t } from '../../stores/i18n'
     import Title from '../shared/Title.svelte'
     import DistanceNumber from '../shared/DistanceNumber.svelte'
     import WeightNumber from '../shared/WeightNumber.svelte'
@@ -13,31 +13,29 @@
 </script>
 
 <Container>
-    <div>
-        <Title title={i18n.t('display.skills.jump')} />
+    <Title title={t('display.skills.jump')} />
 
-        <div>
-            <p class="text-sm text-secondary">{i18n.t('display.skills.distance')}</p>
-            <p><DistanceNumber distanceInFeet={jumpDistanceInFeet} /></p>
-        </div>
-
-        <div>
-            <p class="text-sm text-secondary">{i18n.t('display.skills.height')}</p>
-            <p><DistanceNumber distanceInFeet={jumpHeightInFeet} /></p>
-        </div>
+    <div >
+        <p class="text-sm text-secondary">{t('display.skills.distance')}</p>
+        <DistanceNumber distanceInFeet={jumpDistanceInFeet} />
     </div>
 
     <div>
-        <Title title={i18n.t('display.skills.atletics')} />
+        <p class="text-sm text-secondary">{t('display.skills.height')}</p>
+        <DistanceNumber distanceInFeet={jumpHeightInFeet} />
+    </div>
+</Container>
 
-        <div>
-            <p class="text-sm text-secondary">{i18n.t('display.skills.pushAndPull')}</p>
-            <p><WeightNumber weightInPounds={pushAndPullInPounds} /></p>
-        </div>
+<Container>
+    <Title title={t('display.skills.atletics')} />
 
-        <div>
-            <p class="text-sm text-secondary">{i18n.t('display.skills.maxLoad')}</p>
-            <p><WeightNumber weightInPounds={maxLoadInPounds} /></p>
-        </div>
+    <div>
+        <p class="text-sm text-secondary">{t('display.skills.pushAndPull')}</p>
+        <WeightNumber weightInPounds={pushAndPullInPounds} />
+    </div>
+
+    <div>
+        <p class="text-sm text-secondary">{t('display.skills.maxLoad')}</p>
+        <WeightNumber weightInPounds={maxLoadInPounds} />
     </div>
 </Container>

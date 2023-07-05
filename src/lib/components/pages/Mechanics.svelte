@@ -7,6 +7,5 @@
 
 <Container>
     <Title title={i18n.t('display.mechanics')} />
-
     <OtherMechanics />
 </Container>

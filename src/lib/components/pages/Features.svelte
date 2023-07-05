@@ -7,6 +7,5 @@
 
 <Container>
     <Title title={t('display.features')} />
-
     <Features />
 </Container>

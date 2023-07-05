@@ -65,6 +65,7 @@
                 {#each ATTRIBUTES as attribute}
                     <option value={attribute}>{t(`attributes.${attribute}`)}</option>
                 {/each}
+
                 <option value={null}>{t('none')}</option>
             </select>
 

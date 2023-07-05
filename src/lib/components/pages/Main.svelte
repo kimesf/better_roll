@@ -1,5 +1,5 @@
 <script lang="ts">
-    import i18n, { t } from '../../stores/i18n'
+    import { t } from '../../stores/i18n'
     import Collapsible from '../shared/Collapsible.svelte'
     import CoreMechanics from '../character/CoreMechanics.svelte'
     import Skills from '../character/Skills.svelte'
@@ -17,62 +17,54 @@
 
 <div class="flex">
     <div class="basis-2/5 h-screen overflow-y-scroll p-2 pb-20">
-        <div>
-            <CoreMechanics />
-        </div>
+        <CoreMechanics />
     </div>
 
     <div class="basis-3/5 h-screen overflow-y-scroll p-2 pb-20 bg-secondary">
-        <div class="text-center">
-            <Editable>
-                <span slot="showing">
-                    <Basics {character} />
-                </span>
+        <Editable class="text-center">
+            <Basics slot="showing" {character} />
 
-                <Container>
-                    <input
-                        id="name"
-                        type="text"
-                        class="input w-full"
-                        bind:value={$characterRepository.current.name}
-                        placeholder={t('display.missingName')}
-                    />
+            <Container slot="editing">
+                <input
+                    id="name"
+                    type="text"
+                    class="input w-full"
+                    bind:value={$characterRepository.current.name}
+                    placeholder={t('display.missingName')}
+                />
 
-                    <Incrementor id="level" bind:value={$characterRepository.current.level} />
+                <Incrementor id="level" bind:value={$characterRepository.current.level} />
 
-                    <input
-                        id="lineages"
-                        type="text"
-                        class="input w-full"
-                        bind:value={$characterRepository.current.lineages}
-                    />
+                <input
+                    id="lineages"
+                    type="text"
+                    class="input w-full"
+                    bind:value={$characterRepository.current.lineages}
+                />
 
-                    <input
-                        id="classes"
-                        type="text"
-                        class="input w-full"
-                        bind:value={$characterRepository.current.classes}
-                    />
-                </Container>
-            </Editable>
-        </div>
+                <input
+                    id="classes"
+                    type="text"
+                    class="input w-full"
+                    bind:value={$characterRepository.current.classes}
+                />
+            </Container>
+        </Editable>
 
-        <div class="flex flex-col">
-            <Skills />
+        <Skills />
 
-            <Collapsible>
-                <div slot="title" class="text-2xl capitalize">
-                    {i18n.t('display.other')}
-                </div>
+        <Collapsible>
+            <span slot="title" class="text-2xl capitalize">
+                {t('display.other')}
+            </span>
 
-                <Container slot="body">
-                    <Tools />
+            <Container slot="body">
+                <Tools />
 
-                    <Proficiencies />
+                <Proficiencies />
 
-                    <Atletics />
-                </Container>
-            </Collapsible>
-        </div>
+                <Atletics />
+            </Container>
+        </Collapsible>
     </div>
 </div>
