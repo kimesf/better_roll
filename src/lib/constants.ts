@@ -2,7 +2,7 @@ import type { Attribute, Level, ProficiencyBonus, Coin, SpellCircle, School } fr
 
 export const ATTRIBUTES: Attribute[] = ['str', 'dex', 'con', 'int', 'wis', 'cha']
 
-export const SPELL_CIRCLES: SpellCircle[] = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+export const SPELL_CIRCLES: SpellCircle[] = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
 
 export const SCHOOLS: School[] = [
     'abjuration',
