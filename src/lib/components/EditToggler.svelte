@@ -6,7 +6,7 @@
 
 <Draggable class="z-30" top={12}>
     <button
-        class="rounded-full"
+        class="rounded-full shadow-xl"
         class:bg-blue-500={!$canEdit}
         class:bg-green-500={$canEdit}
         on:click={() => canEdit.toggle()}

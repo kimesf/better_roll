@@ -3,6 +3,7 @@
     import characterRepository from '../../stores/characterRepository'
     import Editable from '../shared/Editable.svelte'
     import Container from '../shared/Container.svelte'
+    import Input from '../shared/Input.svelte'
 
     const proficiencies: ('weapons' | 'armors' | 'languages')[] = ['weapons', 'armors', 'languages']
 </script>
@@ -13,10 +14,10 @@
             <div class="text-secondary">{i18n.t(`display.skills.${proficiency}`)}</div>
 
             <Editable>
-                <textarea
+                <Input
                     slot="editing"
+                    type="textarea"
                     id="proficiency-{proficiency}"
-                    class="input w-full"
                     bind:value={$characterRepository.current[proficiency]}
                 />
 

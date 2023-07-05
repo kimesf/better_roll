@@ -1,5 +1,6 @@
 <script lang="ts">
     import { t } from '../../stores/i18n'
+    import Input from './Input.svelte'
 
     export let suggestions
     export let value
@@ -7,7 +8,7 @@
 </script>
 
 <div class="grid gap-1 grid-cols-2">
-    <input type="text" {id} class="input col-span-2 w-full" bind:value placeholder={t('other')} />
+    <Input type="text" {id} class="col-span-2" bind:value placeholder={t('other')} />
 
     {#each suggestions as suggestion}
         <button

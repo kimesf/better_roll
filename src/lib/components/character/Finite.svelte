@@ -9,6 +9,7 @@
     import BtnAction from '../shared/BtnAction.svelte'
     import Incrementor from '../shared/Incrementor.svelte'
     import Container from '../shared/Container.svelte'
+    import Input from '../shared/Input.svelte'
 
     const DEFAULT: Finite = {
         name: '',
@@ -57,11 +58,10 @@
         <Collapsible>
             <div slot="title" class="flex w-full justify-between">
                 <Editable class="grow basis-0 flex items-center text-left">
-                    <input
+                    <Input
                         slot="editing"
-                        id="finite-{index}-name"
                         type="text"
-                        class="input w-36"
+                        id="finite-{index}-name"
                         bind:value={finite.name}
                     />
 
@@ -73,11 +73,11 @@
                     class="grow basis-0 flex text-4xl justify-between"
                     bind:value={finite.amount}
                 >
-                    <input
+                    <Input
                         slot="extra"
-                        id="finite-{index}-unity"
                         type="text"
-                        class="input w-8 text-center"
+                        id="finite-{index}-unity"
+                        class="w-8 text-center"
                         bind:value={finite.unity}
                         placeholder={t('display.resources.finite.unity.placeholder')}
                     />
@@ -94,11 +94,10 @@
                 </Editable>
 
                 <Editable>
-                    <input
+                    <Input
                         slot="editing"
-                        id="finite-{index}-source"
                         type="text"
-                        class="input w-full"
+                        id="finite-{index}-source"
                         bind:value={finite.source}
                         placeholder={t('display.missingSource')}
                     />
@@ -124,10 +123,10 @@
                 <Separator />
 
                 <Editable>
-                    <textarea
+                    <Input
                         slot="editing"
+                        type="textarea"
                         id="finite-{index}-notes"
-                        class="input w-full"
                         bind:value={finite.notes}
                         placeholder={t('display.missingNotes')}
                     />

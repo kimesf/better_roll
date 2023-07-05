@@ -7,6 +7,7 @@
     import type { Feature } from '../../types'
     import BtnAction from '../shared/BtnAction.svelte'
     import Container from '../shared/Container.svelte'
+    import Input from '../shared/Input.svelte'
 
     const DEFAULT: Feature = {
         name: '',
@@ -46,10 +47,9 @@
                 </span>
 
                 <div slot="editing" class="flex justify-between">
-                    <input
-                        id="feature-{index}-name"
+                    <Input
                         type="text"
-                        class="input w-full"
+                        id="feature-{index}-name"
                         bind:value={feature.name}
                         placeholder={t('display.missingName')}
                     />
@@ -77,11 +77,10 @@
                         {/if}
                     </div>
 
-                    <input
+                    <Input
                         slot="editing"
-                        id="feature-{index}-source"
                         type="text"
-                        class="input w-full"
+                        id="feature-{index}-source"
                         bind:value={feature.source}
                         placeholder={t('display.missingSource')}
                     />
@@ -92,10 +91,10 @@
                 <Editable>
                     <span slot="showing">{feature.notes || t('display.missingNotes')}</span>
 
-                    <textarea
+                    <Input
                         slot="editing"
+                        type="textarea"
                         id="feature-{index}-notes"
-                        class="input w-full"
                         bind:value={feature.notes}
                         placeholder={t('display.missingNotes')}
                     />

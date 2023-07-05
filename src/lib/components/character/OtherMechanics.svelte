@@ -5,6 +5,7 @@
     import BtnAction from '../shared/BtnAction.svelte'
     import type { Mechanic } from '../../types'
     import Container from '../shared/Container.svelte'
+    import Input from '../shared/Input.svelte'
 
     const DEFAULT: Mechanic = {
         name: '',
@@ -39,15 +40,12 @@
         <Editable>
             <Container row slot="editing">
                 <BtnAction kind="destroy" class="w-16" handler={(_e) => destroy(index)} />
-
-                <input id="mechanic-{index}-name" type="text" class="input w-full" bind:value={mechanic.name} />
-
-                <input id="mechanic-{index}-value" type="text" class="input w-full" bind:value={mechanic.value} />
+                <Input type="text" id="mechanic-{index}-name" bind:value={mechanic.name} />
+                <Input type="text" id="mechanic-{index}-value" bind:value={mechanic.value} />
             </Container>
 
             <Container row slot="showing" class="justify-between items-center">
                 <span>{mechanic.name}</span>
-
                 <span class="text-2xl">{mechanic.value}</span>
             </Container>
         </Editable>

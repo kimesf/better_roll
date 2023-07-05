@@ -8,6 +8,7 @@
     import Collapsible from './shared/Collapsible.svelte'
     import type { Character } from '../types'
     import Container from './shared/Container.svelte'
+    import Input from './shared/Input.svelte'
 
     const { select, create, destroy } = characterRepository
 
@@ -79,7 +80,7 @@
         <div slot="title" class="capitalize text-lg">{t('selection.restore')}</div>
 
         <div slot="body">
-            <input type="file" accept="application/json" class="input w-full mb-1 basis-2/3" bind:files />
+            <Input id="restore" type="file" accept="application/json" class="mb-1 basis-2/3" bind:files />
 
             <BtnAction
                 kind="update"

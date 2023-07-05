@@ -9,6 +9,7 @@
     import Editable from '../shared/Editable.svelte'
     import { ATTRIBUTES } from '../../constants'
     import BtnAction from '../shared/BtnAction.svelte'
+    import Input from '../shared/Input.svelte'
 
     const toolModifier = ({ attribute, expertise, otherBonus }: Tool): number => {
         const attributeBonus = attribute ? $attributesModifiers[attribute] : 0
@@ -53,7 +54,7 @@
         </div>
 
         <Editable>
-            <input slot="editing" id="tool-{index}-name" type="text" class="input w-full" bind:value={tool.name} />
+            <Input slot="editing" type="text" id="tool-{index}-name" bind:value={tool.name} />
 
             <span slot="showing">{tool.name}</span>
         </Editable>
@@ -61,22 +62,25 @@
 
     <Editable>
         <div class="flex justify-between">
-            <select id="tool-{index}-attribute" class="input" bind:value={tool.attribute}>
-                {#each ATTRIBUTES as attribute}
-                    <option value={attribute}>{t(`attributes.${attribute}`)}</option>
-                {/each}
-
-                <option value={null}>{t('none')}</option>
-            </select>
+            <!-- TODO: move there options somewhere else, constants? -->
+            <Input
+                type="select"
+                id="tool-{index}-attribute"
+                options={[...ATTRIBUTES.map(attr => [attr, t(`attributes.${attr}`)]), [null, t('none')]]}
+                bind:value={tool.attribute}
+            />
 
             <BtnAction kind="destroy" class="w-16" handler={(_e) => destroy(index)} />
         </div>
 
-        <div>
-            <input id="tool-{index}-expertise" type="checkbox" bind:checked={tool.expertise} />
-            <label for={`skill-${index}-expertise`}>{t('display.skills.expertise')}</label>
-        </div>
+        <Input
+            type="checkbox"
+            id="tool-{index}-expertise"
+            label={t('display.skills.expertise')}
+            bind:checked={tool.expertise}
+        />
 
+        <!-- TODO: incrementor with label -->
         <div class="flex items-center justify-start">
             <label for={`tool-${index}-otherBonus`}>{t('bonus')}:</label>
             <Incrementor id="tool-{index}-otherBonus" bind:value={tool.otherBonus} />

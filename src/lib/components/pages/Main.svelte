@@ -11,6 +11,7 @@
     import Incrementor from '../shared/Incrementor.svelte'
     import Basics from '../character/Basics.svelte'
     import Container from '../shared/Container.svelte'
+    import Input from '../shared/Input.svelte'
 
     $: character = $characterRepository.current
 </script>
@@ -25,29 +26,15 @@
             <Basics slot="showing" {character} />
 
             <Container slot="editing">
-                <input
-                    id="name"
+                <Input
                     type="text"
-                    class="input w-full"
+                    id="name"
                     bind:value={$characterRepository.current.name}
                     placeholder={t('display.missingName')}
                 />
-
                 <Incrementor id="level" bind:value={$characterRepository.current.level} />
-
-                <input
-                    id="lineages"
-                    type="text"
-                    class="input w-full"
-                    bind:value={$characterRepository.current.lineages}
-                />
-
-                <input
-                    id="classes"
-                    type="text"
-                    class="input w-full"
-                    bind:value={$characterRepository.current.classes}
-                />
+                <Input type="text" id="lineages" bind:value={$characterRepository.current.lineages} />
+                <Input type="text" id="classes" bind:value={$characterRepository.current.classes} />
             </Container>
         </Editable>
 

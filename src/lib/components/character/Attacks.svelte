@@ -9,6 +9,7 @@
     import Container from '../shared/Container.svelte'
     import Editable from '../shared/Editable.svelte'
     import Incrementor from '../shared/Incrementor.svelte'
+    import Input from '../shared/Input.svelte'
     import Separator from '../shared/Separator.svelte'
     import SignedNumber from '../shared/SignedNumber.svelte'
     import Title from '../shared/Title.svelte'
@@ -67,7 +68,7 @@
             <Container slot="title">
                 <Editable>
                     <Container row slot="editing">
-                        <input id="attack-{index}-name" type="text" class="input w-full" bind:value={attack.name} />
+                        <Input type="text" id="attack-{index}-name" bind:value={attack.name} />
 
                         <BtnAction kind="destroy" class="w-16" handler={(_e) => destroy(index)} />
                     </Container>
@@ -96,10 +97,9 @@
                         <Title title={t('display.attacks.damage')} />
 
                         <Container row class="items-center">
-                            <input
+                            <Input
                                 type="text"
                                 id="attack-{index}-damage"
-                                class="input w-full"
                                 bind:value={attack.damage}
                                 placeholder={t('display.attacks.damage.placeholder')}
                             />
@@ -111,10 +111,9 @@
                     <Container>
                         <Title title={t('display.attacks.damageType')} />
 
-                        <input
+                        <Input
                             type="text"
                             id="attack-{index}-damageType"
-                            class="input w-full"
                             bind:value={attack.damageType}
                             placeholder={t('display.attacks.damageType.placeholder')}
                         />
@@ -127,20 +126,23 @@
                             <div>
                                 <div>
                                     {$proficiencyBonus}
-                                    <input type="checkbox" bind:checked={attack.addProficiency} />
+                                    <Input
+                                        type="checkbox"
+                                        id="attack-{index}-addProficiency"
+                                        bind:checked={attack.addProficiency}
+                                    />
                                     <span class="text-secondary text-sm">{t('display.attacks.addProficiency')}</span>
                                 </div>
 
                                 <div class="text-4xl">+</div>
 
                                 <div>
-                                    <select id="attack-{index}-attribute" class="input" bind:value={attack.attribute}>
-                                        {#each ATTRIBUTES as attribute}
-                                            <option value={attribute}>{t(`attributes.${attribute}`)}</option>
-                                        {/each}
-
-                                        <option value={null}>{t('none')}</option>
-                                    </select>
+                                    <Input
+                                        type="select"
+                                        id="attack-{index}-attribute"
+                                        options={[...ATTRIBUTES.map(attr => [attr, t(`attributes.${attr}`)]), [null, t('none')]]}
+                                        bind:value={attack.attribute}
+                                    />
 
                                     <span class="text-secondary">{t('attribute')}</span>
                                 </div>
@@ -148,10 +150,9 @@
                                 <div class="text-4xl">+</div>
 
                                 <div>
-                                    <input
+                                    <Input
                                         id="attack-{index}-hitBonus"
                                         type="number"
-                                        class="input w-12 text-center"
                                         bind:value={attack.hitBonus}
                                     />
 
@@ -169,9 +170,9 @@
 
                     <Separator />
 
-                    <textarea
+                    <Input
+                        type="textarea"
                         id="attack-{index}-notes"
-                        class="input w-full"
                         bind:value={attack.notes}
                         placeholder={t('display.missingNotes')}
                     />

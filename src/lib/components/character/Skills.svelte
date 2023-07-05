@@ -11,6 +11,7 @@
     import { t } from '../../stores/i18n'
     import Incrementor from '../shared/Incrementor.svelte'
     import Separator from '../shared/Separator.svelte'
+    import Input from '../shared/Input.svelte'
 
     const skillModifier = ({ attribute, proficiency, expertise, otherBonus }: Skill): number => {
         return (
@@ -53,24 +54,21 @@
                 <Editable class="text-secondary text-sm">
                     <Separator />
 
-                    <div>
-                        <input
-                            id="skill-{index}-proficiency"
-                            type="checkbox"
-                            bind:checked={$characterRepository.current.skills[skillIndex(skill)].proficiency}
-                        />
-                        <label for={`skill-${index}-proficiency`}>{t('display.skills.proficiency')}</label>
-                    </div>
+                    <Input
+                        type="checkbox"
+                        id="skill-{index}-proficiency"
+                        label={t('display.skills.proficiency')}
+                        bind:checked={$characterRepository.current.skills[skillIndex(skill)].proficiency}
+                    />
 
-                    <div>
-                        <input
-                            id="skill-{index}-expertise"
-                            type="checkbox"
-                            bind:checked={$characterRepository.current.skills[skillIndex(skill)].expertise}
-                        />
-                        <label for={`skill-${index}-expertise`}>{t('display.skills.expertise')}</label>
-                    </div>
+                    <Input
+                        type="checkbox"
+                        id="skill-{index}-expertise"
+                        label={t('display.skills.expertise')}
+                        bind:checked={$characterRepository.current.skills[skillIndex(skill)].expertise}
+                    />
 
+                    <!-- TODO: label to incrementor -->
                     <div class="flex items-center justify-start">
                         <label for={`skill-${index}-otherBonus`}>{t('bonus')}:</label>
                         <Incrementor

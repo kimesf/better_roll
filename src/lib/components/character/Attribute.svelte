@@ -5,6 +5,7 @@
     import characterRepository from '../../stores/characterRepository'
     import type { Attribute } from '../../types'
     import { attributesModifiers } from '../../stores/currentCharacter'
+    import Input from '../shared/Input.svelte'
 
     export let attr: Attribute
 </script>
@@ -21,11 +22,10 @@
     <Editable class="grow basis-0">
         <span slot="showing" class="text-secondary">({$characterRepository.current.attributes[attr]})</span>
 
-        <input
+        <Input
             slot="editing"
-            id="attributes-{attr}"
             type="number"
-            class="input w-12 text-center"
+            id="attributes-{attr}"
             bind:value={$characterRepository.current.attributes[attr]}
         />
     </Editable>

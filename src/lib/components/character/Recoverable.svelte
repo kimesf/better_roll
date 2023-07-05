@@ -8,6 +8,7 @@
     import type { Recoverable } from '../../types'
     import Incrementor from '../shared/Incrementor.svelte'
     import Container from '../shared/Container.svelte'
+    import Input from '../shared/Input.svelte'
 
     const DEFAULT: Recoverable = {
         name: '',
@@ -49,11 +50,10 @@
         <div slot="title" class="flex w-full items-center">
             <div class="grow basis-0 flex flex-col">
                 <Editable>
-                    <input
+                    <Input
                         slot="editing"
-                        id="recoverable-{index}-name"
                         type="text"
-                        class="input w-36"
+                        id="recoverable-{index}-name"
                         bind:value={recoverable.name}
                     />
                     <span slot="showing">{recoverable.name}</span>
@@ -69,11 +69,10 @@
                 class="grow basis-0 flex text-4xl justify-between"
                 bind:value={recoverable.current}
             >
-                <input
+                <Input
                     slot="extra"
+                    type="number"
                     id="recoverable-{index}-total"
-                    type="text"
-                    class="input w-12 text-center"
                     bind:value={recoverable.total}
                 />
 
@@ -86,10 +85,21 @@
                 <BtnAction kind="destroy" class="w-16" handler={(_e) => destroy(index)} />
 
                 <div class="text-secondary">
-                    <label for="short">{t('recoverable.short')}</label>
-                    <input class="input" type="radio" id="short" bind:group={recoverable.recoveredBy} value="short" />
-                    <label for="long">{t('recoverable.long')}</label>
-                    <input class="input" type="radio" id="long" bind:group={recoverable.recoveredBy} value="long" />
+                    <Input
+                        type="radio"
+                        id="short"
+                        value="short"
+                        label={t('recoverable.short')}
+                        bind:group={recoverable.recoveredBy}
+                    />
+
+                    <Input
+                        type="radio"
+                        id="long"
+                        value="long"
+                        label={t('recoverable.long')}
+                        bind:group={recoverable.recoveredBy}
+                    />
                 </div>
             </Editable>
 
@@ -98,17 +108,17 @@
             </Editable>
 
             <Editable>
-                <input
+                <Input
                     slot="editing"
-                    id="recoverable-{index}-source"
                     type="text"
-                    class="input w-full"
+                    id="recoverable-{index}-source"
                     bind:value={recoverable.source}
                     placeholder={t('display.missingSource')}
                 />
 
                 <div slot="showing">
                     {#if recoverable.source}
+                        <!-- TODO: use Link -->
                         <a
                             class="underline text-sky-500"
                             href={recoverable.source}
@@ -130,10 +140,10 @@
             <Editable>
                 <span slot="showing" class="whitespace-pre-wrap">{recoverable.notes || t('display.missingNotes')}</span>
 
-                <textarea
+                <Input
                     slot="editing"
+                    type="textarea"
                     id="recoverable-{index}-notes"
-                    class="input w-full"
                     bind:value={recoverable.notes}
                     placeholder={t('display.missingNotes')}
                 />

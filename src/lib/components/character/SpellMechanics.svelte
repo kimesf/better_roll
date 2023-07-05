@@ -10,6 +10,7 @@
     import { ATTRIBUTES } from '../../constants'
     import type { SpellCircle, SpellSlot } from '../../types'
     import Container from '../shared/Container.svelte'
+    import Input from '../shared/Input.svelte'
 
     $: spellAttribute = $character.spellMechanics.attribute
 
@@ -86,18 +87,15 @@
 
         <div class="flex flex-col items-center">
             <Editable>
-                <select
+                <Input
                     slot="editing"
+                    type="select"
                     id="spellMechanics-attribute"
-                    class="input text-lg"
+                    options={ATTRIBUTES.map(attr => [attr, t(`attributes.${attr}.full`)])}
                     bind:value={$characterRepository.current.spellMechanics.attribute}
-                >
-                    {#each ATTRIBUTES as attribute}
-                        <option value={attribute}>{t(`attributes.${attribute}.full`)}</option>
-                    {/each}
-                </select>
+                />
 
-                <span slot="showing" class="text-4xl">{t(`attributes.${spellAttribute}.full`)}</span>
+                <span slot="showing" class="text-2xl">{t(`attributes.${spellAttribute}.full`)}</span>
             </Editable>
 
             <span class="text-secondary">{t('character.spellMechanics.attribute')}</span>
@@ -136,10 +134,10 @@
                 >
                     <span class="text-4xl">{slot.current}/{slot.total}</span>
 
-                    <input
-                        id="spellMechanics-slots-{index}-total"
+                    <Input
                         slot="extra"
-                        class="input w-12 text-center"
+                        type="number"
+                        id="spellMechanics-slots-{index}-total"
                         bind:value={slot.total}
                     />
                 </Incrementor>

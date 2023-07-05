@@ -1,6 +1,7 @@
 <script lang="ts">
     import Editable from './Editable.svelte'
     import canEdit from '../../stores/canEdit'
+    import Input from './Input.svelte'
 
     export let id
     export let contentClasses = ''
@@ -12,7 +13,7 @@
 
     <Editable>
         <div slot="editing" class="flex items-center">
-            <input {id} type="number" class="text-primary input text-center w-12" bind:value />
+            <Input type="number" {id} bind:value />
 
             {#if $$slots.extra}
                 <span class="text-base"> | </span>

@@ -11,10 +11,6 @@
         @apply bg-neutral-950
     }
 
-    .bg-contrast {
-        @apply bg-neutral-500
-    }
-
     .text-primary {
         @apply text-neutral-200
     }
@@ -29,10 +25,5 @@
 
     .text-expert {
         @apply text-teal-500
-    }
-
-    /* TODO: input to shared component */
-    .input {
-        @apply bg-contrast rounded-md p-1 text-sm
     }
 }

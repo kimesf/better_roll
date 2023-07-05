@@ -8,9 +8,10 @@
     import BtnAction from '../shared/BtnAction.svelte'
     import Editable from '../shared/Editable.svelte'
     import characterRepository from '../../stores/characterRepository'
-    import InputWithSuggestions from '../shared/InputWithSuggestions.svelte'
     import { SCHOOLS, SPELL_CIRCLES } from '../../constants'
     import Container from '../shared/Container.svelte'
+    import Input from '../shared/Input.svelte'
+    import InputWithSuggestions from '../shared/InputWithSuggestions.svelte'
 
     const SPACE = '\u0020'
 
@@ -231,41 +232,35 @@
 
                         <Container slot="editing">
                             <Container>
-                                <div class="flex gap-1">
-                                    <input
-                                        type="text"
-                                        id="spell-{index}-name"
-                                        class="input grow"
-                                        bind:value={spell.name}
+                                <Container row>
+                                    <Input type="text" id="spell-{index}-name" bind:value={spell.name} />
+
+                                    <Input
+                                        type="select"
+                                        id="spell-{index}-circle"
+                                        options={SPELL_CIRCLES.map(option => [option, option])}
+                                        bind:value={spell.circle}
+                                    />
+                                </Container>
+
+                                <Container row>
+                                    <Input
+                                        type="select"
+                                        id="spell-{index}-school"
+                                        options={SCHOOLS.map(option => [option, t(`spells.school.${option}`)])}
+                                        bind:value={spell.school}
                                     />
 
-                                    <select id="spell-{index}-circle" class="input" bind:value={spell.circle}>
-                                        {#each SPELL_CIRCLES as option}
-                                            <option value={option}>{option}</option>
-                                        {/each}
-                                    </select>
-                                </div>
-
-                                <div class="flex gap-2">
-                                    <select id="spell-{index}-school" class="input" bind:value={spell.school}>
-                                        {#each SCHOOLS as option}
-                                            <option value={option}>{t(`spells.school.${option}`)}</option>
-                                        {/each}
-                                    </select>
-
                                     <BtnAction kind="destroy" class="grow" handler={(_e) => destroy(index)} />
-                                </div>
+                                </Container>
 
                                 {#each booleanForms as key}
-                                    <div>
-                                        <input
-                                            id="spell-{index}-{key}"
-                                            class="input"
-                                            type="checkbox"
-                                            bind:checked={spell[key]}
-                                        />
-                                        <label for="spell-{index}-{key}">{t(`character.spells.${key}`)}?</label>
-                                    </div>
+                                    <Input
+                                        type="checkbox"
+                                        id="spell-{index}-{key}"
+                                        label="{t(`character.spells.${key}`)}?"
+                                        bind:checked={spell[key]}
+                                    />
                                 {/each}
                             </Container>
 
@@ -273,23 +268,17 @@
                                 <Title title={t('character.spells.components')} />
 
                                 {#each formComponents as key}
-                                    <div>
-                                        <input
-                                            id="spell-{index}-components-{key}"
-                                            class="input"
-                                            type="checkbox"
-                                            bind:checked={spell.components[key]}
-                                        />
-                                        <label for="spell-{index}-{key}"
-                                            >{t(`character.spells.components.${key}`)}?</label
-                                        >
-                                    </div>
+                                    <Input
+                                        type="checkbox"
+                                        id="spell-{index}-components-{key}"
+                                        label="{t(`character.spells.components.${key}`)}?"
+                                        bind:checked={spell.components[key]}
+                                    />
                                 {/each}
 
-                                <input
+                                <Input
                                     type="text"
                                     id="spell-{index}-components-notes"
-                                    class="input w-full"
                                     bind:value={spell.components.notes}
                                 />
                             </Container>
@@ -299,8 +288,8 @@
                                     <Title title={t(`character.spells.${key}`)} />
 
                                     <InputWithSuggestions
-                                        {suggestions}
                                         id="spell-{index}-{key}"
+                                        {suggestions}
                                         bind:value={spell[key]}
                                     />
                                 </Container>
@@ -309,9 +298,9 @@
                             <Container>
                                 <Title title={t('character.spells.source')} />
 
-                                <input
+                                <Input
+                                    type="text"
                                     id="spell-{index}-source"
-                                    class="input w-full"
                                     bind:value={spell.source}
                                     placeholder={t('display.missingSource')}
                                 />
@@ -320,9 +309,9 @@
                             <Container>
                                 <Title title={t('character.spells.notes')} />
 
-                                <textarea
+                                <Input
+                                    type="textarea"
                                     id="spell-{index}-notes"
-                                    class="input w-full"
                                     bind:value={spell.notes}
                                     placeholder={t('display.missingNotes')}
                                 />
