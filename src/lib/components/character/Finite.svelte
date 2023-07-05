@@ -10,6 +10,7 @@
     import Incrementor from '../shared/Incrementor.svelte'
     import Container from '../shared/Container.svelte'
     import Input from '../shared/Input.svelte'
+    import Link from '../shared/Link.svelte'
 
     const DEFAULT: Finite = {
         name: '',
@@ -104,18 +105,9 @@
 
                     <div slot="showing">
                         {#if finite.source}
-                            <a
-                                class="underline text-sky-500"
-                                href={finite.source}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                            >
-                                {finite.source}
-                            </a>
+                            <Link to={finite.source} />
                         {:else}
-                            <span>
-                                {t('display.missingSource')}
-                            </span>
+                            <span>{t('display.missingSource')}</span>
                         {/if}
                     </div>
                 </Editable>

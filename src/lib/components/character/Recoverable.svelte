@@ -9,6 +9,7 @@
     import Incrementor from '../shared/Incrementor.svelte'
     import Container from '../shared/Container.svelte'
     import Input from '../shared/Input.svelte'
+    import Link from '../shared/Link.svelte'
 
     const DEFAULT: Recoverable = {
         name: '',
@@ -118,19 +119,9 @@
 
                 <div slot="showing">
                     {#if recoverable.source}
-                        <!-- TODO: use Link -->
-                        <a
-                            class="underline text-sky-500"
-                            href={recoverable.source}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                        >
-                            {recoverable.source}
-                        </a>
+                        <Link to={recoverable.source} />
                     {:else}
-                        <span>
-                            {t('display.missingSource')}
-                        </span>
+                        <span>{t('display.missingSource')}</span>
                     {/if}
                 </div>
             </Editable>

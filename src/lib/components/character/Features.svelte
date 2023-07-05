@@ -8,6 +8,7 @@
     import BtnAction from '../shared/BtnAction.svelte'
     import Container from '../shared/Container.svelte'
     import Input from '../shared/Input.svelte'
+    import Link from '../shared/Link.svelte'
 
     const DEFAULT: Feature = {
         name: '',
@@ -62,18 +63,9 @@
                 <Editable>
                     <div slot="showing">
                         {#if feature.source}
-                            <a
-                                class="underline text-sky-500"
-                                href={feature.source}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                            >
-                                {feature.source}
-                            </a>
+                            <Link to={feature.source} />
                         {:else}
-                            <span>
-                                {t('display.missingSource')}
-                            </span>
+                            <span>{t('display.missingSource')}</span>
                         {/if}
                     </div>
 
