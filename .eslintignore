@@ -1,4 +1,5 @@
 index.html
+public/**/*.js
 *.config.js
 *.config.ts
 **/*/*.test.ts
