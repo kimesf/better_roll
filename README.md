@@ -2,7 +2,7 @@
 
 > ### A simple D&D character sheet designed for mobile as a databaseless web application
 
-Live on [better-roll.vercel.app](better-roll.vercel.app)
+Live on [better-roll.vercel.app](https://better-roll.vercel.app/)
 
 ## Why?
 
