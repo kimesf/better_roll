@@ -58,20 +58,21 @@ npm run dev
 
 Open [localhost:5173](localhost:5173) in your browser.
 
-## TODO: Improvements
+## To Be Improved
 
-### TODO: UX and Features
+### UX and Features
 
-- TODO: Ordering lists
-- TODO: Adding spells
-- TODO: Possible actions list
-- TODO: Having current available spells in one place (different views for spells)
+- On edit mode, being able to order lists;
+- Having different views for spells, e.g. seeing only available/prepared spells in the combat page or filtering them by circle;
+- Automatic rest (short or long) that restores recoverable resources, life and spell slots;
+- Being able to record equipped items;
+- Being able to track death saves;
+- Responsivity in tablets and desktop.
 
-### TODO: Tech
+### Tech
 
-- TODO: Tests.
-- Better handling of character update logic. I would prefer character components not to be responsable for the update logic of the current select character.
-- TODO: SSR needed? Cache whole app for when there is no internet. It's not needed anyway.
+- Better handling of character update logic. I would prefer character components not to be responsable for the update logic of the current select character;
+- Better testing coverage.
 
 ---
 
