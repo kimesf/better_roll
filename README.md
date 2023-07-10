@@ -67,7 +67,8 @@ Open [localhost:5173](localhost:5173) in your browser.
 - Automatic rest (short or long) that restores recoverable resources, life and spell slots;
 - Being able to record equipped items;
 - Being able to track death saves;
-- Responsivity in tablets and desktop.
+- Responsivity in tablets and desktop;
+- English i18n.
 
 ### Tech
 
