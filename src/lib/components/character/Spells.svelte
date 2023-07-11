@@ -151,49 +151,49 @@
 
     <div class="flex flex-col gap-2">
         {#each $characterRepository.current.spells as spell, index}
-            <div
-                class="flex flex-col px-2 border border-l-8 border-neutral-500 text-secondary"
-                class:border-l-green-500={spell.alwaysAvailable || spell.available}
-                class:text-neutral-200={spell.alwaysAvailable || spell.available}
-                on:click={() => toggle(index)}
-                on:keydown={() => toggle(index)}
-            >
-                <div class="flex justify-between">
-                    <div class="text-lg">
-                        {spell.name}
+            <button on:click={() => toggle(index)}>
+                <div
+                    class="flex flex-col px-2 border border-l-8 border-neutral-500 text-secondary"
+                    class:border-l-green-500={spell.alwaysAvailable || spell.available}
+                    class:text-neutral-200={spell.alwaysAvailable || spell.available}
+                >
+                    <div class="flex justify-between">
+                        <div class="text-lg">
+                            {spell.name}
+                        </div>
+
+                        <div>
+                            {spell.circle}
+                        </div>
                     </div>
 
-                    <div>
-                        {spell.circle}
+                    <div class="flex justify-between">
+                        <div>
+                            {spell.conjurationTime}
+                        </div>
+
+                        <div>
+                            {spell.range}
+                        </div>
+
+                        <div>
+                            {spell.duration}
+                        </div>
+
+                        {#if spell.concentration}
+                            <div class="uppercase">
+                                {t('character.spells.concentration').at(0)}
+                            </div>
+                        {/if}
+
+                        {#if spell.ritual}
+                            <div class="uppercase">
+                                {t('character.spells.ritual').at(0)}
+                            </div>
+                        {/if}
                     </div>
                 </div>
-
-                <div class="flex justify-between">
-                    <div>
-                        {spell.conjurationTime}
-                    </div>
-
-                    <div>
-                        {spell.range}
-                    </div>
-
-                    <div>
-                        {spell.duration}
-                    </div>
-
-                    {#if spell.concentration}
-                        <div class="uppercase">
-                            {t('character.spells.concentration').at(0)}
-                        </div>
-                    {/if}
-
-                    {#if spell.ritual}
-                        <div class="uppercase">
-                            {t('character.spells.ritual').at(0)}
-                        </div>
-                    {/if}
-                </div>
-            </div>
+            </button>
 
             {#if visible == index}
                 <div transition:slide class="px-2">

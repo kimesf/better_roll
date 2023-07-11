@@ -6,7 +6,7 @@
 
     let isMoving = false
 
-    let element: HTMLDivElement
+    let element: HTMLButtonElement
     let offsetLeft: number
     let offsetTop: number
 
@@ -75,7 +75,7 @@
     <div class="z-99 bg-primary bg-opacity-50 absolute top-0 left-0 w-screen h-screen" />
 {/if}
 
-<div
+<button
     bind:this={element}
     on:touchstart={unlock}
     on:mousedown={unlock}
@@ -85,7 +85,7 @@
     style="left: {left}px; top: {top}px;"
 >
     <slot />
-</div>
+</button>
 
 <style lang="postcss">
     .z-100 {
