@@ -1,6 +1,7 @@
 'use strict'
 
-const VERSION = 1
+// TODO: automatically bump version
+const VERSION = 2
 const CACHE_KEY = `pwa-v${VERSION}`
 const PROD_DOMAIN = 'better-roll.vercel.app'
 
