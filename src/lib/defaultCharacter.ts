@@ -21,6 +21,10 @@ export default {
             temporary: 0,
             debuff: 0,
         },
+        deathSaves: {
+            successes: 0,
+            failures: 0,
+        },
         bonusInitiative: 0,
         defense: 10,
         walkSpeed: 30,

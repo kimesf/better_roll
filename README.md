@@ -66,8 +66,9 @@ Open [localhost:5173](localhost:5173) in your browser.
 - Having different views for spells, e.g. seeing only available/prepared spells in the combat page or filtering them by circle;
 - Automatic rest (short or long) that restores recoverable resources, life and spell slots;
 - Being able to record equipped items;
-- Being able to track death saves;
 - Responsivity in tablets and desktop;
+- Maybe having passive skill values;
+- Add weight management for finites;
 - English i18n.
 
 ### Tech

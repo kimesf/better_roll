@@ -35,6 +35,10 @@ export type Character = {
             temporary: number
             debuff: number
         }
+        deathSaves: {
+            successes: number
+            failures: number
+        }
         bonusInitiative: number
         defense: number
         walkSpeed: number
