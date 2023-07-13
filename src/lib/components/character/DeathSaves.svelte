@@ -47,14 +47,14 @@
 
     // Return of any is expected here
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const checked = (deathSave: DeathSave): any[] => {
-        return Array(deathSaves[deathSave])
+    $: checked = (deathSave: DeathSave): any[] => {
+        return Array(deathSaves[deathSave]) // eslint-disable-line @typescript-eslint/no-unsafe-return
     }
 
     // Return of any is expected here
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const unchecked = (deathSave: DeathSave): any[] => {
-        return Array(3 - deathSaves[deathSave])
+    $: unchecked = (deathSave: DeathSave): any[] => {
+        return Array(3 - deathSaves[deathSave]) // eslint-disable-line @typescript-eslint/no-unsafe-return
     }
 
     const options = [
