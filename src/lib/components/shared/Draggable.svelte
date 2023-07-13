@@ -26,11 +26,11 @@
         maxTop = window.innerHeight - offsetTop
     })
 
-    const unlock = (): void => {
+    const lock = (): void => {
         isMoving = true
     }
 
-    const lock = (): void => {
+    const unlock = (): void => {
         isMoving = false
     }
 
@@ -59,12 +59,13 @@
     }
 </script>
 
-<svelte:window on:touchend={lock} on:touchmove={onTouchMove} on:mouseup={lock} on:mousemove={onMouseMove} />
+<svelte:window on:touchend={unlock} on:touchmove={onTouchMove} on:mouseup={unlock} on:mousemove={onMouseMove} />
 
 <svelte:head>
     {#if isMoving}
         <style>
-            body {
+            * {
+                touch-action: none;
                 overscroll-behavior: none;
             }
         </style>
@@ -77,8 +78,8 @@
 
 <button
     bind:this={element}
-    on:touchstart={unlock}
-    on:mousedown={unlock}
+    on:touchstart={lock}
+    on:mousedown={lock}
     class="{$$props.class || ''} cursor-move select-none fixed"
     class:z-100={isMoving}
     class:highlight={isMoving}
