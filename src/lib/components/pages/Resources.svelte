@@ -5,6 +5,7 @@
     import Finite from '../character/Finite.svelte'
     import Recoverable from '../character/Recoverable.svelte'
     import Container from '../shared/Container.svelte'
+    import EquippedItems from '../character/EquippedItems.svelte'
 </script>
 
 <Container>
@@ -16,4 +17,7 @@
 
     <Title title={t('display.resources.coins')} />
     <Coins />
+
+    <Title title={t('character.resources.equippedItems')} />
+    <EquippedItems />
 </Container>

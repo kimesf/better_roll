@@ -20,6 +20,10 @@ export default {
             temporary: 0,
             debuff: 0,
         },
+        deathSaves: {
+            successes: 0,
+            failures: 0,
+        },
         bonusInitiative: 0,
         defense: 16,
         walkSpeed: 30,
@@ -168,17 +172,16 @@ export default {
             { name: 'Sino', amount: 1, unity: 'u', notes: '', source: '' },
             { name: 'Insígnia Sagrada', amount: 1, unity: 'u', notes: '', source: '' },
         ],
-    },
 
-    // TODO:
-    // equipped_items: [
-    //   { name: "Botas Élficas",              notes: "", source: "" },
-    //   { name: "Manto Preto Comum",          notes: "", source: "" },
-    //   { name: "Armadura de Couro Batido",   notes: "", source: "" },
-    //   { name: "Lâmina Escondida com prata", notes: "", source: "" },
-    //   { name: "Lâmina Escondida",           notes: "", source: "" },
-    //   { name: "Mochila",                    notes: "", source: "" },
-    // ],
+        equippedItems: [
+            { name: "Botas Élficas",              attunement:  true, notes: "stealth boots", source: "https://roll20.net/compendium/dnd5e/Boots%20of%20Elvenkind#content" },
+            { name: "Manto Preto Comum",          attunement: false, notes: "", source: "" },
+            { name: "Armadura de Couro Batido",   attunement: false, notes: "", source: "" },
+            { name: "Lâmina Escondida com prata", attunement: false, notes: "", source: "" },
+            { name: "Lâmina Escondida",           attunement: false, notes: "", source: "" },
+            { name: "Mochila",                    attunement: false, notes: "", source: "" },
+        ],
+    },
 
     attacks: [
         {

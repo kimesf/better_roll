@@ -103,6 +103,7 @@ export default {
         },
         recoverable: [],
         finite: [],
+        equippedItems: [],
     },
     attacks: [
         {

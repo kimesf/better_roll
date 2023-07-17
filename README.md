@@ -65,7 +65,6 @@ Open [localhost:5173](localhost:5173) in your browser.
 - On edit mode, being able to order lists;
 - Having different views for spells, e.g. seeing only available/prepared spells in the combat page or filtering them by circle;
 - Automatic rest (short or long) that restores recoverable resources, life and spell slots;
-- Being able to record equipped items;
 - Responsivity in tablets and desktop;
 - Maybe having passive skill values;
 - Add weight management for finites;

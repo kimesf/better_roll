@@ -57,6 +57,7 @@ export type Character = {
         coins: Coins
         recoverable: Recoverable[]
         finite: Finite[]
+        equippedItems: EquippedItem[]
     }
     features: Feature[]
     attacks: Attack[]
@@ -101,6 +102,13 @@ export type Finite = {
     name: string
     amount: number
     unity: string
+    notes: string
+    source: string
+}
+
+export type EquippedItem = {
+    name: string
+    attunement: boolean
     notes: string
     source: string
 }

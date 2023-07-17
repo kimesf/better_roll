@@ -1,6 +1,8 @@
 <script lang="ts">
     import { twMerge } from 'tailwind-merge'
 
+    // todo: better types depending on type. eg. value required if text, checked required if checkbox etc.
+
     export let id: string
     export let type: 'text' | 'number' | 'textarea' | 'radio' | 'checkbox' | 'file' | 'select'
     export let placeholder = ''
