@@ -12,6 +12,7 @@
     import Container from '../shared/Container.svelte'
     import Input from '../shared/Input.svelte'
     import InputWithSuggestions from '../shared/InputWithSuggestions.svelte'
+    import Text from '../shared/Text.svelte'
 
     const SPACE = '\u0020'
 
@@ -224,9 +225,7 @@
                             {#if spell.notes}
                                 <Separator />
 
-                                <div class="whitespace-pre-wrap">
-                                    {spell.notes}
-                                </div>
+                                <Text>{spell.notes}</Text>
                             {/if}
                         </Container>
 

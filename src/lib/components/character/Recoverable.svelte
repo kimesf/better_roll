@@ -10,6 +10,7 @@
     import Container from '../shared/Container.svelte'
     import Input from '../shared/Input.svelte'
     import Link from '../shared/Link.svelte'
+    import Text from '../shared/Text.svelte'
 
     const DEFAULT: Recoverable = {
         name: '',
@@ -129,7 +130,9 @@
             <Separator />
 
             <Editable>
-                <span slot="showing" class="whitespace-pre-wrap">{recoverable.notes || t('display.missingNotes')}</span>
+                <Text slot="showing">
+                    {recoverable.notes || t('display.missingNotes')}
+                </Text>
 
                 <Input
                     slot="editing"

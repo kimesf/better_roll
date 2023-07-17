@@ -11,6 +11,7 @@
     import Container from '../shared/Container.svelte'
     import Input from '../shared/Input.svelte'
     import Link from '../shared/Link.svelte'
+    import Text from '../shared/Text.svelte'
 
     const DEFAULT: Finite = {
         name: '',
@@ -123,7 +124,9 @@
                         placeholder={t('display.missingNotes')}
                     />
 
-                    <span slot="showing" class="whitespace-pre-wrap">{finite.notes || t('display.missingNotes')}</span>
+                    <Text slot="showing" >
+                        {finite.notes || t('display.missingNotes')}
+                    </Text>
                 </Editable>
             </Container>
         </Collapsible>
