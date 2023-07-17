@@ -4,7 +4,8 @@
     import { attributesModifiers, proficiencyBonus } from '../../stores/currentCharacter'
     import { t } from '../../stores/i18n'
     import { type Attack } from '../../types'
-    import BtnAction from '../shared/BtnAction.svelte'
+    import BtnCreate from '../shared/BtnCreate.svelte'
+    import BtnDestroy from '../shared/BtnDestroy.svelte'
     import Collapsible from '../shared/Collapsible.svelte'
     import Container from '../shared/Container.svelte'
     import Editable from '../shared/Editable.svelte'
@@ -60,7 +61,7 @@
 
 <Container>
     <Editable>
-        <BtnAction kind="create" class="w-full" handler={(_e) => create()}>{t('actions.create')}</BtnAction>
+        <BtnCreate class="w-full" handler={(_) => create()} />
     </Editable>
 
     {#each $characterRepository.current.attacks as attack, index}
@@ -70,7 +71,7 @@
                     <Container row slot="editing">
                         <Input type="text" id="attack-{index}-name" bind:value={attack.name} />
 
-                        <BtnAction kind="destroy" class="w-16" handler={(_e) => destroy(index)} />
+                        <BtnDestroy kind="destroy" class="w-16" handler={(_) => destroy(index)} />
                     </Container>
 
                     <span slot="showing">{attack.name}</span>

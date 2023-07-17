@@ -82,7 +82,7 @@
                     </Container>
 
                     <Container row slot="editing" class="justify-between">
-                        <BtnDestroy class="w-16" handler={() => destroy(i)} />
+                        <BtnDestroy class="w-16" handler={(_) => destroy(i)} />
 
                         <Input
                             id="equippedItems-{i}-attunement"

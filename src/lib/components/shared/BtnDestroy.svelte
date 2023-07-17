@@ -25,5 +25,9 @@
 </script>
 
 <Btn handler={safeHandler} class={twMerge('bg-red-500', klass)}>
-    <Icon name="trash-can" />
+    {#if $$slots.default}
+       <slot />
+    {:else}
+        <Icon name="trash-can" />
+    {/if}
 </Btn>

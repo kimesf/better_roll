@@ -5,7 +5,6 @@
     import Separator from '../shared/Separator.svelte'
     import { slide } from 'svelte/transition'
     import Link from '../shared/Link.svelte'
-    import BtnAction from '../shared/BtnAction.svelte'
     import Editable from '../shared/Editable.svelte'
     import characterRepository from '../../stores/characterRepository'
     import { SCHOOLS, SPELL_CIRCLES } from '../../constants'
@@ -13,6 +12,8 @@
     import Input from '../shared/Input.svelte'
     import InputWithSuggestions from '../shared/InputWithSuggestions.svelte'
     import Text from '../shared/Text.svelte'
+    import BtnCreate from '../shared/BtnCreate.svelte'
+    import BtnDestroy from '../shared/BtnDestroy.svelte'
 
     const SPACE = '\u0020'
 
@@ -147,7 +148,7 @@
     <Title title={t('character.spells.title')} />
 
     <Editable>
-        <BtnAction kind="create" class="w-full" handler={(_e) => create()}>{t('actions.create')}</BtnAction>
+        <BtnCreate class="w-full" handler={(_) => create()} />
     </Editable>
 
     <div class="flex flex-col gap-2">
@@ -250,7 +251,7 @@
                                         bind:value={spell.school}
                                     />
 
-                                    <BtnAction kind="destroy" class="grow" handler={(_e) => destroy(index)} />
+                                    <BtnDestroy class="grow" handler={(_) => destroy(index)} />
                                 </Container>
 
                                 {#each booleanForms as key}

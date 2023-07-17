@@ -4,13 +4,14 @@
     import Collapsible from '../shared/Collapsible.svelte'
     import Separator from '../shared/Separator.svelte'
     import Editable from '../shared/Editable.svelte'
-    import BtnAction from '../shared/BtnAction.svelte'
     import type { Recoverable } from '../../types'
     import Incrementor from '../shared/Incrementor.svelte'
     import Container from '../shared/Container.svelte'
     import Input from '../shared/Input.svelte'
     import Link from '../shared/Link.svelte'
     import Text from '../shared/Text.svelte'
+    import BtnCreate from '../shared/BtnCreate.svelte'
+    import BtnDestroy from '../shared/BtnDestroy.svelte'
 
     const DEFAULT: Recoverable = {
         name: '',
@@ -44,7 +45,7 @@
 </script>
 
 <Editable>
-    <BtnAction kind="create" class="w-full" handler={(_e) => create()}>{t('actions.create')}</BtnAction>
+    <BtnCreate class="w-full" handler={(_) => create()} />
 </Editable>
 
 {#each $characterRepository.current.resources.recoverable as recoverable, index}
@@ -84,7 +85,7 @@
 
         <Container slot="body">
             <Editable row class="justify-between items-center">
-                <BtnAction kind="destroy" class="w-16" handler={(_e) => destroy(index)} />
+                <BtnDestroy class="w-16" handler={(_) => destroy(index)} />
 
                 <div class="text-secondary">
                     <Input

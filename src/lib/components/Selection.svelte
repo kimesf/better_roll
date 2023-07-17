@@ -1,7 +1,6 @@
 <script lang="ts">
     import characterRepository from '../stores/characterRepository'
     import { t } from '../stores/i18n'
-    import BtnAction from './shared/BtnAction.svelte'
     import Title from './shared/Title.svelte'
     import Separator from './shared/Separator.svelte'
     import Basics from './character/Basics.svelte'
@@ -9,6 +8,9 @@
     import type { Character } from '../types'
     import Container from './shared/Container.svelte'
     import Input from './shared/Input.svelte'
+    import BtnUpdate from './shared/BtnUpdate.svelte'
+    import BtnCreate from './shared/BtnCreate.svelte'
+    import BtnDestroy from './shared/BtnDestroy.svelte'
 
     const { select, create, destroy } = characterRepository
 
@@ -82,53 +84,27 @@
         <div slot="body">
             <Input id="restore" type="file" accept="application/json" class="mb-1 basis-2/3" bind:files />
 
-            <BtnAction
-                kind="update"
-                class="w-full basis-1/3"
-                handler={() => {
-                    restore()
-                }}>{t('selection.restore')}</BtnAction
-            >
+            <BtnUpdate class="w-full basis-1/3" handler={(_) => restore()}>
+                {t('selection.restore')}
+            </BtnUpdate>
 
             <Separator />
         </div>
     </Collapsible>
 
-    <BtnAction
-        kind="create"
-        class="w-full"
-        handler={() => {
-            save()
-        }}>{t('selection.save')}</BtnAction
-    >
+    <BtnCreate class="w-full" handler={(_) => save()}>
+        {t('selection.save')}
+    </BtnCreate>
 
-    <BtnAction
-        kind="create"
-        class="w-full"
-        handler={() => {
-            create()
-        }}>{t('actions.create')}</BtnAction
-    >
+    <BtnCreate class="w-full" handler={(_) => create()} />
 
     {#each $characterRepository.all as availableCharacter, index}
         <div class="flex flex-col justify-center border border-neutral-500 rounded-md p-2">
             <Basics character={availableCharacter} />
 
             <div class="flex gap-1">
-                <BtnAction
-                    kind="destroy"
-                    class="w-16"
-                    handler={() => {
-                        destroy(index)
-                    }}
-                />
-                <BtnAction
-                    kind="update"
-                    class="w-full"
-                    handler={() => {
-                        select(availableCharacter)
-                    }}>{t('selection.select')}</BtnAction
-                >
+                <BtnDestroy class="w-16" handler={(_) => destroy(index)} />
+                <BtnUpdate class="w-full" handler={(_) => select(availableCharacter)}>{t('selection.select')}</BtnUpdate>
             </div>
         </div>
     {/each}

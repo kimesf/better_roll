@@ -8,8 +8,9 @@
     import Separator from '../shared/Separator.svelte'
     import Editable from '../shared/Editable.svelte'
     import { ATTRIBUTES } from '../../constants'
-    import BtnAction from '../shared/BtnAction.svelte'
     import Input from '../shared/Input.svelte'
+    import BtnCreate from '../shared/BtnCreate.svelte'
+    import BtnDestroy from '../shared/BtnDestroy.svelte'
 
     const toolModifier = ({ attribute, expertise, otherBonus }: Tool): number => {
         const attributeBonus = attribute ? $attributesModifiers[attribute] : 0
@@ -44,7 +45,7 @@
 </script>
 
 <Editable>
-    <BtnAction kind="create" class="w-full" handler={(_e) => create()}>{t('actions.create')}</BtnAction>
+    <BtnCreate class="w-full" handler={(_) => create()} />
 </Editable>
 
 {#each $characterRepository.current.tools as tool, index}
@@ -70,7 +71,7 @@
                 bind:value={tool.attribute}
             />
 
-            <BtnAction kind="destroy" class="w-16" handler={(_e) => destroy(index)} />
+            <BtnDestroy class="w-16" handler={(_) => destroy(index)} />
         </div>
 
         <Input

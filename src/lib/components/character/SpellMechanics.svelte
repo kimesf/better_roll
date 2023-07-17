@@ -4,13 +4,14 @@
     import SignedNumber from '../shared/SignedNumber.svelte'
     import Editable from '../shared/Editable.svelte'
     import Incrementor from '../shared/Incrementor.svelte'
-    import BtnAction from '../shared/BtnAction.svelte'
     import { attributesModifiers, character, proficiencyBonus } from '../../stores/currentCharacter'
     import characterRepository from '../../stores/characterRepository'
     import { ATTRIBUTES } from '../../constants'
     import type { SpellCircle, SpellSlot } from '../../types'
     import Container from '../shared/Container.svelte'
     import Input from '../shared/Input.svelte'
+    import BtnCreate from '../shared/BtnCreate.svelte'
+    import BtnDestroy from '../shared/BtnDestroy.svelte'
 
     $: spellAttribute = $character.spellMechanics.attribute
 
@@ -115,13 +116,11 @@
     <Title title={t('character.spellMechanics.slots')} />
 
     <Editable>
-        <BtnAction kind="create" class="w-full" handler={(_e) => createSlot()}>
-            {t('actions.create')}
-        </BtnAction>
+        <BtnCreate class="w-full" handler={(_) => createSlot()} />
 
-        <BtnAction kind="destroy" class="w-full" handler={(_e) => destroyLastSlot()}>
+        <BtnDestroy class="w-full" handler={(_) => destroyLastSlot()}>
             {t('character.spellMechanics.slots.destroyLast')}
-        </BtnAction>
+        </BtnDestroy>
     </Editable>
 
     <div class="grid gap-4 grid-cols-2">

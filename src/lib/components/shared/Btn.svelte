@@ -1,7 +1,7 @@
 <script lang="ts">
     import { twMerge } from "tailwind-merge"
 
-    type HandlerEvent = MouseEvent & { currentTarget: EventTarget & HTMLButtonElement }
+    type HandlerEvent = (MouseEvent | TouchEvent) & { currentTarget: EventTarget & HTMLButtonElement }
 
     export let handler: (e: HandlerEvent) => void = null
 
@@ -13,7 +13,7 @@
         handler(e)
     }
 
-    let klass = ($$props.class as string | undefined) || ''
+    const klass = ($$props.class as string | undefined) || ''
 </script>
 
 <button

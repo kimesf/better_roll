@@ -5,10 +5,11 @@
     import Editable from '../shared/Editable.svelte'
     import Separator from '../shared/Separator.svelte'
     import type { Feature } from '../../types'
-    import BtnAction from '../shared/BtnAction.svelte'
     import Container from '../shared/Container.svelte'
     import Input from '../shared/Input.svelte'
     import Link from '../shared/Link.svelte'
+    import BtnCreate from '../shared/BtnCreate.svelte'
+    import BtnDestroy from '../shared/BtnDestroy.svelte'
 
     const DEFAULT: Feature = {
         name: '',
@@ -37,7 +38,7 @@
 
 <Container>
     <Editable>
-        <BtnAction kind="create" class="w-full" handler={(_e) => create()}>{t('actions.create')}</BtnAction>
+        <BtnCreate class="w-full" handler={(_) => create()} />
     </Editable>
 
     {#each $characterRepository.current.features as feature, index}
@@ -55,7 +56,7 @@
                         placeholder={t('display.missingName')}
                     />
 
-                    <BtnAction kind="destroy" class="w-16 ml-4" handler={(_e) => destroy(index)} />
+                    <BtnDestroy class="w-16 ml-4" handler={(_) => destroy(index)} />
                 </div>
             </Editable>
 

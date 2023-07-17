@@ -19,37 +19,27 @@
 
 {#if type == 'text'}
     <input {id} bind:value class={twMerge('w-full', klass)} {placeholder} type="text" />
-{/if}
-
-{#if type == 'number'}
+{:else if type == 'number'}
     <input {id} bind:value class={twMerge('w-12 text-center', klass)} type="number" />
-{/if}
-
-{#if type == 'textarea'}
+{:else if type == 'textarea'}
     <textarea {id} bind:value class={twMerge('w-full', klass)} {placeholder} />
-{/if}
-
-{#if type == 'radio'}
+{:else if type == 'radio'}
     {#if label}
         <label for={id}>{label}</label>
     {/if}
-    <input {id} bind:group {value} class={klass} type="radio" />
-{/if}
 
-{#if type == 'checkbox'}
+    <input {id} bind:group {value} class={klass} type="radio" />
+{:else if type == 'checkbox'}
     <span>
         <input {id} bind:checked class={klass} type="checkbox" />
+
         {#if label}
             <label for={id}>{label}</label>
         {/if}
     </span>
-{/if}
-
-{#if type == 'file'}
+{:else if type == 'file'}
     <input {id} type="file" bind:files {accept} class={twMerge('w-full', klass)} />
-{/if}
-
-{#if type == 'select'}
+{:else if type == 'select'}
     <select {id} bind:value>
         {#each options as [option, label]}
             <option value={option}>{label}</option>

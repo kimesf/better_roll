@@ -6,12 +6,13 @@
     import characterRepository from '../../stores/characterRepository'
     import Editable from '../shared/Editable.svelte'
     import type { Finite } from '../../types'
-    import BtnAction from '../shared/BtnAction.svelte'
     import Incrementor from '../shared/Incrementor.svelte'
     import Container from '../shared/Container.svelte'
     import Input from '../shared/Input.svelte'
     import Link from '../shared/Link.svelte'
     import Text from '../shared/Text.svelte'
+    import BtnCreate from '../shared/BtnCreate.svelte'
+    import BtnDestroy from '../shared/BtnDestroy.svelte'
 
     const DEFAULT: Finite = {
         name: '',
@@ -53,7 +54,7 @@
 
 <Container>
     <Editable>
-        <BtnAction kind="create" class="w-full" handler={(_e) => create()}>{t('actions.create')}</BtnAction>
+        <BtnCreate class="w-full" handler={(_) => create()} />
     </Editable>
 
     {#each $characterRepository.current.resources.finite as finite, index}
@@ -90,7 +91,7 @@
 
             <Container slot="body">
                 <Editable>
-                    <BtnAction kind="destroy" class="w-20" handler={(_e) => destroy(index)} />
+                    <BtnDestroy class="w-20" handler={(_) => destroy(index)} />
 
                     <Separator />
                 </Editable>
