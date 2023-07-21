@@ -68,6 +68,8 @@ Open [localhost:5173](localhost:5173) in your browser.
 - Responsivity in tablets and desktop;
 - Maybe having passive skill values;
 - Add weight management for finites;
+- Focus on newly created list items;
+- Rethink edit inputs on collapsible title;
 - English i18n.
 
 ### Tech

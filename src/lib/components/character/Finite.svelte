@@ -1,5 +1,4 @@
 <script lang="ts">
-    import { tick } from 'svelte'
     import { t } from '../../stores/i18n'
     import Collapsible from '../shared/Collapsible.svelte'
     import Separator from '../shared/Separator.svelte'
@@ -14,6 +13,8 @@
     import BtnCreate from '../shared/BtnCreate.svelte'
     import BtnDestroy from '../shared/BtnDestroy.svelte'
 
+    const { createRelation, destroyRelation } = characterRepository
+
     const DEFAULT: Finite = {
         name: '',
         amount: 1,
@@ -21,40 +22,11 @@
         notes: '',
         source: '',
     }
-
-    const newFinite = (): Finite => {
-        return structuredClone(DEFAULT)
-    }
-
-    const trigger = (): void => {
-        $characterRepository = $characterRepository
-    }
-
-    const create = async (): Promise<void> => {
-        $characterRepository.current.resources.finite.push(newFinite())
-        trigger()
-
-        // TODO: do that for all, maybe find other solution
-        await tick()
-        focusLast()
-    }
-
-    const destroy = (index: number): void => {
-        $characterRepository.current.resources.finite.splice(index, 1)
-        trigger()
-    }
-
-    const focusLast = (): void => {
-        const lastId = `finite-${$characterRepository.current.resources.finite.length - 1}-name`
-        const last = document.getElementById(lastId)
-
-        last.focus()
-    }
 </script>
 
 <Container>
     <Editable>
-        <BtnCreate class="w-full" handler={(_) => create()} />
+        <BtnCreate class="w-full" handler={(_) => createRelation('resources.finite', DEFAULT)} />
     </Editable>
 
     {#each $characterRepository.current.resources.finite as finite, index}
@@ -91,7 +63,7 @@
 
             <Container slot="body">
                 <Editable>
-                    <BtnDestroy class="w-20" handler={(_) => destroy(index)} />
+                    <BtnDestroy class="w-20" handler={(_) => destroyRelation('resources.finite', index)} />
 
                     <Separator />
                 </Editable>

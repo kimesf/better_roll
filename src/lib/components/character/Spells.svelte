@@ -100,6 +100,8 @@
         visible = spellIndex == visible ? null : spellIndex
     }
 
+    const { createRelation, destroyRelation } = characterRepository
+
     const DEFAULT: Spell = {
         name: 'new',
         circle: 1,
@@ -121,34 +123,13 @@
         notes: '',
         source: '',
     }
-
-    const newSpell = (): Spell => {
-        return structuredClone(DEFAULT)
-    }
-
-    // TODO: dup
-    const trigger = (): void => {
-        $characterRepository = $characterRepository
-    }
-
-    // TODO: dup
-    const create = (): void => {
-        $characterRepository.current.spells.push(newSpell())
-        trigger()
-    }
-
-    // TODO: dup
-    const destroy = (index: number): void => {
-        $characterRepository.current.spells.splice(index, 1)
-        trigger()
-    }
 </script>
 
 <Container>
     <Title title={t('character.spells.title')} />
 
     <Editable>
-        <BtnCreate class="w-full" handler={(_) => create()} />
+        <BtnCreate class="w-full" handler={(_) => createRelation('spells', DEFAULT)} />
     </Editable>
 
     <div class="flex flex-col gap-2">
@@ -251,7 +232,7 @@
                                         bind:value={spell.school}
                                     />
 
-                                    <BtnDestroy class="grow" handler={(_) => destroy(index)} />
+                                    <BtnDestroy class="grow" handler={(_) => destroyRelation('spells', index)} />
                                 </Container>
 
                                 {#each booleanForms as key}

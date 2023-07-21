@@ -11,34 +11,18 @@
     import BtnCreate from '../shared/BtnCreate.svelte'
     import BtnDestroy from '../shared/BtnDestroy.svelte'
 
+    const { createRelation, destroyRelation } = characterRepository
+
     const DEFAULT: Feature = {
         name: '',
         notes: '',
         source: '',
     }
-
-    const newFeature = (): Feature => {
-        return structuredClone(DEFAULT)
-    }
-
-    const trigger = (): void => {
-        $characterRepository.current.features = $characterRepository.current.features
-    }
-
-    const create = (): void => {
-        $characterRepository.current.features.push(newFeature())
-        trigger()
-    }
-
-    const destroy = (index: number): void => {
-        $characterRepository.current.features.splice(index, 1)
-        trigger()
-    }
 </script>
 
 <Container>
     <Editable>
-        <BtnCreate class="w-full" handler={(_) => create()} />
+        <BtnCreate class="w-full" handler={(_) => createRelation('features', DEFAULT)} />
     </Editable>
 
     {#each $characterRepository.current.features as feature, index}
@@ -56,7 +40,7 @@
                         placeholder={t('display.missingName')}
                     />
 
-                    <BtnDestroy class="w-16 ml-4" handler={(_) => destroy(index)} />
+                    <BtnDestroy class="w-16 ml-4" handler={(_) => destroyRelation('features', index)} />
                 </div>
             </Editable>
 

@@ -14,6 +14,8 @@
     import BtnCreate from '../shared/BtnCreate.svelte'
     import BtnDestroy from '../shared/BtnDestroy.svelte'
 
+    const { createRelation, destroyRelation } = characterRepository
+
     type StringBoolean = 'true' | 'false'
 
     ;(function _migrate() {
@@ -30,32 +32,13 @@
         notes: '',
         source: '',
     }
-
-    const newItem = (): EquippedItem => {
-        return structuredClone(DEFAULT)
-    }
-
-    const trigger = (): void => {
-        $characterRepository = $characterRepository
-    }
-
-    const create = (): void => {
-        $characterRepository.current.resources.equippedItems.push(newItem())
-        trigger()
-    }
-
-    const destroy = (index: number): void => {
-        $characterRepository.current.resources.equippedItems.splice(index, 1)
-        trigger()
-    }
-
     const attunement = ({ attunement }: EquippedItem): StringBoolean => {
         return String(attunement) as StringBoolean
     }
 </script>
 
 <Editable>
-    <BtnCreate handler={create} />
+    <BtnCreate handler={(_) => createRelation('resources.equippedItems', DEFAULT)} />
 </Editable>
 
 {#each $characterRepository.current.resources.equippedItems as item, i}
@@ -82,7 +65,7 @@
                     </Container>
 
                     <Container row slot="editing" class="justify-between">
-                        <BtnDestroy class="w-16" handler={(_) => destroy(i)} />
+                        <BtnDestroy class="w-16" handler={(_) => destroyRelation('resources.equippedItems', i)} />
 
                         <Input
                             id="equippedItems-{i}-attunement"

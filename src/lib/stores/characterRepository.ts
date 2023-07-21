@@ -1,5 +1,16 @@
 import { get, writable, type Writable } from 'svelte/store'
-import { type Character } from '../types'
+import {
+    type Attack,
+    type Character,
+    type EquippedItem,
+    type Feature,
+    type Finite,
+    type Mechanic,
+    type Recoverable,
+    type Spell,
+    type SpellSlot,
+    type Tool,
+} from '../types'
 import defaultCharacter from '../defaultCharacter'
 
 const LS_KEY = 'characters'
@@ -9,9 +20,23 @@ type CharacterStoreState = {
     all: Character[]
 }
 
+type Relations = {
+    attacks: Attack
+    features: Feature
+    'mechanics.other': Mechanic
+    'resources.finite': Finite
+    'resources.recoverable': Recoverable
+    'resources.equippedItems': EquippedItem
+    spells: Spell
+    'spellMechanics.slots': SpellSlot
+    tools: Tool
+}
+
 interface CharacterStore extends Writable<CharacterStoreState> {
     select: (character: Character) => void
     create: () => void
+    createRelation: (path: keyof Relations, relation: Relations[typeof path]) => void
+    destroyRelation: (path: keyof Relations, index: number) => void
     destroy: (index: number) => void
 }
 
@@ -64,10 +89,36 @@ const initStore = (): CharacterStore => {
         })
     }
 
+    const createRelation: CharacterStore['createRelation'] = (path, relation) => {
+        digFromCurrent(path).push(structuredClone(relation))
+        triggerUpdate()
+    }
+
+    const destroyRelation: CharacterStore['destroyRelation'] = (path, index) => {
+        digFromCurrent(path).splice(index, 1)
+        triggerUpdate()
+    }
+
+    const digFromCurrent = (path: keyof Relations): Relations[typeof path][] => {
+        return path
+            .split('.')
+            .reduce((o, i) => o[i], current()) as Relations[typeof path][] // eslint-disable-line
+    }
+
+    const current = (): Character => {
+        return get(store).current
+    }
+
+    const triggerUpdate = (): void => {
+        store.set(get(store))
+    }
+
     return {
         subscribe,
         select,
         create,
+        createRelation,
+        destroyRelation,
         destroy,
         set,
         update,

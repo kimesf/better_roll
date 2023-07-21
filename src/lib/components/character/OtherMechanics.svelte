@@ -7,39 +7,23 @@
     import BtnDestroy from '../shared/BtnDestroy.svelte'
     import BtnCreate from '../shared/BtnCreate.svelte'
 
+    const { createRelation, destroyRelation } = characterRepository
+
     const DEFAULT: Mechanic = {
         name: '',
         value: '',
-    }
-
-    const newMechanic = (): Mechanic => {
-        return structuredClone(DEFAULT)
-    }
-
-    const trigger = (): void => {
-        $characterRepository.current.mechanics.other = $characterRepository.current.mechanics.other
-    }
-
-    const create = (): void => {
-        $characterRepository.current.mechanics.other.push(newMechanic())
-        trigger()
-    }
-
-    const destroy = (index: number): void => {
-        $characterRepository.current.mechanics.other.splice(index, 1)
-        trigger()
     }
 </script>
 
 <Container>
     <Editable>
-        <BtnCreate class="w-full" handler={(_) => create()} />
+        <BtnCreate class="w-full" handler={(_) => createRelation('mechanics.other', DEFAULT)} />
     </Editable>
 
     {#each $characterRepository.current.mechanics.other as mechanic, index}
         <Editable>
             <Container row slot="editing">
-                <BtnDestroy class="w-16" handler={(_) => destroy(index)} />
+                <BtnDestroy class="w-16" handler={(_) => destroyRelation('mechanics.other', index)} />
                 <Input type="text" id="mechanic-{index}-name" bind:value={mechanic.name} />
                 <Input type="text" id="mechanic-{index}-value" bind:value={mechanic.value} />
             </Container>

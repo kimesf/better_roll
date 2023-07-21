@@ -15,6 +15,8 @@
     import SignedNumber from '../shared/SignedNumber.svelte'
     import Title from '../shared/Title.svelte'
 
+    const { createRelation, destroyRelation } = characterRepository
+
     const DEFAULT: Attack = {
         name: '',
         addProficiency: false,
@@ -25,24 +27,6 @@
         damageType: '',
         notes: '',
         source: '',
-    }
-
-    const newAttack = (): Attack => {
-        return structuredClone(DEFAULT)
-    }
-
-    const trigger = (): void => {
-        $characterRepository.current.attacks = $characterRepository.current.attacks
-    }
-
-    const create = (): void => {
-        $characterRepository.current.attacks.push(newAttack())
-        trigger()
-    }
-
-    const destroy = (index: number): void => {
-        $characterRepository.current.attacks.splice(index, 1)
-        trigger()
     }
 
     const attackHitBonus = ({ attribute, hitBonus, addProficiency }: Attack): number => {
@@ -61,7 +45,7 @@
 
 <Container>
     <Editable>
-        <BtnCreate class="w-full" handler={(_) => create()} />
+        <BtnCreate class="w-full" handler={(_) => createRelation('attacks', DEFAULT)} />
     </Editable>
 
     {#each $characterRepository.current.attacks as attack, index}
@@ -71,7 +55,7 @@
                     <Container row slot="editing">
                         <Input type="text" id="attack-{index}-name" bind:value={attack.name} />
 
-                        <BtnDestroy kind="destroy" class="w-16" handler={(_) => destroy(index)} />
+                        <BtnDestroy kind="destroy" class="w-16" handler={(_) => destroyRelation('attacks', index)} />
                     </Container>
 
                     <span slot="showing">{attack.name}</span>

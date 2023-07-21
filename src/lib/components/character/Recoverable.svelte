@@ -13,6 +13,8 @@
     import BtnCreate from '../shared/BtnCreate.svelte'
     import BtnDestroy from '../shared/BtnDestroy.svelte'
 
+    const { createRelation, destroyRelation } = characterRepository
+
     const DEFAULT: Recoverable = {
         name: '',
         current: 0,
@@ -21,31 +23,10 @@
         notes: '',
         source: '',
     }
-
-    const newRecoverable = (): Recoverable => {
-        return structuredClone(DEFAULT)
-    }
-
-    // TODO: dup
-    const trigger = (): void => {
-        $characterRepository = $characterRepository
-    }
-
-    // TODO: dup
-    const create = (): void => {
-        $characterRepository.current.resources.recoverable.push(newRecoverable())
-        trigger()
-    }
-
-    // TODO: dup
-    const destroy = (index: number): void => {
-        $characterRepository.current.resources.recoverable.splice(index, 1)
-        trigger()
-    }
 </script>
 
 <Editable>
-    <BtnCreate class="w-full" handler={(_) => create()} />
+    <BtnCreate class="w-full" handler={(_) => createRelation('resources.recoverable', DEFAULT)} />
 </Editable>
 
 {#each $characterRepository.current.resources.recoverable as recoverable, index}
@@ -85,7 +66,7 @@
 
         <Container slot="body">
             <Editable row class="justify-between items-center">
-                <BtnDestroy class="w-16" handler={(_) => destroy(index)} />
+                <BtnDestroy class="w-16" handler={(_) => destroyRelation('resources.recoverable', index)} />
 
                 <div class="text-secondary">
                     <Input

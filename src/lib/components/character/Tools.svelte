@@ -18,34 +18,18 @@
         return $proficiencyBonus * (expertise ? 2 : 1) + attributeBonus + otherBonus
     }
 
+    const { createRelation, destroyRelation } = characterRepository
+
     const DEFAULT: Tool = {
         name: '',
         attribute: null,
         expertise: false,
         otherBonus: 0,
     }
-
-    const newTool = (): Tool => {
-        return structuredClone(DEFAULT)
-    }
-
-    const trigger = (): void => {
-        $characterRepository = $characterRepository
-    }
-
-    const create = (): void => {
-        $characterRepository.current.tools.push(newTool())
-        trigger()
-    }
-
-    const destroy = (index: number): void => {
-        $characterRepository.current.tools.splice(index, 1)
-        trigger()
-    }
 </script>
 
 <Editable>
-    <BtnCreate class="w-full" handler={(_) => create()} />
+    <BtnCreate class="w-full" handler={(_) => createRelation('tools', DEFAULT)} />
 </Editable>
 
 {#each $characterRepository.current.tools as tool, index}
@@ -71,7 +55,7 @@
                 bind:value={tool.attribute}
             />
 
-            <BtnDestroy class="w-16" handler={(_) => destroy(index)} />
+            <BtnDestroy class="w-16" handler={(_) => destroyRelation('tools',index)} />
         </div>
 
         <Input

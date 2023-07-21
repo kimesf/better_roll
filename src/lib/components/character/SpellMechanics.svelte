@@ -21,6 +21,8 @@
     $: spellSaveDifficulty =
         8 + $proficiencyBonus + $attributesModifiers[spellAttribute] + $character.spellMechanics.saveDifficultyBonus
 
+    const { createRelation, destroyRelation } = characterRepository
+
     const DEFAULT_SLOT: SpellSlot = {
         circle: 1,
         current: 1,
@@ -35,22 +37,8 @@
         return slot
     }
 
-    const trigger = (): void => {
-        $characterRepository = $characterRepository
-    }
-
-    const createSlot = (): void => {
-        if ($characterRepository.current.spellMechanics.slots.length == 9) {
-            return
-        }
-
-        $characterRepository.current.spellMechanics.slots.push(newSlot())
-        trigger()
-    }
-
-    const destroyLastSlot = (): void => {
-        $characterRepository.current.spellMechanics.slots.pop()
-        trigger()
+    const lastSlotIndex = (): number => {
+        return $characterRepository.current.spellMechanics.slots.length - 1
     }
 </script>
 
@@ -116,9 +104,9 @@
     <Title title={t('character.spellMechanics.slots')} />
 
     <Editable>
-        <BtnCreate class="w-full" handler={(_) => createSlot()} />
+        <BtnCreate class="w-full" handler={(_) => createRelation('spellMechanics.slots', newSlot())} />
 
-        <BtnDestroy class="w-full" handler={(_) => destroyLastSlot()}>
+        <BtnDestroy class="w-full" handler={(_) => destroyRelation('spellMechanics.slots', lastSlotIndex())}>
             {t('character.spellMechanics.slots.destroyLast')}
         </BtnDestroy>
     </Editable>
