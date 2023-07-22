@@ -137,7 +137,8 @@
             <button on:click={() => toggle(index)}>
                 <div
                     class="flex flex-col px-2 border border-l-8 border-neutral-500 text-secondary"
-                    class:border-l-green-500={spell.alwaysAvailable || spell.available}
+                    class:border-l-green-500={spell.available}
+                    class:border-l-blue-500={spell.alwaysAvailable}
                     class:text-neutral-200={spell.alwaysAvailable || spell.available}
                 >
                     <div class="flex justify-between">
