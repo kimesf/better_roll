@@ -13,6 +13,7 @@
     import Text from '../shared/Text.svelte'
     import BtnCreate from '../shared/BtnCreate.svelte'
     import BtnDestroy from '../shared/BtnDestroy.svelte'
+    import BtnUpdate from '../shared/BtnUpdate.svelte'
 
     export let onlyShow = false
     export let filter: (spell: Spell) => boolean | null = null
@@ -139,6 +140,23 @@
     }
 
     $: spellList = filter ? $characterRepository.current.spells.filter(filter) : $characterRepository.current.spells
+
+    const sortSpells = (): void => {
+        $characterRepository.current.spells.sort((a, b) => {
+            if (a.circle < b.circle) return -1
+            if (a.circle > b.circle) return 1
+
+            if (a.alwaysAvailable && !b.alwaysAvailable) return -1
+            if (!a.alwaysAvailable && b.alwaysAvailable) return 1
+
+            if (a.name < b.name) return -1
+            if (a.name > b.name) return 1
+
+            return 0
+        })
+
+        $characterRepository = $characterRepository
+    }
 </script>
 
 <Container>
@@ -146,6 +164,9 @@
 
     <Editable {onlyShow}>
         <BtnCreate class="w-full" handler={(_) => createRelation('spells', DEFAULT)} />
+        <BtnUpdate class="w-full" handler={(_) => sortSpells()}>
+            {t('character.spells.autosort')}
+        </BtnUpdate>
     </Editable>
 
     <div class="flex flex-col gap-2">

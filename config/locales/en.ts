@@ -115,6 +115,7 @@ export default {
     'character.spellMechanics.circle': 'circle',
     'character.spellMechanics.slots': 'slots',
     'character.spellMechanics.slots.destroyLast': 'remove last',
+    'character.spells.autosort': 'autosort',
     'character.spells.title': 'spells',
     'character.spells.name': 'name',
     'character.spells.circle': 'circle',

@@ -115,6 +115,7 @@ export default {
     'character.spellMechanics.circle': 'círculo',
     'character.spellMechanics.slots': 'slots',
     'character.spellMechanics.slots.destroyLast': 'remover último',
+    'character.spells.autosort': 'organizar',
     'character.spells.title': 'feitiços',
     'character.spells.name': 'nome',
     'character.spells.circle': 'círculo',
