@@ -3,7 +3,6 @@
     import { type Spell } from '../../types'
     import Title from '../shared/Title.svelte'
     import Separator from '../shared/Separator.svelte'
-    import { slide } from 'svelte/transition'
     import Link from '../shared/Link.svelte'
     import Editable from '../shared/Editable.svelte'
     import characterRepository from '../../stores/characterRepository'
@@ -14,6 +13,9 @@
     import Text from '../shared/Text.svelte'
     import BtnCreate from '../shared/BtnCreate.svelte'
     import BtnDestroy from '../shared/BtnDestroy.svelte'
+
+    export let onlyShow = false
+    export let filter: (spell: Spell) => boolean | null = null
 
     const SPACE = '\u0020'
 
@@ -123,17 +125,31 @@
         notes: '',
         source: '',
     }
+
+    const keyFor = (spell: Spell): string => {
+        return spell.name
+    }
+
+    $: spellIndexesByKey = $characterRepository.current.spells.reduce((acc, spell, index) => {
+        return Object.assign(acc, { [keyFor(spell)]: index })
+    }, {}) as { [key: string]: number }
+
+    const indexFor = (spell: Spell): number => {
+        return spellIndexesByKey[keyFor(spell)]
+    }
+
+    $: spellList = filter ? $characterRepository.current.spells.filter(filter) : $characterRepository.current.spells
 </script>
 
 <Container>
     <Title title={t('character.spells.title')} />
 
-    <Editable>
+    <Editable {onlyShow}>
         <BtnCreate class="w-full" handler={(_) => createRelation('spells', DEFAULT)} />
     </Editable>
 
     <div class="flex flex-col gap-2">
-        {#each $characterRepository.current.spells as spell, index}
+        {#each spellList as spell, index}
             <button on:click={() => toggle(index)}>
                 <div
                     class="flex flex-col px-2 border border-l-8 border-neutral-500 text-secondary"
@@ -180,127 +196,129 @@
             </button>
 
             {#if visible == index}
-                <div transition:slide class="px-2">
-                    <Editable>
-                        <Container slot="showing">
-                            <div class="flex justify-between">
-                                <div>
-                                    {spell.target}
-                                </div>
-
-                                <div class="uppercase text-sm">
-                                    {t(`spells.school.${spell.school}`)}
-                                </div>
+                <Editable {onlyShow}>
+                    <Container slot="showing">
+                        <div class="flex justify-between">
+                            <div>
+                                {spell.target}
                             </div>
+
+                            <div class="uppercase text-sm">
+                                {t(`spells.school.${spell.school}`)}
+                            </div>
+                        </div>
+
+                        <div>
+                            {presentComponents(spell.components)}
+                        </div>
+
+                        {#if spell.source}
+                            <Separator />
 
                             <div>
-                                {presentComponents(spell.components)}
+                                <Link to={spell.source} />
                             </div>
+                        {/if}
 
-                            {#if spell.source}
-                                <Separator />
+                        {#if spell.notes}
+                            <Separator />
 
-                                <div>
-                                    <Link to={spell.source} />
-                                </div>
-                            {/if}
+                            <Text>{spell.notes}</Text>
+                        {/if}
+                    </Container>
 
-                            {#if spell.notes}
-                                <Separator />
-
-                                <Text>{spell.notes}</Text>
-                            {/if}
-                        </Container>
-
-                        <Container slot="editing">
-                            <Container>
-                                <Container row>
-                                    <Input type="text" id="spell-{index}-name" bind:value={spell.name} />
-
-                                    <Input
-                                        type="select"
-                                        id="spell-{index}-circle"
-                                        options={SPELL_CIRCLES.map(option => [option, option])}
-                                        bind:value={spell.circle}
-                                    />
-                                </Container>
-
-                                <Container row>
-                                    <Input
-                                        type="select"
-                                        id="spell-{index}-school"
-                                        options={SCHOOLS.map(option => [option, t(`spells.school.${option}`)])}
-                                        bind:value={spell.school}
-                                    />
-
-                                    <BtnDestroy class="grow" handler={(_) => destroyRelation('spells', index)} />
-                                </Container>
-
-                                {#each booleanForms as key}
-                                    <Input
-                                        type="checkbox"
-                                        id="spell-{index}-{key}"
-                                        label="{t(`character.spells.${key}`)}?"
-                                        bind:checked={spell[key]}
-                                    />
-                                {/each}
-                            </Container>
-
-                            <Container>
-                                <Title title={t('character.spells.components')} />
-
-                                {#each formComponents as key}
-                                    <Input
-                                        type="checkbox"
-                                        id="spell-{index}-components-{key}"
-                                        label="{t(`character.spells.components.${key}`)}?"
-                                        bind:checked={spell.components[key]}
-                                    />
-                                {/each}
-
+                    <Container slot="editing">
+                        <Container>
+                            <Container row>
                                 <Input
                                     type="text"
-                                    id="spell-{index}-components-notes"
-                                    bind:value={spell.components.notes}
+                                    id="spell-{index}-name"
+                                    bind:value={$characterRepository.current.spells[indexFor(spell)].name}
+                                />
+
+                                <Input
+                                    type="select"
+                                    id="spell-{index}-circle"
+                                    options={SPELL_CIRCLES.map((option) => [option, option])}
+                                    bind:value={$characterRepository.current.spells[indexFor(spell)].circle}
                                 />
                             </Container>
 
-                            {#each formsWithSuggestions as [key, suggestions]}
-                                <Container>
-                                    <Title title={t(`character.spells.${key}`)} />
+                            <Container row>
+                                <Input
+                                    type="select"
+                                    id="spell-{index}-school"
+                                    options={SCHOOLS.map((option) => [option, t(`spells.school.${option}`)])}
+                                    bind:value={$characterRepository.current.spells[indexFor(spell)].school}
+                                />
 
-                                    <InputWithSuggestions
-                                        id="spell-{index}-{key}"
-                                        {suggestions}
-                                        bind:value={spell[key]}
-                                    />
-                                </Container>
+                                <BtnDestroy class="grow" handler={(_) => destroyRelation('spells', index)} />
+                            </Container>
+
+                            {#each booleanForms as key}
+                                <Input
+                                    type="checkbox"
+                                    id="spell-{index}-{key}"
+                                    label="{t(`character.spells.${key}`)}?"
+                                    bind:checked={$characterRepository.current.spells[indexFor(spell)][key]}
+                                />
+                            {/each}
+                        </Container>
+
+                        <Container>
+                            <Title title={t('character.spells.components')} />
+
+                            {#each formComponents as key}
+                                <Input
+                                    type="checkbox"
+                                    id="spell-{index}-components-{key}"
+                                    label="{t(`character.spells.components.${key}`)}?"
+                                    bind:checked={$characterRepository.current.spells[indexFor(spell)].components[key]}
+                                />
                             {/each}
 
-                            <Container>
-                                <Title title={t('character.spells.source')} />
-
-                                <Input
-                                    type="text"
-                                    id="spell-{index}-source"
-                                    bind:value={spell.source}
-                                    placeholder={t('display.missingSource')}
-                                />
-                            </Container>
-
-                            <Container>
-                                <Title title={t('character.spells.notes')} />
-
-                                <Input
-                                    type="textarea"
-                                    id="spell-{index}-notes"
-                                    bind:value={spell.notes}
-                                    placeholder={t('display.missingNotes')}
-                                />
-                            </Container>
+                            <Input
+                                type="text"
+                                id="spell-{index}-components-notes"
+                                bind:value={$characterRepository.current.spells[indexFor(spell)].components.notes}
+                            />
                         </Container>
-                    </Editable>
-                </div>
+
+                        {#each formsWithSuggestions as [key, suggestions]}
+                            <Container>
+                                <Title title={t(`character.spells.${key}`)} />
+
+                                <InputWithSuggestions
+                                    id="spell-{index}-{key}"
+                                    {suggestions}
+                                    bind:value={$characterRepository.current.spells[indexFor(spell)][key]}
+                                />
+                            </Container>
+                        {/each}
+
+                        <Container>
+                            <Title title={t('character.spells.notes')} />
+
+                            <Input
+                                type="textarea"
+                                id="spell-{index}-notes"
+                                bind:value={$characterRepository.current.spells[indexFor(spell)].notes}
+                                placeholder={t('display.missingNotes')}
+                            />
+                        </Container>
+
+                        <Container>
+                            <Title title={t('character.spells.source')} />
+
+                            <Input
+                                type="text"
+                                id="spell-{index}-source"
+                                bind:value={$characterRepository.current.spells[indexFor(spell)].source}
+                                placeholder={t('display.missingSource')}
+                            />
+                        </Container>
+                    </Container>
+                </Editable>
             {/if}
         {/each}
     </div>
