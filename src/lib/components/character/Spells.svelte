@@ -1,107 +1,20 @@
 <script lang="ts">
     import { t } from '../../stores/i18n'
     import { type Spell } from '../../types'
-    import Title from '../shared/Title.svelte'
     import Separator from '../shared/Separator.svelte'
-    import Link from '../shared/Link.svelte'
-    import Editable from '../shared/Editable.svelte'
     import characterRepository from '../../stores/characterRepository'
-    import { SCHOOLS, SPELL_CIRCLES } from '../../constants'
     import Container from '../shared/Container.svelte'
-    import Input from '../shared/Input.svelte'
-    import InputWithSuggestions from '../shared/InputWithSuggestions.svelte'
     import Text from '../shared/Text.svelte'
-    import BtnCreate from '../shared/BtnCreate.svelte'
-    import BtnDestroy from '../shared/BtnDestroy.svelte'
-    import BtnUpdate from '../shared/BtnUpdate.svelte'
+    import Btn from '../shared/Btn.svelte'
+    import Icon from '../shared/Icon.svelte'
+    import Chip from '../shared/Chip.svelte'
+    import NewCollapsible from '../shared/NewCollapsible.svelte'
+    import NewEditable from '../shared/NewEditable.svelte'
+    import NewTitle from '../shared/NewTitle.svelte'
+    import spellEditor from '../../stores/spellEditor'
 
-    export let onlyShow = false
+    export let forceShow = false
     export let filter: (spell: Spell) => boolean | null = null
-
-    const SPACE = '\u0020'
-
-    enum ConjurationTimes {
-        Action = 'action',
-        Bonus = 'bonus',
-        Reaction = 'reaction',
-        OneMinute = '1minute',
-        TenMinutes = '10minutes',
-        OneHour = '1hour',
-    }
-    enum Ranges {
-        Touch = 'touch',
-        TenFeet = '10feet',
-        ThirtyFeet = '30feet',
-        SixtyFeet = '60feet',
-        NinetyFeet = '90feet',
-        OneHundredAndTwentyFeet = '120feet',
-        OneHundredAndFiftyFeet = '150feet',
-        FiveHundredFeet = '500feet',
-        Self = 'self',
-        SelfFiveFootRadius = 'self5footRadius',
-        SelfTenFootRadius = 'self10footRadius',
-        SelfThirtyFootRadius = 'self30footRadius',
-        SelfFifteenFootCone = 'self15footCone',
-        SelfFifteenFootCube = 'self15footCube',
-        SelfThirtyFootLine = 'self30footLine',
-    }
-
-    enum Targets {
-        Self = 'self',
-        OneCreature = 'oneCreature',
-        OneCreatureInSight = 'oneCreatureInSight',
-        OneCreatureWilling = 'oneCreatureWilling',
-        UpToThreeCreature = 'upToThreeCreatures',
-        AllCreaturesInRange = 'allCreaturesInRange',
-    }
-
-    enum Durations {
-        Instant = 'instant',
-        OneRound = '1round',
-        OneMinute = '1minute',
-        TenMinutes = '10minutes',
-        Onehour = '1hour',
-        EightHours = '8hours',
-        OneDay = '1day',
-        Permanent = 'permanent',
-    }
-
-    const conjurationTimes = Object.values(ConjurationTimes).map((key) => t(`character.spells.conjurationTime.${key}`))
-    const ranges = Object.values(Ranges).map((key) => t(`character.spells.range.${key}`))
-    const targets = Object.values(Targets).map((key) => t(`character.spells.target.${key}`))
-    const durations = Object.values(Durations).map((key) => t(`character.spells.duration.${key}`))
-
-    const formsWithSuggestions: ['conjurationTime' | 'range' | 'target' | 'duration', string[]][] = [
-        ['conjurationTime', conjurationTimes],
-        ['range', ranges],
-        ['target', targets],
-        ['duration', durations],
-    ]
-
-    const booleanForms: ('alwaysAvailable' | 'available' | 'ritual' | 'concentration')[] = [
-        'available',
-        'alwaysAvailable',
-        'concentration',
-        'ritual',
-    ]
-
-    const formComponents: ('verbal' | 'somatic' | 'material')[] = ['verbal', 'somatic', 'material']
-
-    const presentComponents = (components: Spell['components']) => {
-        const maybeAspect = (aspect: 'verbal' | 'somatic' | 'material') =>
-            components[aspect] ? t(`spells.components.${aspect}`).at(0).toUpperCase() : ''
-
-        const abbr = ['verbal', 'somatic', 'material'].map(maybeAspect).join('')
-        const notes = components.material ? `${SPACE}(${components.notes})` : ''
-
-        return abbr + notes
-    }
-
-    let visible: number | null = null
-
-    const toggle = (spellIndex: number): void => {
-        visible = spellIndex == visible ? null : spellIndex
-    }
 
     const { createRelation, destroyRelation } = characterRepository
 
@@ -127,18 +40,6 @@
         source: '',
     }
 
-    const keyFor = (spell: Spell): string => {
-        return spell.name
-    }
-
-    $: spellIndexesByKey = $characterRepository.current.spells.reduce((acc, spell, index) => {
-        return Object.assign(acc, { [keyFor(spell)]: index })
-    }, {}) as { [key: string]: number }
-
-    const indexFor = (spell: Spell): number => {
-        return spellIndexesByKey[keyFor(spell)]
-    }
-
     $: spellList = filter ? $characterRepository.current.spells.filter(filter) : $characterRepository.current.spells
 
     const sortSpells = (): void => {
@@ -159,188 +60,134 @@
     }
 </script>
 
-<Container>
-    <Title title={t('character.spells.title')} />
+<NewEditable {forceShow}>
+    <Container row slot="editing">
+        <Btn shape="round" kind="create" handler={(_) => createRelation('spells', DEFAULT)} />
+        <Btn shape="round" icon="arrow-down-a-z" kind="update" askConfirmation handler={(_) => sortSpells()} />
+        <NewTitle title={t('character.spells')} />
+    </Container>
+</NewEditable>
 
-    <Editable {onlyShow}>
-        <BtnCreate class="w-full" handler={(_) => createRelation('spells', DEFAULT)} />
-        <BtnUpdate class="w-full" handler={(_) => sortSpells()}>
-            {t('character.spells.autosort')}
-        </BtnUpdate>
-    </Editable>
+{#each spellList as spell, index}
+    <NewCollapsible>
+        <svelte:fragment slot="title">
+            <div
+                class="min-w-[32px] min-h-[32px] max-w-[32px] max-h-[32px] shadow-xl rounded-full flex items-center justify-center font-extrabold text-xl"
+                class:bg-neutral-500={!spell.available && !spell.alwaysAvailable}
+                class:bg-green-500={spell.available}
+                class:bg-pink-500={spell.alwaysAvailable}
+            >
+                {spell.circle}
+            </div>
 
-    <div class="flex flex-col gap-2">
-        {#each spellList as spell, index}
-            <button on:click={() => toggle(index)}>
-                <div
-                    class="flex flex-col px-2 border border-l-8 border-neutral-500 text-secondary"
-                    class:border-l-green-500={spell.available}
-                    class:border-l-blue-500={spell.alwaysAvailable}
-                    class:text-neutral-200={spell.alwaysAvailable || spell.available}
-                >
-                    <div class="flex justify-between">
-                        <div class="text-lg">
-                            {spell.name}
-                        </div>
+            <div class="text-lg font-bold text-secondary" class:text-white={spell.available || spell.alwaysAvailable}>
+                {spell.name}
+            </div>
+        </svelte:fragment>
 
-                        <div>
-                            {spell.circle}
-                        </div>
-                    </div>
+        <svelte:fragment slot="subtitle">
+            <div
+                class="flex justify-between text-secondary items-center"
+                class:text-white={spell.available || spell.alwaysAvailable}
+            >
+                <div class="flex gap-2">
+                    <Chip>
+                        {spell.conjurationTime}
+                    </Chip>
 
-                    <div class="flex justify-between">
-                        <div>
-                            {spell.conjurationTime}
-                        </div>
-
-                        <div>
-                            {spell.range}
-                        </div>
-
-                        <div>
-                            {spell.duration}
-                        </div>
-
-                        {#if spell.concentration}
-                            <div class="uppercase">
-                                {t('character.spells.concentration').at(0)}
-                            </div>
-                        {/if}
-
-                        {#if spell.ritual}
-                            <div class="uppercase">
-                                {t('character.spells.ritual').at(0)}
-                            </div>
-                        {/if}
-                    </div>
+                    <Chip>
+                        {spell.range}
+                    </Chip>
                 </div>
-            </button>
 
-            {#if visible == index}
-                <Editable {onlyShow}>
-                    <Container slot="showing">
-                        <div class="flex justify-between">
-                            <div>
-                                {spell.target}
-                            </div>
+                <div class="flex">
+                    <!-- TODO: add this -->
+                    {#if true}<Icon name="coins" class="bg-red-500" />{/if}
+                    {#if spell.concentration}<Icon name="brain" />{/if}
+                    {#if spell.ritual}<Icon name="menorah" />{/if}
+                </div>
+            </div>
 
-                            <div class="uppercase text-sm">
-                                {t(`spells.school.${spell.school}`)}
-                            </div>
-                        </div>
+            <NewEditable>
+                <Container row class="justify-start" slot="editing">
+                    {#if !forceShow}
+                        <Btn
+                            askConfirmation
+                            shape="round"
+                            handler={(_) => destroyRelation('spells', index)}
+                            icon="trash-can"
+                            kind="destroy"
+                        />
 
-                        <div>
-                            {presentComponents(spell.components)}
-                        </div>
+                        <Btn shape="round" handler={() => spellEditor.set(index)} icon="pen" kind="update" />
 
-                        {#if spell.source}
-                            <Separator />
-
-                            <div>
-                                <Link to={spell.source} />
-                            </div>
+                        {#if !spell.alwaysAvailable}
+                            {#if spell.available}
+                                <Btn
+                                    shape="round"
+                                    handler={() => (spell.available = false)}
+                                    icon="bookmark"
+                                    kind="update"
+                                />
+                            {:else}
+                                <Btn
+                                    shape="round"
+                                    handler={() => (spell.available = true)}
+                                    icon="bookmark"
+                                    kind="update"
+                                    iconKind="regular"
+                                />
+                            {/if}
                         {/if}
+                    {/if}
 
-                        {#if spell.notes}
-                            <Separator />
+                    <Btn
+                        shape="round"
+                        handler={() => alert('used')}
+                        askConfirmation
+                        icon="hand-sparkles"
+                        kind="update"
+                    />
+                </Container>
+            </NewEditable>
+        </svelte:fragment>
 
-                            <Text>{spell.notes}</Text>
-                        {/if}
-                    </Container>
+        <svelte:fragment slot="body">
+            <Chip>
+                {t(`spells.school.${spell.school}`)}
+            </Chip>
 
-                    <Container slot="editing">
-                        <Container>
-                            <Container row>
-                                <Input
-                                    type="text"
-                                    id="spell-{index}-name"
-                                    bind:value={$characterRepository.current.spells[indexFor(spell)].name}
-                                />
+            <Chip>
+                {spell.duration}
+            </Chip>
 
-                                <Input
-                                    type="select"
-                                    id="spell-{index}-circle"
-                                    options={SPELL_CIRCLES.map((option) => [option, option])}
-                                    bind:value={$characterRepository.current.spells[indexFor(spell)].circle}
-                                />
-                            </Container>
+            <Chip>
+                {spell.target}
+            </Chip>
 
-                            <Container row>
-                                <Input
-                                    type="select"
-                                    id="spell-{index}-school"
-                                    options={SCHOOLS.map((option) => [option, t(`spells.school.${option}`)])}
-                                    bind:value={$characterRepository.current.spells[indexFor(spell)].school}
-                                />
+            <Separator />
 
-                                <BtnDestroy class="grow" handler={(_) => destroyRelation('spells', index)} />
-                            </Container>
+            <Container row gap="small">
+                {#if spell.components.verbal}<Chip>{t('spells.components.verbal')}</Chip>{/if}
+                {#if spell.components.somatic}<Chip>{t('spells.components.somatic')}</Chip>{/if}
+                {#if spell.components.material}<Chip>{t('spells.components.material')}</Chip>{/if}
+            </Container>
 
-                            {#each booleanForms as key}
-                                <Input
-                                    type="checkbox"
-                                    id="spell-{index}-{key}"
-                                    label="{t(`character.spells.${key}`)}?"
-                                    bind:checked={$characterRepository.current.spells[indexFor(spell)][key]}
-                                />
-                            {/each}
-                        </Container>
-
-                        <Container>
-                            <Title title={t('character.spells.components')} />
-
-                            {#each formComponents as key}
-                                <Input
-                                    type="checkbox"
-                                    id="spell-{index}-components-{key}"
-                                    label="{t(`character.spells.components.${key}`)}?"
-                                    bind:checked={$characterRepository.current.spells[indexFor(spell)].components[key]}
-                                />
-                            {/each}
-
-                            <Input
-                                type="text"
-                                id="spell-{index}-components-notes"
-                                bind:value={$characterRepository.current.spells[indexFor(spell)].components.notes}
-                            />
-                        </Container>
-
-                        {#each formsWithSuggestions as [key, suggestions]}
-                            <Container>
-                                <Title title={t(`character.spells.${key}`)} />
-
-                                <InputWithSuggestions
-                                    id="spell-{index}-{key}"
-                                    {suggestions}
-                                    bind:value={$characterRepository.current.spells[indexFor(spell)][key]}
-                                />
-                            </Container>
-                        {/each}
-
-                        <Container>
-                            <Title title={t('character.spells.notes')} />
-
-                            <Input
-                                type="textarea"
-                                id="spell-{index}-notes"
-                                bind:value={$characterRepository.current.spells[indexFor(spell)].notes}
-                                placeholder={t('display.missingNotes')}
-                            />
-                        </Container>
-
-                        <Container>
-                            <Title title={t('character.spells.source')} />
-
-                            <Input
-                                type="text"
-                                id="spell-{index}-source"
-                                bind:value={$characterRepository.current.spells[indexFor(spell)].source}
-                                placeholder={t('display.missingSource')}
-                            />
-                        </Container>
-                    </Container>
-                </Editable>
+            {#if spell.components.notes}
+                <div>
+                    {spell.components.notes}
+                </div>
             {/if}
-        {/each}
-    </div>
-</Container>
+
+            {#if spell.source}
+                <Btn shape="round" kind="link" to={spell.source} />
+            {:else}
+                <Separator />
+            {/if}
+
+            {#if spell.notes}
+                <Text>{spell.notes}</Text>
+            {/if}
+        </svelte:fragment>
+    </NewCollapsible>
+{/each}

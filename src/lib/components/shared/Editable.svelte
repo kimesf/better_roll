@@ -6,14 +6,20 @@
     export let onlyShow = false
 </script>
 
-<Container class={$$props.class || ''} {row}>
-    {#if onlyShow}
+{#if onlyShow}
+    <Container class={$$props.class || ''} {row}>
         <slot name="showing" />
-    {:else if $$slots.default && $canEdit}
+    </Container>
+{:else if $$slots.default && $canEdit}
+    <Container class={$$props.class || ''} {row}>
         <slot />
-    {:else if $canEdit}
+    </Container>
+{:else if $canEdit && $$slots.editing}
+    <Container class={$$props.class || ''} {row}>
         <slot name="editing" />
-    {:else}
+    </Container>
+{:else if $$slots.showing}
+    <Container class={$$props.class || ''} {row}>
         <slot name="showing" />
-    {/if}
-</Container>
+    </Container>
+{/if}

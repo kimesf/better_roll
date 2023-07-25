@@ -4,15 +4,15 @@
 
 @layer components {
     .bg-primary {
-        @apply bg-neutral-900
+        @apply bg-neutral-800
     }
 
     .bg-secondary {
-        @apply bg-neutral-950
+        @apply bg-neutral-700
     }
 
     .text-primary {
-        @apply text-neutral-200
+        @apply text-white
     }
 
     .text-secondary {

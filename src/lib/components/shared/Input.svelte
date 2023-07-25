@@ -51,6 +51,6 @@
     input,
     textarea,
     select {
-        @apply bg-neutral-500 rounded-md p-1 text-sm;
+        @apply bg-neutral-500 rounded-md p-1 text-sm shadow-lg;
     }
 </style>

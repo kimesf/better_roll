@@ -15,5 +15,5 @@
     <Title title={i18n.t('display.actions.attacks')} />
     <Attacks />
 
-    <Spells onlyShow {filter}/>
+    <Spells forceShow {filter}/>
 </Container>
