@@ -11,6 +11,7 @@
     import BtnUpdate from './shared/BtnUpdate.svelte'
     import BtnCreate from './shared/BtnCreate.svelte'
     import BtnDestroy from './shared/BtnDestroy.svelte'
+    import Card from './shared/Card.svelte'
 
     const { select, create, destroy } = characterRepository
 

@@ -17,6 +17,7 @@
     let klass = ($$props.class as string | undefined) || ''
 </script>
 
+<!-- // Usar  composição -->
 {#if type == 'text'}
     <input {id} bind:value class={twMerge('w-full', klass)} {placeholder} type="text" />
 {:else if type == 'number'}

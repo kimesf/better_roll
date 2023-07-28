@@ -1,58 +1,59 @@
 <script lang="ts">
     import { t } from '../../stores/i18n'
-    import index from '../../stores/spellEditor'
     import { SCHOOLS, SPELL_CIRCLES } from '../../constants'
-    import Container from '../shared/Container.svelte'
-    import Input from '../shared/Input.svelte'
-    import Title from '../shared/Title.svelte'
-    import InputWithSuggestions from '../shared/InputWithSuggestions.svelte'
+    import Form from '../ui/Form.svelte'
+    import Stack from '../ui/Stack.svelte'
+    import Grid from '../ui/Grid.svelte'
+    import Steps from '../ui/Steps.svelte'
+    import Card from '../shared/Card.svelte'
+    import index from '../../stores/spellEditor'
     import characterRepository from '../../stores/characterRepository'
 
     enum ConjurationTimes {
-        Action = 'action',
-        Bonus = 'bonus',
-        Reaction = 'reaction',
-        OneMinute = '1minute',
-        TenMinutes = '10minutes',
         OneHour = '1hour',
+        TenMinutes = '10minutes',
+        OneMinute = '1minute',
+        Reaction = 'reaction',
+        Bonus = 'bonus',
+        Action = 'action',
     }
 
     enum Ranges {
-        Touch = 'touch',
-        TenFeet = '10feet',
-        ThirtyFeet = '30feet',
-        SixtyFeet = '60feet',
-        NinetyFeet = '90feet',
-        OneHundredAndTwentyFeet = '120feet',
-        OneHundredAndFiftyFeet = '150feet',
-        FiveHundredFeet = '500feet',
-        Self = 'self',
-        SelfFiveFootRadius = 'self5footRadius',
-        SelfTenFootRadius = 'self10footRadius',
-        SelfThirtyFootRadius = 'self30footRadius',
-        SelfFifteenFootCone = 'self15footCone',
-        SelfFifteenFootCube = 'self15footCube',
         SelfThirtyFootLine = 'self30footLine',
+        SelfThirtyFootRadius = 'self30footRadius',
+        OneHundredAndTwentyFeet = '120feet',
+        NinetyFeet = '90feet',
+        SixtyFeet = '60feet',
+        ThirtyFeet = '30feet',
+        Self = 'self',
+        Touch = 'touch',
+        // TenFeet = '10feet',
+        // OneHundredAndFiftyFeet = '150feet',
+        // FiveHundredFeet = '500feet',
+        // SelfFiveFootRadius = 'self5footRadius',
+        // SelfTenFootRadius = 'self10footRadius',
+        // SelfFifteenFootCone = 'self15footCone',
+        // SelfFifteenFootCube = 'self15footCube',
     }
 
     enum Targets {
-        Self = 'self',
-        OneCreature = 'oneCreature',
-        OneCreatureInSight = 'oneCreatureInSight',
-        OneCreatureWilling = 'oneCreatureWilling',
-        UpToThreeCreature = 'upToThreeCreatures',
         AllCreaturesInRange = 'allCreaturesInRange',
+        UpToThreeCreature = 'upToThreeCreatures',
+        OneCreatureWilling = 'oneCreatureWilling',
+        OneCreatureInSight = 'oneCreatureInSight',
+        OneCreature = 'oneCreature',
+        Self = 'self',
     }
 
     enum Durations {
-        Instant = 'instant',
-        OneRound = '1round',
-        OneMinute = '1minute',
-        TenMinutes = '10minutes',
-        Onehour = '1hour',
-        EightHours = '8hours',
-        OneDay = '1day',
         Permanent = 'permanent',
+        OneDay = '1day',
+        EightHours = '8hours',
+        Onehour = '1hour',
+        TenMinutes = '10minutes',
+        OneMinute = '1minute',
+        OneRound = '1round',
+        Instant = 'instant',
     }
 
     const conjurationTimes = Object.values(ConjurationTimes).map((key) => t(`character.spells.conjurationTime.${key}`))
@@ -75,94 +76,137 @@
     ]
 
     const formComponents: ('verbal' | 'somatic' | 'material')[] = ['verbal', 'somatic', 'material']
+
+    const closeEditor = () => {
+        $index = undefined
+    }
+
+    // TEMP TODO
+    let checked = false
 </script>
 
-<button on:click={() => $index = null}>
-    TESTE
-</button>
+<Stack direction="col" class="h-full bg-primary bg-[rgb(0,0,0,0.8)]" gap="no">
+    <button class="w-full grow" on:click={closeEditor} />
 
-<Container>
-    <Container row>
-        <Input
-            type="text"
-            id="spell-{index}-name"
-            bind:value={$characterRepository.current.spells[$index].name}
-        />
+    <Card class="mx-4">
+        <Steps let:Step onDone={closeEditor}>
+            <Form let:F>
+                <Step step={0}>
+                    <F.Label title={t('spells.name')}>
+                        <F.Input
+                            type="text"
+                            id="spell-{$index}-name"
+                            bind:value={$characterRepository.current.spells[$index].name}
+                            placeholder="Abrakadabra"
+                        />
+                    </F.Label>
 
-        <Input
-            type="select"
-            id="spell-{index}-circle"
-            options={SPELL_CIRCLES.map((option) => [option, option])}
-            bind:value={$characterRepository.current.spells[$index].circle}
-        />
-    </Container>
+                    <Stack>
+                        <F.Label class="grow" title={t('spells.circle')}>
+                            <F.Select
+                                id="spell-{$index}-circle"
+                                options={SPELL_CIRCLES.map((option) => [option, option])}
+                                bind:value={$characterRepository.current.spells[$index].circle}
+                            />
+                        </F.Label>
 
-    <Input
-        type="select"
-        id="spell-{index}-school"
-        options={SCHOOLS.map((option) => [option, t(`spells.school.${option}`)])}
-        bind:value={$characterRepository.current.spells[$index].school}
-    />
+                        <F.Label class="grow" title={t('spells.school')}>
+                            <F.Select
+                                id="spell-{$index}-school"
+                                options={SCHOOLS.map((option) => [option, t(`spells.school.${option}`)])}
+                                bind:value={$characterRepository.current.spells[$index].school}
+                            />
+                        </F.Label>
+                    </Stack>
+                </Step>
 
-    {#each booleanForms as key}
-        <Input
-            type="checkbox"
-            id="spell-{index}-{key}"
-            label="{t(`character.spells.${key}`)}?"
-            bind:checked={$characterRepository.current.spells[$index][key]}
-        />
-    {/each}
-</Container>
+                {#each formsWithSuggestions as [key, options], i}
+                    <Step step={i + 1}>
+                        <F.InputOptions {options} bind:value={$characterRepository.current.spells[$index][key]} />
 
-<Container>
-    <Title title={t('character.spells.components')} />
+                        <F.Label title={t(`character.spells.${key}`)}>
+                            <F.Input
+                                type="text"
+                                id="spell-{$index}-{key}"
+                                bind:value={$characterRepository.current.spells[$index][key]}
+                                placeholder={t('other')}
+                            />
+                        </F.Label>
+                    </Step>
+                {/each}
 
-    {#each formComponents as key}
-        <Input
-            type="checkbox"
-            id="spell-{index}-components-{key}"
-            label="{t(`character.spells.components.${key}`)}?"
-            bind:checked={$characterRepository.current.spells[$index].components[key]}
-        />
-    {/each}
+                <Step step={5}>
+                    <F.Label title={t(`character.spells.components`)} />
 
-    <Input
-        type="text"
-        id="spell-{index}-components-notes"
-        bind:value={$characterRepository.current.spells[$index].components.notes}
-    />
-</Container>
+                    <Stack>
+                        {#each formComponents as key}
+                            <Stack direction="col" align="center" gap="xs">
+                                <F.Label
+                                    for="spell-{$index}-components-{key}"
+                                    title={t(`character.spells.components.${key}`)}
+                                />
 
-{#each formsWithSuggestions as [key, suggestions]}
-    <Container>
-        <Title title={t(`character.spells.${key}`)} />
+                                <F.Checkbox
+                                    id="spell-{$index}-components-{key}"
+                                    bind:checked={$characterRepository.current.spells[$index].components[key]}
+                                />
+                            </Stack>
+                        {/each}
 
-        <InputWithSuggestions
-            id="spell-{index}-{key}"
-            {suggestions}
-            bind:value={$characterRepository.current.spells[$index][key]}
-        />
-    </Container>
-{/each}
+                        <!-- TODO TEMP -->
+                        <Stack direction="col" align="center" gap="xs">
+                            <F.Label for="spell-{$index}-components-cost" title="custo" />
+                            <F.Checkbox id="spell-{$index}-components-cost" bind:checked />
+                        </Stack>
+                    </Stack>
 
-<Container>
-    <Title title={t('character.spells.notes')} />
+                    <F.Label title="descrição">
+                        <F.Textarea
+                            id="spell-{$index}-components-notes"
+                            bind:value={$characterRepository.current.spells[$index].components.notes}
+                            placeholder={t('spells.components.placeholder')}
+                        />
+                    </F.Label>
+                </Step>
 
-    <Input
-        type="textarea"
-        id="spell-{index}-notes"
-        bind:value={$characterRepository.current.spells[$index].notes}
-        placeholder={t('display.missingNotes')}
-    />
-</Container>
+                <Step step={6}>
+                    <Grid>
+                        {#each booleanForms as key}
+                            <Stack direction="col" gap="xs" align="center">
+                                <F.Label for="spell-{$index}-{key}" title={t(`character.spells.${key}`)} />
+                                <F.Checkbox
+                                    id="spell-{$index}-{key}"
+                                    bind:checked={$characterRepository.current.spells[$index][key]}
+                                />
+                            </Stack>
+                        {/each}
+                    </Grid>
+                </Step>
 
-<Container>
-    <Title title={t('character.spells.source')} />
+                <Step step={7}>
+                    <F.Label title={t('character.spells.notes')}>
+                        <F.Textarea
+                            id="spell-{$index}-notes"
+                            bind:value={$characterRepository.current.spells[$index].notes}
+                            placeholder={t('display.missingNotes')}
+                            rows={25}
+                        />
+                    </F.Label>
+                </Step>
 
-    <Input
-        type="text"
-        id="spell-{index}-source"
-        bind:value={$characterRepository.current.spells[$index].source}
-        placeholder={t('display.missingSource')}
-    />
-</Container>
+                <Step step={8}>
+                    <F.Label title={t('character.spells.source')}>
+                        <F.Input
+                            type="text"
+                            id="spell-{$index}-source"
+                            bind:value={$characterRepository.current.spells[$index].source}
+                            placeholder={t('display.missingSource')}
+                        />
+                    </F.Label>
+                </Step>
+            </Form>
+        </Steps>
+    </Card>
+
+    <button class="w-full h-20" on:click={closeEditor} />
+</Stack>

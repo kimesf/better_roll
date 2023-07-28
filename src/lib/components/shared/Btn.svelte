@@ -95,3 +95,37 @@
 
     }
 </style>
+
+<!-- <svelte:element
+	this={href ? "a" : "button"}
+	type={href ? undefined : type}
+	{href}
+	class={cn(buttonVariants({ variant, size, className }))}
+	{...$$restProps}
+	on:click
+	on:change
+	on:keydown
+	on:keyup
+	on:mouseenter
+	on:mouseleave
+>
+	<slot />
+</svelte:element> -->
+
+<!-- <script lang="ts">
+    export let to: string
+
+    const withHttp = (url: string): string => {
+        return !/^https?:\/\//i.test(url) ? `http://${url}` : url
+    }
+</script>
+
+<a href={withHttp(to)} target="_blank" rel="noopener noreferrer">
+    {#if $$slots.default}
+        <slot />
+    {:else}
+        <span class="underline text-sky-500">
+            {to}
+        </span>
+    {/if}
+</a> -->

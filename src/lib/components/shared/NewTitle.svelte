@@ -1,11 +1,19 @@
 <script lang="ts">
     export let title: string
+    export let left = false
+    export let right = false
 </script>
 
 <div class="w-full uppercase text-xl font-bold flex justify-between items-center gap-4">
-    <div class="line" />
+    {#if left}
+        <div class="line" />
+    {/if}
+
     {title}
-    <div class="line"/>
+
+    {#if right}
+        <div class="line" />
+    {/if}
 </div>
 
 <style lang="postcss">

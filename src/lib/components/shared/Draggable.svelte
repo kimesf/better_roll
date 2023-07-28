@@ -1,5 +1,6 @@
 <script lang="ts">
     import { onMount } from 'svelte'
+    import Button from '../ui/Button.svelte'
 
     export let left = 100
     export let top = 100

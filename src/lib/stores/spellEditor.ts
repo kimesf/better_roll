@@ -1,8 +1,8 @@
 import { writable, type Readable } from 'svelte/store'
-import type { Spell } from '../types'
+// import type { Spell } from '../types'
 // import characterRepository from './characterRepository'
 
-type SpellIndex = number | null
+type SpellIndex = number | undefined
 
 // type SpellIndexesByKey = { [key: string]: number }
 
@@ -11,7 +11,7 @@ interface SpellEditorStore extends Readable<SpellIndex> {
 }
 
 const initStore = (): SpellEditorStore => {
-    const { subscribe, set } = writable(null)
+    const { subscribe, set } = writable(undefined)
 
     // const setFromAbsoluteIndex: SpellEditorStore['set'] = (spell) => {
     //     set(indexOf(spell))

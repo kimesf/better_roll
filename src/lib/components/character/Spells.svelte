@@ -1,6 +1,6 @@
 <script lang="ts">
     import { t } from '../../stores/i18n'
-    import { type Spell } from '../../types'
+    import { type Spell, type SpellCircle } from '../../types'
     import Separator from '../shared/Separator.svelte'
     import characterRepository from '../../stores/characterRepository'
     import Container from '../shared/Container.svelte'
@@ -12,6 +12,10 @@
     import NewEditable from '../shared/NewEditable.svelte'
     import NewTitle from '../shared/NewTitle.svelte'
     import spellEditor from '../../stores/spellEditor'
+    import Stack from '../ui/Stack.svelte'
+    import Button from '../ui/Button.svelte'
+    import SpellMechanics from './SpellMechanics.svelte'
+    import SpellSlots from './SpellSlots.svelte'
 
     export let forceShow = false
     export let filter: (spell: Spell) => boolean | null = null
@@ -19,7 +23,7 @@
     const { createRelation, destroyRelation } = characterRepository
 
     const DEFAULT: Spell = {
-        name: 'new',
+        name: '',
         circle: 1,
         alwaysAvailable: false,
         available: false,
@@ -58,14 +62,33 @@
 
         $characterRepository = $characterRepository
     }
+
+    const create = (): void => {
+        createRelation('spells', DEFAULT)
+        spellEditor.set($characterRepository.current.spells.length -1)
+    }
+
+    const use = (usedCircle: SpellCircle): void => {
+        const spellSlotIndex = $characterRepository.current.spellMechanics.slots.findIndex(({circle}) => circle == usedCircle)
+
+        if ($characterRepository.current.spellMechanics.slots[spellSlotIndex].current <= 0) {
+            alert(t('character.spellMechanics.slots.notAvailable'))
+            return
+        }
+
+        $characterRepository.current.spellMechanics.slots[spellSlotIndex].current--
+
+        alert(t('character.spellMechanics.slots.used'))
+    }
 </script>
 
 <NewEditable {forceShow}>
-    <Container row slot="editing">
-        <Btn shape="round" kind="create" handler={(_) => createRelation('spells', DEFAULT)} />
+    <Stack slot="editing">
+        <!-- TODO: IMPLEMENT CREATE AND REWRITE THIS PAGE using stack, grid, button etc.. -->
+        <Btn shape="round" kind="create" handler={create} />
         <Btn shape="round" icon="arrow-down-a-z" kind="update" askConfirmation handler={(_) => sortSpells()} />
-        <NewTitle title={t('character.spells')} />
-    </Container>
+        <NewTitle left right title={t('character.spells')} />
+    </Stack>
 </NewEditable>
 
 {#each spellList as spell, index}
@@ -100,7 +123,7 @@
                     </Chip>
                 </div>
 
-                <div class="flex">
+                <div class="flex gap-1">
                     <!-- TODO: add this -->
                     {#if true}<Icon name="coins" class="bg-red-500" />{/if}
                     {#if spell.concentration}<Icon name="brain" />{/if}
@@ -141,13 +164,9 @@
                         {/if}
                     {/if}
 
-                    <Btn
-                        shape="round"
-                        handler={() => alert('used')}
-                        askConfirmation
-                        icon="hand-sparkles"
-                        kind="update"
-                    />
+                    <Button action="update" shape="round" on:click={() => use(spell.circle)}>
+                        <Icon name="hand-sparkles" />
+                    </Button>
                 </Container>
             </NewEditable>
         </svelte:fragment>
