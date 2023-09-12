@@ -167,6 +167,7 @@ export default {
     'character.spells.components.verbal': 'verbal',
     'character.spells.components.somatic': 'somatic',
     'character.spells.components.material': 'material',
+    'character.spells.components.cost': 'cost',
     'character.spells.concentration': 'concentration',
     'character.spells.ritual': 'ritual',
     'character.spells.notes': 'description',

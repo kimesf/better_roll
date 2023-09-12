@@ -75,14 +75,11 @@
         'ritual',
     ]
 
-    const formComponents: ('verbal' | 'somatic' | 'material')[] = ['verbal', 'somatic', 'material']
+    const formComponents: ('verbal' | 'somatic' | 'material' | 'cost')[] = ['verbal', 'somatic', 'material', 'cost']
 
     const closeEditor = () => {
         $index = undefined
     }
-
-    // TEMP TODO
-    let checked = false
 </script>
 
 <Stack direction="col" class="h-full bg-primary bg-[rgb(0,0,0,0.8)]" gap="no">
@@ -152,12 +149,6 @@
                                 />
                             </Stack>
                         {/each}
-
-                        <!-- TODO TEMP -->
-                        <Stack direction="col" align="center" gap="xs">
-                            <F.Label for="spell-{$index}-components-cost" title="custo" />
-                            <F.Checkbox id="spell-{$index}-components-cost" bind:checked />
-                        </Stack>
                     </Stack>
 
                     <F.Label title="descrição">

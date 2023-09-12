@@ -14,8 +14,6 @@
     import spellEditor from '../../stores/spellEditor'
     import Stack from '../ui/Stack.svelte'
     import Button from '../ui/Button.svelte'
-    import SpellMechanics from './SpellMechanics.svelte'
-    import SpellSlots from './SpellSlots.svelte'
 
     export let forceShow = false
     export let filter: (spell: Spell) => boolean | null = null
@@ -35,6 +33,7 @@
             verbal: false,
             somatic: false,
             material: false,
+            cost: false,
             notes: '',
         },
         duration: '',
@@ -124,8 +123,7 @@
                 </div>
 
                 <div class="flex gap-1">
-                    <!-- TODO: add this -->
-                    {#if true}<Icon name="coins" class="bg-red-500" />{/if}
+                    {#if spell.components.cost}<Icon name="coins" />{/if}
                     {#if spell.concentration}<Icon name="brain" />{/if}
                     {#if spell.ritual}<Icon name="menorah" />{/if}
                 </div>
