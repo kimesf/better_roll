@@ -50,7 +50,7 @@
 
             <Incrementor
                 id="recoverable-{index}-current"
-                class="grow basis-0 flex text-4xl justify-between"
+                class="grow basis-0 text-4xl"
                 bind:value={recoverable.current}
             >
                 <Input

@@ -31,8 +31,8 @@
 
     {#each $characterRepository.current.resources.finite as finite, index}
         <Collapsible>
-            <div slot="title" class="flex w-full justify-between">
-                <Editable class="grow basis-0 flex items-center text-left">
+            <div slot="title" class="w-full flex items-center">
+                <Editable class="grow basis-0 ">
                     <Input
                         slot="editing"
                         type="text"
@@ -45,7 +45,7 @@
 
                 <Incrementor
                     id="finite-{index}-amount"
-                    class="grow basis-0 flex text-4xl justify-between"
+                    class="grow basis-0 text-4xl"
                     bind:value={finite.amount}
                 >
                     <Input

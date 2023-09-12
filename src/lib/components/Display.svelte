@@ -9,6 +9,8 @@
     import characterRepository from '../stores/characterRepository'
     import Mechanics from './pages/Mechanics.svelte'
     import EditToggler from './EditToggler.svelte'
+    import spellEditor from '../stores/spellEditor'
+    import SpellEditor from './character/SpellEditor.svelte'
 
     // TODO: maybe page handling can be a store and they this can be clean up
     const pages = {
@@ -38,6 +40,12 @@
 
     let menuVisible = false
 </script>
+
+{#if $spellEditor > -1}
+    <div class="z-50 fixed h-screen w-screen">
+        <SpellEditor />
+    </div>
+{/if}
 
 <EditToggler />
 

@@ -17,6 +17,7 @@
     let klass = ($$props.class as string | undefined) || ''
 </script>
 
+<!-- // Usar  composição -->
 {#if type == 'text'}
     <input {id} bind:value class={twMerge('w-full', klass)} {placeholder} type="text" />
 {:else if type == 'number'}
@@ -51,6 +52,6 @@
     input,
     textarea,
     select {
-        @apply bg-neutral-500 rounded-md p-1 text-sm;
+        @apply bg-neutral-500 rounded-md p-1 text-sm shadow-lg;
     }
 </style>

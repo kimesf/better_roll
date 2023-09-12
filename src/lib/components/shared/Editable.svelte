@@ -1,25 +1,25 @@
 <script lang="ts">
-    import { slide } from 'svelte/transition'
     import canEdit from '../../stores/canEdit'
     import Container from './Container.svelte'
 
     export let row = false
+    export let onlyShow = false
 </script>
 
-{#if $$slots.default && $canEdit}
-    <div transition:slide>
-        <Container class={$$props.class || ''} {row}>
-            <slot />
-        </Container>
-    </div>
-{/if}
-
-{#if $$slots.editing || $$slots.showing}
-    <div class={$$props.class || ''}>
-        {#if $canEdit}
-            <slot name="editing" />
-        {:else}
-            <slot name="showing" />
-        {/if}
-    </div>
+{#if onlyShow}
+    <Container class={$$props.class || ''} {row}>
+        <slot name="showing" />
+    </Container>
+{:else if $$slots.default && $canEdit}
+    <Container class={$$props.class || ''} {row}>
+        <slot />
+    </Container>
+{:else if $canEdit && $$slots.editing}
+    <Container class={$$props.class || ''} {row}>
+        <slot name="editing" />
+    </Container>
+{:else if $$slots.showing}
+    <Container class={$$props.class || ''} {row}>
+        <slot name="showing" />
+    </Container>
 {/if}

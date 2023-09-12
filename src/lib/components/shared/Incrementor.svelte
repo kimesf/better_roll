@@ -11,7 +11,7 @@
 <div class="{$$props.class || ''} w-full flex justify-around items-center">
     <button class:invisible={!$canEdit} class="text-red-500 text-4xl" on:click={() => value--}> - </button>
 
-    <Editable>
+    <Editable class="w-fit">
         <div slot="editing" class="flex items-center">
             <Input type="number" {id} bind:value />
 

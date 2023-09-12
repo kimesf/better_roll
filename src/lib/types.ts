@@ -158,6 +158,7 @@ export type Spell = {
         verbal: boolean
         somatic: boolean
         material: boolean
+        cost: boolean
         notes: string
     }
     duration: string

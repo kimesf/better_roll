@@ -1,1 +1,1 @@
-<hr class="border-neutral-500" />
+<hr class="border-neutral-600" />

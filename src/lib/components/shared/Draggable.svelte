@@ -1,5 +1,6 @@
 <script lang="ts">
     import { onMount } from 'svelte'
+    import Button from '../ui/Button.svelte'
 
     export let left = 100
     export let top = 100
@@ -73,7 +74,7 @@
 </svelte:head>
 
 {#if isMoving}
-    <div class="z-99 bg-primary bg-opacity-50 absolute top-0 left-0 w-screen h-screen" />
+    <div class="z-99 absolute top-0 left-0 w-screen h-screen" />
 {/if}
 
 <button
